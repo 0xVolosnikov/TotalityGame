@@ -57,7 +57,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ClassLibrary1\CommonClasses.csproj">
+    <ProjectReference Include="..\CommonClasses\CommonClasses.csproj">
       <Project>{2d0a4c97-8f53-4b07-b51c-d1cb3bbdc020}</Project>
       <Name>CommonClasses</Name>
     </ProjectReference>
