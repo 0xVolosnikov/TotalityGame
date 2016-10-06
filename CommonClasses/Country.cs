@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CommonClasses
 {
-    class Country
+    public class Country
     {
         public struct FSB
         {
@@ -52,11 +52,16 @@ namespace CommonClasses
         private int lvlResIndustry;
         private int lvlLightIndustry;
         private int lvlHeavyIndustry;
-        private int lvlMilitary;
+        public int lvlMilitary { get; set; }
         private int university;
         private int scientist; 
         
         public Country()
+        {
+
+        }
+
+        public void NukeExplosion(int count)
         {
 
         }
