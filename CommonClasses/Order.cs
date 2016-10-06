@@ -10,6 +10,8 @@ namespace CommonClasses
     [DataContract]
     public class Order
     {
+        public string countryName;
+
         public List<int> args = new List<int>();
         public Order(params int[] args)
         {

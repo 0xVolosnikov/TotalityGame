@@ -41,10 +41,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Diplomatical\DiplomaticalProcessor.cs" />
+    <Compile Include="Diplomatical\DiplomaticalDatabase.cs" />
     <Compile Include="Main\MainProcessor.cs" />
+    <Compile Include="Main\IMinisteryProcessor.cs" />
     <Compile Include="News\NewsProcessor.cs" />
     <Compile Include="Nuke\NukeProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CommonClasses\CommonClasses.csproj">
+      <Project>{2d0a4c97-8f53-4b07-b51c-d1cb3bbdc020}</Project>
+      <Name>CommonClasses</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
