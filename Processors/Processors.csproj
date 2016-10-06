@@ -44,6 +44,15 @@
     <Compile Include="Diplomatical\DiplomaticalDatabase.cs" />
     <Compile Include="Main\MainProcessor.cs" />
     <Compile Include="Main\IMinisteryProcessor.cs" />
+    <Compile Include="Main\MinFinanceProcessor.cs" />
+    <Compile Include="Main\MinForeignProcessor.cs" />
+    <Compile Include="Main\MinFSBProcessor.cs" />
+    <Compile Include="Main\MinIndustryProcessor.cs" />
+    <Compile Include="Main\MinMediaProcessor.cs" />
+    <Compile Include="Main\MinMilitaryProcessor.cs" />
+    <Compile Include="Main\MinMVDProcessor.cs" />
+    <Compile Include="Main\MinPremierProcessor.cs" />
+    <Compile Include="Main\MinScienceProcessor.cs" />
     <Compile Include="News\NewsProcessor.cs" />
     <Compile Include="Nuke\NukeProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
