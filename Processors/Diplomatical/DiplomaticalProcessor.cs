@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Processors.Diplomatical
 {
-    class DiplomaticalProcessor
+    public class DiplomaticalProcessor
     {
     }
 }

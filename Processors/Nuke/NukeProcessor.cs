@@ -10,7 +10,7 @@ using transmitterService;
 
 namespace Processors.Nuke
 {
-    class NukeProcessor
+    public class NukeProcessor
     {
         const int delay = 500;
         private BackgroundWorker timer = new BackgroundWorker();
