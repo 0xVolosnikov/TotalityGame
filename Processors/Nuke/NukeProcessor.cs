@@ -49,7 +49,7 @@ namespace Processors.Nuke
             NukeRocket rckt = rockets.Find(x => x.id == rocketId);
             if (rckt != null)
             {
-                // TSOP
+                WinnerChoosingSystems.massiveTsop(defender)
             }
         }
 
@@ -70,7 +70,7 @@ namespace Processors.Nuke
                     rckt.lifeTime -= delay;
                     if (rckt.lifeTime <= 0)
                     {
-                        countries[rckt.to].NukeExplosion(rckt.count);
+                        rckt.to.NukeExplosion(rckt.count);
                         rockets.Remove(rckt);
                     }
                 }

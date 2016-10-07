@@ -10,14 +10,14 @@ namespace CommonClasses
     [DataContract]
     public class NukeRocket
     {
-        public string from { get; }
-        public string to { get; }
+        public Country from { get; }
+        public Country to { get; }
         public int lifeTime;
         public int count;
         public int id;
         static int idCount;
 
-        public NukeRocket(string from, string to)
+        public NukeRocket(Country from, Country to)
         {
             this.id = idCount;
             idCount++;
