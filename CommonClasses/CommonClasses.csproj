@@ -43,7 +43,9 @@
   <ItemGroup>
     <Compile Include="Constants.cs" />
     <Compile Include="Country.cs" />
-    <Compile Include="DipMsg.cs" />
+    <Compile Include="Diplomatical\ContractOther.cs" />
+    <Compile Include="Diplomatical\DipMsg.cs" />
+    <Compile Include="Diplomatical\DipContract.cs" />
     <Compile Include="EMin.cs" />
     <Compile Include="NukeRocket.cs" />
     <Compile Include="Order.cs" />

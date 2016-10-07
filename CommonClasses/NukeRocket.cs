@@ -10,22 +10,30 @@ namespace CommonClasses
     [DataContract]
     public class NukeRocket
     {
-        public Country from { get; }
-        public Country to { get; }
+        public string from { get; }
+        public string to { get; }
         public int lifeTime;
         public int count;
         public int id;
-        static int idCount;
 
-        public NukeRocket(Country from, Country to)
+        public NukeRocket(int id, string from, string to)
         {
-            this.id = idCount;
-            idCount++;
-            if (idCount > 1000) idCount = 0;
+            this.id = id;
 
             this.from = from;
             this.to = to;
             lifeTime = Constants.nukeRocketLifetime;
         }
+    }
+
+    public static class NukeRocketFactory
+    {
+        public static int counterId = 0;
+
+        public static NukeRocket createRocket(string from, string to)
+        {
+            return new NukeRocket(counterId++, from, to);
+        }
+
     }
 }

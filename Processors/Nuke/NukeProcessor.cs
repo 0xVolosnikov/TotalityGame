@@ -50,7 +50,7 @@ namespace Processors.Nuke
             if (rckt != null)
             {
                 int loosed;
-                int result = WinnerChoosingSystems.nukeMassiveTsop(defender.missile, out loosed, rckt.count, rckt.from.lvlMilitary, defender.lvlMilitary);
+                int result = WinnerChoosingSystems.nukeMassiveTsop(defender.missile, out loosed, rckt.count, countries[rckt.from].lvlMilitary, defender.lvlMilitary);
                 defender.missile -= loosed;
                 rckt.count -= result;
             }
@@ -73,7 +73,7 @@ namespace Processors.Nuke
                     rckt.lifeTime -= delay;
                     if (rckt.lifeTime <= 0)
                     {
-                        rckt.to.NukeExplosion(rckt.count);
+                        countries[rckt.to].NukeExplosion(rckt.count);
                         rockets.Remove(rckt);
                     }
                 }
