@@ -54,8 +54,8 @@ namespace CommonClasses
         private int lvlHeavyIndustry;
         private int lvlMilitary;
         private int university;
-        private int scientist; 
-        
+        private int scientist;
+
         public Country()
         {
 
