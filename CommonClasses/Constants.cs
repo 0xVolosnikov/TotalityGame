@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace CommonClasses
 {
-    class Enums
+    static class Constants
     {
+        public static int nukeRocketLifetime = 15000;
     }
 }

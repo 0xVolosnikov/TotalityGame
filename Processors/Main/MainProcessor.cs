@@ -49,9 +49,8 @@ namespace Processors.Main
                 {
                     currentOrdersLine.Add(qu.Value.Dequeue());
                 }
-
                 // захуярить фсбшную обработку
-
+                // и новостную
                 for (int i = 0; i < currentOrdersLine.Count; i++)
                 {
                     ministeryProcessors[currentOrdersLine[i].args[0]].processOrder(currentOrdersLine[i]);

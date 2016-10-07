@@ -9,9 +9,24 @@ namespace Processors.Main
 {
     class MinFinanceProcessor : IMinisteryProcessor
     {
+        enum actions { action1, action2 };
+
         public bool processOrder(Order order)
         {
-            throw new NotImplementedException();
+            switch (order.args[1])
+            {
+                case (int)actions.action1:
+                    return true;
+                    break;
+
+                case (int)actions.action2:
+                    return true;
+                    break;
+
+                default:
+                    return false;
+                    break;
+            }
         }
     }
 }

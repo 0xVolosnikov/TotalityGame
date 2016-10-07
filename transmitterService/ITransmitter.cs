@@ -30,7 +30,7 @@ namespace transmitterService
         void InitializeNukeDialog();
 
         [OperationContract(IsOneWay = true)]
-        void updateNukeDialog();
+        void updateNukeDialog(List<NukeRocket> rockets);
 
         [OperationContract(IsOneWay = true)]
         void updateNews();
