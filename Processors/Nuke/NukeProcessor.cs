@@ -49,7 +49,10 @@ namespace Processors.Nuke
             NukeRocket rckt = rockets.Find(x => x.id == rocketId);
             if (rckt != null)
             {
-                WinnerChoosingSystems.massiveTsop(defender)
+                int loosed;
+                int result = WinnerChoosingSystems.nukeMassiveTsop(defender.missile, out loosed, rckt.count, rckt.from.lvlMilitary, defender.lvlMilitary);
+                defender.missile -= loosed;
+                rckt.count -= result;
             }
         }
 

@@ -32,10 +32,11 @@ namespace CommonClasses
             }
         }
 
-       public  static int massiveTsop(int count, int attackerLvl, int defenderLvl)
+       public  static int nukeMassiveTsop(int count, out int loosed, int nukesCount, int attackerLvl, int defenderLvl)
         {
             double attackerChance = 0.5;
             int result = 0;
+            loosed = 0;
 
             if (attackerLvl >= defenderLvl)
                 for (int i = 1; i <= defenderLvl - attackerLvl; i++)
@@ -49,9 +50,12 @@ namespace CommonClasses
                 }
 
 
-            for (int i = 0; i < count; i++)
-                if (randomizer.Next(1000) < (int)(attackerChance*1000))
+            for (int i = 0; i < count && result < nukesCount; i++)
+            {
+                if (randomizer.Next(1000) < (int)(attackerChance * 1000))
                     result++;
+                loosed++;
+            }
             return result;
         }
     }
