@@ -56,12 +56,24 @@ namespace Totality.GUI
 
         private void startListening_Click(object sender, RoutedEventArgs e)
         {
-            listeningStatusDisplay.Fill = Brushes.DarkGreen;
+            listeningStatusDisplay.Fill = Brushes.ForestGreen;
         }
 
         private void buttonLogOpen_Click(object sender, RoutedEventArgs e)
         {
             _logger.showLoggingWindow();
+        }
+
+        private void loadingButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            Microsoft.Win32.OpenFileDialog dialog = new Microsoft.Win32.OpenFileDialog();
+            dialog.Filter = "JSON File(*.json)|*.json";
+            if (dialog.ShowDialog() == true)
+            {
+                _logger.Info("Loading savefile " + dialog.SafeFileName);
+                _dataLayer.Load(dialog.FileName);
+            }
         }
     }
 }

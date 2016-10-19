@@ -35,7 +35,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button x:Name="button_Copy2" Content="Загрузить сохранение" HorizontalAlignment="Left" Margin="373,45,0,0" VerticalAlignment="Top" Width="134" Height="30">
+        <Button x:Name="loadingButton" Content="Загрузить сохранение" HorizontalAlignment="Left" Margin="373,45,0,0" VerticalAlignment="Top" Width="134" Height="30" Click="loadingButton_Click">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                     <GradientStop Color="#FFF3F3F3" Offset="0"/>

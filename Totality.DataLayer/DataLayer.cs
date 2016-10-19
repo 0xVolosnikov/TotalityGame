@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,7 @@ namespace Totality.DataLayer
 {
     public class DataLayer : IDataLayer
     {
+        
         private Dictionary<string, List<DipContract>> _diplomaticalDatabase = new Dictionary<string, List<DipContract>>();
         private Dictionary<string, Country> _countries = new Dictionary<string, Country>();
 
@@ -65,5 +67,43 @@ namespace Totality.DataLayer
                 return false;
             }
         }
+
+        public bool Save(string savePath)
+        {
+            try
+            {
+                System.IO.File.WriteAllText(savePath, JsonConvert.SerializeObject(new DataBaseSave
+                {
+                    Countries = _countries,
+                    DiplomaticalDatabase = _diplomaticalDatabase
+                }));
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public bool Load(string savePath)
+        {
+            try
+            {
+                var loaded = JsonConvert.DeserializeObject<DataBaseSave>(System.IO.File.ReadAllText(savePath));
+                _countries = loaded.Countries;
+                _diplomaticalDatabase = loaded.DiplomaticalDatabase;
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+    }
+
+    class DataBaseSave
+    {
+        public Dictionary<string, Country> Countries { get; set; }
+        public Dictionary<string, List<DipContract>> DiplomaticalDatabase { get; set; }
     }
 }

@@ -9,6 +9,9 @@ namespace Totality.Model.Interfaces
 {
     public interface IDataLayer
     {
+        bool Save(string saveName);
+        bool Load(string saveName);
+
         bool AddCountry(Country newCountry);
         bool DeleteCountry(string name);
         Country GetCountry(string name);
