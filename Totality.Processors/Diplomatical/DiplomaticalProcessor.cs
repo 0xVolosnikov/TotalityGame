@@ -9,7 +9,7 @@ namespace Totality.Processors.Diplomatical
 {
     public class DiplomaticalProcessor : AbstractProcessor
     {
-        public DiplomaticalProcessor(IDataLayer dataLayer) : base(dataLayer)
+        public DiplomaticalProcessor(IDataLayer dataLayer, ILogger logger) : base(dataLayer, logger)
         {
         }
     }

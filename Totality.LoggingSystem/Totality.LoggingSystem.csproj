@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2F3D18D6-560B-41C3-909B-59B682DF63E3}</ProjectGuid>
+    <ProjectGuid>{D90072A3-49D1-40CF-AE1A-98CD75136A3B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Totality.Processors</RootNamespace>
-    <AssemblyName>Processors</AssemblyName>
+    <RootNamespace>Totality.LoggingSystem</RootNamespace>
+    <AssemblyName>Totality.LoggingSystem</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,9 +30,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.3.10\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,32 +44,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Diplomatical\DiplomaticalProcessor.cs" />
-    <Compile Include="AbstractProcessor.cs" />
-    <Compile Include="Main\MainProcessor.cs" />
-    <Compile Include="Main\IMinisteryProcessor.cs" />
-    <Compile Include="Main\MinFinanceProcessor.cs" />
-    <Compile Include="Main\MinForeignProcessor.cs" />
-    <Compile Include="Main\MinFSBProcessor.cs" />
-    <Compile Include="Main\MinIndustryProcessor.cs" />
-    <Compile Include="Main\MinMediaProcessor.cs" />
-    <Compile Include="Main\MinMilitaryProcessor.cs" />
-    <Compile Include="Main\MinMVDProcessor.cs" />
-    <Compile Include="Main\MinPremierProcessor.cs" />
-    <Compile Include="Main\MinScienceProcessor.cs" />
-    <Compile Include="News\NewsProcessor.cs" />
-    <Compile Include="Nuke\NukeProcessor.cs" />
+    <Compile Include="Logger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Totality.CommonClasses\Totality.CommonClasses.csproj">
-      <Project>{2d0a4c97-8f53-4b07-b51c-d1cb3bbdc020}</Project>
-      <Name>Totality.CommonClasses</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Totality.DataLayer\Totality.DataLayer.csproj">
-      <Project>{406c6dbb-795b-43d9-99c3-39663a25561a}</Project>
-      <Name>Totality.DataLayer</Name>
-    </ProjectReference>
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="NLog.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Totality.Model\Totality.Model.csproj">
       <Project>{277f5307-857b-46bb-8f51-63df2549bbe8}</Project>
       <Name>Totality.Model</Name>

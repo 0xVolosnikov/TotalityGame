@@ -18,7 +18,7 @@ namespace Totality.Processors.Nuke
         private List<NukeRocket> _rockets = new List<NukeRocket>();
         private ITransmitter _transmitter;
 
-        public NukeProcessor( ITransmitter transmitter, IDataLayer dataLayer) : base(dataLayer)
+        public NukeProcessor( ITransmitter transmitter, IDataLayer dataLayer, ILogger logger) : base(dataLayer, logger)
         {
             _transmitter = transmitter;
 

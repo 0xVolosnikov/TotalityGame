@@ -11,7 +11,7 @@ namespace Totality.Processors.Main
 {
     class MinMediaProcessor : AbstractProcessor, IMinisteryProcessor
     {
-        public MinMediaProcessor(IDataLayer dataLayer) : base(dataLayer)
+        public MinMediaProcessor(IDataLayer dataLayer, ILogger logger) : base(dataLayer, logger)
         {
         }
 

@@ -6,15 +6,19 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
 using Totality.Model;
-using NLog;
+using Totality.Model.Interfaces;
+using Totality.LoggingSystem;
 
 namespace Totality.TransmitterService
 {
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
-    public class Transmitter : ITransmitterService
+    public class Transmitter : AbstractLoggable, ITransmitterService
     {
-        private static Logger _log = LogManager.GetCurrentClassLogger();
         public SynchronizedCollection<Client> Clients = new SynchronizedCollection<Client>();
+
+        public Transmitter(ILogger log) : base(log)
+        {
+        }
 
         public bool Register(string myName)
         {

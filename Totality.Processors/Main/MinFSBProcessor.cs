@@ -11,7 +11,7 @@ namespace Totality.Processors.Main
 {
     class MinFSBProcessor : AbstractProcessor, IMinisteryProcessor
     {
-        public MinFSBProcessor(IDataLayer dataLayer) : base(dataLayer)
+        public MinFSBProcessor(IDataLayer dataLayer, ILogger logger) : base(dataLayer, logger)
         {
         }
 

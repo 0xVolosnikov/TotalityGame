@@ -29,7 +29,8 @@ namespace Totality.GUI
     /// </summary>
     public partial class MainWindow : Window
     {
-        private ITransmitter _transmitter = new Transmitter();
+        private ILogger _logger = new LoggingSystem.Logger();
+        private ITransmitter _transmitter;
         private IDataLayer _dataLayer = new DataLayer.DataLayer();
         private MainProcessor _mainProcessor;
         private DiplomaticalProcessor _dipProcessor;
@@ -40,10 +41,11 @@ namespace Totality.GUI
         {
             InitializeComponent();
 
-            _mainProcessor = new MainProcessor(_dataLayer);
-            _nukeProcessor = new NukeProcessor( _transmitter, _dataLayer);
+            _transmitter = new Transmitter(_logger);
+            _mainProcessor = new MainProcessor(_dataLayer, _logger);
+            _nukeProcessor = new NukeProcessor( _transmitter, _dataLayer, _logger);
             _newsProcessor = new NewsProcessor();
-            _dipProcessor = new DiplomaticalProcessor(_dataLayer);
+            _dipProcessor = new DiplomaticalProcessor(_dataLayer, _logger);
         }
 
         private void startListening_Click(object sender, RoutedEventArgs e)

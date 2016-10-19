@@ -36,10 +36,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <HintPath>..\packages\NLog.4.3.10\lib\net45\NLog.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -60,18 +56,15 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="NLog.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <None Include="NLog.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Totality.DataLayer\Totality.DataLayer.csproj">
       <Project>{406c6dbb-795b-43d9-99c3-39663a25561a}</Project>
       <Name>Totality.DataLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Totality.LoggingSystem\Totality.LoggingSystem.csproj">
+      <Project>{D90072A3-49D1-40CF-AE1A-98CD75136A3B}</Project>
+      <Name>Totality.LoggingSystem</Name>
     </ProjectReference>
     <ProjectReference Include="..\Totality.Model\Totality.Model.csproj">
       <Project>{277F5307-857B-46BB-8F51-63DF2549BBE8}</Project>

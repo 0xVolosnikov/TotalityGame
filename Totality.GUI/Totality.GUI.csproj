@@ -35,10 +35,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <HintPath>..\packages\NLog.4.3.10\lib\net45\NLog.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -90,13 +86,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Content Include="NLog.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <None Include="NLog.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -110,6 +99,10 @@
     <ProjectReference Include="..\Totality.CommonClasses\Totality.CommonClasses.csproj">
       <Project>{2d0a4c97-8f53-4b07-b51c-d1cb3bbdc020}</Project>
       <Name>Totality.CommonClasses</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Totality.LoggingSystem\Totality.LoggingSystem.csproj">
+      <Project>{d90072a3-49d1-40cf-ae1a-98cd75136a3b}</Project>
+      <Name>Totality.LoggingSystem</Name>
     </ProjectReference>
     <ProjectReference Include="..\Totality.Processors\Totality.Processors.csproj">
       <Project>{2f3d18d6-560b-41c3-909b-59b682df63e3}</Project>

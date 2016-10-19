@@ -11,7 +11,7 @@ namespace Totality.Processors.Main
 {
     class MinForeignProcessor : AbstractProcessor, IMinisteryProcessor
     {
-        public MinForeignProcessor(IDataLayer dataLayer) : base(dataLayer)
+        public MinForeignProcessor(IDataLayer dataLayer, ILogger logger) : base(dataLayer, logger)
         {
         }
 

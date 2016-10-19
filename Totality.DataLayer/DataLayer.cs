@@ -24,7 +24,6 @@ namespace Totality.DataLayer
             }
             catch (Exception e)
             {
-                // ToDo: Логирование!
                 return false;
             }
         }
@@ -38,7 +37,6 @@ namespace Totality.DataLayer
             }
             catch (Exception e)
             {
-                // ToDo: Логирование!
                 return false;
             }
         }
@@ -51,7 +49,6 @@ namespace Totality.DataLayer
             }
             catch (Exception e)
             {
-                // ToDo: Логирование!
                 throw new KeyNotFoundException(nameof(GetCountry));
             }
         }
@@ -65,7 +62,6 @@ namespace Totality.DataLayer
             }
             catch (Exception e)
             {
-                // ToDo: Логирование!
                 return false;
             }
         }

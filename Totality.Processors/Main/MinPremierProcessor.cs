@@ -11,7 +11,7 @@ namespace Totality.Processors.Main
 {
     class MinPremierProcessor : AbstractProcessor, IMinisteryProcessor
     {
-        public MinPremierProcessor(IDataLayer dataLayer) : base(dataLayer)
+        public MinPremierProcessor(IDataLayer dataLayer, ILogger logger) : base(dataLayer, logger)
         {
         }
 

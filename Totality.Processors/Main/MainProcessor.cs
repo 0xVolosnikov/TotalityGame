@@ -15,17 +15,17 @@ namespace Totality.Processors.Main
         private List<IMinisteryProcessor> _ministeryProcessors = new List<IMinisteryProcessor>();
         private List<Order> _currentOrdersLine = new List<Order>();
 
-        public MainProcessor(IDataLayer dataLayer) : base(dataLayer)
+        public MainProcessor(IDataLayer dataLayer, ILogger logger) : base(dataLayer, logger)
         {
-            _ministeryProcessors.Add(new MinIndustryProcessor(dataLayer));
-            _ministeryProcessors.Add(new MinFinanceProcessor(dataLayer));
-            _ministeryProcessors.Add(new MinMilitaryProcessor(dataLayer));
-            _ministeryProcessors.Add(new MinForeignProcessor(dataLayer));
-            _ministeryProcessors.Add(new MinMediaProcessor(dataLayer));
-            _ministeryProcessors.Add(new MinMVDProcessor(dataLayer));
-            _ministeryProcessors.Add(new MinFSBProcessor(dataLayer));
-            _ministeryProcessors.Add(new MinScienceProcessor(dataLayer));
-            _ministeryProcessors.Add(new MinPremierProcessor(dataLayer));
+            _ministeryProcessors.Add(new MinIndustryProcessor(dataLayer, logger));
+            _ministeryProcessors.Add(new MinFinanceProcessor(dataLayer, logger));
+            _ministeryProcessors.Add(new MinMilitaryProcessor(dataLayer, logger));
+            _ministeryProcessors.Add(new MinForeignProcessor(dataLayer, logger));
+            _ministeryProcessors.Add(new MinMediaProcessor(dataLayer, logger));
+            _ministeryProcessors.Add(new MinMVDProcessor(dataLayer, logger));
+            _ministeryProcessors.Add(new MinFSBProcessor(dataLayer, logger));
+            _ministeryProcessors.Add(new MinScienceProcessor(dataLayer, logger));
+            _ministeryProcessors.Add(new MinPremierProcessor(dataLayer, logger));
         }
 
         public void AddCountry(string name)

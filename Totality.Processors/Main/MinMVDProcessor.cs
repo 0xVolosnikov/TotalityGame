@@ -11,7 +11,7 @@ namespace Totality.Processors.Main
 {
     class MinMVDProcessor : AbstractProcessor, IMinisteryProcessor
     {
-        public MinMVDProcessor(IDataLayer dataLayer) : base(dataLayer)
+        public MinMVDProcessor(IDataLayer dataLayer, ILogger logger) : base(dataLayer, logger)
         {
         }
 

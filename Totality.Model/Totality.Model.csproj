@@ -41,11 +41,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AbstractLoggable.cs" />
     <Compile Include="Country.cs" />
     <Compile Include="Diplomatical\ContractOther.cs" />
     <Compile Include="Diplomatical\DipContract.cs" />
     <Compile Include="Diplomatical\DipMsg.cs" />
     <Compile Include="Interfaces\IDataLayer.cs" />
+    <Compile Include="Interfaces\ILogger.cs" />
     <Compile Include="Interfaces\ITransmitter.cs" />
     <Compile Include="NukeRocket.cs" />
     <Compile Include="Order.cs" />
