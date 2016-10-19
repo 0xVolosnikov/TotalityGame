@@ -7,7 +7,7 @@ using System.ServiceModel;
 using System.Text;
 using Totality.Model;
 
-namespace Totality.transmitterService
+namespace Totality.TransmitterService
 {
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
     public class Transmitter : ITransmitter

@@ -7,7 +7,7 @@ using System.ServiceModel;
 using System.Text;
 using Totality.Model;
 
-namespace Totality.transmitterService
+namespace Totality.TransmitterService
 {
     [ServiceContract(CallbackContract = typeof(ICallback))]
     public interface ITransmitter

@@ -51,7 +51,7 @@
     <Compile Include="Property.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CommonClasses\Totality.CommonClasses.csproj">
+    <ProjectReference Include="..\Totality.CommonClasses\Totality.CommonClasses.csproj">
       <Project>{2d0a4c97-8f53-4b07-b51c-d1cb3bbdc020}</Project>
       <Name>Totality.CommonClasses</Name>
     </ProjectReference>

@@ -96,11 +96,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CommonClasses\Totality.CommonClasses.csproj">
+    <ProjectReference Include="..\Totality.CommonClasses\Totality.CommonClasses.csproj">
       <Project>{2d0a4c97-8f53-4b07-b51c-d1cb3bbdc020}</Project>
       <Name>Totality.CommonClasses</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Processors\Totality.Processors.csproj">
+    <ProjectReference Include="..\Totality.Processors\Totality.Processors.csproj">
       <Project>{2f3d18d6-560b-41c3-909b-59b682df63e3}</Project>
       <Name>Totality.Processors</Name>
     </ProjectReference>
@@ -112,7 +112,7 @@
       <Project>{277f5307-857b-46bb-8f51-63df2549bbe8}</Project>
       <Name>Totality.Model</Name>
     </ProjectReference>
-    <ProjectReference Include="..\transmitterService\Totality.transmitterService.csproj">
+    <ProjectReference Include="..\Totality.TransmitterService\Totality.TransmitterService.csproj">
       <Project>{ed78d101-6d7c-455c-bfa6-5d22385dde2b}</Project>
       <Name>Totality.transmitterService</Name>
     </ProjectReference>

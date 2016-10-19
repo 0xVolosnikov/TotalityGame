@@ -3,7 +3,7 @@ using Totality.Processors.Diplomatical;
 using Totality.Processors.Main;
 using Totality.Processors.News;
 using Totality.Processors.Nuke;
-using Totality.transmitterService;
+using Totality.TransmitterService;
 using Totality.Model;
 using System;
 using System.Collections.Generic;

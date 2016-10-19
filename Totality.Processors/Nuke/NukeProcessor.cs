@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Totality.transmitterService;
+using Totality.TransmitterService;
 using Totality.Model;
 
 namespace Totality.Processors.Nuke
