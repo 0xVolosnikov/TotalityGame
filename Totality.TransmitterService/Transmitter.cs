@@ -6,12 +6,14 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
 using Totality.Model;
+using NLog;
 
 namespace Totality.TransmitterService
 {
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
     public class Transmitter : ITransmitterService
     {
+        private static Logger _log = LogManager.GetCurrentClassLogger();
         public SynchronizedCollection<Client> Clients = new SynchronizedCollection<Client>();
 
         public bool Register(string myName)
@@ -21,13 +23,19 @@ namespace Totality.TransmitterService
                 Client newClient = new Client(OperationContext.Current.GetCallbackChannel<ICallbackService>(), myName);
                 newClient.Fault += FaultHandler;
                 Clients.Add(newClient);
+                _log.Info("Client " + myName + " registered!");
                 return true;
             }
-            else return false;
+            else
+            {
+                _log.Warn("Client " + myName + " tried to register twice!");
+                return false;
+            }
         }
 
         private void FaultHandler(Client sender)
         {
+            _log.Info("Client " + sender.Name + " disconnected!");
             Clients.Remove(sender);
         }
 
@@ -48,6 +56,7 @@ namespace Totality.TransmitterService
 
         public void InitializeNukeDialogs()
         {
+            _log.Trace("Starting nuke attack...");
             foreach (Client client in Clients)
             {
                 client.Transmitter.InitializeNukeDialog();
@@ -69,6 +78,7 @@ namespace Totality.TransmitterService
 
         public void SendDip(DipMsg msg)
         {
+            _log.Trace("Client " + msg.From + " sended a diplomatical message to " + msg.To);
             Clients.First(x => x.Name == msg.To).Transmitter.SendDip(msg);
         }
     }

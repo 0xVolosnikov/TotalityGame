@@ -43,7 +43,7 @@ namespace Totality.GUI
             _mainProcessor = new MainProcessor(_dataLayer);
             _nukeProcessor = new NukeProcessor( _transmitter, _dataLayer);
             _newsProcessor = new NewsProcessor();
-            _dipProcessor = new DiplomaticalProcessor();
+            _dipProcessor = new DiplomaticalProcessor(_dataLayer);
         }
 
         private void startListening_Click(object sender, RoutedEventArgs e)
