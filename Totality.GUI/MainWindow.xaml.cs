@@ -29,7 +29,7 @@ namespace Totality.GUI
     /// </summary>
     public partial class MainWindow : Window
     {
-        private ILogger _logger = new LoggingSystem.Logger();
+        private LoggingSystem.Logger _logger = new LoggingSystem.Logger();
         private ITransmitter _transmitter;
         private IDataLayer _dataLayer = new DataLayer.DataLayer();
         private MainProcessor _mainProcessor;
@@ -40,6 +40,7 @@ namespace Totality.GUI
         public MainWindow()
         {
             InitializeComponent();
+            this.Closing += MainWindow_Closing;
 
             _transmitter = new Transmitter(_logger);
             _mainProcessor = new MainProcessor(_dataLayer, _logger);
@@ -48,9 +49,19 @@ namespace Totality.GUI
             _dipProcessor = new DiplomaticalProcessor(_dataLayer, _logger);
         }
 
+        private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            _logger.killLoggingWindow();
+        }
+
         private void startListening_Click(object sender, RoutedEventArgs e)
         {
             listeningStatusDisplay.Fill = Brushes.DarkGreen;
+        }
+
+        private void buttonLogOpen_Click(object sender, RoutedEventArgs e)
+        {
+            _logger.showLoggingWindow();
         }
     }
 }

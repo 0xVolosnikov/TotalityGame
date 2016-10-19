@@ -8,8 +8,8 @@
         Title="TotalityServer" Height="300" Width="531">
     <Window.Background>
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-            <GradientStop Color="#FF6C6C6C" Offset="0"/>
-            <GradientStop Color="#FFA4A4A4" Offset="1"/>
+            <GradientStop Color="#FF171717" Offset="0"/>
+            <GradientStop Color="#FF111111" Offset="1"/>
         </LinearGradientBrush>
     </Window.Background>
     <Grid>
@@ -17,7 +17,7 @@
         <Rectangle Fill="#FF262674" HorizontalAlignment="Left" Height="50" Margin="373,202,0,0" Stroke="Black" VerticalAlignment="Top" Width="61"/>
         <Rectangle x:Name="listeningStatusDisplay" Fill="#FFC50000" HorizontalAlignment="Left" Height="50" Margin="446,202,0,0" Stroke="Black" VerticalAlignment="Top" Width="61"/>
         <Button x:Name="startListening" Content="Запуск сервера" HorizontalAlignment="Left" Margin="373,10,0,0" VerticalAlignment="Top" Width="134" Height="30" Click="startListening_Click"/>
-        <Button x:Name="button_Copy" Content="Завершить ход" HorizontalAlignment="Left" Margin="373,167,0,0" VerticalAlignment="Top" Width="134" Height="30">
+        <Button x:Name="button_Copy" Content="Завершить ход" HorizontalAlignment="Left" Margin="373,150,0,0" VerticalAlignment="Top" Width="134" Height="30">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                     <GradientStop Color="#FFD9DBEE" Offset="0"/>
@@ -26,7 +26,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button x:Name="button_Copy1" Content="Открыть консоль" HorizontalAlignment="Left" Margin="373,114,0,0" VerticalAlignment="Top" Width="134" Height="30">
+        <Button x:Name="button_Copy1" Content="Открыть консоль" HorizontalAlignment="Left" Margin="373,80,0,0" VerticalAlignment="Top" Width="134" Height="30">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                     <GradientStop Color="#FFDCE1E2" Offset="0"/>
@@ -35,12 +35,21 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button x:Name="button_Copy2" Content="Загрузить сохранение" HorizontalAlignment="Left" Margin="373,62,0,0" VerticalAlignment="Top" Width="134" Height="30">
+        <Button x:Name="button_Copy2" Content="Загрузить сохранение" HorizontalAlignment="Left" Margin="373,45,0,0" VerticalAlignment="Top" Width="134" Height="30">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                     <GradientStop Color="#FFF3F3F3" Offset="0"/>
                     <GradientStop Color="#FFDBDEBE" Offset="0.483"/>
                     <GradientStop Color="#FFCDCFB9" Offset="0.985"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button x:Name="buttonLogOpen" Content="Открыть лог" HorizontalAlignment="Left" Margin="373,115,0,0" VerticalAlignment="Top" Width="134" Height="30" Click="buttonLogOpen_Click">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                    <GradientStop Color="#FFDCE1E2" Offset="0"/>
+                    <GradientStop Color="#FFB4BDBD" Offset="0.502"/>
+                    <GradientStop Color="#FF84989B" Offset="1"/>
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
