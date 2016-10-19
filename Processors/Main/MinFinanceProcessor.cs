@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CommonClasses;
+using Totality.CommonClasses;
+using Totality.Model;
 
-namespace Processors.Main
+namespace Totality.Processors.Main
 {
     class MinFinanceProcessor : IMinisteryProcessor
     {
         enum actions { action1, action2 };
 
-        public bool processOrder(Order order)
+        public bool ProcessOrder(Order order)
         {
-            switch (order.args[1])
+            switch (order.Args[1])
             {
                 case (int)actions.action1:
                     return true;

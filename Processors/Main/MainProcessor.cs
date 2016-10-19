@@ -1,61 +1,62 @@
-﻿using CommonClasses;
+﻿using Totality.CommonClasses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Totality.Model;
 
-namespace Processors.Main
+namespace Totality.Processors.Main
 {
     public class MainProcessor
     {
-        private Dictionary<string, Queue<Order>> ordersBase = new Dictionary<string, Queue<Order>>();
-        private List<IMinisteryProcessor> ministeryProcessors = new List<IMinisteryProcessor>();
-        private List<Order> currentOrdersLine = new List<Order>();
+        private Dictionary<string, Queue<Order>> _ordersBase = new Dictionary<string, Queue<Order>>();
+        private List<IMinisteryProcessor> _ministeryProcessors = new List<IMinisteryProcessor>();
+        private List<Order> _currentOrdersLine = new List<Order>();
 
         public MainProcessor()
         {
-            ministeryProcessors.Add(new MinIndustryProcessor());
-            ministeryProcessors.Add(new MinFinanceProcessor());
-            ministeryProcessors.Add(new MinMilitaryProcessor());
-            ministeryProcessors.Add(new MinForeignProcessor());
-            ministeryProcessors.Add(new MinMediaProcessor());
-            ministeryProcessors.Add(new MinMVDProcessor());
-            ministeryProcessors.Add(new MinFSBProcessor());
-            ministeryProcessors.Add(new MinScienceProcessor());
-            ministeryProcessors.Add(new MinPremierProcessor());
+            _ministeryProcessors.Add(new MinIndustryProcessor());
+            _ministeryProcessors.Add(new MinFinanceProcessor());
+            _ministeryProcessors.Add(new MinMilitaryProcessor());
+            _ministeryProcessors.Add(new MinForeignProcessor());
+            _ministeryProcessors.Add(new MinMediaProcessor());
+            _ministeryProcessors.Add(new MinMVDProcessor());
+            _ministeryProcessors.Add(new MinFSBProcessor());
+            _ministeryProcessors.Add(new MinScienceProcessor());
+            _ministeryProcessors.Add(new MinPremierProcessor());
         }
 
-        public void addCountry(string name)
+        public void AddCountry(string name)
         {
-            ordersBase.Add(name, new Queue<Order>());
+            _ordersBase.Add(name, new Queue<Order>());
         }
 
-        public void removeCountry(string name)
+        public void RemoveCountry(string name)
         {
-            ordersBase.Remove(name);
+            _ordersBase.Remove(name);
         }
 
-        public void addOrder(string name, Order newOrder)
+        public void AddOrder(string name, Order newOrder)
         {
-            ordersBase[name].Enqueue(newOrder);
+            _ordersBase[name].Enqueue(newOrder);
         }
 
-        public void processOrders()
+        public void ProcessOrders()
         {
-            while(ordersBase.Any(x => x.Value.Any()))
+            while(_ordersBase.Any(x => x.Value.Any()))
             {
-                foreach (KeyValuePair<string, Queue<Order>> qu in ordersBase.Where(x => x.Value.Any()))
+                foreach (KeyValuePair<string, Queue<Order>> qu in _ordersBase.Where(x => x.Value.Any()))
                 {
-                    currentOrdersLine.Add(qu.Value.Dequeue());
+                    _currentOrdersLine.Add(qu.Value.Dequeue());
                 }
                 // захуярить фсбшную обработку
                 // и новостную
-                for (int i = 0; i < currentOrdersLine.Count; i++)
+                for (int i = 0; i < _currentOrdersLine.Count; i++)
                 {
-                    ministeryProcessors[currentOrdersLine[i].args[0]].processOrder(currentOrdersLine[i]);
+                    _ministeryProcessors[_currentOrdersLine[i].Args[0]].ProcessOrder(_currentOrdersLine[i]);
                 }
-                currentOrdersLine.Clear();
+                _currentOrdersLine.Clear();
             }
         }
 

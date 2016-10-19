@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CommonClasses
+namespace Totality.CommonClasses
 {
-    static class Constants
+    public static class Constants
     {
-        public static int nukeRocketLifetime = 15000;
-        public static int countOfMinisters = 8;
-        public static int initialMoney = 1000000;
-        public static int summOfRes = 300; //сумма всех ресурсов
+        public static int NukeRocketLifetime = 15000;
+        public static int CountOfMinisters = 8;
+        public static int InitialMoney = 1000000;
+        public static int SummOfRes = 300; //сумма всех ресурсов
     }
 }

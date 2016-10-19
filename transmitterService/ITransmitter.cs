@@ -1,27 +1,28 @@
-﻿using CommonClasses;
+﻿using Totality.CommonClasses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using Totality.Model;
 
-namespace transmitterService
+namespace Totality.transmitterService
 {
     [ServiceContract(CallbackContract = typeof(ICallback))]
     public interface ITransmitter
     {
         [OperationContract]
-        bool register(string myName);
+        bool Register(string myName);
 
         [OperationContract]
-        bool addOrders(List<Order> orders);
+        bool AddOrders(List<Order> orders);
 
         [OperationContract]
-        bool shootDownNuke();
+        bool ShootDownNuke();
 
         [OperationContract]
-        bool dipMsg(DipMsg msg);
+        bool DipMsg(DipMsg msg);
     }
 
     public interface ICallback
@@ -30,12 +31,12 @@ namespace transmitterService
         void InitializeNukeDialog();
 
         [OperationContract(IsOneWay = true)]
-        void updateNukeDialog(List<NukeRocket> rockets);
+        void UpdateNukeDialog(List<NukeRocket> rockets);
 
         [OperationContract(IsOneWay = true)]
-        void updateNews();
+        void UpdateNews();
 
         [OperationContract(IsOneWay = true)]
-        void sendDip(DipMsg msg);
+        void SendDip(DipMsg msg);
     }
 }

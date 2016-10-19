@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Server
+namespace Totality.GUI
 {
     /// <summary>
     /// Логика взаимодействия для App.xaml

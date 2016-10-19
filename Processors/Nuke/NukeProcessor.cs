@@ -1,4 +1,4 @@
-﻿using CommonClasses;
+﻿using Totality.CommonClasses;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -6,80 +6,81 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using transmitterService;
+using Totality.transmitterService;
+using Totality.Model;
 
-namespace Processors.Nuke
+namespace Totality.Processors.Nuke
 {
     public class NukeProcessor
     {
-        const int delay = 500;
-        private BackgroundWorker timer = new BackgroundWorker();
-        private List<NukeRocket> rockets = new List<NukeRocket>();
-        private Dictionary<string, Country> countries;
-        private Transmitter transmitter;
+        private const int _delay = 500;
+        private BackgroundWorker _timer = new BackgroundWorker();
+        private List<NukeRocket> _rockets = new List<NukeRocket>();
+        private Dictionary<string, Country> _countries;
+        private Transmitter _transmitter;
 
         public NukeProcessor(ref Dictionary<string, Country> countries, ref Transmitter transmitter)
         {
-            this.countries = countries;
-            this.transmitter = transmitter;
+            _countries = countries;
+            _transmitter = transmitter;
 
-            timer.DoWork += timer_work;
-            timer.WorkerReportsProgress = true;
-            timer.ProgressChanged += timer_tick;
+            _timer.DoWork += timer_work;
+            _timer.WorkerReportsProgress = true;
+            _timer.ProgressChanged += timer_tick;
         }
 
-        public void addRocket(NukeRocket newRocket)
+        public void AddRocket(NukeRocket newRocket)
         {
-            rockets.Add(newRocket);
+            _rockets.Add(newRocket);
         }
 
-        public void startAttack()
+        public void StartAttack()
         {
-            if(!timer.IsBusy)
-            timer.RunWorkerAsync();
+            if(!_timer.IsBusy)
+            _timer.RunWorkerAsync();
 
-            foreach (Transmitter.Client cl in transmitter.clients)
+            foreach (Client cl in _transmitter.clients)
             {
-                cl.transmitter.InitializeNukeDialog();
+                cl.Transmitter.InitializeNukeDialog();
             }
         }
 
-        public void tryToShootdown(Country defender, int rocketId)
+        public void TryToShootdown(Country defender, Guid rocketId)
         {
-            NukeRocket rckt = rockets.Find(x => x.id == rocketId);
+            NukeRocket rckt = _rockets.Find(x => x.Id == rocketId);
             if (rckt != null)
             {
                 int loosed;
-                int result = WinnerChoosingSystems.nukeMassiveTsop(defender.missile, out loosed, rckt.count, countries[rckt.from].lvlMilitary, defender.lvlMilitary);
-                defender.missile -= loosed;
-                rckt.count -= result;
+                int result = WinnerChoosingSystems.NukeMassiveTsop(defender.CountMissiles, out loosed, rckt.Count, _countries[rckt.From].LvlMilitary, defender.LvlMilitary);
+                defender.CountMissiles -= loosed;
+                rckt.Count -= result;
             }
         }
 
         private void timer_tick(object sender, ProgressChangedEventArgs e)
         {
-            foreach(Transmitter.Client cl in transmitter.clients)
+            foreach(Client cl in _transmitter.clients)
             {
-                cl.transmitter.updateNukeDialog(rockets);
+                cl.Transmitter.UpdateNukeDialog(_rockets);
             }
         }
 
         private void timer_work(object sender, DoWorkEventArgs e)
         {
-            while (rockets.Any())
+            while (_rockets.Any())
             {
-                foreach(NukeRocket rckt in rockets)
+                foreach(NukeRocket rckt in _rockets)
                 {
-                    rckt.lifeTime -= delay;
-                    if (rckt.lifeTime <= 0)
+                    rckt.LifeTime -= _delay;
+                    if (rckt.LifeTime <= 0)
                     {
-                        countries[rckt.to].NukeExplosion(rckt.count);
-                        rockets.Remove(rckt);
+                        _countries[rckt.To].NukeExplosion(rckt.Count);
+                        _rockets.Remove(rckt);
                     }
                 }
 
-                timer.ReportProgress(0);            
-                Thread.Sleep(delay);
+                _timer.ReportProgress(0);            
+                Thread.Sleep(_delay);
             } 
         }
 

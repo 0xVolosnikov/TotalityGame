@@ -7,7 +7,7 @@
     <ProjectGuid>{3F27F791-A9EA-4C04-ADC2-701E80D37986}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Server</RootNamespace>
+    <RootNamespace>Totality.GUI</RootNamespace>
     <AssemblyName>Server</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -96,17 +96,25 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CommonClasses\CommonClasses.csproj">
+    <ProjectReference Include="..\CommonClasses\Totality.CommonClasses.csproj">
       <Project>{2d0a4c97-8f53-4b07-b51c-d1cb3bbdc020}</Project>
-      <Name>CommonClasses</Name>
+      <Name>Totality.CommonClasses</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Processors\Processors.csproj">
+    <ProjectReference Include="..\Processors\Totality.Processors.csproj">
       <Project>{2f3d18d6-560b-41c3-909b-59b682df63e3}</Project>
-      <Name>Processors</Name>
+      <Name>Totality.Processors</Name>
     </ProjectReference>
-    <ProjectReference Include="..\transmitterService\transmitterService.csproj">
+    <ProjectReference Include="..\Totality.DataLayer\Totality.DataLayer.csproj">
+      <Project>{406c6dbb-795b-43d9-99c3-39663a25561a}</Project>
+      <Name>Totality.DataLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Totality.Model\Totality.Model.csproj">
+      <Project>{277f5307-857b-46bb-8f51-63df2549bbe8}</Project>
+      <Name>Totality.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\transmitterService\Totality.transmitterService.csproj">
       <Project>{ed78d101-6d7c-455c-bfa6-5d22385dde2b}</Project>
-      <Name>transmitterService</Name>
+      <Name>Totality.transmitterService</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

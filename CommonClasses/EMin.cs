@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CommonClasses
+namespace Totality.CommonClasses
 {
     public enum EMin
     {

@@ -1,11 +1,12 @@
 ﻿using System;
 
-namespace CommonClasses
+namespace Totality.CommonClasses
 {
     public static class WinnerChoosingSystems
     {
-        static Random randomizer = new Random( (DateTime.Today - new DateTime(1995, 1, 1) ).Milliseconds );
-        public static bool tsop(int attackerLvl, int defenderLvl)
+        private static Random _randomizer = new Random( (DateTime.Today - new DateTime(1995, 1, 1) ).Milliseconds );
+
+        public static bool Tsop(int attackerLvl, int defenderLvl)
         {
             double attackerChance = 0.5;
 
@@ -20,7 +21,7 @@ namespace CommonClasses
                     attackerChance -= Math.Pow(0.5, i+1);
                 }
 
-            int result = randomizer.Next(1000);
+            int result = _randomizer.Next(1000);
 
             if (result < (int)(attackerChance*1000))
             {
@@ -32,7 +33,7 @@ namespace CommonClasses
             }
         }
 
-       public  static int nukeMassiveTsop(int count, out int loosed, int nukesCount, int attackerLvl, int defenderLvl)
+       public static int NukeMassiveTsop(int count, out int loosed, int nukesCount, int attackerLvl, int defenderLvl)
         {
             double attackerChance = 0.5;
             int result = 0;
@@ -52,7 +53,7 @@ namespace CommonClasses
 
             for (int i = 0; i < count && result < nukesCount; i++)
             {
-                if (randomizer.Next(1000) < (int)(attackerChance * 1000))
+                if (_randomizer.Next(1000) < (int)(attackerChance * 1000))
                     result++;
                 loosed++;
             }

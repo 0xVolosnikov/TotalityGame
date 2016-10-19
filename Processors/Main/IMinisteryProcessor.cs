@@ -1,14 +1,15 @@
-﻿using CommonClasses;
+﻿using Totality.CommonClasses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Totality.Model;
 
-namespace Processors.Main
+namespace Totality.Processors.Main
 {
     interface IMinisteryProcessor
     {
-        bool processOrder(Order order);
+        bool ProcessOrder(Order order);
     }
 }

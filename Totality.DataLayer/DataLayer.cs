@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Totality.Processors.Diplomatical
+namespace Totality.DataLayer
 {
-    public class DiplomaticalProcessor
+    class DataLayer
     {
     }
 }

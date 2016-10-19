@@ -42,13 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants.cs" />
-    <Compile Include="Country.cs" />
-    <Compile Include="Diplomatical\ContractOther.cs" />
-    <Compile Include="Diplomatical\DipMsg.cs" />
-    <Compile Include="Diplomatical\DipContract.cs" />
     <Compile Include="EMin.cs" />
-    <Compile Include="NukeRocket.cs" />
-    <Compile Include="Order.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WinnerChoosingSystems.cs" />
   </ItemGroup>

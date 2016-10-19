@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CommonClasses;
+using Totality.CommonClasses;
+using Totality.Model;
 
-namespace Processors.Main
+namespace Totality.Processors.Main
 {
     class MinMediaProcessor : IMinisteryProcessor
     {
-        public bool processOrder(Order order)
+        public bool ProcessOrder(Order order)
         {
             throw new NotImplementedException();
         }

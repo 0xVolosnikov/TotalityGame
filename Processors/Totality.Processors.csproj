@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Diplomatical\DiplomaticalProcessor.cs" />
-    <Compile Include="Diplomatical\DiplomaticalDatabase.cs" />
+    <Compile Include="IDataLayer.cs" />
     <Compile Include="Main\MainProcessor.cs" />
     <Compile Include="Main\IMinisteryProcessor.cs" />
     <Compile Include="Main\MinFinanceProcessor.cs" />
@@ -59,13 +59,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CommonClasses\CommonClasses.csproj">
+    <ProjectReference Include="..\CommonClasses\Totality.CommonClasses.csproj">
       <Project>{2d0a4c97-8f53-4b07-b51c-d1cb3bbdc020}</Project>
-      <Name>CommonClasses</Name>
+      <Name>Totality.CommonClasses</Name>
     </ProjectReference>
-    <ProjectReference Include="..\transmitterService\transmitterService.csproj">
+    <ProjectReference Include="..\Totality.Model\Totality.Model.csproj">
+      <Project>{277f5307-857b-46bb-8f51-63df2549bbe8}</Project>
+      <Name>Totality.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\transmitterService\Totality.transmitterService.csproj">
       <Project>{ed78d101-6d7c-455c-bfa6-5d22385dde2b}</Project>
-      <Name>transmitterService</Name>
+      <Name>Totality.transmitterService</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
