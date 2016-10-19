@@ -6,7 +6,6 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Totality.TransmitterService;
 using Totality.Model;
 
 namespace Totality.Processors.Nuke
@@ -17,9 +16,9 @@ namespace Totality.Processors.Nuke
         private BackgroundWorker _timer = new BackgroundWorker();
         private List<NukeRocket> _rockets = new List<NukeRocket>();
         private Dictionary<string, Country> _countries;
-        private Transmitter _transmitter;
+        private ITransmitter _transmitter;
 
-        public NukeProcessor(ref Dictionary<string, Country> countries, ref Transmitter transmitter)
+        public NukeProcessor(ref Dictionary<string, Country> countries, ref ITransmitter transmitter)
         {
             _countries = countries;
             _transmitter = transmitter;
@@ -39,10 +38,7 @@ namespace Totality.Processors.Nuke
             if(!_timer.IsBusy)
             _timer.RunWorkerAsync();
 
-            foreach (Client cl in _transmitter.clients)
-            {
-                cl.Transmitter.InitializeNukeDialog();
-            }
+            _transmitter.InitializeNukeDialogs();
         }
 
         public void TryToShootdown(Country defender, Guid rocketId)
@@ -59,10 +55,7 @@ namespace Totality.Processors.Nuke
 
         private void timer_tick(object sender, ProgressChangedEventArgs e)
         {
-            foreach(Client cl in _transmitter.clients)
-            {
-                cl.Transmitter.UpdateNukeDialog(_rockets);
-            }
+            _transmitter.UpdateNukeDialogs(_rockets);
         }
 
         private void timer_work(object sender, DoWorkEventArgs e)

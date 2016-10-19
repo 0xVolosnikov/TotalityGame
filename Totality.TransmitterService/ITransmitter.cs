@@ -6,11 +6,12 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
 using Totality.Model;
+using Totality.Processors;
 
 namespace Totality.TransmitterService
 {
-    [ServiceContract(CallbackContract = typeof(ICallback))]
-    public interface ITransmitter
+    [ServiceContract(CallbackContract = typeof(ICallbackService))]
+    public interface ITransmitterService : ITransmitter
     {
         [OperationContract]
         bool Register(string myName);
@@ -25,7 +26,7 @@ namespace Totality.TransmitterService
         bool DipMsg(DipMsg msg);
     }
 
-    public interface ICallback
+    public interface ICallbackService
     {
         [OperationContract(IsOneWay = true)]
         void InitializeNukeDialog();

@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Diplomatical\DiplomaticalProcessor.cs" />
     <Compile Include="IDataLayer.cs" />
+    <Compile Include="ITransmitter.cs" />
     <Compile Include="Main\MainProcessor.cs" />
     <Compile Include="Main\IMinisteryProcessor.cs" />
     <Compile Include="Main\MinFinanceProcessor.cs" />
@@ -70,10 +71,6 @@
     <ProjectReference Include="..\Totality.Model\Totality.Model.csproj">
       <Project>{277f5307-857b-46bb-8f51-63df2549bbe8}</Project>
       <Name>Totality.Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Totality.TransmitterService\Totality.TransmitterService.csproj">
-      <Project>{ed78d101-6d7c-455c-bfa6-5d22385dde2b}</Project>
-      <Name>Totality.TransmitterService</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

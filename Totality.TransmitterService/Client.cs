@@ -10,11 +10,11 @@ namespace Totality.TransmitterService
     public class Client
     {
         public string Name { get; }
-        public ICallback Transmitter { get; }
+        public ICallbackService Transmitter { get; }
         public delegate void faultHandler(Client sender);
         public event faultHandler Fault;
 
-        public Client(ICallback channel, string name)
+        public Client(ICallbackService channel, string name)
         {
             Name = name;
             Transmitter = channel;

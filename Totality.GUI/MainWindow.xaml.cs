@@ -1,4 +1,5 @@
 ﻿using Totality.CommonClasses;
+using Totality.Processors;
 using Totality.Processors.Diplomatical;
 using Totality.Processors.Main;
 using Totality.Processors.News;
@@ -28,7 +29,7 @@ namespace Totality.GUI
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Transmitter _transmitter = new Transmitter();
+        private ITransmitter _transmitter = new Transmitter();
         private MainProcessor _mainProcessor;
         private DiplomaticalProcessor _dipProcessor;
         private NewsProcessor _newsProcessor;

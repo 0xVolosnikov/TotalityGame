@@ -10,17 +10,17 @@ using Totality.Model;
 namespace Totality.TransmitterService
 {
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
-    public class Transmitter : ITransmitter
+    public class Transmitter : ITransmitterService
     {
-        public SynchronizedCollection<Client> clients = new SynchronizedCollection<Client>();
+        public SynchronizedCollection<Client> Clients = new SynchronizedCollection<Client>();
 
         public bool Register(string myName)
         {
-            if (!clients.Any(c => c.Name == myName))
+            if (!Clients.Any(c => c.Name == myName))
             {
-                Client newClient = new Client(OperationContext.Current.GetCallbackChannel<ICallback>(), myName);
+                Client newClient = new Client(OperationContext.Current.GetCallbackChannel<ICallbackService>(), myName);
                 newClient.Fault += FaultHandler;
-                clients.Add(newClient);
+                Clients.Add(newClient);
                 return true;
             }
             else return false;
@@ -28,7 +28,7 @@ namespace Totality.TransmitterService
 
         private void FaultHandler(Client sender)
         {
-            clients.Remove(sender);
+            Clients.Remove(sender);
         }
 
         public bool AddOrders(List<Order> orders)
@@ -44,6 +44,32 @@ namespace Totality.TransmitterService
         public bool DipMsg(DipMsg msg)
         {
             return false;
+        }
+
+        public void InitializeNukeDialogs()
+        {
+            foreach (Client client in Clients)
+            {
+                client.Transmitter.InitializeNukeDialog();
+            }
+        }
+
+        public void UpdateNukeDialogs(List<NukeRocket> rockets)
+        {
+            foreach (Client client in Clients)
+            {
+                client.Transmitter.UpdateNukeDialog(rockets);
+            }
+        }
+
+        public void UpdateNews()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SendDip(DipMsg msg)
+        {
+            Clients.First(x => x.Name == msg.To).Transmitter.SendDip(msg);
         }
     }
 }
