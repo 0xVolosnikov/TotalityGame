@@ -42,8 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Diplomatical\DiplomaticalProcessor.cs" />
-    <Compile Include="IDataLayer.cs" />
-    <Compile Include="ITransmitter.cs" />
+    <Compile Include="AbstractProcessor.cs" />
     <Compile Include="Main\MainProcessor.cs" />
     <Compile Include="Main\IMinisteryProcessor.cs" />
     <Compile Include="Main\MinFinanceProcessor.cs" />

@@ -5,11 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 using Totality.CommonClasses;
 using Totality.Model;
+using Totality.Model.Interfaces;
 
 namespace Totality.Processors.Main
 {
-    class MinForeignProcessor : IMinisteryProcessor
+    class MinForeignProcessor : AbstractProcessor, IMinisteryProcessor
     {
+        public MinForeignProcessor(IDataLayer dataLayer) : base(dataLayer)
+        {
+        }
+
         public bool ProcessOrder(Order order)
         {
             throw new NotImplementedException();

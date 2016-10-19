@@ -7,20 +7,19 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Totality.Model;
+using Totality.Model.Interfaces;
 
 namespace Totality.Processors.Nuke
 {
-    public class NukeProcessor
+    public class NukeProcessor : AbstractProcessor
     {
         private const int _delay = 500;
         private BackgroundWorker _timer = new BackgroundWorker();
         private List<NukeRocket> _rockets = new List<NukeRocket>();
-        private Dictionary<string, Country> _countries;
         private ITransmitter _transmitter;
 
-        public NukeProcessor(ref Dictionary<string, Country> countries, ref ITransmitter transmitter)
+        public NukeProcessor( ITransmitter transmitter, IDataLayer dataLayer) : base(dataLayer)
         {
-            _countries = countries;
             _transmitter = transmitter;
 
             _timer.DoWork += timer_work;
@@ -47,7 +46,7 @@ namespace Totality.Processors.Nuke
             if (rckt != null)
             {
                 int loosed;
-                int result = WinnerChoosingSystems.NukeMassiveTsop(defender.CountMissiles, out loosed, rckt.Count, _countries[rckt.From].LvlMilitary, defender.LvlMilitary);
+                int result = WinnerChoosingSystems.NukeMassiveTsop(defender.CountMissiles, out loosed, rckt.Count, _dataLayer.GetCountry(rckt.From).LvlMilitary, defender.LvlMilitary);
                 defender.CountMissiles -= loosed;
                 rckt.Count -= result;
             }
@@ -67,7 +66,9 @@ namespace Totality.Processors.Nuke
                     rckt.LifeTime -= _delay;
                     if (rckt.LifeTime <= 0)
                     {
-                        _countries[rckt.To].NukeExplosion(rckt.Count);
+                        Country curCountry = _dataLayer.GetCountry(rckt.To);
+                        // ToDo: ядерный взрыв
+                        _dataLayer.UpdateCountry(curCountry);
                         _rockets.Remove(rckt);
                     }
                 }

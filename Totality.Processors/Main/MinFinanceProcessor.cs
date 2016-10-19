@@ -5,11 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 using Totality.CommonClasses;
 using Totality.Model;
+using Totality.Model.Interfaces;
 
 namespace Totality.Processors.Main
 {
-    class MinFinanceProcessor : IMinisteryProcessor
+    class MinFinanceProcessor : AbstractProcessor, IMinisteryProcessor
     {
+        public MinFinanceProcessor(IDataLayer dataLayer) : base(dataLayer)
+        {
+        }
+
         enum actions { action1, action2 };
 
         public bool ProcessOrder(Order order)

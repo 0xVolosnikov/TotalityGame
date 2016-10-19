@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Totality.CommonClasses;
 using Totality.Model;
 
-namespace Totality.Processors
+namespace Totality.Model.Interfaces
 {
     public interface ITransmitter
     {

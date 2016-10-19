@@ -21,7 +21,7 @@ namespace Totality.Model
             }
         }
 
-
+        public string Name { get; }
         public int Money { get; set; }
         public Property Ecology { get; set; }
         public Property Mood { get; set; } //настроение
@@ -58,11 +58,6 @@ namespace Totality.Model
         public Country()
         {
             Money = Constants.InitialMoney;           
-        }
-
-        public void NukeExplosion(int count)
-        {
-
         }
     }
 }

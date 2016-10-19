@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
 using Totality.Model;
-using Totality.Processors;
+using Totality.Model.Interfaces;
 
 namespace Totality.TransmitterService
 {

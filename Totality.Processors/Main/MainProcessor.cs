@@ -5,26 +5,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Totality.Model;
+using Totality.Model.Interfaces;
 
 namespace Totality.Processors.Main
 {
-    public class MainProcessor
+    public class MainProcessor : AbstractProcessor
     {
         private Dictionary<string, Queue<Order>> _ordersBase = new Dictionary<string, Queue<Order>>();
         private List<IMinisteryProcessor> _ministeryProcessors = new List<IMinisteryProcessor>();
         private List<Order> _currentOrdersLine = new List<Order>();
 
-        public MainProcessor()
+        public MainProcessor(IDataLayer dataLayer) : base(dataLayer)
         {
-            _ministeryProcessors.Add(new MinIndustryProcessor());
-            _ministeryProcessors.Add(new MinFinanceProcessor());
-            _ministeryProcessors.Add(new MinMilitaryProcessor());
-            _ministeryProcessors.Add(new MinForeignProcessor());
-            _ministeryProcessors.Add(new MinMediaProcessor());
-            _ministeryProcessors.Add(new MinMVDProcessor());
-            _ministeryProcessors.Add(new MinFSBProcessor());
-            _ministeryProcessors.Add(new MinScienceProcessor());
-            _ministeryProcessors.Add(new MinPremierProcessor());
+            _ministeryProcessors.Add(new MinIndustryProcessor(dataLayer));
+            _ministeryProcessors.Add(new MinFinanceProcessor(dataLayer));
+            _ministeryProcessors.Add(new MinMilitaryProcessor(dataLayer));
+            _ministeryProcessors.Add(new MinForeignProcessor(dataLayer));
+            _ministeryProcessors.Add(new MinMediaProcessor(dataLayer));
+            _ministeryProcessors.Add(new MinMVDProcessor(dataLayer));
+            _ministeryProcessors.Add(new MinFSBProcessor(dataLayer));
+            _ministeryProcessors.Add(new MinScienceProcessor(dataLayer));
+            _ministeryProcessors.Add(new MinPremierProcessor(dataLayer));
         }
 
         public void AddCountry(string name)

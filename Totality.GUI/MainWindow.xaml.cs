@@ -20,7 +20,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using Totality.Model.Interfaces;
 
 namespace Totality.GUI
 {
@@ -30,18 +30,18 @@ namespace Totality.GUI
     public partial class MainWindow : Window
     {
         private ITransmitter _transmitter = new Transmitter();
+        private IDataLayer _dataLayer = new DataLayer.DataLayer();
         private MainProcessor _mainProcessor;
         private DiplomaticalProcessor _dipProcessor;
         private NewsProcessor _newsProcessor;
         private NukeProcessor _nukeProcessor;
-        private Dictionary<string, Country> _countries = new Dictionary<string, Country>();
 
         public MainWindow()
         {
             InitializeComponent();
 
-            _mainProcessor = new MainProcessor();
-            _nukeProcessor = new NukeProcessor(ref _countries, ref _transmitter);
+            _mainProcessor = new MainProcessor(_dataLayer);
+            _nukeProcessor = new NukeProcessor( _transmitter, _dataLayer);
             _newsProcessor = new NewsProcessor();
             _dipProcessor = new DiplomaticalProcessor();
         }

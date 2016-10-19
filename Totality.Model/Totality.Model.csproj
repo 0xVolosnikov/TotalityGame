@@ -45,6 +45,8 @@
     <Compile Include="Diplomatical\ContractOther.cs" />
     <Compile Include="Diplomatical\DipContract.cs" />
     <Compile Include="Diplomatical\DipMsg.cs" />
+    <Compile Include="Interfaces\IDataLayer.cs" />
+    <Compile Include="Interfaces\ITransmitter.cs" />
     <Compile Include="NukeRocket.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
