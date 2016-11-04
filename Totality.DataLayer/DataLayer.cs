@@ -32,7 +32,8 @@ namespace Totality.DataLayer
         {
             try
             {
-                _countries.Add(newCountry.Name, newCountry);
+                Country country = newCountry;
+                _countries.Add(newCountry.Name, country);
                 return true;
             }
             catch (Exception e)

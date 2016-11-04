@@ -2,7 +2,7 @@
 
 namespace Totality.CommonClasses
 {
-    public enum EMin
+    public enum Mins
     {
         Industry,
         Finance,

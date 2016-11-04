@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Totality.Handlers.Nuke;
 using Totality.Model;
 using Totality.Model.Interfaces;
 
@@ -11,11 +12,11 @@ namespace Totality.Handlers.Main
         private List<IMinisteryHandler> _ministeryHandlers = new List<IMinisteryHandler>();
         private List<Order> _currentOrdersLine = new List<Order>();
 
-        public MainHandler(IDataLayer dataLayer, ILogger logger) : base(dataLayer, logger)
+        public MainHandler(IDataLayer dataLayer, ILogger logger, NukeHandler nukeHandler) : base(dataLayer, logger)
         {
             _ministeryHandlers.Add(new MinIndustryHandler(dataLayer, logger));
             _ministeryHandlers.Add(new MinFinanceHandler(dataLayer, logger));
-            _ministeryHandlers.Add(new MinMilitaryHandler(dataLayer, logger));
+            _ministeryHandlers.Add(new MinMilitaryHandler(dataLayer, nukeHandler, logger));
             _ministeryHandlers.Add(new MinForeignHandler(dataLayer, logger));
             _ministeryHandlers.Add(new MinMediaHandler(dataLayer, logger));
             _ministeryHandlers.Add(new MinInnerHandler(dataLayer, logger));
@@ -51,7 +52,7 @@ namespace Totality.Handlers.Main
                 // и новостную
                 for (int i = 0; i < _currentOrdersLine.Count; i++)
                 {
-                    _ministeryHandlers[_currentOrdersLine[i].Args[0]].ProcessOrder(_currentOrdersLine[i]);
+                    _ministeryHandlers[_currentOrdersLine[i].Ministery].ProcessOrder(_currentOrdersLine[i]);
                 }
                 _currentOrdersLine.Clear();
             }

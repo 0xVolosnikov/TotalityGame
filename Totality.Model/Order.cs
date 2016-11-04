@@ -12,12 +12,16 @@ namespace Totality.Model
     {
         public string CountryName { get; }
         public string TargetCountryName { get; }
-        public List<int> Args { get; }
+        public long Count { get; set; }
+        public short OrderNum { get; set; }
+        public short Ministery { get; set; }
+        public short TargetMinistery { get; set; }
+        public Guid TargetId { get; set; }
 
-        public Order(string countryName, string targetCountryName = null, params int[] args)
+        public Order(string countryName, string targetCountryName = null)
         {
-            CountryName = countryName; 
-            Args = new List<int>(args);
+            CountryName = countryName;
+            TargetCountryName = targetCountryName;
         }
     }
 }

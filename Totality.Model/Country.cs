@@ -5,59 +5,73 @@ namespace Totality.Model
 {
     public class Country
     {
-        public struct FSB
+        public class SpyNetwork
         {
-            public int NetLvl { get; set; }
-            public List<bool> Recruit { get; set; }
+            public int NetLvl;
+            public List<bool> Recruit;
 
-            public FSB(int lvl)
+            public SpyNetwork()
             {
                 NetLvl = 0;
-                Recruit = new List<bool>(Constants.CountOfMinisters);
+                bool[] rc = new bool[Constants.CountOfMinisters];
+                Recruit = new List<bool>(rc);
             }
         }
 
         public string Name { get; }
-        public long Money { get; set; }
-        public long ProductionUpgradeCost { get; set; }
-        public double Ecology { get; set; }
-        public Property Mood { get; set; } //настроение
+        public long Money;
+        public long ProductionUpgradeCost;
+        public double Ecology;
+        public Property Mood; //настроение
 
-        public Property PowerResIndustry { get; set; }
-        public Property ResLand { get; set; }
-        public Property ResWood { get; set; }
-        public Property ResSteel { get; set; }
-        public Property ResOil { get; set; }
-        public double ProdUranus { get; set; }
-        public Property ResUranus { get; set; }
-        public Property PowerLightIndustry { get; set; }
-        public Property PowerHeavyIndustry { get; set; }
+        public int[] MinsBlocks = new int[Constants.CountOfMinisters];
 
-        public Property TaxesLvl { get; set; }
+        public Property PowerResIndustry;
+        public Property ResLand;
+        public Property ResWood;
+        public Property ResSteel;
+        public Property ResOil;
+        public double ProdUranus;
+        public Property ResUranus;
+        public Property PowerLightIndustry;
+        public Property PowerHeavyIndustry;
 
-        public Property PowerMilitary { get; set; }
-        public int CountNukes { get; set; }
-        public int CountMissiles { get; set; }
+        public Property TaxesLvl;
 
-        public Property PowerMassMedia { get; set; }
+        public Property PowerMilitary;
+        public int NukesCount;
+        public int MissilesCount;
+        public List<string> WarList = new List<string>();
+
+        public Property PowerMassMedia;
         public Dictionary<string, double> MassMedia = new Dictionary<string, double>();
 
-        public bool IsRiot { get; set; }
-        public bool IsMobilized { get; set; }
+        public bool IsRiot = false;
+        public bool IsMobilized = false;
+        public bool IsAlerted = false;
 
         public int LvlFSB { get; set; }
-        public Dictionary<string, FSB> FSBStructure = new Dictionary<string, FSB>();
+        public Dictionary<string, SpyNetwork> SpyNetworks = new Dictionary<string, SpyNetwork>();
+        public List<List<string>> ForeignSpyes;
 
-        public Property PowerScience { get; set; }
-        public int LvlResIndustry { get; set; }
-        public int LvlLightIndustry { get; set; }
-        public int LvlHeavyIndustry { get; set; }
-        public int LvlMilitary { get; set; }
+        public Property PowerScience;
+        public int LvlResIndustry;
+        public int LvlLightIndustry;
+        public int LvlHeavyIndustry;
+        public int LvlMilitary;
+        public int PremierLvl = 1;
+        public long PremierLvlUpCost;
 
         public Country(string name)
         {
             Money = Constants.InitialMoney;
-            Name = name;          
+            PremierLvlUpCost = Constants.InitialPremierLvlUpCost;
+            Name = name;
+            ForeignSpyes = new List<List<string>>();
+            for (int i = 0; i < Constants.CountOfMinisters; i++)
+            {
+                ForeignSpyes.Add(new List<string>());
+            }
         }
     }
 }

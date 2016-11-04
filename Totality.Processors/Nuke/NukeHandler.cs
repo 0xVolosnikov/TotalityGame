@@ -40,14 +40,17 @@ namespace Totality.Handlers.Nuke
             _transmitter.InitializeNukeDialogs();
         }
 
-        public void TryToShootdown(Country defender, Guid rocketId)
+        public void TryToShootdown(string defender, Guid rocketId)
         {
             NukeRocket rckt = _rockets.Find(x => x.Id == rocketId);
             if (rckt != null)
             {
+                var missilesCount = (int)_dataLayer.GetProperty(defender, "MissilesCount");
+                var lvlMilitary = (int)_dataLayer.GetProperty(defender, "LvlMilitary");
                 int loosed;
-                int result = WinnerChoosingSystems.NukeMassiveTsop(defender.CountMissiles, out loosed, rckt.Count, _dataLayer.GetCountry(rckt.From).LvlMilitary, defender.LvlMilitary);
-                defender.CountMissiles -= loosed;
+                int result = WinnerChoosingSystems.NukeMassiveTsop(missilesCount, out loosed, rckt.Count, _dataLayer.GetCountry(rckt.From).LvlMilitary, lvlMilitary);
+                missilesCount -= loosed;
+                _dataLayer.SetProperty(defender, "MissilesCount", missilesCount);
                 rckt.Count -= result;
             }
         }

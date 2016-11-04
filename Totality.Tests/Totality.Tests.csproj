@@ -54,9 +54,14 @@
   <ItemGroup>
     <Compile Include="DataLayerTests.cs" />
     <Compile Include="MilitaryHandlerTests.cs" />
+    <Compile Include="PremierHandlerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Totality.CommonClasses\Totality.CommonClasses.csproj">
+      <Project>{2d0a4c97-8f53-4b07-b51c-d1cb3bbdc020}</Project>
+      <Name>Totality.CommonClasses</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Totality.DataLayer\Totality.DataLayer.csproj">
       <Project>{406c6dbb-795b-43d9-99c3-39663a25561a}</Project>
       <Name>Totality.DataLayer</Name>
