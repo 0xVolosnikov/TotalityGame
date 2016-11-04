@@ -73,13 +73,15 @@ namespace Totality.Handlers.Main
         private bool MakeNukes(Order order)
         {
             var money = (long)_dataLayer.GetProperty(order.CountryName, "Money");
+            var uranus = (double)_dataLayer.GetProperty(order.CountryName, "ResUranus");
 
-            if ( money < Constants.NukeCost * order.Count)
+            if ( money < Constants.NukeCost * order.Count || uranus < Constants.NukeUranusCost)
                 return false;
 
             money -= Constants.NukeCost * order.Count;
             _dataLayer.SetProperty(order.CountryName, "Money", money);
-
+            uranus -= Constants.NukeUranusCost;
+            _dataLayer.SetProperty(order.CountryName, "ResUranus", uranus);
 
             var nukes = (int)_dataLayer.GetProperty(order.CountryName, "NukesCount");
             nukes += (int)order.Count;

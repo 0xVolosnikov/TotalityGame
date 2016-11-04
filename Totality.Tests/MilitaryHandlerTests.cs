@@ -34,6 +34,7 @@ namespace Totality.Tests
 
             var newCountry = new Country(Guid.NewGuid().ToString());
             newCountry.Money = Constants.NukeCost;
+            newCountry.ResUranus = Constants.NukeUranusCost;
             _data.AddCountry(newCountry);
 
             handler.ProcessOrder(new Order(newCountry.Name, null){ Ministery = (int)Mins.Military, OrderNum = 3, Count = 1 } );

@@ -53,6 +53,9 @@
   </Choose>
   <ItemGroup>
     <Compile Include="DataLayerTests.cs" />
+    <Compile Include="IndustryHandlerTests.cs" />
+    <Compile Include="InnerHandlerTests.cs" />
+    <Compile Include="MediaHandlerTests.cs" />
     <Compile Include="MilitaryHandlerTests.cs" />
     <Compile Include="PremierHandlerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

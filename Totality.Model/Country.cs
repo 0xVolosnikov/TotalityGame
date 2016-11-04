@@ -19,22 +19,23 @@ namespace Totality.Model
         }
 
         public string Name { get; }
-        public long Money;
-        public long ProductionUpgradeCost;
+        public long Money;       
         public double Ecology;
-        public Property Mood; //настроение
+        public double Mood = 100; 
 
         public int[] MinsBlocks = new int[Constants.CountOfMinisters];
 
-        public Property PowerResIndustry;
-        public Property ResLand;
-        public Property ResWood;
-        public Property ResSteel;
-        public Property ResOil;
+        public double PowerResIndustry;
+        public double ResAgricultural;
+        public double ResWood;
+        public double ResSteel;
+        public double ResOil;
         public double ProdUranus;
-        public Property ResUranus;
-        public Property PowerLightIndustry;
-        public Property PowerHeavyIndustry;
+        public double ResUranus;
+        public double PowerLightIndustry;
+        public double PowerHeavyIndustry;
+        public long ProductionUpgradeCost;
+        public long IndustryUpgradeCost;
 
         public Property TaxesLvl;
 
@@ -44,15 +45,17 @@ namespace Totality.Model
         public List<string> WarList = new List<string>();
 
         public Property PowerMassMedia;
-        public Dictionary<string, double> MassMedia = new Dictionary<string, double>();
+        public Dictionary<string, short> MassMedia = new Dictionary<string, short>();
 
         public bool IsRiot = false;
         public bool IsMobilized = false;
         public bool IsAlerted = false;
+        public bool IsRepressed = false;
 
         public int LvlFSB { get; set; }
         public Dictionary<string, SpyNetwork> SpyNetworks = new Dictionary<string, SpyNetwork>();
         public List<List<string>> ForeignSpyes;
+
 
         public Property PowerScience;
         public int LvlResIndustry;
@@ -60,12 +63,18 @@ namespace Totality.Model
         public int LvlHeavyIndustry;
         public int LvlMilitary;
         public int PremierLvl = 1;
+        public int InnerLvl = 1;
         public long PremierLvlUpCost;
+        public long InnerLvlUpCost;
 
         public Country(string name)
         {
             Money = Constants.InitialMoney;
             PremierLvlUpCost = Constants.InitialPremierLvlUpCost;
+            IndustryUpgradeCost = Constants.InitialIndustryUpgradeCost;
+            ProductionUpgradeCost = Constants.InitialProductionUpgradeCost;
+            InnerLvlUpCost = Constants.InitialInnerLvlUpCost;
+
             Name = name;
             ForeignSpyes = new List<List<string>>();
             for (int i = 0; i < Constants.CountOfMinisters; i++)

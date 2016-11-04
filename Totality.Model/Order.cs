@@ -13,6 +13,7 @@ namespace Totality.Model
         public string CountryName { get; }
         public string TargetCountryName { get; }
         public long Count { get; set; }
+        public short Value { get; set; }
         public short OrderNum { get; set; }
         public short Ministery { get; set; }
         public short TargetMinistery { get; set; }

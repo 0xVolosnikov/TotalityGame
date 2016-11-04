@@ -9,7 +9,7 @@ namespace Totality.CommonClasses
         Military,
         Foreign,
         Media,
-        MVD,
+        Inner,
         FSB,
         Science,
         Premier
