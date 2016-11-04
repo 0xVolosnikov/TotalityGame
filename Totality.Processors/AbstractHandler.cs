@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 using Totality.Model;
 using Totality.Model.Interfaces;
 
-namespace Totality.Processors
+namespace Totality.Handlers
 {
-    public class AbstractProcessor : AbstractLoggable
+    public class AbstractHandler : AbstractLoggable
     {
         protected IDataLayer _dataLayer;
-        public AbstractProcessor(IDataLayer dataLayer, ILogger logger) : base (logger)
+        public AbstractHandler(IDataLayer dataLayer, ILogger logger) : base (logger)
         {
             _dataLayer = dataLayer;
         }

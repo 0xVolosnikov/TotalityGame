@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Totality.Processors.News
+namespace Totality.Handlers.News
 {
-    public class NewsProcessor
+    public class NewsHandler
     {
     }
 }

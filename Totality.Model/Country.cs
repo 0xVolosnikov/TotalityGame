@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Totality.CommonClasses;
 
 namespace Totality.Model
@@ -22,8 +18,9 @@ namespace Totality.Model
         }
 
         public string Name { get; }
-        public int Money { get; set; }
-        public Property Ecology { get; set; }
+        public long Money { get; set; }
+        public long ProductionUpgradeCost { get; set; }
+        public double Ecology { get; set; }
         public Property Mood { get; set; } //настроение
 
         public Property PowerResIndustry { get; set; }
@@ -31,6 +28,7 @@ namespace Totality.Model
         public Property ResWood { get; set; }
         public Property ResSteel { get; set; }
         public Property ResOil { get; set; }
+        public double ProdUranus { get; set; }
         public Property ResUranus { get; set; }
         public Property PowerLightIndustry { get; set; }
         public Property PowerHeavyIndustry { get; set; }
@@ -45,6 +43,7 @@ namespace Totality.Model
         public Dictionary<string, double> MassMedia = new Dictionary<string, double>();
 
         public bool IsRiot { get; set; }
+        public bool IsMobilized { get; set; }
 
         public int LvlFSB { get; set; }
         public Dictionary<string, FSB> FSBStructure = new Dictionary<string, FSB>();
@@ -55,9 +54,10 @@ namespace Totality.Model
         public int LvlHeavyIndustry { get; set; }
         public int LvlMilitary { get; set; }
 
-        public Country()
+        public Country(string name)
         {
-            Money = Constants.InitialMoney;           
+            Money = Constants.InitialMoney;
+            Name = name;          
         }
     }
 }

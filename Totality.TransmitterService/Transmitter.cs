@@ -20,6 +20,10 @@ namespace Totality.TransmitterService
         {
         }
 
+        public Transmitter() : base(null)
+        {
+        }
+
         public bool Register(string myName)
         {
             if (!Clients.Any(c => c.Name == myName))

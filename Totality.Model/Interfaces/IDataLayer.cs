@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Totality.Model;
+﻿
 
 namespace Totality.Model.Interfaces
 {
@@ -17,6 +12,8 @@ namespace Totality.Model.Interfaces
         Country GetCountry(string name);
         bool UpdateCountry(Country newCountry);
 
+        object GetProperty(string countryName, string propertyName);
+        void SetProperty(string countryName, string propertyName, object value);
 
     }
 }

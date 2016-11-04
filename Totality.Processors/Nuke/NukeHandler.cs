@@ -9,16 +9,16 @@ using System.Threading.Tasks;
 using Totality.Model;
 using Totality.Model.Interfaces;
 
-namespace Totality.Processors.Nuke
+namespace Totality.Handlers.Nuke
 {
-    public class NukeProcessor : AbstractProcessor
+    public class NukeHandler : AbstractHandler
     {
         private const int _delay = 500;
         private BackgroundWorker _timer = new BackgroundWorker();
         private List<NukeRocket> _rockets = new List<NukeRocket>();
         private ITransmitter _transmitter;
 
-        public NukeProcessor( ITransmitter transmitter, IDataLayer dataLayer, ILogger logger) : base(dataLayer, logger)
+        public NukeHandler( ITransmitter transmitter, IDataLayer dataLayer, ILogger logger) : base(dataLayer, logger)
         {
             _transmitter = transmitter;
 

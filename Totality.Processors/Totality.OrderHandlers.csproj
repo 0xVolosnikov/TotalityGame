@@ -41,21 +41,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Diplomatical\DiplomaticalProcessor.cs" />
-    <Compile Include="AbstractProcessor.cs" />
-    <Compile Include="Main\MainProcessor.cs" />
-    <Compile Include="Main\IMinisteryProcessor.cs" />
-    <Compile Include="Main\MinFinanceProcessor.cs" />
-    <Compile Include="Main\MinForeignProcessor.cs" />
-    <Compile Include="Main\MinFSBProcessor.cs" />
-    <Compile Include="Main\MinIndustryProcessor.cs" />
-    <Compile Include="Main\MinMediaProcessor.cs" />
-    <Compile Include="Main\MinMilitaryProcessor.cs" />
-    <Compile Include="Main\MinMVDProcessor.cs" />
-    <Compile Include="Main\MinPremierProcessor.cs" />
-    <Compile Include="Main\MinScienceProcessor.cs" />
-    <Compile Include="News\NewsProcessor.cs" />
-    <Compile Include="Nuke\NukeProcessor.cs" />
+    <Compile Include="Diplomatical\DiplomaticalHandler.cs" />
+    <Compile Include="AbstractHandler.cs" />
+    <Compile Include="Main\MainHandler.cs" />
+    <Compile Include="Main\IMinisteryHandler.cs" />
+    <Compile Include="Main\MinFinanceHandler.cs" />
+    <Compile Include="Main\MinForeignHandler.cs" />
+    <Compile Include="Main\MinFsbHandler.cs" />
+    <Compile Include="Main\MinIndustryHandler.cs" />
+    <Compile Include="Main\MinMediaHandler.cs" />
+    <Compile Include="Main\MinMilitaryHandler.cs" />
+    <Compile Include="Main\MinInnerHandler.cs" />
+    <Compile Include="Main\MinPremierHandler.cs" />
+    <Compile Include="Main\MinScienceHandler.cs" />
+    <Compile Include="News\NewsHandler.cs" />
+    <Compile Include="Nuke\NukeHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

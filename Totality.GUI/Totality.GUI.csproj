@@ -24,6 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -36,7 +37,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -104,9 +108,9 @@
       <Project>{d90072a3-49d1-40cf-ae1a-98cd75136a3b}</Project>
       <Name>Totality.LoggingSystem</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Totality.Processors\Totality.Processors.csproj">
+    <ProjectReference Include="..\Totality.Processors\Totality.OrderHandlers.csproj">
       <Project>{2f3d18d6-560b-41c3-909b-59b682df63e3}</Project>
-      <Name>Totality.Processors</Name>
+      <Name>Totality.OrderHandlers</Name>
     </ProjectReference>
     <ProjectReference Include="..\Totality.DataLayer\Totality.DataLayer.csproj">
       <Project>{406c6dbb-795b-43d9-99c3-39663a25561a}</Project>
@@ -118,7 +122,7 @@
     </ProjectReference>
     <ProjectReference Include="..\Totality.TransmitterService\Totality.TransmitterService.csproj">
       <Project>{ed78d101-6d7c-455c-bfa6-5d22385dde2b}</Project>
-      <Name>Totality.transmitterService</Name>
+      <Name>Totality.TransmitterService</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

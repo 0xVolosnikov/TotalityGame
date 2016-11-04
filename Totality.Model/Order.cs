@@ -10,14 +10,14 @@ namespace Totality.Model
     [DataContract]
     public class Order
     {
-        public string CountryName;
+        public string CountryName { get; }
+        public string TargetCountryName { get; }
         public List<int> Args { get; }
 
-        public Order(string countryName, params int[] args)
+        public Order(string countryName, string targetCountryName = null, params int[] args)
         {
             CountryName = countryName; 
-            Args = new List<int>();
-            Args.AddRange(args);
+            Args = new List<int>(args);
         }
     }
 }
