@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Totality.CommonClasses;
 using Totality.Handlers.Nuke;
 using Totality.Model;
 using Totality.Model.Interfaces;
@@ -20,9 +21,16 @@ namespace Totality.Handlers.Main
             _ministeryHandlers.Add(new MinForeignHandler(dataLayer, logger));
             _ministeryHandlers.Add(new MinMediaHandler(dataLayer, logger));
             _ministeryHandlers.Add(new MinInnerHandler(dataLayer, logger));
-            _ministeryHandlers.Add(new MinFsbHandler(dataLayer, logger));
+            _ministeryHandlers.Add(new MinSecurityHandler(dataLayer, logger));
             _ministeryHandlers.Add(new MinScienceHandler(dataLayer, logger));
             _ministeryHandlers.Add(new MinPremierHandler(dataLayer, logger));
+
+            (_ministeryHandlers[(short)Mins.Security] as MinSecurityHandler).SecretOrderProcessed += SecretOrderProcessed;
+        }
+
+        private void SecretOrderProcessed(Order order)
+        {
+            _ordersBase[order.CountryName].Enqueue(order);
         }
 
         public void AddCountry(string name)

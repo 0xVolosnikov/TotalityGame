@@ -64,8 +64,15 @@ namespace Totality.Model
         public int LvlMilitary;
         public int PremierLvl = 1;
         public int InnerLvl = 1;
+        public int IntelligenceLvl = 0;
+        public int CounterSpyLvl = 0;
+        public int ShadowingLvl = 0;
+
+        public long CounterSpyLvlUpCost;
         public long PremierLvlUpCost;
         public long InnerLvlUpCost;
+        public long ShadowingLvlUpCost;
+        public long IntelligenceLvlUpCost;
 
         public Country(string name)
         {
@@ -74,6 +81,9 @@ namespace Totality.Model
             IndustryUpgradeCost = Constants.InitialIndustryUpgradeCost;
             ProductionUpgradeCost = Constants.InitialProductionUpgradeCost;
             InnerLvlUpCost = Constants.InitialInnerLvlUpCost;
+            CounterSpyLvlUpCost = Constants.InitialCounterSpyLvlUpCost;
+            ShadowingLvlUpCost = Constants.InitialShadowingLvlUpCost;
+            IntelligenceLvlUpCost = Constants.InitialIntelligenceLvlUpCost;
 
             Name = name;
             ForeignSpyes = new List<List<string>>();

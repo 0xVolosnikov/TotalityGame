@@ -10,7 +10,7 @@ namespace Totality.CommonClasses
         Foreign,
         Media,
         Inner,
-        FSB,
+        Security,
         Science,
         Premier
     }

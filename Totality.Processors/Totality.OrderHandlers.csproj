@@ -47,7 +47,7 @@
     <Compile Include="Main\IMinisteryHandler.cs" />
     <Compile Include="Main\MinFinanceHandler.cs" />
     <Compile Include="Main\MinForeignHandler.cs" />
-    <Compile Include="Main\MinFsbHandler.cs" />
+    <Compile Include="Main\MinSecurityHandler.cs" />
     <Compile Include="Main\MinIndustryHandler.cs" />
     <Compile Include="Main\MinMediaHandler.cs" />
     <Compile Include="Main\MinMilitaryHandler.cs" />

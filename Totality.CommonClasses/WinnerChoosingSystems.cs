@@ -11,12 +11,12 @@ namespace Totality.CommonClasses
             double attackerChance = 0.5;
 
             if (attackerLvl >= defenderLvl)            
-                for (int i = 1; i <= defenderLvl - attackerLvl; i++)
+                for (int i = 1; i <= attackerLvl - defenderLvl; i++)
                 {
                     attackerChance += Math.Pow(0.5, i+1);
                 }            
             else
-                for (int i = 1; i <=  attackerLvl - defenderLvl; i++)
+                for (int i = 1; i <=  defenderLvl - attackerLvl; i++)
                 {
                     attackerChance -= Math.Pow(0.5, i+1);
                 }

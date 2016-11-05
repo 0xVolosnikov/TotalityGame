@@ -12,6 +12,11 @@ namespace Totality.CommonClasses
         public static double IndustryOilCoeff = 2;
         public static double PremierLvlUpCostRatio = 1.1;
         public static double InnerLvlUpCostRatio = 1.1;
+        public static double NetworkLvlUpCostRatio = 1.1;
+        public static double CounterSpyLvlUpCostRatio = 1.1;
+        public static double ShadowingLvlUpCostRatio = 1.1;
+        public static double IntelligenceLvlUpCostRatio = 1.1;
+        public static double AgentCostRatio = 1.1;
 
         public static int NukeCost = 15000;
         public static double NukeUranusCost = 5;
@@ -19,17 +24,30 @@ namespace Totality.CommonClasses
 
         public static int MissileCost = 15000;
 
+        public static int PurgeCost = 10000;
+
         public static int CountOfMinisters = 8;
         public static int ReorganizingTime = 2;
+        public static int SabotageTime = 1;
+        public static int PurgeTime = 1;
 
-        public static int InitialMoney = 1000000;
+        public static long InitialMoney = 1000000;
         public static int InitialUranusProd = 0;
-        public static int InitialPremierLvlUpCost = 1000;
+        public static long InitialPremierLvlUpCost = 1000;
         public static long InitialInnerLvlUpCost = 1000;
-        public static int InitialIndustryUpgradeCost = 1000;
-        public static int InitialProductionUpgradeCost = 1000;
+        public static long InitialNetworkLvlUpCost = 1000;
+        public static long InitialIndustryUpgradeCost = 1000;
+        public static long InitialProductionUpgradeCost = 1000;
+        public static long InitialAgentCost = 1000;
+        public static long InitialCounterSpyLvlUpCost = 1000;
+        public static long InitialShadowingLvlUpCost = 1000;
+        public static long InitialIntelligenceLvlUpCost = 1000;
 
-        public static int SummOfRes = 300; //сумма всех ресурсов
+        public static int MaxNetworkLvl = 3;
+        public static int MinAgentLvl = 3;
+
+
+        public static int SummOfRes = 300; 
 
     }
 }

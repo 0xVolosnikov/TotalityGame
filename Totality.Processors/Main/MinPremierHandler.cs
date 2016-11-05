@@ -39,7 +39,8 @@ namespace Totality.Handlers.Main
                 _dataLayer.SetProperty(country, "SpyNetworks", foreignSpyNetwork);
             }
             foreignSpyes[order.TargetMinistery].Clear();
-            
+            _dataLayer.SetProperty(order.CountryName, "ForeignSpyes", foreignSpyes);
+
             var minsBlocks = (int[])_dataLayer.GetProperty(order.CountryName, "MinsBlocks");
             minsBlocks[order.TargetMinistery] += Constants.ReorganizingTime;
             _dataLayer.SetProperty(order.CountryName, "MinsBlocks", minsBlocks);
