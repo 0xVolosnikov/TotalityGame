@@ -59,6 +59,7 @@
     <Compile Include="MilitaryHandlerTests.cs" />
     <Compile Include="PremierHandlerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ScienceHandlerTests.cs" />
     <Compile Include="SecurityHandlerTests.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,18 +1,90 @@
 ﻿using System;
+using Totality.CommonClasses;
 using Totality.Model;
 using Totality.Model.Interfaces;
 
 namespace Totality.Handlers.Main
 {
-    class MinScienceHandler : AbstractHandler, IMinisteryHandler
+    public class MinScienceHandler : AbstractHandler, IMinisteryHandler
     {
+        private enum Orders { ImproveExtract , ImproveHeavy , ImproveLight , ImproveMilitary }
+
         public MinScienceHandler(IDataLayer dataLayer, ILogger logger) : base(dataLayer, logger)
         {
         }
 
         public bool ProcessOrder(Order order)
         {
-            throw new NotImplementedException();
+            switch (order.OrderNum)
+            {
+                case (int)Orders.ImproveExtract: return Improve(order, "Extract");
+
+                case (int)Orders.ImproveHeavy: return Improve(order, "Heavy");
+
+                case (int)Orders.ImproveLight: return Improve(order, "Light");
+
+                case (int)Orders.ImproveMilitary: return Improve(order, "Military");
+
+                default: throw new ArgumentException("Order " + order + " not found in " + typeof(MinScienceHandler));
+            }
+        }
+
+        private bool Improve(Order order, string sector)
+        {
+            var money = (long)_dataLayer.GetProperty(order.CountryName, "Money");
+            var sectorLvlUpCost = (long)_dataLayer.GetProperty(order.CountryName, sector + "ScLvlUpCost");
+
+            if (money < sectorLvlUpCost)
+                return false;
+
+            var exp = (int)_dataLayer.GetProperty(order.CountryName, sector + "Experience");
+            var sectorLvlUpExp = (int)_dataLayer.GetProperty(order.CountryName, sector + "ScLvlUpExp");
+            if (exp < sectorLvlUpExp)
+                return false;
+
+            money -= sectorLvlUpCost;
+            _dataLayer.SetProperty(order.CountryName, "Money", money);
+
+            switch (sector)
+            {
+                case "Extract":
+                    sectorLvlUpCost = (long)(sectorLvlUpCost * Constants.ExtractScLvlUpCostRatio);
+                    break;
+                case "Heavy":
+                    sectorLvlUpCost = (long)(sectorLvlUpCost * Constants.HeavyScLvlUpCostRatio);
+                    break;
+                case "Light":
+                    sectorLvlUpCost = (long)(sectorLvlUpCost * Constants.LightScLvlUpCostRatio);
+                    break;
+                case "Military":
+                    sectorLvlUpCost = (long)(sectorLvlUpCost * Constants.MilitaryScLvlUpCostRatio);
+                    break;
+            }
+            _dataLayer.SetProperty(order.CountryName, sector + "ScLvlUpCost", sectorLvlUpCost);
+
+            exp -= sectorLvlUpExp;
+            _dataLayer.SetProperty(order.CountryName, sector + "Experience", exp);
+            switch (sector)
+            {
+                case "Extract":
+                    sectorLvlUpExp = (int)(sectorLvlUpExp * Constants.ExtractScLvlUpExpRatio);
+                    break;
+                case "Heavy":
+                    sectorLvlUpExp = (int)(sectorLvlUpExp * Constants.HeavyScLvlUpExpRatio);
+                    break;
+                case "Light":
+                    sectorLvlUpExp = (int)(sectorLvlUpExp * Constants.LightScLvlUpExpRatio);
+                    break;
+                case "Military":
+                    sectorLvlUpExp = (int)(sectorLvlUpExp * Constants.MilitaryScLvlUpExpRatio);
+                    break;
+            }
+            _dataLayer.SetProperty(order.CountryName, sector + "ScLvlUpExp", sectorLvlUpExp);
+
+            var lvl = (int)_dataLayer.GetProperty(order.CountryName, sector + "ScienceLvl") + 1;
+            _dataLayer.SetProperty(order.CountryName, sector + "ScienceLvl", lvl);
+
+            return true;
         }
     }
 }

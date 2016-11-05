@@ -17,6 +17,14 @@ namespace Totality.CommonClasses
         public static double ShadowingLvlUpCostRatio = 1.1;
         public static double IntelligenceLvlUpCostRatio = 1.1;
         public static double AgentCostRatio = 1.1;
+        public static double ExtractScLvlUpCostRatio = 1.1;
+        public static double ExtractScLvlUpExpRatio = 1.1;
+        public static double HeavyScLvlUpCostRatio = 1.1;
+        public static double HeavyScLvlUpExpRatio = 1.1;
+        public static double LightScLvlUpCostRatio = 1.1;
+        public static double LightScLvlUpExpRatio = 1.1;
+        public static double MilitaryScLvlUpCostRatio = 1.1;
+        public static double MilitaryScLvlUpExpRatio = 1.1;
 
         public static int NukeCost = 15000;
         public static double NukeUranusCost = 5;
@@ -42,6 +50,14 @@ namespace Totality.CommonClasses
         public static long InitialCounterSpyLvlUpCost = 1000;
         public static long InitialShadowingLvlUpCost = 1000;
         public static long InitialIntelligenceLvlUpCost = 1000;
+        public static long InitialExtractScLvlUpCost = 1000;
+        public static long InitialExtractScLvlUpExp = 5;
+        public static long InitialHeavyScLvlUpCost = 1000;
+        public static long InitialHeavyScLvlUpExp = 5;
+        public static long InitialLightScLvlUpCost = 1000;
+        public static long InitialLightScLvlUpExp = 5;
+        public static long InitialMilitaryScLvlUpCost = 1000;
+        public static long InitialMilitaryScLvlUpExp = 5;
 
         public static int MaxNetworkLvl = 3;
         public static int MinAgentLvl = 3;

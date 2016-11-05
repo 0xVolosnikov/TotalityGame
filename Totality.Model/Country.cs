@@ -67,12 +67,29 @@ namespace Totality.Model
         public int IntelligenceLvl = 0;
         public int CounterSpyLvl = 0;
         public int ShadowingLvl = 0;
+        public int ExtractScienceLvl = 1;
+        public int HeavyScienceLvl = 1;
+        public int LightScienceLvl = 1;
+        public int MilitaryScienceLvl = 1;
+
+        public int ExtractExperience = 0;
+        public int HeavyExperience = 0;
+        public int LightExperience = 0;
+        public int MilitaryExperience = 0;
 
         public long CounterSpyLvlUpCost;
         public long PremierLvlUpCost;
         public long InnerLvlUpCost;
         public long ShadowingLvlUpCost;
         public long IntelligenceLvlUpCost;
+        public long ExtractScLvlUpCost;
+        public long HeavyScLvlUpCost;
+        public long LightScLvlUpCost;
+        public long MilitaryScLvlUpCost;
+        public int ExtractScLvlUpExp;
+        public int HeavyScLvlUpExp;
+        public int LightScLvlUpExp;
+        public int MilitaryScLvlUpExp;
 
         public Country(string name)
         {
