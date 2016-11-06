@@ -15,5 +15,9 @@ namespace Totality.Model.Interfaces
         object GetProperty(string countryName, string propertyName);
         void SetProperty(string countryName, string propertyName, object value);
 
+        long GetCurrencyOnStock(string countryName);
+        void SetCurrencyOnStock(string countryName, long count);
+
+
     }
 }

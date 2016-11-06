@@ -39,6 +39,8 @@ namespace Totality.CommonClasses
         public static int SabotageTime = 1;
         public static int PurgeTime = 1;
 
+        public static long InitialCurrencyOnStock = 10000000;
+        public static long InitialNationalCurrencyDemand = 10000000;
         public static long InitialMoney = 1000000;
         public static int InitialUranusProd = 0;
         public static long InitialPremierLvlUpCost = 1000;

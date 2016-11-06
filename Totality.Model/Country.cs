@@ -37,7 +37,7 @@ namespace Totality.Model
         public long ProductionUpgradeCost;
         public long IndustryUpgradeCost;
 
-        public Property TaxesLvl;
+        public short TaxesLvl;
 
         public Property PowerMilitary;
         public int NukesCount;
@@ -56,8 +56,9 @@ namespace Totality.Model
         public Dictionary<string, SpyNetwork> SpyNetworks = new Dictionary<string, SpyNetwork>();
         public List<List<string>> ForeignSpyes;
 
+        public long NationalCurrencyDemand;
+        public Dictionary<string, long> CurrencyAccounts = new Dictionary<string, long>();
 
-        public Property PowerScience;
         public int LvlResIndustry;
         public int LvlLightIndustry;
         public int LvlHeavyIndustry;
@@ -101,6 +102,8 @@ namespace Totality.Model
             CounterSpyLvlUpCost = Constants.InitialCounterSpyLvlUpCost;
             ShadowingLvlUpCost = Constants.InitialShadowingLvlUpCost;
             IntelligenceLvlUpCost = Constants.InitialIntelligenceLvlUpCost;
+
+            NationalCurrencyDemand = Constants.InitialNationalCurrencyDemand;
 
             Name = name;
             ForeignSpyes = new List<List<string>>();
