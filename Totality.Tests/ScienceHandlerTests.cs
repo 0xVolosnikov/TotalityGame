@@ -6,6 +6,7 @@ using Totality.Handlers.Main;
 using Totality.Model;
 using Totality.CommonClasses;
 using Totality.Model.Interfaces;
+using Totality.Handlers.News;
 
 namespace Totality.Tests
 {
@@ -14,11 +15,12 @@ namespace Totality.Tests
     public class ScienceHandlerTests
     {
         private IDataLayer _data = new DataLayer.DataLayer(null);
+        private NewsHandler _newsHandler = new NewsHandler();
 
         [TestMethod]
         public void ShouldExtractUp()
         {
-            MinScienceHandler handler = new MinScienceHandler(_data, null);
+            MinScienceHandler handler = new MinScienceHandler(_newsHandler, _data, null);
 
             var newCountry = new Country(Guid.NewGuid().ToString());
             newCountry.Money = newCountry.ExtractScLvlUpCost;
@@ -35,7 +37,7 @@ namespace Totality.Tests
         [TestMethod]
         public void ShouldHeavyUp()
         {
-            MinScienceHandler handler = new MinScienceHandler(_data, null);
+            MinScienceHandler handler = new MinScienceHandler(_newsHandler, _data, null);
 
             var newCountry = new Country(Guid.NewGuid().ToString());
             newCountry.Money = newCountry.HeavyScLvlUpCost;
@@ -52,7 +54,7 @@ namespace Totality.Tests
         [TestMethod]
         public void ShouldLightUp()
         {
-            MinScienceHandler handler = new MinScienceHandler(_data, null);
+            MinScienceHandler handler = new MinScienceHandler(_newsHandler, _data, null);
 
             var newCountry = new Country(Guid.NewGuid().ToString());
             newCountry.Money = newCountry.LightScLvlUpCost;
@@ -69,7 +71,7 @@ namespace Totality.Tests
         [TestMethod]
         public void ShouldMilitaryUp()
         {
-            MinScienceHandler handler = new MinScienceHandler(_data, null);
+            MinScienceHandler handler = new MinScienceHandler(_newsHandler, _data, null);
 
             var newCountry = new Country(Guid.NewGuid().ToString());
             newCountry.Money = newCountry.MilitaryScLvlUpCost;

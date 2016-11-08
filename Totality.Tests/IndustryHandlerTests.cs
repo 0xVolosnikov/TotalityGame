@@ -4,6 +4,7 @@ using Totality.Handlers.Main;
 using Totality.Model.Interfaces;
 using Totality.Model;
 using Totality.CommonClasses;
+using Totality.Handlers.News;
 
 namespace Totality.Tests
 {
@@ -11,11 +12,12 @@ namespace Totality.Tests
     public class IndustryHandlerTests
     {
         private IDataLayer _data = new DataLayer.DataLayer(null);
+        private NewsHandler _newsHandler = new NewsHandler();
 
         [TestMethod]
         public void ShouldImproveHeavyIndustry()
         {
-            MinIndustryHandler handler = new MinIndustryHandler(_data, null);
+            MinIndustryHandler handler = new MinIndustryHandler(_newsHandler, _data, null);
 
             var newCountry = new Country(Guid.NewGuid().ToString());
             newCountry.Money = newCountry.IndustryUpgradeCost;
@@ -34,7 +36,7 @@ namespace Totality.Tests
         [TestMethod]
         public void ShouldImproveLightIndustry()
         {
-            MinIndustryHandler handler = new MinIndustryHandler(_data, null);
+            MinIndustryHandler handler = new MinIndustryHandler(_newsHandler, _data, null);
 
             var newCountry = new Country(Guid.NewGuid().ToString());
             newCountry.Money = newCountry.IndustryUpgradeCost;
@@ -53,7 +55,7 @@ namespace Totality.Tests
         [TestMethod]
         public void ShouldIncreaseSteel()
         {
-            MinIndustryHandler handler = new MinIndustryHandler(_data, null);
+            MinIndustryHandler handler = new MinIndustryHandler(_newsHandler, _data, null);
 
             var newCountry = new Country(Guid.NewGuid().ToString());
             newCountry.Money = newCountry.ProductionUpgradeCost;
@@ -70,7 +72,7 @@ namespace Totality.Tests
         [TestMethod]
         public void ShouldIncreaseOil()
         {
-            MinIndustryHandler handler = new MinIndustryHandler(_data, null);
+            MinIndustryHandler handler = new MinIndustryHandler(_newsHandler, _data, null);
 
             var newCountry = new Country(Guid.NewGuid().ToString());
             newCountry.Money = newCountry.ProductionUpgradeCost;
@@ -87,7 +89,7 @@ namespace Totality.Tests
         [TestMethod]
         public void ShouldIncreaseWood()
         {
-            MinIndustryHandler handler = new MinIndustryHandler(_data, null);
+            MinIndustryHandler handler = new MinIndustryHandler(_newsHandler, _data, null);
 
             var newCountry = new Country(Guid.NewGuid().ToString());
             newCountry.Money = newCountry.ProductionUpgradeCost;
@@ -104,7 +106,7 @@ namespace Totality.Tests
         [TestMethod]
         public void ShouldIncreaseAgricultural()
         {
-            MinIndustryHandler handler = new MinIndustryHandler(_data, null);
+            MinIndustryHandler handler = new MinIndustryHandler(_newsHandler, _data, null);
 
             var newCountry = new Country(Guid.NewGuid().ToString());
             newCountry.Money = newCountry.ProductionUpgradeCost;

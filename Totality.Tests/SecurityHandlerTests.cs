@@ -4,6 +4,7 @@ using Totality.Handlers.Main;
 using Totality.Model.Interfaces;
 using Totality.Model;
 using Totality.CommonClasses;
+using Totality.Handlers.News;
 
 namespace Totality.Tests
 {
@@ -11,11 +12,12 @@ namespace Totality.Tests
     public class SecurityHandlerTests
     {
         private IDataLayer _data = new DataLayer.DataLayer(null);
+        private NewsHandler _newsHandler = new NewsHandler();
 
         [TestMethod]
         public void ShouldImproveNetwork()
         {
-            MinSecurityHandler handler = new MinSecurityHandler(_data, null);
+            MinSecurityHandler handler = new MinSecurityHandler(_newsHandler, _data, null);
 
             var newCountry1 = new Country(Guid.NewGuid().ToString());
             var newCountry2 = new Country(Guid.NewGuid().ToString());
@@ -36,7 +38,7 @@ namespace Totality.Tests
         [TestMethod]
         public void ShouldAddAgents()
         {
-            MinSecurityHandler handler = new MinSecurityHandler(_data, null);
+            MinSecurityHandler handler = new MinSecurityHandler(_newsHandler, _data, null);
 
             var newCountry1 = new Country(Guid.NewGuid().ToString());
             var newCountry2 = new Country(Guid.NewGuid().ToString());
@@ -65,7 +67,7 @@ namespace Totality.Tests
         [TestMethod]
         public void ShouldPurge()
         {
-            MinSecurityHandler handler = new MinSecurityHandler(_data, null);
+            MinSecurityHandler handler = new MinSecurityHandler(_newsHandler, _data, null);
 
             var newCountry1 = new Country(Guid.NewGuid().ToString());
             var newCountry2 = new Country(Guid.NewGuid().ToString());
@@ -92,7 +94,7 @@ namespace Totality.Tests
         [TestMethod]
         public void ShouldEvacuateAgent()
         {
-            MinSecurityHandler handler = new MinSecurityHandler(_data, null);
+            MinSecurityHandler handler = new MinSecurityHandler(_newsHandler, _data, null);
 
             var newCountry1 = new Country(Guid.NewGuid().ToString());
             var newCountry2 = new Country(Guid.NewGuid().ToString());
@@ -116,7 +118,7 @@ namespace Totality.Tests
         [TestMethod]
         public void ShouldCounterSpyLvlUp()
         {
-            MinSecurityHandler handler = new MinSecurityHandler(_data, null);
+            MinSecurityHandler handler = new MinSecurityHandler(_newsHandler, _data, null);
 
             var newCountry = new Country(Guid.NewGuid().ToString());
             newCountry.Money = newCountry.CounterSpyLvlUpCost;
@@ -132,7 +134,7 @@ namespace Totality.Tests
         [TestMethod]
         public void ShouldShadowingLvlUp()
         {
-            MinSecurityHandler handler = new MinSecurityHandler(_data, null);
+            MinSecurityHandler handler = new MinSecurityHandler(_newsHandler, _data, null);
 
             var newCountry = new Country(Guid.NewGuid().ToString());
             newCountry.Money = newCountry.ShadowingLvlUpCost;
@@ -148,7 +150,7 @@ namespace Totality.Tests
         [TestMethod]
         public void ShouldIntelligenceLvlUp()
         {
-            MinSecurityHandler handler = new MinSecurityHandler(_data, null);
+            MinSecurityHandler handler = new MinSecurityHandler(_newsHandler, _data, null);
 
             var newCountry = new Country(Guid.NewGuid().ToString());
             newCountry.Money = newCountry.IntelligenceLvlUpCost;
@@ -164,7 +166,7 @@ namespace Totality.Tests
         [TestMethod]
         public void ShouldSabotage()
         {
-            MinSecurityHandler handler = new MinSecurityHandler(_data, null);
+            MinSecurityHandler handler = new MinSecurityHandler(_newsHandler, _data, null);
 
             var newCountry1 = new Country(Guid.NewGuid().ToString());
             var newCountry2 = new Country(Guid.NewGuid().ToString());

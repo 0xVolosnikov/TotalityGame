@@ -4,6 +4,7 @@ using Totality.Model.Interfaces;
 using Totality.Handlers.Main;
 using Totality.Model;
 using Totality.CommonClasses;
+using Totality.Handlers.News;
 
 namespace Totality.Tests
 {
@@ -11,11 +12,12 @@ namespace Totality.Tests
     public class FinanceHandlerTests
     {
         private IDataLayer _data = new DataLayer.DataLayer(null);
+        private NewsHandler _newsHandler = new NewsHandler();
 
         [TestMethod]
         public void ShouldChangeTaxes()
         {
-            MinFinanceHandler handler = new MinFinanceHandler(_data, null);
+            MinFinanceHandler handler = new MinFinanceHandler(_newsHandler, _data, null);
 
             var newCountry = new Country(Guid.NewGuid().ToString());
             newCountry.TaxesLvl = 0;
@@ -31,7 +33,7 @@ namespace Totality.Tests
         [TestMethod]
         public void ShouldPurchaseCurrency()
         {
-            MinFinanceHandler handler = new MinFinanceHandler(_data, null);
+            MinFinanceHandler handler = new MinFinanceHandler(_newsHandler, _data, null);
 
             var newCountry1 = new Country(Guid.NewGuid().ToString());
             newCountry1.Money = 1;
@@ -50,7 +52,7 @@ namespace Totality.Tests
         [TestMethod]
         public void ShouldSellCurrency()
         {
-            MinFinanceHandler handler = new MinFinanceHandler(_data, null);
+            MinFinanceHandler handler = new MinFinanceHandler(_newsHandler, _data, null);
 
             var newCountry1 = new Country(Guid.NewGuid().ToString());
             _data.AddCountry(newCountry1);
@@ -71,7 +73,7 @@ namespace Totality.Tests
         [TestMethod]
         public void ShouldInfuseCurrency()
         {
-            MinFinanceHandler handler = new MinFinanceHandler(_data, null);
+            MinFinanceHandler handler = new MinFinanceHandler(_newsHandler, _data, null);
 
             var newCountry = new Country(Guid.NewGuid().ToString());
             newCountry.Money = 1;

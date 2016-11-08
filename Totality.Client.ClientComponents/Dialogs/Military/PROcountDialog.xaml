@@ -1,0 +1,35 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Totality.Client.ClientComponents.Dialogs"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="Totality.Client.ClientComponents.Dialogs.Military.PROcountDialog"
+             mc:Ignorable="d" d:DesignWidth="607.389" Width="617" Height="323.5" BorderBrush="White" BorderThickness="5">
+    <UserControl.Effect>
+        <DropShadowEffect RenderingBias="Quality" BlurRadius="7"/>
+    </UserControl.Effect>
+    <Canvas x:Name="canvas1" Background="#FF00000A">
+        <Canvas Height="34" Canvas.Top="22" Width="607" Background="#FF5D0000">
+            <Image x:Name="image" Height="50" Canvas.Left="278" Width="50" Source="/Totality.Client.ClientComponents;component/Images/interface/star.png" Canvas.Top="-9"/>
+        </Canvas>
+        <Label x:Name="label" Content="Укажите изменение арсенала ПРО" Canvas.Left="10" Canvas.Top="75" Width="587" Height="54" Foreground="White" FontSize="24" FontFamily="Arial Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold"/>
+        <Button x:Name="cancelButton" Content="Отмена" Canvas.Left="92" Canvas.Top="232" Width="194" Height="48" FontFamily="Arial Black" FontSize="20" Click="cancelButton_Click">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                    <GradientStop Color="#FFF3F3F3" Offset="0"/>
+                    <GradientStop Color="#FFCDCDCD" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button x:Name="acceptButton" Content="Подтвердить" Canvas.Left="316" Canvas.Top="232" Width="194" Height="48" Foreground="#FF02000C" FontSize="20" FontWeight="Bold" FontFamily="Arial Black" Click="acceptButton_Click">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                    <GradientStop Color="#FFF3F3F3" Offset="0"/>
+                    <GradientStop Color="#FFCDCDCD" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <xctk:IntegerUpDown x:Name="integerUpDown" Canvas.Left="216" Canvas.Top="148" Height="44" Width="174" FontSize="36" FontFamily="Arial Black" FontWeight="Bold" ClipValueToMinMax="True" DefaultValue="1" Minimum="0" Maximum="100" Value="1" Text="" HorizontalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center"/>
+    </Canvas>
+</UserControl>

@@ -4,6 +4,7 @@ namespace Totality.CommonClasses
 {
     public enum Mins
     {
+        NoOne = -1,
         Industry,
         Finance,
         Military,

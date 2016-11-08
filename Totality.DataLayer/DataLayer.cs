@@ -109,7 +109,7 @@ namespace Totality.DataLayer
             _financialStock[countryName] = count;
         }
 
-        public List<DipContract> GetContractList(string countryName)
+        public List<DipContract> GetContractList()
         {
             return _diplomaticalDatabase;
         }

@@ -33,7 +33,7 @@ namespace Totality.GUI
             _newsHandler = new NewsHandler();
             _host = new ServiceHost(_transmitter);
             _dataLayer = new DataLayer.DataLayer(_logger);
-            _nukeHandler = new NukeHandler( _transmitter, _dataLayer, _logger);
+            _nukeHandler = new NukeHandler(_newsHandler, _transmitter, _dataLayer, _logger);
             _mainHandler = new MainHandler(_newsHandler, _dataLayer, _logger, _nukeHandler);            
             _dipHandler = new DiplomaticalHandler(_newsHandler, _transmitter, _dataLayer, _logger);
 

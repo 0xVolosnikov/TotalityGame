@@ -4,6 +4,7 @@ using Totality.Handlers.Main;
 using Totality.Model.Interfaces;
 using Totality.Model;
 using Totality.CommonClasses;
+using Totality.Handlers.News;
 
 namespace Totality.Tests
 {
@@ -11,11 +12,12 @@ namespace Totality.Tests
     public class PremierHandlerTests
     {
         private IDataLayer _data = new DataLayer.DataLayer(null);
+        private NewsHandler _newsHandler = new NewsHandler();
 
         [TestMethod]
         public void ShouldReorganize()
         {
-            MinPremierHandler handler = new MinPremierHandler(_data, null);
+            MinPremierHandler handler = new MinPremierHandler(_newsHandler, _data, null);
 
             var newCountry1 = new Country(Guid.NewGuid().ToString());
             var newCountry2 = new Country(Guid.NewGuid().ToString());
@@ -39,7 +41,7 @@ namespace Totality.Tests
         [TestMethod]
         public void ShouldLvlUp()
         {
-            MinPremierHandler handler = new MinPremierHandler(_data, null);
+            MinPremierHandler handler = new MinPremierHandler(_newsHandler, _data, null);
 
             var newCountry = new Country(Guid.NewGuid().ToString());
             newCountry.Money = newCountry.PremierLvlUpCost;
@@ -55,7 +57,7 @@ namespace Totality.Tests
         [TestMethod]
         public void ShouldAlert()
         {
-            MinPremierHandler handler = new MinPremierHandler(_data, null);
+            MinPremierHandler handler = new MinPremierHandler(_newsHandler, _data, null);
 
             var newCountry = new Country(Guid.NewGuid().ToString());
             _data.AddCountry(newCountry);

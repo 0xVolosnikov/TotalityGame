@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="Totality.Client.ClientComponents.FinancePanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Totality.Client.ClientComponents"
+             mc:Ignorable="d" Width="1200" Height="445">
+    <Canvas x:Name="canvas1" Width="1200" Height="445">
+        <Canvas.Background>
+            <ImageBrush ImageSource="Images/Finance/dollarBack.jpg" Stretch="None"/>
+        </Canvas.Background>
+        <Canvas Height="43" Canvas.Top="7" Width="1200">
+            <Canvas Height="58" Canvas.Top="2" Width="1200" Background="#FF21201B">
+                <Label x:Name="label" Content="Министерство Финансов" Canvas.Left="427" Height="39" Width="346" Foreground="White" FontFamily="Haettenschweiler" FontSize="36" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" Canvas.Top="8"/>
+            </Canvas>
+        </Canvas>
+        <Canvas Height="35" Canvas.Left="539" Canvas.Top="410" Width="122" Background="#D8000000" HorizontalAlignment="Center"/>
+        <local:Button x:Name="LVLupButton" Canvas.Left="622" Canvas.Top="415" Width="25" imgUp="Images/LvlBut0.png" imgDown="Images/LvlBut1.png" Height="25"/>
+        <local:Button x:Name="HelpButton" Canvas.Left="552" Canvas.Top="415" Width="25" imgUp="Images/LvlHelp0.png" imgDown="Images/LvlHelp1.png" Height="25"/>
+        <Label x:Name="LVLlabel" Content="5" Canvas.Left="584" Canvas.Top="410" Height="35" FontSize="25" FontWeight="Bold" FontFamily="Euphemia" Foreground="White" Padding="-1,0,0,0" Width="30" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Canvas Height="276" Canvas.Left="304" Canvas.Top="98" Width="594" Background="#3FFCFFB8"/>
+        <local:Button x:Name="InvestButton" Canvas.Left="317" Canvas.Top="112" Width="174" Height="247" imgUp="Images/Finance/InvestButton.png" imgDown="Images/Finance/InvestButtonD.png">
+            <local:Button.Effect>
+                <DropShadowEffect BlurRadius="2" Opacity="0.7" RenderingBias="Quality"/>
+            </local:Button.Effect>
+        </local:Button>
+        <local:Button x:Name="ExchangeButton" Canvas.Left="513" Canvas.Top="112" Width="174" Height="247" imgUp="Images/Finance/ExchangeButton.png" imgDown="Images/Finance/ExchangeButtonD.png">
+            <local:Button.Effect>
+                <DropShadowEffect BlurRadius="2" Opacity="0.7"/>
+            </local:Button.Effect>
+        </local:Button>
+        <local:Button x:Name="TransButton" Canvas.Left="709" Canvas.Top="112" Width="174" Height="247" imgUp="Images/Finance/TransferButton.png" imgDown="Images/Finance/TransferButtonD.png">
+            <local:Button.Effect>
+                <DropShadowEffect BlurRadius="2" Opacity="0.7"/>
+            </local:Button.Effect>
+        </local:Button>
+    </Canvas>
+</UserControl>

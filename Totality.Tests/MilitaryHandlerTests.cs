@@ -4,6 +4,7 @@ using Totality.Handlers.Main;
 using Totality.Model.Interfaces;
 using Totality.Model;
 using Totality.CommonClasses;
+using Totality.Handlers.News;
 
 namespace Totality.Tests
 {
@@ -11,11 +12,12 @@ namespace Totality.Tests
     public class MilitaryHandlerTests
     {
         private IDataLayer _data = new DataLayer.DataLayer(null);
+        private NewsHandler _newsHandler = new NewsHandler();
 
         [TestMethod]
         public void ShouldMobilize()
         {         
-            MinMilitaryHandler handler = new MinMilitaryHandler(_data, null, null);
+            MinMilitaryHandler handler = new MinMilitaryHandler(_newsHandler, _data, null, null);
 
             var newCountry = new Country(Guid.NewGuid().ToString());
             _data.AddCountry(newCountry);
@@ -30,7 +32,7 @@ namespace Totality.Tests
         [TestMethod]
         public void ShouldMakeNukes()
         {
-            MinMilitaryHandler handler = new MinMilitaryHandler(_data,null, null);
+            MinMilitaryHandler handler = new MinMilitaryHandler(_newsHandler, _data,null, null);
 
             var newCountry = new Country(Guid.NewGuid().ToString());
             newCountry.Money = Constants.NukeCost;
@@ -49,7 +51,7 @@ namespace Totality.Tests
         [TestMethod]
         public void ShouldMakeMissiles()
         {
-            MinMilitaryHandler handler = new MinMilitaryHandler(_data, null, null);
+            MinMilitaryHandler handler = new MinMilitaryHandler(_newsHandler, _data, null, null);
 
             var newCountry = new Country(Guid.NewGuid().ToString());
             newCountry.Money = Constants.MissileCost;
@@ -67,7 +69,7 @@ namespace Totality.Tests
         [TestMethod]
         public void ShouldIncreaseUranium()
         {
-            MinMilitaryHandler handler = new MinMilitaryHandler(_data, null, null);
+            MinMilitaryHandler handler = new MinMilitaryHandler(_newsHandler, _data, null, null);
 
             var newCountry = new Country(Guid.NewGuid().ToString());
             newCountry.Money = newCountry.ProductionUpgradeCost;
@@ -83,7 +85,7 @@ namespace Totality.Tests
         [TestMethod]
         public void ShouldStartWar()
         {
-            MinMilitaryHandler handler = new MinMilitaryHandler(_data, null, null);
+            MinMilitaryHandler handler = new MinMilitaryHandler(_newsHandler, _data, null, null);
 
             var newCountry1 = new Country(Guid.NewGuid().ToString());
             var newCountry2 = new Country(Guid.NewGuid().ToString());

@@ -4,6 +4,7 @@ using Totality.Handlers.Main;
 using Totality.Model.Interfaces;
 using Totality.Model;
 using Totality.CommonClasses;
+using Totality.Handlers.News;
 
 namespace Totality.Tests
 {
@@ -11,11 +12,12 @@ namespace Totality.Tests
     public class InnerHandlerTests
     {
         private IDataLayer _data = new DataLayer.DataLayer(null);
+        private NewsHandler _newsHandler = new NewsHandler();
 
         [TestMethod]
         public void ShouldSuppresRiot()
         {
-            MinInnerHandler handler = new MinInnerHandler(_data, null);
+            MinInnerHandler handler = new MinInnerHandler(_newsHandler, _data, null);
 
             var newCountry = new Country(Guid.NewGuid().ToString());
             newCountry.IsRiot = true;
@@ -31,7 +33,7 @@ namespace Totality.Tests
         [TestMethod]
         public void ShouldRepress()
         {
-            MinInnerHandler handler = new MinInnerHandler(_data, null);
+            MinInnerHandler handler = new MinInnerHandler(_newsHandler, _data, null);
 
             var newCountry = new Country(Guid.NewGuid().ToString());
             _data.AddCountry(newCountry);
@@ -46,7 +48,7 @@ namespace Totality.Tests
         [TestMethod]
         public void ShouldEndRepress()
         {
-            MinInnerHandler handler = new MinInnerHandler(_data, null);
+            MinInnerHandler handler = new MinInnerHandler(_newsHandler, _data, null);
 
             var newCountry = new Country(Guid.NewGuid().ToString());
             newCountry.IsRepressed = true;
@@ -63,7 +65,7 @@ namespace Totality.Tests
         [TestMethod]
         public void ShouldLvlUp()
         {
-            MinInnerHandler handler = new MinInnerHandler(_data, null);
+            MinInnerHandler handler = new MinInnerHandler(_newsHandler, _data, null);
 
             var newCountry = new Country(Guid.NewGuid().ToString());
             newCountry.Money = newCountry.InnerLvlUpCost;

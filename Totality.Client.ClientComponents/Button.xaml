@@ -1,0 +1,12 @@
+﻿<UserControl x:Class="Totality.Client.ClientComponents.Button"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Totality.Client.ClientComponents"
+             mc:Ignorable="d" 
+             d:DesignHeight="138.889" d:DesignWidth="98.148" Width="99" Height="134">
+    <Grid>
+        <Image x:Name="image" Stretch="None" Source="Images/Interface/ClearButton.png"/>
+    </Grid>
+</UserControl>

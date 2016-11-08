@@ -8,6 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Totality.Model;
 using Totality.Model.Interfaces;
+using Totality.Handlers.News;
 
 namespace Totality.Handlers.Nuke
 {
@@ -18,7 +19,7 @@ namespace Totality.Handlers.Nuke
         private List<NukeRocket> _rockets = new List<NukeRocket>();
         private ITransmitter _transmitter;
 
-        public NukeHandler( ITransmitter transmitter, IDataLayer dataLayer, ILogger logger) : base(dataLayer, logger)
+        public NukeHandler(NewsHandler newsHandler, ITransmitter transmitter, IDataLayer dataLayer, ILogger logger) : base(newsHandler, dataLayer, logger)
         {
             _transmitter = transmitter;
 
