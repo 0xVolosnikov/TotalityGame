@@ -1,4 +1,5 @@
 ﻿using System;
+using Totality.Handlers.News;
 using Totality.Model.Diplomatical;
 using Totality.Model.Interfaces;
 
@@ -8,7 +9,7 @@ namespace Totality.Handlers.Diplomatical
     {
         private ITransmitter _transmitter;
 
-        public DiplomaticalHandler(ITransmitter transmitter, IDataLayer dataLayer, ILogger logger) : base(dataLayer, logger)
+        public DiplomaticalHandler(NewsHandler newsHandler, ITransmitter transmitter, IDataLayer dataLayer, ILogger logger) : base(newsHandler, dataLayer, logger)
         {
             _transmitter = transmitter;
         }

@@ -44,6 +44,7 @@
     <Compile Include="Constants.cs" />
     <Compile Include="FinancialTools.cs" />
     <Compile Include="Mins.cs" />
+    <Compile Include="NewsCodes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WinnerChoosingSystems.cs" />
   </ItemGroup>

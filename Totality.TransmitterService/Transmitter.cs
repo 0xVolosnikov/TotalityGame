@@ -89,9 +89,14 @@ namespace Totality.TransmitterService
             }
         }
 
-        public void UpdateNews()
+        public void SendNews(Dictionary<string, List<Model.News>> newsBase)
         {
-            throw new NotImplementedException();
+            _log.Trace("Sending news...");
+            foreach (Client client in Clients)
+            {
+                if(newsBase.ContainsKey(client.Name))
+                client.Transmitter.SendNews(newsBase[client.Name]);
+            }
         }
 
         public void UpdateClients(Dictionary<string, Country> countries)

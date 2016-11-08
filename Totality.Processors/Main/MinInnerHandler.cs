@@ -1,5 +1,6 @@
 ﻿using System;
 using Totality.CommonClasses;
+using Totality.Handlers.News;
 using Totality.Model;
 using Totality.Model.Interfaces;
 
@@ -9,7 +10,7 @@ namespace Totality.Handlers.Main
     {
         private enum Orders { SuppressRiot, Repressions, EndRepressions, LvlUp }
 
-        public MinInnerHandler(IDataLayer dataLayer, ILogger logger) : base(dataLayer, logger)
+        public MinInnerHandler(NewsHandler newsHandler, IDataLayer dataLayer, ILogger logger) : base(newsHandler, dataLayer, logger)
         {
         }
 

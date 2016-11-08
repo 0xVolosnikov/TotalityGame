@@ -1,4 +1,5 @@
 ﻿using System;
+using Totality.Handlers.News;
 using Totality.Model;
 using Totality.Model.Interfaces;
 
@@ -6,7 +7,7 @@ namespace Totality.Handlers.Main
 {
     class MinForeignHandler : AbstractHandler, IMinisteryHandler
     {
-        public MinForeignHandler(IDataLayer dataLayer, ILogger logger) : base(dataLayer, logger)
+        public MinForeignHandler(NewsHandler newsHandler, IDataLayer dataLayer, ILogger logger) : base(newsHandler, dataLayer, logger)
         {
         }
 

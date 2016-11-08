@@ -20,6 +20,7 @@ namespace Totality.Model
         public short Ministery { get; set; }
         public short TargetMinistery { get; set; }
         public Guid TargetId { get; set; }
+        public bool isSecret = false;
 
         public Order(string countryName, string targetCountryName = null)
         {

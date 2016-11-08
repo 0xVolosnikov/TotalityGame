@@ -15,7 +15,7 @@ namespace Totality.Model.Interfaces
 
         void UpdateNukeDialogs(List<NukeRocket> rockets);
 
-        void UpdateNews();
+        void SendNews(Dictionary<string, List<Model.News>> newsBase);
 
         void UpdateClients(Dictionary<string, Country> countries);
 

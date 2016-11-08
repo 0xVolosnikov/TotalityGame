@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Totality.Handlers.News;
 using Totality.Model;
 using Totality.Model.Interfaces;
 
@@ -9,7 +10,7 @@ namespace Totality.Handlers.Main
     {
         private enum Orders { ChangePropDirection }
 
-        public MinMediaHandler(IDataLayer dataLayer, ILogger logger) : base(dataLayer, logger)
+        public MinMediaHandler(NewsHandler newsHandler, IDataLayer dataLayer, ILogger logger) : base(newsHandler, dataLayer, logger)
         {
         }
 

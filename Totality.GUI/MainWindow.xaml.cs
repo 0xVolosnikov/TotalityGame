@@ -30,13 +30,14 @@ namespace Totality.GUI
             InitializeComponent();
             this.Closing += MainWindow_Closing;
             _transmitter = new Transmitter(_logger);
+            _newsHandler = new NewsHandler();
             _host = new ServiceHost(_transmitter);
             _dataLayer = new DataLayer.DataLayer(_logger);
             _nukeHandler = new NukeHandler( _transmitter, _dataLayer, _logger);
-            _mainHandler = new MainHandler(_dataLayer, _logger, _nukeHandler);
-            _newsHandler = new NewsHandler();
-            _dipHandler = new DiplomaticalHandler(_transmitter, _dataLayer, _logger);
+            _mainHandler = new MainHandler(_newsHandler, _dataLayer, _logger, _nukeHandler);            
+            _dipHandler = new DiplomaticalHandler(_newsHandler, _transmitter, _dataLayer, _logger);
 
+            _newsHandler.Transmitter = _transmitter;
             _transmitter.MainHandler = _mainHandler;
             _transmitter.NukeHandler = _nukeHandler;
             _transmitter.DipHandler = _dipHandler;

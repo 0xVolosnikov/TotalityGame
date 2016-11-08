@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Totality.CommonClasses;
+using Totality.Handlers.News;
 using Totality.Model;
 using Totality.Model.Interfaces;
 
@@ -10,7 +11,7 @@ namespace Totality.Handlers.Main
     {
         private enum Orders { ChangeTaxes , PurchaseCurrency, SellCurrency, CurrencyInfusion }
 
-        public MinFinanceHandler(IDataLayer dataLayer, ILogger logger) : base(dataLayer, logger)
+        public MinFinanceHandler(NewsHandler newsHandler, IDataLayer dataLayer, ILogger logger) : base(newsHandler, dataLayer, logger)
         {
         }
 

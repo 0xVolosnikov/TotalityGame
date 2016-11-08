@@ -36,7 +36,7 @@ namespace Totality.TransmitterService
         void UpdateNukeDialog(List<NukeRocket> rockets);
 
         [OperationContract(IsOneWay = true)]
-        void UpdateNews();
+        void SendNews(List<News> newsList);
 
         [OperationContract(IsOneWay = true)]
         void UpdateClient(Country country);

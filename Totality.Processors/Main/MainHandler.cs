@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Totality.CommonClasses;
 using Totality.Handlers.Diplomatical;
+using Totality.Handlers.News;
 using Totality.Handlers.Nuke;
 using Totality.Model;
 using Totality.Model.Interfaces;
@@ -18,25 +19,27 @@ namespace Totality.Handlers.Main
         private NukeHandler _nukeHandler;
         private DiplomaticalHandler _dipHandler;
 
-        public MainHandler(IDataLayer dataLayer, ILogger logger, NukeHandler nukeHandler) : base(dataLayer, logger)
+
+        public MainHandler(NewsHandler newsHandler, IDataLayer dataLayer, ILogger logger, NukeHandler nukeHandler) : base(newsHandler, dataLayer, logger)
         {
             _nukeHandler = nukeHandler;
 
-            _ministeryHandlers.Add(new MinIndustryHandler(dataLayer, logger));
-            _ministeryHandlers.Add(new MinFinanceHandler(dataLayer, logger));
-            _ministeryHandlers.Add(new MinMilitaryHandler(dataLayer, nukeHandler, logger));
-            _ministeryHandlers.Add(new MinForeignHandler(dataLayer, logger));
-            _ministeryHandlers.Add(new MinMediaHandler(dataLayer, logger));
-            _ministeryHandlers.Add(new MinInnerHandler(dataLayer, logger));
-            _ministeryHandlers.Add(new MinSecurityHandler(dataLayer, logger));
-            _ministeryHandlers.Add(new MinScienceHandler(dataLayer, logger));
-            _ministeryHandlers.Add(new MinPremierHandler(dataLayer, logger));
+            _ministeryHandlers.Add(new MinIndustryHandler(newsHandler, dataLayer, logger));
+            _ministeryHandlers.Add(new MinFinanceHandler(newsHandler, dataLayer, logger));
+            _ministeryHandlers.Add(new MinMilitaryHandler(newsHandler, dataLayer, nukeHandler, logger));
+            _ministeryHandlers.Add(new MinForeignHandler(newsHandler, dataLayer, logger));
+            _ministeryHandlers.Add(new MinMediaHandler(newsHandler,dataLayer, logger));
+            _ministeryHandlers.Add(new MinInnerHandler(newsHandler, dataLayer, logger));
+            _ministeryHandlers.Add(new MinSecurityHandler(newsHandler, dataLayer, logger));
+            _ministeryHandlers.Add(new MinScienceHandler(newsHandler, dataLayer, logger));
+            _ministeryHandlers.Add(new MinPremierHandler(newsHandler, dataLayer, logger));
 
             (_ministeryHandlers[(short)Mins.Security] as MinSecurityHandler).SecretOrderProcessed += SecretOrderProcessed;
         }
 
         private void SecretOrderProcessed(Order order)
         {
+            order.isSecret = true;
             _ordersBase[order.CountryName].Enqueue(order);
         }
 
@@ -73,7 +76,7 @@ namespace Totality.Handlers.Main
 
             _dipHandler.SendContractsToAll();
 
-            // send News
+            _newsHandler.SendNews();
 
 
         }

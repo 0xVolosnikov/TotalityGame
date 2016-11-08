@@ -55,6 +55,7 @@
     <Compile Include="Interfaces\IDataLayer.cs" />
     <Compile Include="Interfaces\ILogger.cs" />
     <Compile Include="Interfaces\ITransmitter.cs" />
+    <Compile Include="News.cs" />
     <Compile Include="NukeRocket.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

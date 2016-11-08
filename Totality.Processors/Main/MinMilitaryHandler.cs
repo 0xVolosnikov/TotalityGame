@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Totality.CommonClasses;
+using Totality.Handlers.News;
 using Totality.Handlers.Nuke;
 using Totality.Model;
 using Totality.Model.Interfaces;
@@ -12,7 +13,7 @@ namespace Totality.Handlers.Main
         private enum Orders { GeneralMobilization, Demobilization, IncreaseUranium, MakeNukes, MakeMissiles, NukeStrike, StartWar }
         private NukeHandler _nukeHandler;
 
-        public MinMilitaryHandler(IDataLayer dataLayer, NukeHandler nukeHandler, ILogger logger) : base(dataLayer, logger)
+        public MinMilitaryHandler(NewsHandler newsHandler, IDataLayer dataLayer, NukeHandler nukeHandler, ILogger logger) : base(newsHandler, dataLayer, logger)
         {
             _nukeHandler = nukeHandler;
         }

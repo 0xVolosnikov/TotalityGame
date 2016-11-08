@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Totality.CommonClasses;
+using Totality.Handlers.News;
 using Totality.Model;
 using Totality.Model.Interfaces;
 using static Totality.Model.Country;
@@ -13,7 +14,7 @@ namespace Totality.Handlers.Main
         public delegate void SecretOrder(Order order);
         public event SecretOrder SecretOrderProcessed;
 
-        public MinSecurityHandler(IDataLayer dataLayer, ILogger logger) : base(dataLayer, logger)
+        public MinSecurityHandler(NewsHandler newsHandler, IDataLayer dataLayer, ILogger logger) : base(newsHandler, dataLayer, logger)
         {
         }
 

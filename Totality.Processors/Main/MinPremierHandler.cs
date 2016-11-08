@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Totality.CommonClasses;
+using Totality.Handlers.News;
 using Totality.Model;
 using Totality.Model.Interfaces;
 using static Totality.Model.Country;
@@ -11,7 +12,7 @@ namespace Totality.Handlers.Main
     {
         private enum Orders { MinisteryReorganization, LvlUp, Alert, UnAlert }
 
-        public MinPremierHandler(IDataLayer dataLayer, ILogger logger) : base(dataLayer, logger)
+        public MinPremierHandler(NewsHandler newsHandler, IDataLayer dataLayer, ILogger logger) : base(newsHandler, dataLayer, logger)
         {
         }
 
