@@ -71,6 +71,10 @@
       <Project>{277F5307-857B-46BB-8F51-63DF2549BBE8}</Project>
       <Name>Totality.Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Totality.Processors\Totality.OrderHandlers.csproj">
+      <Project>{2F3D18D6-560B-41C3-909B-59B682DF63E3}</Project>
+      <Name>Totality.OrderHandlers</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

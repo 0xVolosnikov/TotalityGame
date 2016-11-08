@@ -46,13 +46,13 @@ namespace Totality.Handlers.Main
             double res1, res2;
             if (industry == "Heavy")
             {
-                res1 = (double)_dataLayer.GetProperty(order.CountryName, "ResSteel");
-                res2 = (double)_dataLayer.GetProperty(order.CountryName, "ResOil");
+                res1 = (double)_dataLayer.GetProperty(order.CountryName, "FinalSteel");
+                res2 = (double)_dataLayer.GetProperty(order.CountryName, "FinalOil");
             }
             else
             {
-                res1 = (double)_dataLayer.GetProperty(order.CountryName, "ResWood");
-                res2 = (double)_dataLayer.GetProperty(order.CountryName, "ResAgricultural");
+                res1 = (double)_dataLayer.GetProperty(order.CountryName, "FinalWood");
+                res2 = (double)_dataLayer.GetProperty(order.CountryName, "FinalAgricultural");
             }
 
             if (res1 < industryPower * Constants.IndustrySteelCoeff || res2 < industryPower * Constants.IndustryOilCoeff)

@@ -1,5 +1,9 @@
 ﻿
 
+using System;
+using System.Collections.Generic;
+using Totality.Model.Diplomatical;
+
 namespace Totality.Model.Interfaces
 {
     public interface IDataLayer
@@ -11,6 +15,7 @@ namespace Totality.Model.Interfaces
         bool DeleteCountry(string name);
         Country GetCountry(string name);
         bool UpdateCountry(Country newCountry);
+        Dictionary<string, Country> GetCountries();
 
         object GetProperty(string countryName, string propertyName);
         void SetProperty(string countryName, string propertyName, object value);
@@ -18,6 +23,9 @@ namespace Totality.Model.Interfaces
         long GetCurrencyOnStock(string countryName);
         void SetCurrencyOnStock(string countryName, long count);
 
+        List<DipContract> GetContractList();
+        void AddContract(DipContract contract);
+        void BreakContract(Guid id);
 
     }
 }

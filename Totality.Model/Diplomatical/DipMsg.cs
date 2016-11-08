@@ -1,23 +1,29 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace Totality.CommonClasses
+namespace Totality.Model.Diplomatical
 {
     [DataContract]
     public class DipMsg
     {
+        public enum Types { Trade, Peace, Alliance, CurrencyAlliance, Transfer, MilitaryTraining, Other };
+
         public string From { get; }
         public string To { get; }
-        public string Offer { get; } //  программно сгенерированное описание контракта
-        public string Text { get; }  //  дополнительный текст
+        public string Offer; //  программно сгенерированное описание контракта
+        public string Text; //  дополнительный текст
+        public Types Type;
+        public string Resource;
+        public long Price;
+        public bool Applied = false;
         public Guid Id;
+        public int Time;
+        public long Count;
 
-        public DipMsg(string from, string to, string offer, string text)
+        public DipMsg(string from, string to)
         {
             From = from;
             To = to;
-            Offer = offer;
-            Text = text;
             Id = Guid.NewGuid();
         }
     }

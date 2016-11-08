@@ -1,5 +1,4 @@
-﻿using Totality.CommonClasses;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -8,6 +7,10 @@ using System.Text;
 using Totality.Model;
 using Totality.Model.Interfaces;
 using Totality.LoggingSystem;
+using Totality.Model.Diplomatical;
+using Totality.Handlers.Diplomatical;
+using Totality.Handlers.Nuke;
+using Totality.Handlers.Main;
 
 namespace Totality.TransmitterService
 {
@@ -15,6 +18,9 @@ namespace Totality.TransmitterService
     public class Transmitter : AbstractLoggable, ITransmitterService
     {
         public SynchronizedCollection<Client> Clients = new SynchronizedCollection<Client>();
+        public DiplomaticalHandler DipHandler { get; set; }
+        public NukeHandler NukeHandler { get; set; }
+        public MainHandler MainHandler { get; set; }
 
         public Transmitter(ILogger log) : base(log)
         {
@@ -49,17 +55,21 @@ namespace Totality.TransmitterService
 
         public bool AddOrders(List<Order> orders)
         {
-            return false;
+            MainHandler.AddOrders(orders);
+            return true;
         }
 
-        public bool ShootDownNuke()
+        public bool ShootDownNuke(string defender, Guid rocketId)
         {
-            return false;
+            NukeHandler.TryToShootdown(defender, rocketId);
+            return true;
         }
 
         public bool DipMsg(DipMsg msg)
         {
-            return false;
+            _log.Trace("Got a diplomatical message from " + msg.From);
+            DipHandler.ProcessDipMessage(msg);
+            return true;
         }
 
         public void InitializeNukeDialogs()
@@ -84,10 +94,29 @@ namespace Totality.TransmitterService
             throw new NotImplementedException();
         }
 
+        public void UpdateClients(Dictionary<string, Country> countries)
+        {
+            _log.Trace("Updating countries...");
+            foreach (Client client in Clients)
+            {
+                client.Transmitter.UpdateClient(countries[client.Name]);
+            }
+        }
+
         public void SendDip(DipMsg msg)
         {
             _log.Trace("Client " + msg.From + " sended a diplomatical message to " + msg.To);
             Clients.First(x => x.Name == msg.To).Transmitter.SendDip(msg);
         }
+
+        public void SendContractsToAll(List<DipContract> contracts)
+        {
+            _log.Trace("Sending contracts to all...");
+            foreach (Client client in Clients)
+            {
+                client.Transmitter.SendContracts( contracts.Where(x => x.From == client.Name || x.To == client.Name).ToList<DipContract>() );
+            }
+        }
+
     }
 }

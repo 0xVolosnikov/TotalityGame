@@ -20,8 +20,8 @@ namespace Totality.Tests
             var newCountry = new Country(Guid.NewGuid().ToString());
             newCountry.Money = newCountry.IndustryUpgradeCost;
             newCountry.PowerHeavyIndustry = 1;
-            newCountry.ResSteel = 500;
-            newCountry.ResOil = 500;
+            newCountry.FinalSteel = 500;
+            newCountry.FinalOil = 500;
             _data.AddCountry(newCountry);
 
             handler.ProcessOrder(new Order(newCountry.Name, null) { Ministery = (int)Mins.Industry, OrderNum = 0 });
@@ -39,8 +39,8 @@ namespace Totality.Tests
             var newCountry = new Country(Guid.NewGuid().ToString());
             newCountry.Money = newCountry.IndustryUpgradeCost;
             newCountry.PowerLightIndustry = 1;
-            newCountry.ResWood = 500;
-            newCountry.ResAgricultural = 500;
+            newCountry.FinalWood = 500;
+            newCountry.FinalAgricultural = 500;
             _data.AddCountry(newCountry);
 
             handler.ProcessOrder(new Order(newCountry.Name, null) { Ministery = (int)Mins.Industry, OrderNum = 1 });

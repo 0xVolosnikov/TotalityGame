@@ -35,7 +35,11 @@ namespace Totality.GUI
             _nukeHandler = new NukeHandler( _transmitter, _dataLayer, _logger);
             _mainHandler = new MainHandler(_dataLayer, _logger, _nukeHandler);
             _newsHandler = new NewsHandler();
-            _dipHandler = new DiplomaticalHandler(_dataLayer, _logger);
+            _dipHandler = new DiplomaticalHandler(_transmitter, _dataLayer, _logger);
+
+            _transmitter.MainHandler = _mainHandler;
+            _transmitter.NukeHandler = _nukeHandler;
+            _transmitter.DipHandler = _dipHandler;
         }
 
         private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)

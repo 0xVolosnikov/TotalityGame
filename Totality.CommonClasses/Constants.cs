@@ -25,12 +25,20 @@ namespace Totality.CommonClasses
         public static double LightScLvlUpExpRatio = 1.1;
         public static double MilitaryScLvlUpCostRatio = 1.1;
         public static double MilitaryScLvlUpExpRatio = 1.1;
+        public static double MilitaryGrowthRatio = 1.1;
+        public static double MilitaryScienceBuffRatio = 0.9;
+
+        public static double ScienceBuff = 1.1;
+        public static double MobilizeBuff = 1.2;
+        public static double MobilizeDebuff = 0.95;
 
         public static int NukeCost = 15000;
+        public static int NukeHeavyPower = 10;
         public static double NukeUranusCost = 5;
         public static int NukeRocketLifetime = 15000;
 
         public static int MissileCost = 15000;
+        public static int MissileHeavyPower = 5;
 
         public static int PurgeCost = 10000;
 

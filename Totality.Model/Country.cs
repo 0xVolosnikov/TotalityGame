@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
 using Totality.CommonClasses;
 
 namespace Totality.Model
 {
+    [DataContract]
     public class Country
     {
         public class SpyNetwork
@@ -25,7 +27,6 @@ namespace Totality.Model
 
         public int[] MinsBlocks = new int[Constants.CountOfMinisters];
 
-        public double PowerResIndustry;
         public double ResAgricultural;
         public double ResWood;
         public double ResSteel;
@@ -34,12 +35,29 @@ namespace Totality.Model
         public double ResUranus;
         public double PowerLightIndustry;
         public double PowerHeavyIndustry;
+
+        public double FinalAgricultural;
+        public double FinalWood;
+        public double FinalSteel;
+        public double FinalOil;
+        public double FinalLightIndustry;
+        public double FinalHeavyIndustry;
+
+        public double UsedSteel;
+        public double UsedOil;
+        public double UsedWood;
+        public double UsedAgricultural;
+        public double UsedLIpower;
+        public double UsedHIpower;
+
+        public double MilitaryPower;
+
         public long ProductionUpgradeCost;
         public long IndustryUpgradeCost;
 
         public short TaxesLvl;
 
-        public Property PowerMilitary;
+
         public int NukesCount;
         public int MissilesCount;
         public List<string> WarList = new List<string>();

@@ -34,10 +34,13 @@ namespace Totality.Handlers.Nuke
 
         public void StartAttack()
         {
-            if(!_timer.IsBusy)
-            _timer.RunWorkerAsync();
+            if (_rockets.Count != 0)
+            {
+                if (!_timer.IsBusy)
+                    _timer.RunWorkerAsync();
 
-            _transmitter.InitializeNukeDialogs();
+                _transmitter.InitializeNukeDialogs();
+            }
         }
 
         public void TryToShootdown(string defender, Guid rocketId)

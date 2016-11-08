@@ -68,5 +68,19 @@ namespace Totality.Tests
             Assert.AreNotEqual(countryFromData.Money, 0);
         }
 
+        [TestMethod]
+        public void ShouldInfuseCurrency()
+        {
+            MinFinanceHandler handler = new MinFinanceHandler(_data, null);
+
+            var newCountry = new Country(Guid.NewGuid().ToString());
+            newCountry.Money = 1;
+            _data.AddCountry(newCountry);
+
+            handler.ProcessOrder(new Order(newCountry.Name, null) { Ministery = (int)Mins.Finance, OrderNum = 3, Count = 1 });
+
+            Assert.AreNotEqual(_data.GetCurrencyOnStock(newCountry.Name), Constants.InitialCurrencyOnStock);
+        }
+
     }
 }

@@ -3,8 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using Totality.CommonClasses;
-using Totality.CommonClasses.Diplomatical;
 using Totality.Model;
+using Totality.Model.Diplomatical;
 using Totality.Model.Interfaces;
 
 namespace Totality.DataLayer
@@ -14,11 +14,11 @@ namespace Totality.DataLayer
         private class DataBaseSave
         {
             public Dictionary<string, Country> Countries { get; set; }
-            public Dictionary<string, List<DipContract>> DiplomaticalDatabase { get; set; }
+            public List<DipContract> DiplomaticalDatabase { get; set; }
             public Dictionary<string, long> FinancialStock { get; set; }
         }
 
-        private Dictionary<string, List<DipContract>> _diplomaticalDatabase = new Dictionary<string, List<DipContract>>();
+        private List<DipContract> _diplomaticalDatabase = new List<DipContract>();
         private Dictionary<string, Country> _countries = new Dictionary<string, Country>();
         private Dictionary<string, FieldInfo> countryFields = new Dictionary<string, FieldInfo>();
         private Dictionary<string, long> _financialStock = new Dictionary<string, long>();
@@ -71,6 +71,11 @@ namespace Totality.DataLayer
             }
         }
 
+        public Dictionary<string, Country> GetCountries()
+        {
+            return _countries;
+        }
+
         public bool UpdateCountry(Country newCountry)
         {
             try
@@ -102,6 +107,26 @@ namespace Totality.DataLayer
         public void SetCurrencyOnStock(string countryName, long count)
         {
             _financialStock[countryName] = count;
+        }
+
+        public List<DipContract> GetContractList(string countryName)
+        {
+            return _diplomaticalDatabase;
+        }
+
+        public DipContract GetContract( Guid id)
+        {
+            return _diplomaticalDatabase.Find(x => x.Id == id);
+        }
+
+        public void AddContract(DipContract contract)
+        {
+            _diplomaticalDatabase.Add(contract);
+        }
+
+        public void BreakContract(Guid id)
+        {
+            _diplomaticalDatabase.Find(x => x.Id == id).Broken = true;
         }
 
         public bool Save(string savePath)

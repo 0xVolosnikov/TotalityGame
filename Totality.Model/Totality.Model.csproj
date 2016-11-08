@@ -43,7 +43,13 @@
   <ItemGroup>
     <Compile Include="AbstractLoggable.cs" />
     <Compile Include="Country.cs" />
+    <Compile Include="Diplomatical\ContractAlliance.cs" />
+    <Compile Include="Diplomatical\ContractCurrencyAlliance.cs" />
+    <Compile Include="Diplomatical\ContractMilitaryTraining.cs" />
     <Compile Include="Diplomatical\ContractOther.cs" />
+    <Compile Include="Diplomatical\ContractPeace.cs" />
+    <Compile Include="Diplomatical\ContractTrade.cs" />
+    <Compile Include="Diplomatical\ContractTransfer.cs" />
     <Compile Include="Diplomatical\DipContract.cs" />
     <Compile Include="Diplomatical\DipMsg.cs" />
     <Compile Include="Interfaces\IDataLayer.cs" />

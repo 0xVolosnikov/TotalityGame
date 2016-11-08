@@ -74,14 +74,18 @@ namespace Totality.Handlers.Main
         {
             var money = (long)_dataLayer.GetProperty(order.CountryName, "Money");
             var uranus = (double)_dataLayer.GetProperty(order.CountryName, "ResUranus");
+            var heavyPower = (double)_dataLayer.GetProperty(order.CountryName, "FinalHeavyIndustry");
+            var usedHeavyPower = (double)_dataLayer.GetProperty(order.CountryName, "UsedHIpower");
 
-            if ( money < Constants.NukeCost * order.Count || uranus < Constants.NukeUranusCost)
+            if ( money < Constants.NukeCost * order.Count || uranus < Constants.NukeUranusCost || heavyPower - usedHeavyPower < order.Count * Constants.NukeHeavyPower)
                 return false;
 
             money -= Constants.NukeCost * order.Count;
             _dataLayer.SetProperty(order.CountryName, "Money", money);
             uranus -= Constants.NukeUranusCost;
             _dataLayer.SetProperty(order.CountryName, "ResUranus", uranus);
+            usedHeavyPower += order.Count * Constants.NukeHeavyPower;
+            _dataLayer.SetProperty(order.CountryName, "UsedHIpower", usedHeavyPower);
 
             var nukes = (int)_dataLayer.GetProperty(order.CountryName, "NukesCount");
             nukes += (int)order.Count;
@@ -92,13 +96,16 @@ namespace Totality.Handlers.Main
         private bool MakeMissiles(Order order)
         {
             var money = (long)_dataLayer.GetProperty(order.CountryName, "Money");
+            var heavyPower = (double)_dataLayer.GetProperty(order.CountryName, "FinalHeavyIndustry");
+            var usedHeavyPower = (double)_dataLayer.GetProperty(order.CountryName, "UsedHIpower");
 
-            if (money < Constants.MissileCost * order.Count)
+            if (money < Constants.MissileCost * order.Count || heavyPower - usedHeavyPower < order.Count * Constants.MissileHeavyPower)
                 return false;
 
             money -= Constants.MissileCost * order.Count;
             _dataLayer.SetProperty(order.CountryName, "Money", money);
-
+            usedHeavyPower += order.Count * Constants.MissileHeavyPower;
+            _dataLayer.SetProperty(order.CountryName, "UsedHIpower", usedHeavyPower);
 
             var missiles = (int)_dataLayer.GetProperty(order.CountryName, "MissilesCount");
             missiles += (int)order.Count;

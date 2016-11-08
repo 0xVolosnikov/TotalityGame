@@ -8,7 +8,7 @@ namespace Totality.Handlers.Main
 {
     public class MinFinanceHandler : AbstractHandler, IMinisteryHandler
     {
-        private enum Orders { ChangeTaxes , PurchaseCurrency, SellCurrency }
+        private enum Orders { ChangeTaxes , PurchaseCurrency, SellCurrency, CurrencyInfusion }
 
         public MinFinanceHandler(IDataLayer dataLayer, ILogger logger) : base(dataLayer, logger)
         {
@@ -23,6 +23,8 @@ namespace Totality.Handlers.Main
                 case (int)Orders.PurchaseCurrency: return PurchaseCurrency(order);
 
                 case (int)Orders.SellCurrency: return SellCurrency(order);
+
+                case (int)Orders.CurrencyInfusion: return CurrencyInfusion(order);
 
                 default: throw new ArgumentException("Order " + order + " not found in " + typeof(MinPremierHandler));
             }
@@ -98,6 +100,22 @@ namespace Totality.Handlers.Main
             theirQuontityOnStock += order.Count;
             _dataLayer.SetCurrencyOnStock(order.TargetCountryName, theirQuontityOnStock);
 
+            return true;
+        }
+
+        private bool CurrencyInfusion(Order order)
+        {
+            var money = (long)_dataLayer.GetProperty(order.CountryName, "Money");
+
+            if (money < order.Count)
+                return false;
+
+            money -= order.Count;
+            _dataLayer.SetProperty(order.CountryName, "Money", money);
+
+            var ourCurrencyOnStock = _dataLayer.GetCurrencyOnStock(order.CountryName);
+            ourCurrencyOnStock += order.Count;
+            _dataLayer.SetCurrencyOnStock(order.CountryName, ourCurrencyOnStock);
             return true;
         }
     }

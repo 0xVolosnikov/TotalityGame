@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Totality.CommonClasses;
 using Totality.Model;
+using Totality.Model.Diplomatical;
 
 namespace Totality.Model.Interfaces
 {
@@ -16,7 +17,10 @@ namespace Totality.Model.Interfaces
 
         void UpdateNews();
 
+        void UpdateClients(Dictionary<string, Country> countries);
+
         void SendDip(DipMsg msg);
 
+        void SendContractsToAll(List<DipContract> contracts);
     }
 }
