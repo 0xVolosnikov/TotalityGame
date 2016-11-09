@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Totality.Client.GUI"
-        xmlns:Totality.Client.ClientComponents="clr-namespace:Totality.Client.ClientComponents;assembly=Totality.Client.ClientComponents" x:Class="Totality.Client.GUI.MainWindow"
+        xmlns:Totality.Client.ClientComponents="clr-namespace:Totality.Client.ClientComponents;assembly=Totality.Client.ClientComponents" xmlns:Panels="clr-namespace:Totality.Client.ClientComponents.Panels;assembly=Totality.Client.ClientComponents" x:Class="Totality.Client.GUI.MainWindow"
         mc:Ignorable="d"
         Title="MainWindow" Height="702" Width="1206.5">
     <Grid x:Name="_grid">

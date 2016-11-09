@@ -38,6 +38,7 @@ namespace Totality.Client.GUI
         private Country _country;
         BackgroundWorker connectionSetter = new BackgroundWorker();
         private CallbackHandler _servCallbackHandler;
+        private string _name;
 
         public MainWindow()
         {
@@ -67,15 +68,20 @@ namespace Totality.Client.GUI
             buttons[9].MouseDown += (object sender, MouseButtonEventArgs e) => changePanel(_premierPanel);
 
             _connectionPanel = new ConnectionPanel();
+            _connectionPanel.Video(new Uri(String.Format(@"{0}\video2.mp4", AppDomain.CurrentDomain.BaseDirectory, "turnoff"), UriKind.Absolute));
             //_connectionPanel.
             _grid.Children.Add(_connectionPanel);
-            _connectionPanel.StartSpinning();
+            _connectionPanel.NameReceived += _connectionPanel_NameReceived;
             _client = new ReferenceToServer.TransmitterServiceClient(new System.ServiceModel.InstanceContext(_servCallbackHandler));
-            
+
+        }
+
+        private void _connectionPanel_NameReceived(string name)
+        {
+            _name = name;
             connectionSetter.DoWork += FindServer;
             connectionSetter.RunWorkerCompleted += ServerFound;
             connectionSetter.RunWorkerAsync();
-
         }
 
         private void FindServer(object sender, DoWorkEventArgs e)
@@ -102,7 +108,7 @@ namespace Totality.Client.GUI
         {
             _client.Open();
             this.Dispatcher.Invoke( () => _client.InnerDuplexChannel.Faulted += ClientChannelFaulted);
-            _client.Register("Hello,world!");
+            _client.Register(_name);
             this.Dispatcher.Invoke( () => _connectionPanel.Close());
         }
 

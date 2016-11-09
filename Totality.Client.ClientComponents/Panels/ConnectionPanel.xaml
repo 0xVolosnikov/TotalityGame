@@ -1,17 +1,35 @@
 ﻿<UserControl x:Class="Totality.Client.ClientComponents.Panels.ConnectionPanel"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:gif="http://wpfanimatedgif.codeplex.com" 
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Totality.Client.ClientComponents.Panels"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300" Width="1198" Height="700">
-    <Canvas x:Name="_grid" Background="#E50A0A0A">
-        <Canvas x:Name="_canvas" Background="#FFE4EDFF" Height="614" Canvas.Left="96" Canvas.Top="28" Width="1006">
-            <Label x:Name="label" Content="Пытаемся подключиться к серверу..." FontSize="36" FontWeight="Bold" FontFamily="Impact" HorizontalContentAlignment="Center" Height="102" Canvas.Left="-43" Canvas.Top="512" Width="1072" FontStyle="Italic"/>
+             d:DesignHeight="300" d:DesignWidth="300" Width="1198" Height="700" OpacityMask="Black">
+    <Canvas x:Name="_grid" Background="#FF101010">
+        <Canvas x:Name="_canvas" Background="#FF101010" Height="614" Canvas.Left="96" Canvas.Top="28" Width="1006">
+            <MediaElement x:Name="_mediaElement" Height="710" Width="1194" Volume="0" Stretch="Fill" Source="../video2.mp4" Canvas.Left="-96" Canvas.Top="-36" LoadedBehavior="Manual" ScrubbingEnabled="True" IsMuted="True" Position="0:0:5"/>
             <Image x:Name="_synchronizationImage" HorizontalAlignment="Left" Height="236" VerticalAlignment="Top" Width="236" Source="Images/synchronization.png" Canvas.Left="378" Canvas.Top="196"/>
-            <Label x:Name="label_Copy" FontSize="120" FontWeight="Bold" FontFamily="Impact" HorizontalContentAlignment="Center" Height="168" Canvas.Left="-43" Width="1072" Content="Totality"/>
-            <Button x:Name="button" Content="Button" Canvas.Left="808" Canvas.Top="378" Width="75" Click="button_Click"/>
+            <Image x:Name="image" Height="200" Canvas.Left="206" Canvas.Top="-9" Width="581" Source="Images/TotalityText.png"/>
+            <Image x:Name="image1" Height="63" Canvas.Left="58" Canvas.Top="494" Width="893" Source="Images/TotalityText2.png"/>
+            <Border x:Name="_nameCanvas" Height="614" Width="1006" Background="#FF170000" BorderBrush="White" BorderThickness="2">
+                <Grid>
+                    <Label x:Name="label" Content="Введите название вашей страны:" FontSize="48" FontFamily="Arial" FontWeight="Bold" Foreground="White" Margin="108,168,84,381"/>
+                    <TextBox x:Name="nameInput" TextWrapping="Wrap" Background="#FFF5FCFF" FontSize="36" HorizontalContentAlignment="Center" Margin="108,264,84,293"/>
+                    <Button x:Name="approveName" Content="Подтвердить" FontSize="24" FontFamily="Arial" FontWeight="Bold" Margin="627,416,84,128" Click="approveName_Click">
+                        <Button.Background>
+                            <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                <GradientStop Color="#FFF3F3F3" Offset="0"/>
+                                <GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+                                <GradientStop Color="#FFDDDDDD" Offset="0.904"/>
+                                <GradientStop Color="#FFCDCDCD" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <Image x:Name="image2" Source="/Totality.Client.ClientComponents;component/Images/Interface/star.png" Margin="470,42,436,472"/>
+                </Grid>
+            </Border>
         </Canvas>
     </Canvas>
 </UserControl>

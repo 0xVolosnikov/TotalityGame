@@ -37,9 +37,15 @@ namespace Totality.GUI
 
             var hostName = System.Net.Dns.GetHostName();
             List<IPAddress> serverIps = new List<IPAddress>( System.Net.Dns.GetHostEntry(hostName).AddressList );
-
-            _host = new ServiceHost(_transmitter,new Uri("net.tcp://" + serverIps.Find(x=> x.ToString().StartsWith("192.168.1.")).ToString() + ":10577/transmitter"));
-            _logger.Info(serverIps.Find(x => x.ToString().StartsWith("192.168.1.")).ToString());
+            try
+            {
+                _host = new ServiceHost(_transmitter, new Uri("net.tcp://" + serverIps.Find(x => x.ToString().StartsWith("192.168.1.") || x.ToString().StartsWith("192.168.0.")).ToString() + ":10577/transmitter"));
+                _logger.Info(serverIps.Find(x => x.ToString().StartsWith("192.168.1.")|| x.ToString().StartsWith("192.168.0.")).ToString());
+            }
+            catch (Exception e)
+            {
+                _logger.Error("Something get wrong with configuring host: " + e.Message);
+            }
             _dataLayer = new DataLayer.DataLayer(_logger);
             _nukeHandler = new NukeHandler(_newsHandler, _transmitter, _dataLayer, _logger);
             _mainHandler = new MainHandler(_newsHandler, _dataLayer, _logger, _nukeHandler);            

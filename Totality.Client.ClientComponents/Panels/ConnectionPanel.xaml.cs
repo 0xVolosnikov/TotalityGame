@@ -22,8 +22,11 @@ namespace Totality.Client.ClientComponents.Panels
     public partial class ConnectionPanel : UserControl
     {
         DoubleAnimation SyncronizationSpinning;
-        DoubleAnimation slide;
-        DoubleAnimation clear;
+        DoubleAnimation open = new DoubleAnimation(0, 100, TimeSpan.FromSeconds(2));
+        DoubleAnimation clear = new DoubleAnimation(100, 0, TimeSpan.FromSeconds(1));
+        public delegate void NameHandler(string name);
+        public event NameHandler NameReceived;
+        private Uri _video;
 
         public ConnectionPanel()
         {
@@ -32,6 +35,8 @@ namespace Totality.Client.ClientComponents.Panels
 
         public void StartSpinning()
         {
+           
+            DoubleAnimationUsingKeyFrames g = new DoubleAnimationUsingKeyFrames();
             SyncronizationSpinning = new DoubleAnimation(360, TimeSpan.FromSeconds(1.5));
             SyncronizationSpinning.RepeatBehavior = RepeatBehavior.Forever;
             _synchronizationImage.RenderTransform = new RotateTransform(0, _synchronizationImage.Width/2, _synchronizationImage.Height / 2);
@@ -40,35 +45,57 @@ namespace Totality.Client.ClientComponents.Panels
 
         public void Close()
         {
-            SyncronizationSpinning.RepeatBehavior = new RepeatBehavior(0);
-            _synchronizationImage.RenderTransform.BeginAnimation(RotateTransform.AngleProperty, SyncronizationSpinning);
-            slide = new DoubleAnimation(1000, TimeSpan.FromSeconds(0.5));
-            slide.AccelerationRatio = 0.4;
-            _canvas.BeginAnimation(Canvas.TopProperty, slide);
-            clear = new DoubleAnimation(0, TimeSpan.FromSeconds(0.5));
+            
+
+          //  slide = new DoubleAnimation(1000, TimeSpan.FromSeconds(0.5));
+          //  slide.AccelerationRatio = 0.4;
+          //  _canvas.BeginAnimation(Canvas.TopProperty, slide);
+            var clear = new DoubleAnimation(0, TimeSpan.FromSeconds(1));
+            //clear.AccelerationRatio = 0.4;
+            //_canvas.Background.BeginAnimation(Brush.OpacityProperty, clear);
+            BeginAnimation(UIElement.OpacityProperty, clear);
+
             clear.Completed += Clear_Completed;
-            _grid.Background.BeginAnimation(Brush.OpacityProperty, clear);
+        }
+
+        public void Video (Uri video)
+        {
+            _mediaElement.Source = video;
+            _mediaElement.BeginInit();
+            _mediaElement.Play();
         }
 
         private void Clear_Completed(object sender, EventArgs e)
         {
             this.Visibility = Visibility.Hidden;
+            SyncronizationSpinning.RepeatBehavior = new RepeatBehavior(0);
+            _synchronizationImage.RenderTransform.BeginAnimation(RotateTransform.AngleProperty, SyncronizationSpinning);
+            _mediaElement.Pause();
         }
 
         public void Open()
         {
-            this.Visibility = Visibility.Visible;
             StartSpinning();
-            slide = new DoubleAnimation(28, TimeSpan.FromSeconds(0.5));
-            slide.AccelerationRatio = 0.4;
-            _canvas.BeginAnimation(Canvas.TopProperty, slide);
-            clear = new DoubleAnimation(100, TimeSpan.FromSeconds(0.5));
-            _grid.Background.BeginAnimation(Brush.OpacityProperty, clear);
+            this.Visibility = Visibility.Visible;
+            //slide = new DoubleAnimation(28, TimeSpan.FromSeconds(0.5));
+            //slide.AccelerationRatio = 0.4;
+           // _canvas.BeginAnimation(Canvas.TopProperty, slide);
+            var open = new DoubleAnimation(0, 100, TimeSpan.FromSeconds(2));
+            open.AccelerationRatio = 0.4;
+            //_grid.Background.BeginAnimation(Brush.OpacityProperty, clear);
+            this.BeginAnimation(UIElement.OpacityProperty, open);
         }
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void approveName_Click(object sender, RoutedEventArgs e)
+        {
+            StartSpinning();
+            NameReceived.Invoke(nameInput.Text);
+            _nameCanvas.Visibility = Visibility.Hidden;
         }
     }
 }
