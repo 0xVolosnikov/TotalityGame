@@ -14,6 +14,11 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Media.Animation;
 using Totality.Client.ClientComponents;
+using Totality.Client.GUI.ReferenceToServer;
+using Totality.Client.ClientComponents.Panels;
+using System.ServiceModel.Discovery;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace Totality.Client.GUI
 {
@@ -26,11 +31,18 @@ namespace Totality.Client.GUI
         DoubleAnimation slideToLeft;
         DoubleAnimation slideToCenter;
         DoubleAnimation slideRightToCenter;
+        ConnectionPanel _connectionPanel;
         UserControl currentPanel;
-        ServerCallbackHandler tr = new ServerCallbackHandler();
+        TransmitterServiceClient _client;
+        private Country _country;
+        BackgroundWorker connectionSetter = new BackgroundWorker();
+        private CallbackHandler _servCallbackHandler;
 
         public MainWindow()
         {
+            _servCallbackHandler = new CallbackHandler();
+            _servCallbackHandler.CountryUpdated += _servCallbackHandler_CountryUpdated;
+
             InitializeComponent();
             setAnims();
             this.MouseWheel += MainWindow_MouseWheel;
@@ -46,9 +58,61 @@ namespace Totality.Client.GUI
             buttons[1].MouseDown += (object sender, MouseButtonEventArgs e) => changePanel(militaryPanel);
             buttons[2].MouseDown += (object sender, MouseButtonEventArgs e) => changePanel(financePanel);
 
-            //var client = new ReferenceToServer.TransmitterServiceClient(new System.ServiceModel.InstanceContext(tr));
-            //client.Open();
-            //client.Register("Hello, world!");
+            _connectionPanel = new ConnectionPanel();
+            //_connectionPanel.
+            _grid.Children.Add(_connectionPanel);
+            _connectionPanel.StartSpinning();
+            _client = new ReferenceToServer.TransmitterServiceClient(new System.ServiceModel.InstanceContext(_servCallbackHandler));
+            
+            connectionSetter.DoWork += FindServer;
+            connectionSetter.RunWorkerCompleted += ServerFound;
+            connectionSetter.RunWorkerAsync();
+
+        }
+
+        private void FindServer(object sender, DoWorkEventArgs e)
+        {
+            DiscoveryClient discoveryClient = new DiscoveryClient(new UdpDiscoveryEndpoint());
+
+            bool needToStop = false;
+
+            while (!needToStop)
+            {
+                FindResponse servers = discoveryClient.Find(new FindCriteria(typeof(ITransmitterService)){ Duration = TimeSpan.FromSeconds(0.2) });
+                System.Console.WriteLine(servers.Endpoints.Count);
+                if (servers.Endpoints.Count > 0)
+                {
+                    needToStop = true;
+                    _client.Endpoint.Address = servers.Endpoints[0].Address;
+                }
+            }
+            discoveryClient.Close();
+        }
+
+        private void ServerFound(object sender, RunWorkerCompletedEventArgs e)
+        {
+            _client.Open();
+            this.Dispatcher.Invoke( () => _client.InnerDuplexChannel.Faulted += ClientChannelFaulted);
+            _client.Register("Hello, world!");
+            this.Dispatcher.Invoke( () => _connectionPanel.Close());
+        }
+
+
+        private void ClientChannelFaulted(object sender, EventArgs e)
+        {
+            _client.Abort();
+            _client = new ReferenceToServer.TransmitterServiceClient(new System.ServiceModel.InstanceContext(_servCallbackHandler));
+            _connectionPanel.Dispatcher.Invoke(_connectionPanel.Open);
+            connectionSetter.RunWorkerAsync();
+        }
+
+        private void _servCallbackHandler_CountryUpdated(Country country)
+        {
+            _country = country;
+            _header.UpdateMoney(country.Money);
+            _header.UpdateNukes(country.NukesCount);
+            _header.UpdateMissiles(country.MissilesCount);
+            _header.UpdateMood((short)country.Mood);
         }
 
         private void setAnims()

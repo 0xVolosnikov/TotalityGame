@@ -75,7 +75,7 @@
     <Compile Include="ButtonToolTip.xaml.cs">
       <DependentUpon>ButtonToolTip.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\Common\ConnectionPanel.xaml.cs">
+    <Compile Include="Panels\ConnectionPanel.xaml.cs">
       <DependentUpon>ConnectionPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\Common\HelpDialog.xaml.cs">
@@ -171,7 +171,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Dialogs\Common\ConnectionPanel.xaml">
+    <Page Include="Panels\ConnectionPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -385,6 +385,9 @@
       <Project>{277f5307-857b-46bb-8f51-63df2549bbe8}</Project>
       <Name>Totality.Model</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Panels\Images\synchronization.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

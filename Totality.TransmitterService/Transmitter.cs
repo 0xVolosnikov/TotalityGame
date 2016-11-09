@@ -37,6 +37,7 @@ namespace Totality.TransmitterService
                 Client newClient = new Client(OperationContext.Current.GetCallbackChannel<ICallbackService>(), myName);
                 newClient.Fault += FaultHandler;
                 Clients.Add(newClient);
+                MainHandler.AddCountry(myName);
                 _log.Info("Client " + myName + " registered!");
                 return true;
             }

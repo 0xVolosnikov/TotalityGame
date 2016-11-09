@@ -13,11 +13,11 @@ namespace Totality.Handlers.Main
     public class MainHandler : AbstractHandler
     {
         private Dictionary<string, Queue<Order>> _ordersBase = new Dictionary<string, Queue<Order>>();
-        private ITransmitter _transmitter;
+        public ITransmitter Transmitter { get; set; }
         private List<IMinisteryHandler> _ministeryHandlers = new List<IMinisteryHandler>();
         private List<Order> _currentOrdersLine = new List<Order>();
         private NukeHandler _nukeHandler;
-        private DiplomaticalHandler _dipHandler;
+        public DiplomaticalHandler DipHandler { get; set; }
 
 
         public MainHandler(NewsHandler newsHandler, IDataLayer dataLayer, ILogger logger, NukeHandler nukeHandler) : base(newsHandler, dataLayer, logger)
@@ -74,7 +74,7 @@ namespace Totality.Handlers.Main
 
             updateClients();
 
-            _dipHandler.SendContractsToAll();
+            DipHandler.SendContractsToAll();
 
             _newsHandler.SendNews();
 
@@ -146,7 +146,7 @@ namespace Totality.Handlers.Main
 
         private void updateClients()
         {
-            _transmitter.UpdateClients( _dataLayer.GetCountries() );
+            Transmitter.UpdateClients( _dataLayer.GetCountries() );
         }
 
         private void updateMilitaryPower()
@@ -189,11 +189,13 @@ namespace Totality.Handlers.Main
         public void AddCountry(string name)
         {
             _ordersBase.Add(name, new Queue<Order>());
+            _dataLayer.AddCountry(new Country(name));
         }
 
         public void RemoveCountry(string name)
         {
             _ordersBase.Remove(name);
+
         }
 
     }

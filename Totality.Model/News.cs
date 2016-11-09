@@ -10,7 +10,9 @@ namespace Totality.Model
     [DataContract]
     public class News
     {
+        [DataMember]
         public string newsCode;
+        [DataMember]
         public List<string> args = new List<string>();
         
         public News(string code)

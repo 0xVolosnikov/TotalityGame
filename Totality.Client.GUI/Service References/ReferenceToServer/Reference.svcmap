@@ -27,6 +27,7 @@
     <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="e31a4b02-546a-41ec-bc71-5c013734dc6f" SourceId="1" SourceUrl="http://localhost:8053/transmitter/mex" />
     <MetadataFile FileName="Totality.Model.xsd" MetadataType="Schema" ID="69d01883-b191-4f16-a2bf-04c43b4a9c8a" SourceId="1" SourceUrl="http://localhost:8053/transmitter/mex" />
     <MetadataFile FileName="Totality.Model.Diplomatical.xsd" MetadataType="Schema" ID="ba1b47a0-a9ce-4281-9265-55be742d4460" SourceId="1" SourceUrl="http://localhost:8053/transmitter/mex" />
+    <MetadataFile FileName="Arrays.xsd" MetadataType="Schema" ID="d08d7c65-14bd-4d97-8320-c977e5caed4f" SourceId="1" SourceUrl="http://localhost:8053/transmitter/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

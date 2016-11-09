@@ -24,5 +24,25 @@ namespace Totality.Client.ClientComponents
         {
             InitializeComponent();
         }
+
+        public void UpdateMoney (long money)
+        {
+            this.LMoney.Content = money.ToString();
+        }
+
+        public void UpdateNukes(int count)
+        {
+            this.LNukes.Content = count.ToString();
+        }
+
+        public void UpdateMissiles(int count)
+        {
+            this.LPRO.Content = count.ToString();
+        }
+
+        public void UpdateMood(short value)
+        {
+            this.LMood.Content = value.ToString();
+        }
     }
 }

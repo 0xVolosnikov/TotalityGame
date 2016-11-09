@@ -1,5 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Totality.Model" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Totality.Model" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/Totality.Model" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Totality.Model" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <xs:complexType name="ArrayOfOrder">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="Order" nillable="true" type="tns:Order" />
@@ -7,7 +9,18 @@
   </xs:complexType>
   <xs:element name="ArrayOfOrder" nillable="true" type="tns:ArrayOfOrder" />
   <xs:complexType name="Order">
-    <xs:sequence />
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Count" type="xs:long" />
+      <xs:element minOccurs="0" name="CountryName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Ministery" type="xs:short" />
+      <xs:element minOccurs="0" name="OrderNum" type="xs:short" />
+      <xs:element minOccurs="0" name="TargetCountryName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TargetCountryName2" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TargetId" type="ser:guid" />
+      <xs:element minOccurs="0" name="TargetMinistery" type="xs:short" />
+      <xs:element minOccurs="0" name="Value" type="xs:short" />
+      <xs:element minOccurs="0" name="isSecret" type="xs:boolean" />
+    </xs:sequence>
   </xs:complexType>
   <xs:element name="Order" nillable="true" type="tns:Order" />
   <xs:complexType name="ArrayOfNukeRocket">
@@ -17,7 +30,92 @@
   </xs:complexType>
   <xs:element name="ArrayOfNukeRocket" nillable="true" type="tns:ArrayOfNukeRocket" />
   <xs:complexType name="NukeRocket">
-    <xs:sequence />
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Count" type="xs:int" />
+      <xs:element minOccurs="0" name="From" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="ser:guid" />
+      <xs:element minOccurs="0" name="LifeTime" type="xs:int" />
+      <xs:element minOccurs="0" name="To" nillable="true" type="xs:string" />
+    </xs:sequence>
   </xs:complexType>
   <xs:element name="NukeRocket" nillable="true" type="tns:NukeRocket" />
+  <xs:complexType name="ArrayOfNews">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="News" nillable="true" type="tns:News" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfNews" nillable="true" type="tns:ArrayOfNews" />
+  <xs:complexType name="News">
+    <xs:sequence>
+      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="args" nillable="true" type="q1:ArrayOfstring" />
+      <xs:element minOccurs="0" name="newsCode" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="News" nillable="true" type="tns:News" />
+  <xs:complexType name="Country">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CounterSpyLvl" type="xs:int" />
+      <xs:element minOccurs="0" name="CounterSpyLvlUpCost" type="xs:long" />
+      <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="CurrencyAccounts" nillable="true" type="q2:ArrayOfKeyValueOfstringlong" />
+      <xs:element minOccurs="0" name="Ecology" type="xs:double" />
+      <xs:element minOccurs="0" name="ExtractExperience" type="xs:int" />
+      <xs:element minOccurs="0" name="ExtractScLvlUpCost" type="xs:long" />
+      <xs:element minOccurs="0" name="ExtractScLvlUpExp" type="xs:int" />
+      <xs:element minOccurs="0" name="ExtractScienceLvl" type="xs:int" />
+      <xs:element minOccurs="0" name="FinalAgricultural" type="xs:double" />
+      <xs:element minOccurs="0" name="FinalHeavyIndustry" type="xs:double" />
+      <xs:element minOccurs="0" name="FinalLightIndustry" type="xs:double" />
+      <xs:element minOccurs="0" name="FinalOil" type="xs:double" />
+      <xs:element minOccurs="0" name="FinalSteel" type="xs:double" />
+      <xs:element minOccurs="0" name="FinalWood" type="xs:double" />
+      <xs:element minOccurs="0" name="HeavyExperience" type="xs:int" />
+      <xs:element minOccurs="0" name="HeavyScLvlUpCost" type="xs:long" />
+      <xs:element minOccurs="0" name="HeavyScLvlUpExp" type="xs:int" />
+      <xs:element minOccurs="0" name="HeavyScienceLvl" type="xs:int" />
+      <xs:element minOccurs="0" name="IndustryUpgradeCost" type="xs:long" />
+      <xs:element minOccurs="0" name="InnerLvl" type="xs:int" />
+      <xs:element minOccurs="0" name="InnerLvlUpCost" type="xs:long" />
+      <xs:element minOccurs="0" name="IntelligenceLvl" type="xs:int" />
+      <xs:element minOccurs="0" name="IntelligenceLvlUpCost" type="xs:long" />
+      <xs:element minOccurs="0" name="IsAlerted" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsMobilized" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsRepressed" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsRiot" type="xs:boolean" />
+      <xs:element minOccurs="0" name="LightExperience" type="xs:int" />
+      <xs:element minOccurs="0" name="LightScLvlUpCost" type="xs:long" />
+      <xs:element minOccurs="0" name="LightScLvlUpExp" type="xs:int" />
+      <xs:element minOccurs="0" name="LightScienceLvl" type="xs:int" />
+      <xs:element minOccurs="0" name="LvlHeavyIndustry" type="xs:int" />
+      <xs:element minOccurs="0" name="LvlLightIndustry" type="xs:int" />
+      <xs:element minOccurs="0" name="LvlMilitary" type="xs:int" />
+      <xs:element minOccurs="0" name="LvlResIndustry" type="xs:int" />
+      <xs:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="MassMedia" nillable="true" type="q3:ArrayOfKeyValueOfstringshort" />
+      <xs:element minOccurs="0" name="MilitaryExperience" type="xs:int" />
+      <xs:element minOccurs="0" name="MilitaryPower" type="xs:double" />
+      <xs:element minOccurs="0" name="MilitaryScLvlUpCost" type="xs:long" />
+      <xs:element minOccurs="0" name="MilitaryScLvlUpExp" type="xs:int" />
+      <xs:element minOccurs="0" name="MilitaryScienceLvl" type="xs:int" />
+      <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="MinsBlocks" nillable="true" type="q4:ArrayOfint" />
+      <xs:element minOccurs="0" name="MissilesCount" type="xs:int" />
+      <xs:element minOccurs="0" name="Money" type="xs:long" />
+      <xs:element minOccurs="0" name="Mood" type="xs:double" />
+      <xs:element minOccurs="0" name="NukesCount" type="xs:int" />
+      <xs:element minOccurs="0" name="PremierLvl" type="xs:int" />
+      <xs:element minOccurs="0" name="PremierLvlUpCost" type="xs:long" />
+      <xs:element minOccurs="0" name="ProductionUpgradeCost" type="xs:long" />
+      <xs:element minOccurs="0" name="ShadowingLvl" type="xs:int" />
+      <xs:element minOccurs="0" name="ShadowingLvlUpCost" type="xs:long" />
+      <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="SpyNetworks" nillable="true" type="q5:ArrayOfKeyValueOfstringCountry.SpyNetworkZ8yiO27Z" />
+      <xs:element minOccurs="0" name="TaxesLvl" type="xs:short" />
+      <xs:element xmlns:q6="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="WarList" nillable="true" type="q6:ArrayOfstring" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Country" nillable="true" type="tns:Country" />
+  <xs:complexType name="Country.SpyNetwork">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="NetLvl" type="xs:int" />
+      <xs:element xmlns:q7="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Recruit" nillable="true" type="q7:ArrayOfboolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Country.SpyNetwork" nillable="true" type="tns:Country.SpyNetwork" />
 </xs:schema>

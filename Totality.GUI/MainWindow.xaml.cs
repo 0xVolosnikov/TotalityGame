@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Media;
 using Totality.Model.Interfaces;
 using System.ServiceModel;
+using System.ServiceModel.Discovery;
 
 namespace Totality.GUI
 {
@@ -37,6 +38,8 @@ namespace Totality.GUI
             _mainHandler = new MainHandler(_newsHandler, _dataLayer, _logger, _nukeHandler);            
             _dipHandler = new DiplomaticalHandler(_newsHandler, _transmitter, _dataLayer, _logger);
 
+            _mainHandler.Transmitter = _transmitter;
+            _mainHandler.DipHandler = _dipHandler;
             _newsHandler.Transmitter = _transmitter;
             _transmitter.MainHandler = _mainHandler;
             _transmitter.NukeHandler = _nukeHandler;
@@ -53,6 +56,18 @@ namespace Totality.GUI
         {
             try
             {
+
+                ServiceDiscoveryBehavior discoveryBehavior = new ServiceDiscoveryBehavior();
+                // send announcements on UDP multicast transport
+                discoveryBehavior.AnnouncementEndpoints.Add(
+                  new UdpAnnouncementEndpoint());
+
+                _host.Description.Behaviors.Add(new ServiceDiscoveryBehavior());
+
+                // ** DISCOVERY ** //
+                // add the discovery endpoint that specifies where to publish the services
+                _host.Description.Endpoints.Add(new UdpDiscoveryEndpoint());
+
                 _host.Open();
 
                 if (_host.State == CommunicationState.Opened)
@@ -84,6 +99,11 @@ namespace Totality.GUI
                 _logger.Info("Loading savefile " + dialog.SafeFileName);
                 _dataLayer.Load(dialog.FileName);
             }
+        }
+
+        private void _endStepButtonClick(object sender, RoutedEventArgs e)
+        {
+            _mainHandler.FinishStep();
         }
     }
 }

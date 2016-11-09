@@ -7,37 +7,37 @@
         xmlns:Totality.Client.ClientComponents="clr-namespace:Totality.Client.ClientComponents;assembly=Totality.Client.ClientComponents" x:Class="Totality.Client.GUI.MainWindow"
         mc:Ignorable="d"
         Title="MainWindow" Height="702" Width="1206.5">
-    <Grid>
+    <Grid x:Name="_grid">
         <Grid.Background>
-            <ImageBrush ImageSource="bgtexture.jpg" TileMode="Tile" ViewportUnits="Absolute" Viewport="0 0 500 300" Stretch="None"/>
+            <ImageBrush ImageSource="Images/bgtexture.jpg" TileMode="Tile" ViewportUnits="Absolute" Viewport="0 0 500 300" Stretch="None"/>
         </Grid.Background>
         <Canvas x:Name="canvas1" HorizontalAlignment="Left" Height="672" VerticalAlignment="Top" Width="1198">
             <Totality.Client.ClientComponents:ordersTable x:Name="dataGrid1" HorizontalAlignment="Left" VerticalAlignment="Top" Height="445" Width="1198" Canvas.Top="50" startingLines="14" Canvas.Left="0" />
-            <Image x:Name="image" Height="100" Canvas.Left="28" Canvas.Top="572" Width="100" Source="line.png"/>
-            <Totality.Client.ClientComponents:MinisteryButton x:Name="but1" Canvas.Left="29" Canvas.Top="511" imgDown="but2.png" imgUp="but1.png"/>
-            <Image x:Name="image_Copy" Height="100" Canvas.Left="132" Canvas.Top="572" Width="100" Source="line.png"/>
-            <Totality.Client.ClientComponents:MinisteryButton x:Name="but2" Canvas.Left="133" Canvas.Top="511" imgDown="but2.png" imgUp="but1.png"/>
-            <Image x:Name="image_Copy1" Height="100" Canvas.Left="236" Canvas.Top="572" Width="100" Source="line.png"/>
-            <Totality.Client.ClientComponents:MinisteryButton x:Name="but3" Canvas.Left="237" Canvas.Top="511" imgDown="but2.png" imgUp="but1.png"/>
-            <Image x:Name="image_Copy2" Height="100" Canvas.Left="340" Canvas.Top="572" Width="100" Source="line.png"/>
-            <Totality.Client.ClientComponents:MinisteryButton x:Name="but4" Canvas.Left="341" Canvas.Top="511" imgDown="but2.png" imgUp="but1.png"/>
-            <Image x:Name="image_Copy3" Height="100" Canvas.Left="444" Canvas.Top="572" Width="100" Source="line.png"/>
-            <Totality.Client.ClientComponents:MinisteryButton x:Name="but5" Canvas.Left="445" Canvas.Top="511" imgDown="but2.png" imgUp="but1.png"/>
-            <Image x:Name="image_Copy4" Height="100" Canvas.Left="548" Canvas.Top="572" Width="100" Source="line.png"/>
-            <Totality.Client.ClientComponents:MinisteryButton x:Name="but6" Canvas.Left="549" Canvas.Top="511" imgDown="but2.png" imgUp="but1.png"/>
-            <Image x:Name="image_Copy5" Height="100" Canvas.Left="652" Canvas.Top="572" Width="100" Source="line.png"/>
-            <Totality.Client.ClientComponents:MinisteryButton x:Name="but7" Canvas.Left="653" Canvas.Top="511" imgDown="but2.png" imgUp="but1.png"/>
-            <Image x:Name="image_Copy6" Height="100" Canvas.Left="756" Canvas.Top="572" Width="100" Source="line.png"/>
-            <Totality.Client.ClientComponents:MinisteryButton x:Name="but8" Canvas.Left="757" Canvas.Top="511" imgDown="but2.png" imgUp="but1.png"/>
-            <Image x:Name="image_Copy7" Height="100" Canvas.Left="860" Canvas.Top="572" Width="100" Source="line.png"/>
-            <Totality.Client.ClientComponents:MinisteryButton x:Name="but9" Canvas.Left="861" Canvas.Top="511" imgDown="but2.png" imgUp="but1.png"/>
-            <Image x:Name="image_Copy8" Height="100" Canvas.Left="964" Canvas.Top="572" Width="100" Source="line.png"/>
-            <Totality.Client.ClientComponents:MinisteryButton x:Name="but10" Canvas.Left="965" Canvas.Top="511" imgDown="but2.png" imgUp="but1.png"/>
-            <Image x:Name="image_Copy9" Height="100" Canvas.Left="1068" Canvas.Top="572" Width="100" Source="line.png"/>
-            <Totality.Client.ClientComponents:MinisteryButton x:Name="but11" Canvas.Left="1069" Canvas.Top="511" imgDown="but2.png" imgUp="but1.png"/>
+            <Image x:Name="image" Height="100" Canvas.Left="28" Canvas.Top="572" Width="100" Source="Images/line.png"/>
+            <Totality.Client.ClientComponents:MinisteryButton x:Name="but1" Canvas.Left="29" Canvas.Top="511" imgDown="Images/but2.png" imgUp="Images/but1.png"/>
+            <Image x:Name="image_Copy" Height="100" Canvas.Left="132" Canvas.Top="572" Width="100" Source="Images/line.png"/>
+            <Totality.Client.ClientComponents:MinisteryButton x:Name="but2" Canvas.Left="133" Canvas.Top="511" imgDown="Images/but2.png" imgUp="Images/but1.png"/>
+            <Image x:Name="image_Copy1" Height="100" Canvas.Left="236" Canvas.Top="572" Width="100" Source="Images/line.png"/>
+            <Totality.Client.ClientComponents:MinisteryButton x:Name="but3" Canvas.Left="237" Canvas.Top="511" imgDown="Images/but2.png" imgUp="Images/but1.png"/>
+            <Image x:Name="image_Copy2" Height="100" Canvas.Left="340" Canvas.Top="572" Width="100" Source="Images/line.png"/>
+            <Totality.Client.ClientComponents:MinisteryButton x:Name="but4" Canvas.Left="341" Canvas.Top="511" imgDown="Images/but2.png" imgUp="Images/but1.png"/>
+            <Image x:Name="image_Copy3" Height="100" Canvas.Left="444" Canvas.Top="572" Width="100" Source="Images/line.png"/>
+            <Totality.Client.ClientComponents:MinisteryButton x:Name="but5" Canvas.Left="445" Canvas.Top="511" imgDown="Images/but2.png" imgUp="Images/but1.png"/>
+            <Image x:Name="image_Copy4" Height="100" Canvas.Left="548" Canvas.Top="572" Width="100" Source="Images/line.png"/>
+            <Totality.Client.ClientComponents:MinisteryButton x:Name="but6" Canvas.Left="549" Canvas.Top="511" imgDown="Images/but2.png" imgUp="Images/but1.png"/>
+            <Image x:Name="image_Copy5" Height="100" Canvas.Left="652" Canvas.Top="572" Width="100" Source="Images/line.png"/>
+            <Totality.Client.ClientComponents:MinisteryButton x:Name="but7" Canvas.Left="653" Canvas.Top="511" imgDown="Images/but2.png" imgUp="Images/but1.png"/>
+            <Image x:Name="image_Copy6" Height="100" Canvas.Left="756" Canvas.Top="572" Width="100" Source="Images/line.png"/>
+            <Totality.Client.ClientComponents:MinisteryButton x:Name="but8" Canvas.Left="757" Canvas.Top="511" imgDown="Images/but2.png" imgUp="Images/but1.png"/>
+            <Image x:Name="image_Copy7" Height="100" Canvas.Left="860" Canvas.Top="572" Width="100" Source="Images/line.png"/>
+            <Totality.Client.ClientComponents:MinisteryButton x:Name="but9" Canvas.Left="861" Canvas.Top="511" imgDown="Images/but2.png" imgUp="Images/but1.png"/>
+            <Image x:Name="image_Copy8" Height="100" Canvas.Left="964" Canvas.Top="572" Width="100" Source="Images/line.png"/>
+            <Totality.Client.ClientComponents:MinisteryButton x:Name="but10" Canvas.Left="965" Canvas.Top="511" imgDown="Images/but2.png" imgUp="Images/but1.png"/>
+            <Image x:Name="image_Copy9" Height="100" Canvas.Left="1068" Canvas.Top="572" Width="100" Source="Images/line.png"/>
+            <Totality.Client.ClientComponents:MinisteryButton x:Name="but11" Canvas.Left="1069" Canvas.Top="511" imgDown="Images/but2.png" imgUp="Images/but1.png"/>
             <Totality.Client.ClientComponents:MilitaryPanel x:Name="militaryPanel" Canvas.Top="50" Height="445" Width="1200" Canvas.Left="1203"/>
             <Totality.Client.ClientComponents:FinancePanel x:Name="financePanel" Canvas.Left="1203" Canvas.Top="50"/>
         </Canvas>
-        <Totality.Client.ClientComponents:Header VerticalAlignment="Top" Margin="0,0,-1,0" Width="1200"/>
+        <Totality.Client.ClientComponents:Header x:Name="_header" VerticalAlignment="Top" Margin="0,0,-1,0" Width="1200"/>
     </Grid>
 </Window>

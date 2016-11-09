@@ -4,4 +4,14 @@
     <xs:sequence />
   </xs:complexType>
   <xs:element name="DipMsg" nillable="true" type="tns:DipMsg" />
+  <xs:complexType name="ArrayOfDipContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DipContract" nillable="true" type="tns:DipContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDipContract" nillable="true" type="tns:ArrayOfDipContract" />
+  <xs:complexType name="DipContract">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:element name="DipContract" nillable="true" type="tns:DipContract" />
 </xs:schema>

@@ -10,7 +10,7 @@
     </UserControl.Effect>
     <Canvas x:Name="canvas" Background="#FFEFBB00">
         <Canvas Height="48" Canvas.Top="20" Width="607" Background="Black"/>
-        <Image x:Name="image" Height="272" Canvas.Top="73" Width="607" Source="/Totality.Client.ClientComponents;component/Images/Finance/backForFinDial.png" Opacity="0.03" Stretch="Fill"/>
+        <Image x:Name="image" Height="272" Canvas.Top="73" Width="607" Source="/Totality.Client.ClientComponents;component/Panels/Images/Finance/backForFinDial.png" Opacity="0.03" Stretch="Fill"/>
         <Button x:Name="cancelButton" Content="Отмена" Canvas.Left="92" Canvas.Top="254" Width="194" Height="48" FontFamily="Arial Black" FontSize="20" Click="cancelButton_Click">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
@@ -35,6 +35,6 @@
                 </LinearGradientBrush>
             </ComboBox.Background>
         </ComboBox>
-        <Image x:Name="image1" Height="45" Canvas.Left="8" Canvas.Top="88" Width="584" Source="/Totality.Client.ClientComponents;component/Images/Finance/TransText1.png" Stretch="None"/>
+        <Image x:Name="image1" Height="45" Canvas.Left="8" Canvas.Top="88" Width="584" Source="/Totality.Client.ClientComponents;component/Panels/Images/Finance/TransText1.png" Stretch="None"/>
     </Canvas>
 </UserControl>

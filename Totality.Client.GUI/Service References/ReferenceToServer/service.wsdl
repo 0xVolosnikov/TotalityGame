@@ -35,6 +35,7 @@
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/Totality.Model" />
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/Totality.Model.Diplomatical" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="ITransmitterService_Register_InputMessage">
@@ -67,11 +68,17 @@
   <wsdl:message name="ITransmitterService_UpdateNukeDialog_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:UpdateNukeDialog" />
   </wsdl:message>
-  <wsdl:message name="ITransmitterService_UpdateNews_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:UpdateNews" />
+  <wsdl:message name="ITransmitterService_SendNews_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:SendNews" />
+  </wsdl:message>
+  <wsdl:message name="ITransmitterService_UpdateClient_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:UpdateClient" />
   </wsdl:message>
   <wsdl:message name="ITransmitterService_SendDip_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:SendDip" />
+  </wsdl:message>
+  <wsdl:message name="ITransmitterService_SendContracts_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:SendContracts" />
   </wsdl:message>
   <wsdl:portType name="ITransmitterService">
     <wsdl:operation name="Register">
@@ -96,11 +103,17 @@
     <wsdl:operation name="UpdateNukeDialog">
       <wsdl:output wsaw:Action="http://tempuri.org/ITransmitterService/UpdateNukeDialog" message="tns:ITransmitterService_UpdateNukeDialog_OutputCallbackMessage" />
     </wsdl:operation>
-    <wsdl:operation name="UpdateNews">
-      <wsdl:output wsaw:Action="http://tempuri.org/ITransmitterService/UpdateNews" message="tns:ITransmitterService_UpdateNews_OutputCallbackMessage" />
+    <wsdl:operation name="SendNews">
+      <wsdl:output wsaw:Action="http://tempuri.org/ITransmitterService/SendNews" message="tns:ITransmitterService_SendNews_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateClient">
+      <wsdl:output wsaw:Action="http://tempuri.org/ITransmitterService/UpdateClient" message="tns:ITransmitterService_UpdateClient_OutputCallbackMessage" />
     </wsdl:operation>
     <wsdl:operation name="SendDip">
       <wsdl:output wsaw:Action="http://tempuri.org/ITransmitterService/SendDip" message="tns:ITransmitterService_SendDip_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendContracts">
+      <wsdl:output wsaw:Action="http://tempuri.org/ITransmitterService/SendContracts" message="tns:ITransmitterService_SendContracts_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_ITransmitterService" type="tns:ITransmitterService">
@@ -154,14 +167,26 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="UpdateNews">
-      <soap12:operation soapAction="http://tempuri.org/ITransmitterService/UpdateNews" style="document" />
+    <wsdl:operation name="SendNews">
+      <soap12:operation soapAction="http://tempuri.org/ITransmitterService/SendNews" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateClient">
+      <soap12:operation soapAction="http://tempuri.org/ITransmitterService/UpdateClient" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="SendDip">
       <soap12:operation soapAction="http://tempuri.org/ITransmitterService/SendDip" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendContracts">
+      <soap12:operation soapAction="http://tempuri.org/ITransmitterService/SendContracts" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>

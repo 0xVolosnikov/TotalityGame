@@ -17,7 +17,7 @@
         <Rectangle Fill="#FF262674" HorizontalAlignment="Left" Height="50" Margin="373,202,0,0" Stroke="Black" VerticalAlignment="Top" Width="61"/>
         <Rectangle x:Name="listeningStatusDisplay" Fill="#FFC50000" HorizontalAlignment="Left" Height="50" Margin="446,202,0,0" Stroke="Black" VerticalAlignment="Top" Width="61"/>
         <Button x:Name="startListening" Content="Запуск сервера" HorizontalAlignment="Left" Margin="373,10,0,0" VerticalAlignment="Top" Width="134" Height="30" Click="startListening_Click"/>
-        <Button x:Name="button_Copy" Content="Завершить ход" HorizontalAlignment="Left" Margin="373,150,0,0" VerticalAlignment="Top" Width="134" Height="30">
+        <Button x:Name="_endStepButton" Content="Завершить ход" HorizontalAlignment="Left" Margin="373,150,0,0" VerticalAlignment="Top" Width="134" Height="30" Click="_endStepButtonClick">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                     <GradientStop Color="#FFD9DBEE" Offset="0"/>
