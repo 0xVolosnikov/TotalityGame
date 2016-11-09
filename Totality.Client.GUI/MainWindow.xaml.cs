@@ -19,6 +19,7 @@ using Totality.Client.ClientComponents.Panels;
 using System.ServiceModel.Discovery;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using Totality.CommonClasses;
 
 namespace Totality.Client.GUI
 {
@@ -54,9 +55,16 @@ namespace Totality.Client.GUI
             foreach (MinisteryButton but in buttons)
                 but.connectToButtons(buttons);
 
-            buttons[0].MouseDown += (object sender, MouseButtonEventArgs e) => changePanel(dataGrid1); 
-            buttons[1].MouseDown += (object sender, MouseButtonEventArgs e) => changePanel(militaryPanel);
-            buttons[2].MouseDown += (object sender, MouseButtonEventArgs e) => changePanel(financePanel);
+            buttons[0].MouseDown += (object sender, MouseButtonEventArgs e) => changePanel(dataGrid1);
+            buttons[1].MouseDown += (object sender, MouseButtonEventArgs e) => changePanel(_industryPanel);
+            buttons[2].MouseDown += (object sender, MouseButtonEventArgs e) => changePanel(_financePanel);
+            buttons[3].MouseDown += (object sender, MouseButtonEventArgs e) => changePanel(_militaryPanel);
+            buttons[4].MouseDown += (object sender, MouseButtonEventArgs e) => changePanel(_foreignPanel);
+            buttons[5].MouseDown += (object sender, MouseButtonEventArgs e) => changePanel(_mediaPanel);
+            buttons[6].MouseDown += (object sender, MouseButtonEventArgs e) => changePanel(_innerPanel);
+            buttons[7].MouseDown += (object sender, MouseButtonEventArgs e) => changePanel(_securityPanel);
+            buttons[8].MouseDown += (object sender, MouseButtonEventArgs e) => changePanel(_sciencePanel);
+            buttons[9].MouseDown += (object sender, MouseButtonEventArgs e) => changePanel(_premierPanel);
 
             _connectionPanel = new ConnectionPanel();
             //_connectionPanel.
@@ -78,12 +86,13 @@ namespace Totality.Client.GUI
 
             while (!needToStop)
             {
-                FindResponse servers = discoveryClient.Find(new FindCriteria(typeof(ITransmitterService)){ Duration = TimeSpan.FromSeconds(0.2) });
+                FindResponse servers = discoveryClient.Find(new FindCriteria(typeof(ITransmitterService)){ Duration = TimeSpan.FromSeconds(0.5) });
                 System.Console.WriteLine(servers.Endpoints.Count);
                 if (servers.Endpoints.Count > 0)
                 {
                     needToStop = true;
                     _client.Endpoint.Address = servers.Endpoints[0].Address;
+                    
                 }
             }
             discoveryClient.Close();
@@ -93,7 +102,7 @@ namespace Totality.Client.GUI
         {
             _client.Open();
             this.Dispatcher.Invoke( () => _client.InnerDuplexChannel.Faulted += ClientChannelFaulted);
-            _client.Register("Hello, world!");
+            _client.Register("Hello,world!");
             this.Dispatcher.Invoke( () => _connectionPanel.Close());
         }
 

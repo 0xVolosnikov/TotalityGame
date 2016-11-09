@@ -9,6 +9,8 @@ using System.Windows.Media;
 using Totality.Model.Interfaces;
 using System.ServiceModel;
 using System.ServiceModel.Discovery;
+using System.Collections.Generic;
+using System.Net;
 
 namespace Totality.GUI
 {
@@ -32,7 +34,12 @@ namespace Totality.GUI
             this.Closing += MainWindow_Closing;
             _transmitter = new Transmitter(_logger);
             _newsHandler = new NewsHandler();
-            _host = new ServiceHost(_transmitter);
+
+            var hostName = System.Net.Dns.GetHostName();
+            List<IPAddress> serverIps = new List<IPAddress>( System.Net.Dns.GetHostEntry(hostName).AddressList );
+
+            _host = new ServiceHost(_transmitter,new Uri("net.tcp://" + serverIps.Find(x=> x.ToString().StartsWith("192.168.1.")).ToString() + ":10577/transmitter"));
+            _logger.Info(serverIps.Find(x => x.ToString().StartsWith("192.168.1.")).ToString());
             _dataLayer = new DataLayer.DataLayer(_logger);
             _nukeHandler = new NukeHandler(_newsHandler, _transmitter, _dataLayer, _logger);
             _mainHandler = new MainHandler(_newsHandler, _dataLayer, _logger, _nukeHandler);            
@@ -60,9 +67,9 @@ namespace Totality.GUI
                 ServiceDiscoveryBehavior discoveryBehavior = new ServiceDiscoveryBehavior();
                 // send announcements on UDP multicast transport
                 discoveryBehavior.AnnouncementEndpoints.Add(
-                  new UdpAnnouncementEndpoint());
+                  new UdpAnnouncementEndpoint("soap.udp://192.168.1.255:3702") );
 
-                _host.Description.Behaviors.Add(new ServiceDiscoveryBehavior());
+                _host.Description.Behaviors.Add(discoveryBehavior);
 
                 // ** DISCOVERY ** //
                 // add the discovery endpoint that specifies where to publish the services

@@ -17,6 +17,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Totality.Model;
 using Totality.CommonClasses;
+using Totality.Client.ClientComponents.Panels;
 
 namespace Totality.Client.ClientComponents
 {
@@ -25,7 +26,7 @@ namespace Totality.Client.ClientComponents
     /// </summary>
     public partial class FinancePanel : UserControl, InPanel
     {
-        Dialog currentDialog;
+        private Dialog _currentDialog;
 
         public FinancePanel()
         {
@@ -40,19 +41,19 @@ namespace Totality.Client.ClientComponents
 
         private void createDialog<T>(Dialog dialog) where T : UIElement
         {
-            if (currentDialog == null)
+            if (_currentDialog == null)
             {
-                currentDialog = dialog;
-                canvas1.Children.Add((T)currentDialog);
-                Canvas.SetLeft((T)currentDialog, 295);
-                Canvas.SetTop((T)currentDialog, 68);
+                _currentDialog = dialog;
+                canvas1.Children.Add((T)_currentDialog);
+                Canvas.SetLeft((T)_currentDialog, 295);
+                Canvas.SetTop((T)_currentDialog, 68);
             }
         }
 
         public void receiveOrder(object sender, Order order)
         {
             canvas1.Children.Remove((UIElement)sender);
-            currentDialog = null;     
+            _currentDialog = null;     
         }
     }
 }

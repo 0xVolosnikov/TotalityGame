@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="Totality.Client.ClientComponents.SciencePanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Totality.Client.ClientComponents"
+             mc:Ignorable="d" Width="1200" Height="445">
+    <Canvas x:Name="canvas1" Width="1200" Height="445">
+        <Canvas.Background>
+            <ImageBrush ImageSource="Images/Military/militaryBack.jpg" TileMode="Tile" ViewportUnits="Absolute" Viewport="0 0 1680 1050"/>
+        </Canvas.Background>
+        <local:Button x:Name="PRObutton" Canvas.Left="94" Canvas.Top="69" Width="192" imgUp="Images/Military/MilPRO0.png" imgDown="Images/Military/MilPRO1.png" Height="224"/>
+        <Canvas Height="43" Canvas.Top="7" Width="1200">
+            <Canvas Height="39" Canvas.Top="2" Width="1200" Background="#A5900000">
+                <Label x:Name="label" Content="Министерство Обороны" Canvas.Left="427" Height="39" Width="346" Foreground="White" FontFamily="Haettenschweiler" FontSize="36" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" Canvas.Top="-2"/>
+            </Canvas>
+            <Canvas Height="2" Canvas.Top="41" Width="1200" Background="#77FFFFFF"/>
+            <Canvas Height="2" Width="1200" Background="#77FFFFFF"/>
+        </Canvas>
+        <local:Button x:Name="DefendButton" Canvas.Left="368" Canvas.Top="69" Width="192" imgUp="Images/Military/MilDef0.png" imgDown="Images/Military/MilDef1.png" Height="224"/>
+        <local:Button x:Name="RaidButton" Canvas.Left="635" Canvas.Top="69" Width="192" imgUp="Images/Military/MilRaid0.png" imgDown="Images/Military/MilRaid1.png" Height="224"/>
+        <local:Button x:Name="NukesButton" Canvas.Left="914" Canvas.Top="69" Width="192" imgUp="Images/Military/MilBut1.0.png" imgDown="Images/Military/MilBut1.1.png" Height="224" toolTipPicture="Images/ToolTips/NukesToolTip.jpg" toolTipDescription="&quot;Отсюда наша Родина диктует свою непреклоную волю остальному мировому сообществу.&quot;" toolTipCost=""/>
+        <local:Button x:Name="WarButton" Canvas.Left="94" Canvas.Top="318" Width="464" imgUp="Images/Military/MilButWar0.png" imgDown="Images/Military/MilButWar1.png" Height="70"/>
+        <Canvas Height="35" Canvas.Left="539" Canvas.Top="410" Width="122" Background="#D8000000" HorizontalAlignment="Center"/>
+        <local:Button x:Name="NukeStrikeButton" Canvas.Left="914" Canvas.Top="311" Width="192" imgUp="Images/Military/MilButNuke0.png" imgDown="Images/Military/MilButNuke1.png" Height="84" toolTipPicture="Images/ToolTips/nukeStrikeToolTip.jpg" toolTipDescription="Да! надерем им всем жопы! Fuck yeah!"/>
+        <local:Button x:Name="NukeCancelButton" Canvas.Left="840" Canvas.Top="323" Width="59" imgUp="Images/Military/MilButCancel0.png" imgDown="Images/Military/MilButCancel1.png" Height="59"/>
+        <local:Button x:Name="LVLupButton" Canvas.Left="622" Canvas.Top="415" Width="25" imgUp="Images/LvlBut0.png" imgDown="Images/LvlBut1.png" Height="25"/>
+        <local:Button x:Name="HelpButton" Canvas.Left="552" Canvas.Top="415" Width="25" imgUp="Images/LvlHelp0.png" imgDown="Images/LvlHelp1.png" Height="25"/>
+        <Label x:Name="LVLlabel" Content="5" Canvas.Left="584" Canvas.Top="410" Height="35" FontSize="25" FontWeight="Bold" FontFamily="Euphemia" Foreground="White" Padding="-1,0,0,0" Width="30" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+    </Canvas>
+</UserControl>

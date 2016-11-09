@@ -35,8 +35,15 @@
             <Totality.Client.ClientComponents:MinisteryButton x:Name="but10" Canvas.Left="965" Canvas.Top="511" imgDown="Images/but2.png" imgUp="Images/but1.png"/>
             <Image x:Name="image_Copy9" Height="100" Canvas.Left="1068" Canvas.Top="572" Width="100" Source="Images/line.png"/>
             <Totality.Client.ClientComponents:MinisteryButton x:Name="but11" Canvas.Left="1069" Canvas.Top="511" imgDown="Images/but2.png" imgUp="Images/but1.png"/>
-            <Totality.Client.ClientComponents:MilitaryPanel x:Name="militaryPanel" Canvas.Top="50" Height="445" Width="1200" Canvas.Left="1203"/>
-            <Totality.Client.ClientComponents:FinancePanel x:Name="financePanel" Canvas.Left="1203" Canvas.Top="50"/>
+            <Totality.Client.ClientComponents:MilitaryPanel x:Name="_militaryPanel" Canvas.Top="50" Height="445" Width="1200" Canvas.Left="1203"/>
+            <Totality.Client.ClientComponents:FinancePanel x:Name="_financePanel" Canvas.Left="1203" Canvas.Top="50"/>
+            <Totality.Client.ClientComponents:ForeignPanel x:Name="_foreignPanel" Canvas.Left="1203" Canvas.Top="50"/>
+            <Totality.Client.ClientComponents:IndustryPanel x:Name="_industryPanel" Canvas.Left="1203" Canvas.Top="50"/>
+            <Totality.Client.ClientComponents:SecurityPanel x:Name="_securityPanel" Canvas.Left="1203" Canvas.Top="50"/>
+            <Totality.Client.ClientComponents:PremierPanel x:Name="_premierPanel" Canvas.Left="1203" Canvas.Top="50"/>
+            <Totality.Client.ClientComponents:MediaPanel x:Name="_mediaPanel" Canvas.Left="1203" Canvas.Top="50"/>
+            <Totality.Client.ClientComponents:InnerPanel x:Name="_innerPanel" Canvas.Left="1203" Canvas.Top="50"/>
+            <Totality.Client.ClientComponents:SciencePanel x:Name="_sciencePanel" Canvas.Left="1203" Canvas.Top="50"/>
         </Canvas>
         <Totality.Client.ClientComponents:Header x:Name="_header" VerticalAlignment="Top" Margin="0,0,-1,0" Width="1200"/>
     </Grid>

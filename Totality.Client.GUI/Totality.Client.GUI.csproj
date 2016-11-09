@@ -148,6 +148,10 @@
       <Project>{ede8688d-a069-426c-8ccb-cde874209494}</Project>
       <Name>Totality.Client.ClientComponents</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Totality.CommonClasses\Totality.CommonClasses.csproj">
+      <Project>{2d0a4c97-8f53-4b07-b51c-d1cb3bbdc020}</Project>
+      <Name>Totality.CommonClasses</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

@@ -125,6 +125,27 @@
       <DependentUpon>FinancePanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="InPanel.cs" />
+    <Compile Include="Panels\IndustryPanel.xaml.cs">
+      <DependentUpon>IndustryPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\InnerPanel.xaml.cs">
+      <DependentUpon>InnerPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\ForeignPanel.xaml.cs">
+      <DependentUpon>ForeignPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\MediaPanel.xaml.cs">
+      <DependentUpon>MediaPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\SciencePanel.xaml.cs">
+      <DependentUpon>SciencePanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\PremierPanel.xaml.cs">
+      <DependentUpon>PremierPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\SecurityPanel.xaml.cs">
+      <DependentUpon>SecurityPanel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Panels\MilitaryPanel.xaml.cs">
       <DependentUpon>MilitaryPanel.xaml</DependentUpon>
     </Compile>
@@ -232,6 +253,34 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Panels\FinancePanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Panels\IndustryPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Panels\InnerPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Panels\ForeignPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Panels\MediaPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Panels\SciencePanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Panels\PremierPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Panels\SecurityPanel.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
