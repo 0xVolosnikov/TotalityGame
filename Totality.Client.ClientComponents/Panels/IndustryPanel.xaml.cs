@@ -25,6 +25,7 @@ namespace Totality.Client.ClientComponents
     public partial class IndustryPanel : UserControl, InPanel
     {
         Dialog currentDialog;
+        public OrdersTable Table;
 
         public IndustryPanel()
         {

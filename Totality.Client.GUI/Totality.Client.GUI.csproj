@@ -152,6 +152,10 @@
       <Project>{2d0a4c97-8f53-4b07-b51c-d1cb3bbdc020}</Project>
       <Name>Totality.CommonClasses</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Totality.Model\Totality.Model.csproj">
+      <Project>{277f5307-857b-46bb-8f51-63df2549bbe8}</Project>
+      <Name>Totality.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

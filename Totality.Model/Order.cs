@@ -11,9 +11,9 @@ namespace Totality.Model
     public class Order
     {
         [DataMember]
-        public string CountryName { get; }
+        public string CountryName { get; set; }
         [DataMember]
-        public string TargetCountryName { get; }
+        public string TargetCountryName { get; set; }
         [DataMember]
         public string TargetCountryName2 { get; set; }
         [DataMember]

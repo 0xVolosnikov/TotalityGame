@@ -25,6 +25,7 @@ namespace Totality.Client.ClientComponents
     public partial class MediaPanel : UserControl, InPanel
     {
         Dialog currentDialog;
+        public OrdersTable Table;
 
         public MediaPanel()
         {

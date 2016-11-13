@@ -53,9 +53,10 @@ namespace Totality.Client.ClientComponents.Panels
             var clear = new DoubleAnimation(0, TimeSpan.FromSeconds(1));
             //clear.AccelerationRatio = 0.4;
             //_canvas.Background.BeginAnimation(Brush.OpacityProperty, clear);
+            clear.Completed += Clear_Completed;
             BeginAnimation(UIElement.OpacityProperty, clear);
 
-            clear.Completed += Clear_Completed;
+
         }
 
         public void Video (Uri video)
@@ -76,6 +77,7 @@ namespace Totality.Client.ClientComponents.Panels
         public void Open()
         {
             StartSpinning();
+            _mediaElement.Play();
             this.Visibility = Visibility.Visible;
             //slide = new DoubleAnimation(28, TimeSpan.FromSeconds(0.5));
             //slide.AccelerationRatio = 0.4;

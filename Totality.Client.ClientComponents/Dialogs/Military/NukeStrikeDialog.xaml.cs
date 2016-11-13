@@ -21,7 +21,7 @@ namespace Totality.Client.ClientComponents.Dialogs.Military
     /// </summary>
     public partial class NukeStrikeDialog : UserControl, Dialog
     {
-        public delegate void ReceiveOrder(Object sender, Order order);
+        public delegate void ReceiveOrder(object sender, Order order, string text, long price);
         ReceiveOrder receiveOrder;
 
         public NukeStrikeDialog(ReceiveOrder receiveOrder )
@@ -33,16 +33,19 @@ namespace Totality.Client.ClientComponents.Dialogs.Military
         private void acceptButton_Click(object sender, RoutedEventArgs e)
         {
             //receiveOrder(this, new Order((int)Ministers.MinDef, "strike", new List<int>{ 0, 1 }));
-            canvas.Children.Add(new NukeStrikeCountDialog(receiveOrderFromChildren, new List<int> { 5 }));
+            canvas.Children.Add(new NukeStrikeCountDialog(receiveOrderFromChildren));
         }
 
         private void cancelButton_Click(object sender, RoutedEventArgs e)
         {
+
         }
 
         public void receiveOrderFromChildren(object sender, Order order)
         {
-            receiveOrder(this, order);
+            order.CountryName = "Test";
+            order.TargetCountryName = "Test2";
+            receiveOrder(this, order, "Ядерный удар", 0);
         }
     }
 }

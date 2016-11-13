@@ -25,6 +25,7 @@ namespace Totality.Client.ClientComponents
     public partial class PremierPanel : UserControl, InPanel
     {
         Dialog currentDialog;
+        public OrdersTable Table;
 
         public PremierPanel()
         {

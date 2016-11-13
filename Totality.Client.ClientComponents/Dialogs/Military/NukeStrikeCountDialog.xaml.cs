@@ -25,16 +25,15 @@ namespace Totality.Client.ClientComponents.Dialogs.Military
         ReceiveOrder receiveOrder;
         List<int> args;
 
-        public NukeStrikeCountDialog(ReceiveOrder receiveOrder, List<int> args )
+        public NukeStrikeCountDialog(ReceiveOrder receiveOrder)
         {
             this.receiveOrder = receiveOrder;
-            this.args = args;
             InitializeComponent();
         }
 
         private void acceptButton_Click(object sender, RoutedEventArgs e)
         {
-            args.Add((int)integerUpDown.Value);
+            receiveOrder(this, new Order("", "") { Count = (int)integerUpDown.Value });
         }
 
         private void cancelButton_Click(object sender, RoutedEventArgs e)

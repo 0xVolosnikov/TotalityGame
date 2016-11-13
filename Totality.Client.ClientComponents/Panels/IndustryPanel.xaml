@@ -5,27 +5,86 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Totality.Client.ClientComponents"
              mc:Ignorable="d" Width="1200" Height="445">
-    <Canvas x:Name="canvas1" Width="1200" Height="445">
+    <Canvas x:Name="canvas1" Width="1200" Height="445" Margin="0,2,0,-2">
         <Canvas.Background>
-            <ImageBrush ImageSource="Images/Military/militaryBack.jpg" TileMode="Tile" ViewportUnits="Absolute" Viewport="0 0 1680 1050"/>
+            <ImageBrush ImageSource="Images/Industry/background.jpg" />
         </Canvas.Background>
-        <local:Button x:Name="PRObutton" Canvas.Left="94" Canvas.Top="69" Width="192" imgUp="Images/Military/MilPRO0.png" imgDown="Images/Military/MilPRO1.png" Height="224"/>
-        <Canvas Height="43" Canvas.Top="7" Width="1200">
-            <Canvas Height="39" Canvas.Top="2" Width="1200" Background="#A5900000">
-                <Label x:Name="label" Content="Министерство Обороны" Canvas.Left="427" Height="39" Width="346" Foreground="White" FontFamily="Haettenschweiler" FontSize="36" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" Canvas.Top="-2"/>
+        <Canvas Height="43" Width="1200">
+            <Canvas Height="47" Canvas.Top="2" Width="1200" Background="#F2000000">
+                <Label x:Name="label" Content="Министерство промышленности" Canvas.Left="248" Height="39" Width="705" Foreground="White" FontFamily="Impact" FontSize="36" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" Canvas.Top="1"/>
             </Canvas>
-            <Canvas Height="2" Canvas.Top="41" Width="1200" Background="#77FFFFFF"/>
+            <Canvas Height="2" Canvas.Top="49" Width="1200" Background="#77FFFFFF"/>
             <Canvas Height="2" Width="1200" Background="#77FFFFFF"/>
         </Canvas>
-        <local:Button x:Name="DefendButton" Canvas.Left="368" Canvas.Top="69" Width="192" imgUp="Images/Military/MilDef0.png" imgDown="Images/Military/MilDef1.png" Height="224"/>
-        <local:Button x:Name="RaidButton" Canvas.Left="635" Canvas.Top="69" Width="192" imgUp="Images/Military/MilRaid0.png" imgDown="Images/Military/MilRaid1.png" Height="224"/>
-        <local:Button x:Name="NukesButton" Canvas.Left="914" Canvas.Top="69" Width="192" imgUp="Images/Military/MilBut1.0.png" imgDown="Images/Military/MilBut1.1.png" Height="224" toolTipPicture="Images/ToolTips/NukesToolTip.jpg" toolTipDescription="&quot;Отсюда наша Родина диктует свою непреклоную волю остальному мировому сообществу.&quot;" toolTipCost=""/>
-        <local:Button x:Name="WarButton" Canvas.Left="94" Canvas.Top="318" Width="464" imgUp="Images/Military/MilButWar0.png" imgDown="Images/Military/MilButWar1.png" Height="70"/>
-        <Canvas Height="35" Canvas.Left="539" Canvas.Top="410" Width="122" Background="#D8000000" HorizontalAlignment="Center"/>
-        <local:Button x:Name="NukeStrikeButton" Canvas.Left="914" Canvas.Top="311" Width="192" imgUp="Images/Military/MilButNuke0.png" imgDown="Images/Military/MilButNuke1.png" Height="84" toolTipPicture="Images/ToolTips/nukeStrikeToolTip.jpg" toolTipDescription="Да! надерем им всем жопы! Fuck yeah!"/>
-        <local:Button x:Name="NukeCancelButton" Canvas.Left="840" Canvas.Top="323" Width="59" imgUp="Images/Military/MilButCancel0.png" imgDown="Images/Military/MilButCancel1.png" Height="59"/>
-        <local:Button x:Name="LVLupButton" Canvas.Left="622" Canvas.Top="415" Width="25" imgUp="Images/LvlBut0.png" imgDown="Images/LvlBut1.png" Height="25"/>
-        <local:Button x:Name="HelpButton" Canvas.Left="552" Canvas.Top="415" Width="25" imgUp="Images/LvlHelp0.png" imgDown="Images/LvlHelp1.png" Height="25"/>
-        <Label x:Name="LVLlabel" Content="5" Canvas.Left="584" Canvas.Top="410" Height="35" FontSize="25" FontWeight="Bold" FontFamily="Euphemia" Foreground="White" Padding="-1,0,0,0" Width="30" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Canvas Height="336" Canvas.Left="10" Canvas.Top="76" Width="536" UseLayoutRounding="True">
+            <Canvas.Background>
+                <ImageBrush ImageSource="Images/Industry/IndustryResBack.png" Stretch="None"/>
+            </Canvas.Background>
+            <Canvas Height="62" Canvas.Left="95" Canvas.Top="105" Width="391">
+                <Canvas.Background>
+                    <ImageBrush Stretch="None" ImageSource="Images/Industry/resBack.png"/>
+                </Canvas.Background>
+                <Label x:Name="label3_Copy" Content="200" Canvas.Left="324" Canvas.Top="17" Width="63" Height="25" FontFamily="Impact" HorizontalContentAlignment="Center" FontSize="18" Padding="0" VerticalContentAlignment="Center"/>
+                <Image x:Name="image4_Copy" Height="41" Width="267" Source="Images/Industry/steelLine.png" Stretch="None" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Top="9" Canvas.Left="2"/>
+                <Button x:Name="button_Copy" Content="Button" Width="391" Height="62" Opacity="0" Cursor="Hand"/>
+            </Canvas>
+            <Canvas Height="62" Canvas.Left="95" Canvas.Top="30" Width="391" SnapsToDevicePixels="True" UseLayoutRounding="True">
+                <Canvas.Background>
+                    <ImageBrush Stretch="None" ImageSource="Images/Industry/resBack.png"/>
+                </Canvas.Background>
+                <Label x:Name="label3" Content="200" Canvas.Left="324" Canvas.Top="17" Width="63" Height="25" FontFamily="Impact" HorizontalContentAlignment="Center" FontSize="18" Padding="0" VerticalContentAlignment="Center"/>
+                <Image x:Name="image4" Height="41" Width="236" Source="Images/Industry/oilLine.png" Stretch="None" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Top="9" Canvas.Left="2"/>
+                <Button x:Name="button" Content="Button" Width="391" Height="62" Opacity="0" Cursor="Hand"/>
+            </Canvas>
+            <Canvas Height="62" Canvas.Left="95" Canvas.Top="182" Width="391">
+                <Canvas.Background>
+                    <ImageBrush Stretch="None" ImageSource="Images/Industry/resBack.png"/>
+                </Canvas.Background>
+                <Label x:Name="label3_Copy1" Content="200" Canvas.Left="324" Canvas.Top="17" Width="63" Height="25" FontFamily="Impact" HorizontalContentAlignment="Center" FontSize="18" Padding="0" VerticalContentAlignment="Center"/>
+                <Image x:Name="image4_Copy1" Height="41" Width="111" Source="Images/Industry/woodLine.png" Stretch="None" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Top="9" Canvas.Left="2"/>
+                <Button x:Name="button_Copy1" Content="Button" Width="391" Height="62" Opacity="0" Cursor="Hand"/>
+            </Canvas>
+            <Canvas Height="62" Canvas.Left="95" Canvas.Top="257" Width="391">
+                <Canvas.Background>
+                    <ImageBrush Stretch="None" ImageSource="Images/Industry/resBack.png"/>
+                </Canvas.Background>
+                <Label x:Name="label3_Copy2" Content="200" Canvas.Left="324" Canvas.Top="17" Width="63" Height="25" FontFamily="Impact" HorizontalContentAlignment="Center" FontSize="18" Padding="0" VerticalContentAlignment="Center"/>
+                <Image x:Name="image4_Copy2" Height="41" Width="300" Source="Images/Industry/agroLine.png" Stretch="None" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Top="9" Canvas.Left="2"/>
+                <Button x:Name="button_Copy2" Content="Button" Width="391" Height="62" Opacity="0" Cursor="Hand"/>
+            </Canvas>
+            <Label x:Name="label2" Content="50" Canvas.Left="237" Canvas.Top="238" FontFamily="Impact" FontSize="18"/>
+            <Label x:Name="label2_Copy" Content="50" Canvas.Left="138" Canvas.Top="159" FontFamily="Impact" FontSize="18"/>
+            <Label x:Name="label2_Copy1" Content="50" Canvas.Left="222" Canvas.Top="84" FontFamily="Impact" FontSize="18"/>
+            <Label x:Name="label2_Copy2" Content="50" Canvas.Left="201" Canvas.Top="7" FontFamily="Impact" FontSize="18"/>
+            <Image x:Name="image" Height="59" Canvas.Left="26" Canvas.Top="30" Width="69" Source="Images/Industry/oil.png" Stretch="None"/>
+            <Image x:Name="image1" Height="53" Canvas.Left="26" Canvas.Top="107" Width="64" Source="Images/Industry/steel.png" Stretch="None"/>
+            <Image x:Name="image2" Height="51" Canvas.Left="23" Canvas.Top="187" Width="64" Source="Images/Industry/wood.png" Stretch="None"/>
+            <Image x:Name="image3" Height="50" Canvas.Left="26" Canvas.Top="261" Width="64" Source="Images/Industry/agro.png" Stretch="None"/>
+        </Canvas>
+        <local:Button Canvas.Left="564" Canvas.Top="131" Width="210" Height="276" imgUp="Images/Industry/heavyIndustryButton.png" imgDown="Images/Industry/heavyIndustryButtonDown.png" Cursor="Hand" SnapsToDevicePixels="True"/>
+        <local:Button Canvas.Left="808" Canvas.Top="131" Width="210" Height="275" imgUp="Images/Industry/lightIndustryButton.png" imgDown="Images/Industry/lightIndustryButtonDown.png" Cursor="Hand" SnapsToDevicePixels="True"/>
+        <Canvas Height="52" Canvas.Left="564" Canvas.Top="79" Width="210" SnapsToDevicePixels="True">
+            <Canvas.Background>
+                <ImageBrush ImageSource="Images/Industry/heavyIndustryPowerBack.png" Stretch="None"/>
+            </Canvas.Background>
+            <Label x:Name="label4" Content="500" Canvas.Left="43" Canvas.Top="10" Height="34" Width="123" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Padding="0" FontSize="28" FontFamily="Haettenschweiler" Foreground="#FF4F4F4F"/>
+        </Canvas>
+        <Canvas Height="52" Canvas.Left="808" Canvas.Top="79" Width="210">
+            <Canvas.Background>
+                <ImageBrush ImageSource="Images/Industry/lightIndustryPowerBack.png" Stretch="None"/>
+            </Canvas.Background>
+            <Label x:Name="label4_Copy" Content="500" Canvas.Left="43" Canvas.Top="10" Height="34" Width="123" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Padding="0" FontSize="28" FontFamily="Haettenschweiler" Foreground="#FF32514B" SnapsToDevicePixels="True"/>
+        </Canvas>
+        <Canvas Height="281" Canvas.Left="1056" Canvas.Top="128" Width="100">
+            <Canvas.Background>
+                <ImageBrush ImageSource="Images/Industry/ecoDisplay.png" Stretch="None"/>
+            </Canvas.Background>
+        </Canvas>
+        <Canvas Height="55" Canvas.Left="1057" Canvas.Top="78" Width="100" SnapsToDevicePixels="True">
+            <Canvas.Background>
+                <ImageBrush ImageSource="Images/Industry/ecoBack.png" Stretch="None"/>
+            </Canvas.Background>
+            <Label x:Name="label1" Content="ECO" Canvas.Left="26" Canvas.Top="10" Foreground="#FF248300" FontFamily="Impact" FontSize="24"/>
+        </Canvas>
     </Canvas>
 </UserControl>

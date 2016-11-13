@@ -21,7 +21,7 @@ namespace Totality.Client.ClientComponents.Dialogs.Military
     /// </summary>
     public partial class NukesCountDialog : UserControl, Dialog
     {
-        public delegate void ReceiveOrder(Object sender, Order order);
+        public delegate void ReceiveOrder(object sender, Order order, string text, long price);
         ReceiveOrder receiveOrder;
 
         public NukesCountDialog(ReceiveOrder receiveOrder)

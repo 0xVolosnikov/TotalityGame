@@ -27,6 +27,7 @@ namespace Totality.Client.ClientComponents
     public partial class FinancePanel : UserControl, InPanel
     {
         private Dialog _currentDialog;
+        public OrdersTable Table;
 
         public FinancePanel()
         {

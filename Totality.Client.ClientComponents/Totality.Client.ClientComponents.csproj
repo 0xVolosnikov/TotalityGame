@@ -160,8 +160,8 @@
       <DependentUpon>MinisteryButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="OrderRecord.cs" />
-    <Compile Include="ordersTable.xaml.cs">
-      <DependentUpon>ordersTable.xaml</DependentUpon>
+    <Compile Include="OrdersTable.xaml.cs">
+      <DependentUpon>OrdersTable.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -300,7 +300,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ordersTable.xaml">
+    <Page Include="OrdersTable.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -456,6 +456,25 @@
   <ItemGroup>
     <Resource Include="Panels\Images\TotalityText2.png" />
     <Resource Include="Panels\Images\TotalityText.png" />
+    <Resource Include="Panels\Images\Industry\background.jpg" />
+    <Resource Include="Panels\Images\Industry\IndustryResBack.png" />
+    <Resource Include="Panels\Images\Industry\heavyIndustryButton.png" />
+    <Resource Include="Panels\Images\Industry\lightIndustryButton.png" />
+    <Resource Include="Panels\Images\Industry\heavyIndustryPowerBack.png" />
+    <Resource Include="Panels\Images\Industry\lightIndustryPowerBack.png" />
+    <Resource Include="Panels\Images\Industry\ecoDisplay.png" />
+    <Resource Include="Panels\Images\Industry\ecoBack.png" />
+    <Resource Include="Panels\Images\Industry\heavyIndustryButtonDown.png" />
+    <Resource Include="Panels\Images\Industry\lightIndustryButtonDown.png" />
+    <Resource Include="Panels\Images\Industry\resBack.png" />
+    <Resource Include="Panels\Images\Industry\oil.png" />
+    <Resource Include="Panels\Images\Industry\steel.png" />
+    <Resource Include="Panels\Images\Industry\wood.png" />
+    <Resource Include="Panels\Images\Industry\agro.png" />
+    <Resource Include="Panels\Images\Industry\oilLine.png" />
+    <Resource Include="Panels\Images\Industry\steelLine.png" />
+    <Resource Include="Panels\Images\Industry\woodLine.png" />
+    <Resource Include="Panels\Images\Industry\agroLine.png" />
     <Content Include="video2.mp4">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

@@ -48,15 +48,15 @@ namespace Totality.Client.GUI
             InitializeComponent();
             setAnims();
             this.MouseWheel += MainWindow_MouseWheel;
-            this.dataGrid1.PreviewMouseWheel += dataGrid1_PreviewMouseWheel;
-            this.dataGrid1.MouseWheel += dataGrid1_MouseWheel;
-            currentPanel = dataGrid1;
+            _ordersTable.PreviewMouseWheel += dataGrid1_PreviewMouseWheel;
+            _ordersTable.MouseWheel += dataGrid1_MouseWheel;
+            currentPanel = _ordersTable;
             for (int i = 1; i <= 11; i++)
             buttons.Add(FindName("but" + i) as MinisteryButton);
             foreach (MinisteryButton but in buttons)
                 but.connectToButtons(buttons);
 
-            buttons[0].MouseDown += (object sender, MouseButtonEventArgs e) => changePanel(dataGrid1);
+            buttons[0].MouseDown += (object sender, MouseButtonEventArgs e) => changePanel(_ordersTable);
             buttons[1].MouseDown += (object sender, MouseButtonEventArgs e) => changePanel(_industryPanel);
             buttons[2].MouseDown += (object sender, MouseButtonEventArgs e) => changePanel(_financePanel);
             buttons[3].MouseDown += (object sender, MouseButtonEventArgs e) => changePanel(_militaryPanel);
@@ -67,9 +67,19 @@ namespace Totality.Client.GUI
             buttons[8].MouseDown += (object sender, MouseButtonEventArgs e) => changePanel(_sciencePanel);
             buttons[9].MouseDown += (object sender, MouseButtonEventArgs e) => changePanel(_premierPanel);
 
+            _industryPanel.Table = _ordersTable;
+            _financePanel.Table = _ordersTable;
+            _militaryPanel.Table = _ordersTable;
+            _foreignPanel.Table = _ordersTable;
+            _mediaPanel.Table = _ordersTable;
+            _innerPanel.Table = _ordersTable;
+            _securityPanel.Table = _ordersTable;
+            _sciencePanel.Table = _ordersTable;
+            _premierPanel.Table = _ordersTable;
+
             _connectionPanel = new ConnectionPanel();
             _connectionPanel.Video(new Uri(String.Format(@"{0}\video2.mp4", AppDomain.CurrentDomain.BaseDirectory, "turnoff"), UriKind.Absolute));
-            //_connectionPanel.
+
             _grid.Children.Add(_connectionPanel);
             _connectionPanel.NameReceived += _connectionPanel_NameReceived;
             _client = new ReferenceToServer.TransmitterServiceClient(new System.ServiceModel.InstanceContext(_servCallbackHandler));
@@ -152,23 +162,23 @@ namespace Totality.Client.GUI
 
         private void MainWindow_MouseWheel(object sender, MouseWheelEventArgs e)
         {
-            Canvas.SetTop(this.dataGrid1, Canvas.GetTop(this.dataGrid1) + e.Delta*0.1);
+            Canvas.SetTop(_ordersTable, Canvas.GetTop(_ordersTable) + e.Delta*0.1);
         }
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            dataGrid1.addOrder(new OrderRecord("тест", "2000"));
+            _ordersTable.addOrder(new OrderRecord("тест", "2000"));
             
         }
 
         private void dataGrid1_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
         {
-            ((ordersTable)sender).CaptureMouse();
+            ((OrdersTable)sender).CaptureMouse();
         }
 
         private void dataGrid1_MouseWheel(object sender, MouseWheelEventArgs e)
         {
-            ((ordersTable)sender).ReleaseMouseCapture();
+            ((OrdersTable)sender).ReleaseMouseCapture();
         }
     }
 }

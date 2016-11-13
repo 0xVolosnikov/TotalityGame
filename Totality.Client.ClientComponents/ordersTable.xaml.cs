@@ -20,12 +20,12 @@ namespace Totality.Client.ClientComponents
     /// <summary>
     /// Логика взаимодействия для ordersTable.xaml
     /// </summary>
-    public partial class ordersTable : UserControl, InPanel
+    public partial class OrdersTable : UserControl, InPanel
     {
         private ObservableCollection<OrderRecord> orderRecords = new ObservableCollection<OrderRecord>();
         public int startingLines { get; set; }
 
-        public ordersTable()
+        public OrdersTable()
         {
             InitializeComponent();
             this.Loaded += OrdersTable_Loaded;
@@ -53,7 +53,7 @@ namespace Totality.Client.ClientComponents
         public void addOrder(OrderRecord newRecord)
         {
             orderRecords.Add(newRecord);
-            if (newRecord.text != "")
+            if (newRecord.Text != "")
             {
                 reorginizeList();
                 if (orderRecords.Count > startingLines)
@@ -69,7 +69,7 @@ namespace Totality.Client.ClientComponents
             orderRecords.Remove(dataGrid.CurrentItem as OrderRecord);
             if (orderRecords.Count < startingLines)
             {
-                orderRecords.Add(new OrderRecord(""));
+                orderRecords.Add(new OrderRecord(null, ""));
             }
                 reorginizeList();          
         }
@@ -84,10 +84,10 @@ namespace Totality.Client.ClientComponents
         {
             for (int i = orderRecords.Count - 1; i > 0; i--)
             {
-                if( !orderRecords[i].text.Equals("") )
+                if( !orderRecords[i].Text.Equals("") )
                 {
                     int k = i;
-                    while (k > 0 && orderRecords[k-1].text.Equals("")){ k--; }
+                    while (k > 0 && orderRecords[k-1].Text.Equals("")){ k--; }
                     if (i != k)
                     {
                         orderRecords.RemoveAt(k);
