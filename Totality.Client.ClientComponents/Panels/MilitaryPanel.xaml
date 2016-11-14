@@ -9,23 +9,74 @@
         <Canvas.Background>
             <ImageBrush ImageSource="Images/Military/militaryBack.jpg" TileMode="Tile" ViewportUnits="Absolute" Viewport="0 0 1680 1050"/>
         </Canvas.Background>
-        <local:Button x:Name="PRObutton" Canvas.Left="94" Canvas.Top="69" Width="192" imgUp="Images/Military/MilPRO0.png" imgDown="Images/Military/MilPRO1.png" Height="224"/>
-        <Canvas Height="43" Canvas.Top="7" Width="1200">
-            <Canvas Height="39" Canvas.Top="2" Width="1200" Background="#A5900000">
+        <Canvas Height="6" Canvas.Left="39" Canvas.Top="359" Width="659" Background="#FF830000"/>
+        <Canvas Height="43" Width="1200">
+            <Canvas.Effect>
+                <DropShadowEffect/>
+            </Canvas.Effect>
+            <Canvas Height="39" Width="1200" Background="#A5900000" Canvas.Top="2">
+                <Canvas.Effect>
+                    <DropShadowEffect Direction="270"/>
+                </Canvas.Effect>
                 <Label x:Name="label" Content="Министерство Обороны" Canvas.Left="427" Height="39" Width="346" Foreground="White" FontFamily="Haettenschweiler" FontSize="36" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" Canvas.Top="-2"/>
             </Canvas>
-            <Canvas Height="2" Canvas.Top="41" Width="1200" Background="#77FFFFFF"/>
+            <Canvas Height="2" Canvas.Top="41" Width="1200" Background="#77FFFFFF">
+                <Canvas.Effect>
+                    <DropShadowEffect/>
+                </Canvas.Effect>
+            </Canvas>
             <Canvas Height="2" Width="1200" Background="#77FFFFFF"/>
         </Canvas>
-        <local:Button x:Name="DefendButton" Canvas.Left="368" Canvas.Top="69" Width="192" imgUp="Images/Military/MilDef0.png" imgDown="Images/Military/MilDef1.png" Height="224"/>
-        <local:Button x:Name="RaidButton" Canvas.Left="635" Canvas.Top="69" Width="192" imgUp="Images/Military/MilRaid0.png" imgDown="Images/Military/MilRaid1.png" Height="224"/>
-        <local:Button x:Name="NukesButton" Canvas.Left="914" Canvas.Top="69" Width="192" imgUp="Images/Military/MilBut1.0.png" imgDown="Images/Military/MilBut1.1.png" Height="224" toolTipPicture="Images/ToolTips/NukesToolTip.jpg" toolTipDescription="&quot;Отсюда наша Родина диктует свою непреклоную волю остальному мировому сообществу.&quot;" toolTipCost=""/>
-        <local:Button x:Name="WarButton" Canvas.Left="94" Canvas.Top="318" Width="464" imgUp="Images/Military/MilButWar0.png" imgDown="Images/Military/MilButWar1.png" Height="70"/>
-        <Canvas Height="35" Canvas.Left="539" Canvas.Top="410" Width="122" Background="#D8000000" HorizontalAlignment="Center"/>
-        <local:Button x:Name="NukeStrikeButton" Canvas.Left="914" Canvas.Top="311" Width="192" imgUp="Images/Military/MilButNuke0.png" imgDown="Images/Military/MilButNuke1.png" Height="84" toolTipPicture="Images/ToolTips/nukeStrikeToolTip.jpg" toolTipDescription="Да! надерем им всем жопы! Fuck yeah!"/>
-        <local:Button x:Name="NukeCancelButton" Canvas.Left="840" Canvas.Top="323" Width="59" imgUp="Images/Military/MilButCancel0.png" imgDown="Images/Military/MilButCancel1.png" Height="59"/>
-        <local:Button x:Name="LVLupButton" Canvas.Left="622" Canvas.Top="415" Width="25" imgUp="Images/LvlBut0.png" imgDown="Images/LvlBut1.png" Height="25"/>
-        <local:Button x:Name="HelpButton" Canvas.Left="552" Canvas.Top="415" Width="25" imgUp="Images/LvlHelp0.png" imgDown="Images/LvlHelp1.png" Height="25"/>
-        <Label x:Name="LVLlabel" Content="5" Canvas.Left="584" Canvas.Top="410" Height="35" FontSize="25" FontWeight="Bold" FontFamily="Euphemia" Foreground="White" Padding="-1,0,0,0" Width="30" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <local:Button x:Name="NukesButton" Canvas.Left="958" Canvas.Top="69" Width="192" imgUp="/Totality.Client.ClientComponents;component/Images/Military/NukesButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Military/NukesButtonDown.png" Height="224" toolTipPicture="Images/ToolTips/NukesToolTip.jpg" toolTipDescription="&quot;Отсюда наша Родина диктует свою непреклоную волю остальному мировому сообществу.&quot;" toolTipCost="" Cursor="Hand">
+            <local:Button.Effect>
+                <DropShadowEffect Opacity="0.7" Direction="270"/>
+            </local:Button.Effect>
+        </local:Button>
+        <local:Button x:Name="NukeStrikeButton" Canvas.Left="958" Canvas.Top="311" Width="192" imgUp="Images/Military/MilButNuke0.png" imgDown="Images/Military/MilButNuke1.png" Height="84" toolTipPicture="Images/ToolTips/nukeStrikeToolTip.jpg" toolTipDescription="Да! надерем им всем жопы! Fuck yeah!" Cursor="Hand"/>
+        <local:Button x:Name="NukesButton_Copy" Canvas.Left="734" Canvas.Top="69" Width="192" imgUp="/Totality.Client.ClientComponents;component/Images/Military/UranusButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Military/UranusButtonDown.png" Height="224" toolTipPicture="Images/ToolTips/NukesToolTip.jpg" toolTipDescription="&quot;Отсюда наша Родина диктует свою непреклоную волю остальному мировому сообществу.&quot;" toolTipCost="" UseLayoutRounding="True" SnapsToDevicePixels="True" Cursor="Hand">
+            <local:Button.Effect>
+                <DropShadowEffect Opacity="0.7" Direction="270"/>
+            </local:Button.Effect>
+        </local:Button>
+        <Canvas Height="84" Canvas.Left="734" Canvas.Top="311" Width="192" SnapsToDevicePixels="True">
+            <Canvas.Effect>
+                <DropShadowEffect Direction="270"/>
+            </Canvas.Effect>
+            <Canvas.Background>
+                <ImageBrush ImageSource="/Totality.Client.ClientComponents;component/Images/Military/UranusBack.png" Stretch="None"/>
+            </Canvas.Background>
+            <Label x:Name="label1" Content="500" Canvas.Left="43" Canvas.Top="19" Height="46" Width="106" VerticalAlignment="Center" HorizontalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Padding="0" Foreground="#FF2DF900" FontFamily="Impact" FontSize="30"/>
+        </Canvas>
+        <local:Button x:Name="NukesButton_Copy1" Canvas.Left="506" Canvas.Top="69" Width="192" imgUp="/Totality.Client.ClientComponents;component/Images/Military/MissilesButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Military/MissilesButtonDown.png" Height="224" toolTipPicture="Images/ToolTips/NukesToolTip.jpg" toolTipDescription="&quot;Отсюда наша Родина диктует свою непреклоную волю остальному мировому сообществу.&quot;" toolTipCost="" Cursor="Hand">
+            <local:Button.Effect>
+                <DropShadowEffect Opacity="0.7" Direction="270"/>
+            </local:Button.Effect>
+        </local:Button>
+        <local:Button x:Name="NukesButton_Copy2" Canvas.Left="271" Canvas.Top="69" Width="192" imgUp="/Totality.Client.ClientComponents;component/Images/Military/MobilizeButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Military/MobilizeButtonDown.png" Height="224" toolTipPicture="Images/ToolTips/NukesToolTip.jpg" toolTipDescription="&quot;Отсюда наша Родина диктует свою непреклоную волю остальному мировому сообществу.&quot;" toolTipCost="" Cursor="Hand">
+            <local:Button.Effect>
+                <DropShadowEffect Opacity="0.7" Direction="270"/>
+            </local:Button.Effect>
+        </local:Button>
+        <local:Button x:Name="NukesButton_Copy3" Canvas.Left="39" Canvas.Top="69" Width="192" imgUp="/Totality.Client.ClientComponents;component/Images/Military/WarButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Military/WarButtonDown.png" Height="224" toolTipPicture="Images/ToolTips/NukesToolTip.jpg" toolTipDescription="&quot;Отсюда наша Родина диктует свою непреклоную волю остальному мировому сообществу.&quot;" toolTipCost="" Cursor="Hand">
+            <local:Button.Effect>
+                <DropShadowEffect Opacity="0.7" Direction="270"/>
+            </local:Button.Effect>
+        </local:Button>
+        <Canvas Height="6" Canvas.Left="39" Canvas.Top="345" Width="659" Background="#FF830000"/>
+        <Image x:Name="image" Height="51" Canvas.Left="108" Canvas.Top="326" Width="54" Source="/Totality.Client.ClientComponents;component/Images/Interface/star.png" Stretch="None">
+            <Image.Effect>
+                <DropShadowEffect BlurRadius="2" ShadowDepth="1" Opacity="0.6"/>
+            </Image.Effect>
+        </Image>
+        <Image x:Name="image_Copy" Height="47" Canvas.Left="342" Canvas.Top="326" Width="50" Source="/Totality.Client.ClientComponents;component/Images/Interface/star.png" Stretch="None">
+            <Image.Effect>
+                <DropShadowEffect ShadowDepth="1" BlurRadius="2" Opacity="0.6"/>
+            </Image.Effect>
+        </Image>
+        <Image x:Name="image_Copy1" Height="47" Canvas.Left="578" Canvas.Top="326" Width="50" Source="/Totality.Client.ClientComponents;component/Images/Interface/star.png" Stretch="None">
+            <Image.Effect>
+                <DropShadowEffect ShadowDepth="1" BlurRadius="2" Opacity="0.6"/>
+            </Image.Effect>
+        </Image>
     </Canvas>
 </UserControl>

@@ -30,6 +30,7 @@ namespace Totality.Client.ClientComponents
         public MilitaryPanel()
         {
             InitializeComponent();
+            /*
             this.NukeStrikeButton.click += () => createDialog<NukeStrikeDialog>(new NukeStrikeDialog(receiveOrder));
             this.WarButton.click += () => createDialog<WarDialog>(new WarDialog(receiveOrder));
             this.DefendButton.click += () => createDialog<DefCountDialog>(new DefCountDialog(receiveOrder));
@@ -37,6 +38,7 @@ namespace Totality.Client.ClientComponents
             this.NukeCancelButton.click += () => createDialog<CancelDialog>(new CancelDialog(receiveOrder));
             this.NukesButton.click += () => createDialog<NukesCountDialog>(new NukesCountDialog(receiveOrder));
             this.PRObutton.click += () => createDialog<PROcountDialog>(new PROcountDialog(receiveOrder));
+            */
         }
 
         private void createDialog<T>(Dialog dialog) where T : UIElement

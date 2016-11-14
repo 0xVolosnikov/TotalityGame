@@ -12,7 +12,6 @@
             <ImageBrush ImageSource="Images/bgtexture.jpg" TileMode="Tile" ViewportUnits="Absolute" Viewport="0 0 500 300" Stretch="None"/>
         </Grid.Background>
         <Canvas x:Name="canvas1" HorizontalAlignment="Left" Height="672" VerticalAlignment="Top" Width="1198">
-            <Totality.Client.ClientComponents:OrdersTable x:Name="_ordersTable" HorizontalAlignment="Left" VerticalAlignment="Top" Height="445" Width="1198" Canvas.Top="50" startingLines="14" Canvas.Left="0" />
             <Image x:Name="image" Height="100" Canvas.Left="28" Canvas.Top="572" Width="100" Source="Images/line.png"/>
             <Totality.Client.ClientComponents:MinisteryButton x:Name="but1" Canvas.Left="29" Canvas.Top="511" imgDown="Images/but2.png" imgUp="Images/but1.png"/>
             <Image x:Name="image_Copy" Height="100" Canvas.Left="132" Canvas.Top="572" Width="100" Source="Images/line.png"/>
@@ -44,6 +43,7 @@
             <Totality.Client.ClientComponents:MediaPanel x:Name="_mediaPanel" Canvas.Left="1203" Canvas.Top="50"/>
             <Totality.Client.ClientComponents:InnerPanel x:Name="_innerPanel" Canvas.Left="1203" Canvas.Top="50"/>
             <Totality.Client.ClientComponents:SciencePanel x:Name="_sciencePanel" Canvas.Left="1203" Canvas.Top="50"/>
+            <Totality.Client.ClientComponents:OrdersTable x:Name="_ordersTable" HorizontalAlignment="Left" VerticalAlignment="Top" Height="445" Width="1198" Canvas.Top="50" startingLines="14" Canvas.Left="0" />
         </Canvas>
         <Totality.Client.ClientComponents:Header x:Name="_header" VerticalAlignment="Top" Margin="0,0,-1,0" Width="1200"/>
     </Grid>

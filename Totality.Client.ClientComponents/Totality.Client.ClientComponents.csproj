@@ -395,8 +395,6 @@
     <Resource Include="Images\Interface\wheel.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Images\Finance\" />
-    <Folder Include="Images\Military\" />
     <Folder Include="Images\MinisteryButtons\" />
   </ItemGroup>
   <ItemGroup>
@@ -475,6 +473,49 @@
     <Resource Include="Panels\Images\Industry\steelLine.png" />
     <Resource Include="Panels\Images\Industry\woodLine.png" />
     <Resource Include="Panels\Images\Industry\agroLine.png" />
+    <Resource Include="Images\Media\NewsButton.png" />
+    <Resource Include="Images\Media\NewsButtonDown.png" />
+    <Resource Include="Images\Media\PropButton.png" />
+    <Resource Include="Images\Media\PropButtonDown.png" />
+    <Resource Include="Images\Media\mediaBackground.png" />
+    <Resource Include="Images\Finance\CurrencyButton.png" />
+    <Resource Include="Images\Finance\CurrencyButtonDown.png" />
+    <Resource Include="Images\Finance\InterventionButton.png" />
+    <Resource Include="Images\Finance\InterventionDown.png" />
+    <Resource Include="Images\Finance\TaxesButton.png" />
+    <Resource Include="Images\Finance\TaxesButtonDown.png" />
+    <Resource Include="Images\Military\NukesButton.png" />
+    <Resource Include="Images\Military\UranusButton.png" />
+    <Resource Include="Images\Military\UranusBack.png" />
+    <Resource Include="Images\Military\NukesButtonDown.png" />
+    <Resource Include="Images\Military\UranusButtonDown.png" />
+    <Resource Include="Images\Military\MissilesButton.png" />
+    <Resource Include="Images\Military\MissilesButtonDown.png" />
+    <Resource Include="Images\Military\MobilizeButton.png" />
+    <Resource Include="Images\Military\MobilizeButtonDown.png" />
+    <Resource Include="Images\Military\WarButton.png" />
+    <Resource Include="Images\Military\WarButtonDown.png" />
+    <Resource Include="Images\Science\ScienceBackground.png" />
+    <Resource Include="Images\Inner\InnerBackground.jpg" />
+    <Resource Include="Images\Inner\InnerLvlUpButton.png" />
+    <Resource Include="Images\Inner\InnerLvlUpButtonDown.png" />
+    <Resource Include="Images\Inner\RepressionsButton.png" />
+    <Resource Include="Images\Inner\RepressionsButtonDown.png" />
+    <Resource Include="Images\Inner\SuppressButton.png" />
+    <Resource Include="Images\Inner\SuppressButtonDown.png" />
+    <Resource Include="Images\Science\ScienceExtractButton.png" />
+    <Resource Include="Images\Science\ScienceExtractButtonDown.png" />
+    <Resource Include="Images\Science\ScienceHeavyButton.png" />
+    <Resource Include="Images\Science\ScienceHeavyButtonDown.png" />
+    <Resource Include="Images\Science\ScienceLightButton.png" />
+    <Resource Include="Images\Science\ScienceLightButtonDown.png" />
+    <Resource Include="Images\Science\ScienceMilitaryButton.png" />
+    <Resource Include="Images\Science\ScienceMilitaryButtonDown.png" />
+    <Resource Include="Images\Science\ScienceButtonBack.png" />
+    <Resource Include="Images\Science\ScienceExtractLine.png" />
+    <Resource Include="Images\Science\ScienceHeavyLine.png" />
+    <Resource Include="Images\Science\ScienceLightLine.png" />
+    <Resource Include="Images\Science\ScienceMilitaryLine.png" />
     <Content Include="video2.mp4">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
