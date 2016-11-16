@@ -23,7 +23,6 @@ namespace Totality.Client.ClientComponents.Dialogs.Military
     {
         public delegate void ReceiveOrder(Object sender, Order order);
         ReceiveOrder receiveOrder;
-        List<int> args;
 
         public NukeStrikeCountDialog(ReceiveOrder receiveOrder)
         {
@@ -38,6 +37,7 @@ namespace Totality.Client.ClientComponents.Dialogs.Military
 
         private void cancelButton_Click(object sender, RoutedEventArgs e)
         {
+            receiveOrder(this, null);
         }
     }
 }

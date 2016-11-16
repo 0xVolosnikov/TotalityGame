@@ -34,6 +34,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -79,23 +81,38 @@
     <Compile Include="ButtonToolTip.xaml.cs">
       <DependentUpon>ButtonToolTip.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\Inner\LvlupDialog.xaml.cs">
+      <DependentUpon>LvlupDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Inner\SuppressDialog.xaml.cs">
+      <DependentUpon>SuppressDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Inner\RepressionsDialog.xaml.cs">
+      <DependentUpon>RepressionsDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Military\UranusDialog.xaml.cs">
+      <DependentUpon>UranusDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Military\NukesCountDialog - Копировать.xaml.cs">
+      <DependentUpon>MobilizeDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Panels\ConnectionPanel.xaml.cs">
       <DependentUpon>ConnectionPanel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\Common\HelpDialog.xaml.cs">
-      <DependentUpon>HelpDialog.xaml</DependentUpon>
+    <Compile Include="Dialogs\Industry\ImproveDialog.xaml.cs">
+      <DependentUpon>ImproveDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\Common\LvlUpDialog.xaml.cs">
+    <Compile Include="Dialogs\Industry\LvlUpDialog.xaml.cs">
       <DependentUpon>LvlUpDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\Finance\ExchangeDialog.xaml.cs">
-      <DependentUpon>ExchangeDialog.xaml</DependentUpon>
+    <Compile Include="Dialogs\Finance\CurrencyDialog.xaml.cs">
+      <DependentUpon>CurrencyDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\Finance\TransDialog.xaml.cs">
-      <DependentUpon>TransDialog.xaml</DependentUpon>
+    <Compile Include="Dialogs\Finance\TaxesDialog.xaml.cs">
+      <DependentUpon>TaxesDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\Finance\InvestDialog.xaml.cs">
-      <DependentUpon>InvestDialog.xaml</DependentUpon>
+    <Compile Include="Dialogs\Finance\InterventionDialog.xaml.cs">
+      <DependentUpon>InterventionDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\Military\PROcountDialog.xaml.cs">
       <DependentUpon>PROcountDialog.xaml</DependentUpon>
@@ -104,17 +121,8 @@
       <DependentUpon>NukesCountDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\Dialog.cs" />
-    <Compile Include="Dialogs\Military\DefCountDialog.xaml.cs">
-      <DependentUpon>DefCountDialog.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Dialogs\Military\NukeStrikeCountDialog.xaml.cs">
       <DependentUpon>NukeStrikeCountDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\Military\CancelDialog.xaml.cs">
-      <DependentUpon>CancelDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\Military\RaidDialog.xaml.cs">
-      <DependentUpon>RaidDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\Military\WarDialog.xaml.cs">
       <DependentUpon>WarDialog.xaml</DependentUpon>
@@ -183,6 +191,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -196,27 +205,47 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Dialogs\Inner\LvlupDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dialogs\Inner\SuppressDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dialogs\Inner\RepressionsDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dialogs\Military\UranusDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dialogs\Military\MobilizeDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Panels\ConnectionPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Dialogs\Common\HelpDialog.xaml">
+    <Page Include="Dialogs\Industry\ImproveDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Dialogs\Common\LvlUpDialog.xaml">
+    <Page Include="Dialogs\Industry\LvlUpDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Dialogs\Finance\ExchangeDialog.xaml">
+    <Page Include="Dialogs\Finance\CurrencyDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Dialogs\Finance\TransDialog.xaml">
+    <Page Include="Dialogs\Finance\TaxesDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Dialogs\Finance\InvestDialog.xaml">
+    <Page Include="Dialogs\Finance\InterventionDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -228,19 +257,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Dialogs\Military\DefCountDialog.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Dialogs\Military\NukeStrikeCountDialog.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Dialogs\Military\CancelDialog.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Dialogs\Military\RaidDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -516,6 +533,30 @@
     <Resource Include="Images\Science\ScienceHeavyLine.png" />
     <Resource Include="Images\Science\ScienceLightLine.png" />
     <Resource Include="Images\Science\ScienceMilitaryLine.png" />
+    <Resource Include="Images\Security\SecurityBackground.png" />
+    <Resource Include="Images\Security\SecurityShadowingButton.png" />
+    <Resource Include="Images\Security\SecurityShadowingButtonDown.png" />
+    <Resource Include="Images\Security\SecurityCounterspyButton.png" />
+    <Resource Include="Images\Security\SecurityCounterspyButtonDown.png" />
+    <Resource Include="Images\Security\SecurityPurgeButton.png" />
+    <Resource Include="Images\Security\SecurityPurgeButtonDown.png" />
+    <Resource Include="Images\Security\SecurityNetsButton.png" />
+    <Resource Include="Images\Security\SecurityNetsButtonDown.png" />
+    <Resource Include="Images\Foreign\ForeignBackground.png" />
+    <Resource Include="Images\Foreign\ForeignInButton.png" />
+    <Resource Include="Images\Foreign\ForeignInButtonDown.png" />
+    <Resource Include="Images\Foreign\ForeignMenuBack.png" />
+    <Resource Include="Images\Foreign\ForeignSendButton.png" />
+    <Resource Include="Images\Foreign\ForeignSendButtonDown.png" />
+    <Resource Include="Images\Premier\PremierBackground.jpg" />
+    <Resource Include="Images\Premier\PremierBackground2.png" />
+    <Resource Include="Images\Premier\PremierAlertButton.png" />
+    <Resource Include="Images\Premier\PremierAlertButtonDown.png" />
+    <Resource Include="Images\Premier\PremierLvlupButton.png" />
+    <Resource Include="Images\Premier\PremierLvlupButtonDown.png" />
+    <Resource Include="Images\Premier\PremierReorganizeButton.png" />
+    <Resource Include="Images\Premier\PremierReorganizeButtonDown.png" />
+    <Resource Include="Images\Inner\PoliceBadge.png" />
     <Content Include="video2.mp4">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

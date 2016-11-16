@@ -10,25 +10,33 @@
             <ImageBrush ImageSource="Images/Finance/dollarBack.jpg" Stretch="None"/>
         </Canvas.Background>
         <Canvas Height="43" Canvas.Top="7" Width="1200">
-            <Canvas Height="58" Width="1200" Background="#FF21201B" Canvas.Top="-7">
-                <Label x:Name="label" Content="Министерство Финансов" Canvas.Left="427" Height="39" Width="346" Foreground="White" FontFamily="Haettenschweiler" FontSize="36" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" Canvas.Top="8"/>
+            <Canvas Height="45" Width="1200" Background="#FF21201B" Canvas.Top="-7">
+                <Label x:Name="label" Content="Министерство Финансов" Canvas.Left="427" Height="39" Width="346" Foreground="White" FontFamily="Haettenschweiler" FontSize="36" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" Canvas.Top="2"/>
             </Canvas>
         </Canvas>
-        <Canvas Height="276" Canvas.Left="304" Canvas.Top="110" Width="594" Background="#3FFCFFB8"/>
-        <local:Button x:Name="InvestButton" Canvas.Left="317" Canvas.Top="124" Width="174" Height="247" imgUp="/Totality.Client.ClientComponents;component/Images/Finance/CurrencyButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Finance/CurrencyButtonDown.png" Cursor="Hand">
+        <Canvas Height="276" Canvas.Left="304" Canvas.Top="104" Width="594" Background="#3FFCFFB8"/>
+        <local:Button x:Name="CurrencyButton" Canvas.Left="317" Canvas.Top="118" Width="174" Height="247" imgUp="/Totality.Client.ClientComponents;component/Images/Finance/CurrencyButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Finance/CurrencyButtonDown.png" Cursor="Hand">
             <local:Button.Effect>
                 <DropShadowEffect BlurRadius="2" Opacity="0.7" RenderingBias="Quality"/>
             </local:Button.Effect>
         </local:Button>
-        <local:Button x:Name="ExchangeButton" Canvas.Left="513" Canvas.Top="124" Width="174" Height="247" imgUp="/Totality.Client.ClientComponents;component/Images/Finance/InterventionButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Finance/InterventionDown.png" Cursor="Hand">
+        <local:Button x:Name="InterventionButton" Canvas.Left="513" Canvas.Top="118" Width="174" Height="247" imgUp="/Totality.Client.ClientComponents;component/Images/Finance/InterventionButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Finance/InterventionDown.png" Cursor="Hand">
             <local:Button.Effect>
                 <DropShadowEffect BlurRadius="2" Opacity="0.7"/>
             </local:Button.Effect>
         </local:Button>
-        <local:Button x:Name="TransButton" Canvas.Left="709" Canvas.Top="124" Width="174" Height="247" imgUp="/Totality.Client.ClientComponents;component/Images/Finance/TaxesButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Finance/TaxesButtonDown.png" Cursor="Hand">
+        <local:Button x:Name="TaxesButton" Canvas.Left="709" Canvas.Top="118" Width="174" Height="247" imgUp="/Totality.Client.ClientComponents;component/Images/Finance/TaxesButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Finance/TaxesButtonDown.png" Cursor="Hand">
             <local:Button.Effect>
                 <DropShadowEffect BlurRadius="2" Opacity="0.7"/>
             </local:Button.Effect>
         </local:Button>
+        <Canvas Height="3" Canvas.Top="45" Width="1200">
+            <Canvas.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black" Offset="0"/>
+                    <GradientStop Color="#00000000" Offset="1"/>
+                </LinearGradientBrush>
+            </Canvas.Background>
+        </Canvas>
     </Canvas>
 </UserControl>

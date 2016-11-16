@@ -22,20 +22,26 @@ namespace Totality.Client.ClientComponents.Dialogs.Military
     public partial class PROcountDialog : UserControl, Dialog
     {
         public delegate void ReceiveOrder(object sender, Order order, string text, long price);
-        ReceiveOrder receiveOrder;
+        ReceiveOrder _receiveOrder;
+        Country _country;
 
-        public PROcountDialog(ReceiveOrder receiveOrder)
+        public PROcountDialog(ReceiveOrder receiveOrder, Country country)
         {
-            this.receiveOrder = receiveOrder;
+            _receiveOrder = receiveOrder;
+            _country = country;
             InitializeComponent();
         }
 
         private void acceptButton_Click(object sender, RoutedEventArgs e)
         {
+            Order order = new Order(_country.Name);
+            order.Count = (long)integerUpDown.Value;
+            _receiveOrder(this, order, "Производство ракет ПРО", 0);
         }
 
         private void cancelButton_Click(object sender, RoutedEventArgs e)
         {
+            _receiveOrder(this, null, null, 0);
         }
     }
 }

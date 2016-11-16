@@ -20,16 +20,16 @@ namespace Totality.Client.ClientComponents.Dialogs.Finance
     /// <summary>
     /// Логика взаимодействия для NukeStrikeDialog.xaml
     /// </summary>
-    public partial class InvestDialog : UserControl, Dialog
+    public partial class InterventionDialog : UserControl, Dialog
     {
-        public delegate void ReceiveOrder(Object sender, Order order);
-        ReceiveOrder receiveOrder;
-        Mins minister;
+        public delegate void ReceiveOrder(object sender, Order order, string text, long price);
+        ReceiveOrder _receiveOrder;
+        private Country _country;
 
-        public InvestDialog(ReceiveOrder receiveOrder, Mins minister)
+        public InterventionDialog(ReceiveOrder receiveOrder, Country country)
         {
-            this.receiveOrder = receiveOrder;
-            this.minister = minister;
+            _receiveOrder = receiveOrder;
+            _country = country;
             InitializeComponent();
         }
 
@@ -39,7 +39,7 @@ namespace Totality.Client.ClientComponents.Dialogs.Finance
 
         private void cancelButton_Click(object sender, RoutedEventArgs e)
         {
-            receiveOrder(this, null);
+            _receiveOrder(this, null, null, 0);
         }
     }
 }

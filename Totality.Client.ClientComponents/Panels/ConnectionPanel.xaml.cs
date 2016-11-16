@@ -26,7 +26,6 @@ namespace Totality.Client.ClientComponents.Panels
         DoubleAnimation clear = new DoubleAnimation(100, 0, TimeSpan.FromSeconds(1));
         public delegate void NameHandler(string name);
         public event NameHandler NameReceived;
-        private Uri _video;
 
         public ConnectionPanel()
         {
@@ -98,6 +97,11 @@ namespace Totality.Client.ClientComponents.Panels
             StartSpinning();
             NameReceived.Invoke(nameInput.Text);
             _nameCanvas.Visibility = Visibility.Hidden;
+        }
+
+        private void button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

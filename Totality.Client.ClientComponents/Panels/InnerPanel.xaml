@@ -24,8 +24,8 @@
                 </Canvas.Background>
             </Canvas>
         </Canvas>
-        <local:Button Canvas.Left="742" Canvas.Top="95" Width="274" Height="303" imgUp="/Totality.Client.ClientComponents;component/Images/Inner/InnerLvlUpButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Inner/InnerLvlUpButtonDown.png" Cursor="Hand"/>
-        <local:Button Canvas.Left="464" Canvas.Top="95" Width="273" Height="302" imgUp="/Totality.Client.ClientComponents;component/Images/Inner/SuppressButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Inner/SuppressButtonDown.png" Cursor="Hand"/>
-        <local:Button Canvas.Left="187" Canvas.Top="94" Width="272" Height="303" imgUp="/Totality.Client.ClientComponents;component/Images/Inner/RepressionsButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Inner/RepressionsButtonDown.png" Cursor="Hand"/>
+        <local:Button x:Name="LvlupButton" Canvas.Left="742" Canvas.Top="95" Width="274" Height="303" imgUp="/Totality.Client.ClientComponents;component/Images/Inner/InnerLvlUpButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Inner/InnerLvlUpButtonDown.png" Cursor="Hand"/>
+        <local:Button x:Name="SuppressButton" Canvas.Left="464" Canvas.Top="95" Width="273" Height="302" imgUp="/Totality.Client.ClientComponents;component/Images/Inner/SuppressButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Inner/SuppressButtonDown.png" Cursor="Hand"/>
+        <local:Button x:Name="RepressionsButton" Canvas.Left="187" Canvas.Top="94" Width="272" Height="303" imgUp="/Totality.Client.ClientComponents;component/Images/Inner/RepressionsButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Inner/RepressionsButtonDown.png" Cursor="Hand"/>
     </Canvas>
 </UserControl>

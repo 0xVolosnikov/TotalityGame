@@ -14,28 +14,37 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Totality.Model;
 
-namespace Totality.Client.ClientComponents.Dialogs.Military
+namespace Totality.Client.ClientComponents.Dialogs.Inner
 {
     /// <summary>
-    /// Логика взаимодействия для NukeStrikeDialog.xaml
+    /// Логика взаимодействия для ImproveDialog.xaml
     /// </summary>
-    public partial class RaidDialog : UserControl, Dialog
+    public partial class RepressionsDialog : UserControl, Dialog
     {
         public delegate void ReceiveOrder(object sender, Order order, string text, long price);
-        ReceiveOrder receiveOrder;
+        ReceiveOrder _receiveOrder;
+        private Country _country;
 
-        public RaidDialog(ReceiveOrder receiveOrder )
+        public RepressionsDialog(ReceiveOrder receiveOrder, Country country)
         {
-            this.receiveOrder = receiveOrder;
+            _receiveOrder = receiveOrder;
+            _country = country;
             InitializeComponent();
         }
 
         private void acceptButton_Click(object sender, RoutedEventArgs e)
         {
+            Order order = new Order(_country.Name);
+
+            if (_country.IsMobilized)
+            _receiveOrder(this, order, "Прекратить репрессии", 0);
+            else
+            _receiveOrder(this, order, "Начать репрессии", 0);
         }
 
         private void cancelButton_Click(object sender, RoutedEventArgs e)
         {
+            _receiveOrder(this, null, null, 0);
         }
     }
 }

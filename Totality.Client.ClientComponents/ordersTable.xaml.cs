@@ -69,7 +69,7 @@ namespace Totality.Client.ClientComponents
             orderRecords.Remove(dataGrid.CurrentItem as OrderRecord);
             if (orderRecords.Count < startingLines)
             {
-                orderRecords.Add(new OrderRecord(null, ""));
+                orderRecords.Add(new OrderRecord("", ""));
             }
                 reorginizeList();          
         }

@@ -5,27 +5,176 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Totality.Client.ClientComponents"
              mc:Ignorable="d" Width="1200" Height="445">
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="SelectedBackgroundBrush" Color="#DDD" />
+        <SolidColorBrush x:Key="DisabledForegroundBrush" Color="#888" />
+        <SolidColorBrush x:Key="DisabledBackgroundBrush" Color="#EEE" />
+        <!-- SimpleStyles: ListBoxItem -->
+        <Style TargetType="ListBoxItem" x:Key="ListBoxItemTemplate">
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Grid>
+                            <Rectangle x:Name="Rectangle" Fill="Transparent" Stroke="Black" 
+                                       StrokeDashCap="Square" StrokeThickness="0" SnapsToDevicePixels="True">
+                            </Rectangle>
+                            <Border 
+                                Name="Border"
+                                Padding="2"
+                                BorderThickness="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=BorderThickness}"
+                                BorderBrush="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=BorderBrush}">
+                                <ContentPresenter />
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="true">
+                                <Setter TargetName="Rectangle" Property="StrokeThickness" Value="1" />
+                                <Setter TargetName="Border" Property="BorderThickness" Value="0" />
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="true">
+                                <Setter TargetName="Rectangle" Property="Fill" Value="{StaticResource SelectedBackgroundBrush}" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="{StaticResource DisabledForegroundBrush}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource ListBoxItemTemplate}">
+            <Setter Property="BorderThickness" Value="1,0,0,1" />
+            <Setter Property="BorderBrush" Value="#FFE7E3DF" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Style.Triggers>
+                <Trigger Property="ItemsControl.AlternationIndex" Value="3">
+                    <Setter Property="BorderBrush" Value="Black"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="ScrollBarLineButtonStyle" TargetType="{x:Type RepeatButton}">
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RepeatButton}">
+                        <Canvas Height="18">
+                            <Polygon Fill="#131324" Points="3,15 15,15 9,3"></Polygon>
+                        </Canvas>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ScrollBarLineButtonBottomStyle" TargetType="{x:Type RepeatButton}">
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RepeatButton}">
+                        <Canvas Height="18">
+                            <Polygon Fill="#131324" Points="3,3 9,15 15,3"></Polygon>
+                        </Canvas>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ScrollBarPageButtonStyle" TargetType="{x:Type RepeatButton}">
+            <Setter Property="IsTabStop" Value="False"/>
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RepeatButton}">
+                        <Border BorderBrush="Transparent"></Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ScrollBarThumbStyle" TargetType="{x:Type Thumb}">
+            <Setter Property="IsTabStop" Value="False"/>
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Margin" Value="1,0,1,0" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Thumb}">
+                        <Rectangle  Fill="#131324" Margin="2"></Rectangle>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <ControlTemplate x:Key="VerticalScrollBar" TargetType="{x:Type ScrollBar}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition MaxHeight="18"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition MaxHeight="18"/>
+                </Grid.RowDefinitions>
+
+                <RepeatButton Grid.Row="0" Height="18"
+                          Style="{StaticResource ScrollBarLineButtonStyle}"
+                          Command="ScrollBar.LineUpCommand" >
+                </RepeatButton>
+                <Track Name="PART_Track" Grid.Row="1" 
+                   IsDirectionReversed="True">
+                    <Track.DecreaseRepeatButton>
+                        <RepeatButton Command="ScrollBar.PageUpCommand" Style="{StaticResource ScrollBarPageButtonStyle}">
+                        </RepeatButton>
+                    </Track.DecreaseRepeatButton>
+                    <Track.Thumb>
+                        <Thumb Style="{StaticResource ScrollBarThumbStyle}">
+                        </Thumb>
+                    </Track.Thumb>
+                    <Track.IncreaseRepeatButton>
+                        <RepeatButton Command="ScrollBar.PageDownCommand" Style="{StaticResource ScrollBarPageButtonStyle}">
+                        </RepeatButton>
+                    </Track.IncreaseRepeatButton>
+                </Track>
+                <RepeatButton Grid.Row="3" Height="18"
+                          Style="{StaticResource ScrollBarLineButtonBottomStyle}"
+                          Command="ScrollBar.LineDownCommand">
+                </RepeatButton>
+            </Grid>
+        </ControlTemplate>
+
+        <Style TargetType="{x:Type ScrollBar}">
+            <Setter Property="Template" Value="{StaticResource VerticalScrollBar}"/>
+        </Style>
+    </UserControl.Resources>
+    
     <Canvas x:Name="canvas1" Width="1200" Height="445">
         <Canvas.Background>
-            <ImageBrush ImageSource="Images/Military/militaryBack.jpg" TileMode="Tile" ViewportUnits="Absolute" Viewport="0 0 1680 1050"/>
+            <ImageBrush ImageSource="/Totality.Client.ClientComponents;component/Images/Foreign/ForeignBackground.png" Stretch="None"/>
         </Canvas.Background>
-        <local:Button x:Name="PRObutton" Canvas.Left="94" Canvas.Top="69" Width="192" imgUp="Images/Military/MilPRO0.png" imgDown="Images/Military/MilPRO1.png" Height="224"/>
-        <Canvas Height="43" Canvas.Top="7" Width="1200">
-            <Canvas Height="39" Canvas.Top="2" Width="1200" Background="#A5900000">
-                <Label x:Name="label" Content="Министерство Обороны" Canvas.Left="427" Height="39" Width="346" Foreground="White" FontFamily="Haettenschweiler" FontSize="36" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" Canvas.Top="-2"/>
+        <Canvas Height="43" Width="1200" Canvas.Top="-2">
+            <Canvas Height="58" Canvas.Top="2" Width="1200" Background="#FF111126">
+                <Label x:Name="label" Content="Министерство Иностранных Дел" Height="58" Width="1200" Foreground="White" FontFamily="Impact" FontSize="36" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0"/>
             </Canvas>
-            <Canvas Height="2" Canvas.Top="41" Width="1200" Background="#77FFFFFF"/>
-            <Canvas Height="2" Width="1200" Background="#77FFFFFF"/>
+            <Canvas Height="5" Canvas.Top="60" Width="1200">
+                <Canvas.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Black" Offset="0"/>
+                        <GradientStop Color="#00000000" Offset="1"/>
+                    </LinearGradientBrush>
+                </Canvas.Background>
+            </Canvas>
         </Canvas>
-        <local:Button x:Name="DefendButton" Canvas.Left="368" Canvas.Top="69" Width="192" imgUp="Images/Military/MilDef0.png" imgDown="Images/Military/MilDef1.png" Height="224"/>
-        <local:Button x:Name="RaidButton" Canvas.Left="635" Canvas.Top="69" Width="192" imgUp="Images/Military/MilRaid0.png" imgDown="Images/Military/MilRaid1.png" Height="224"/>
-        <local:Button x:Name="NukesButton" Canvas.Left="914" Canvas.Top="69" Width="192" imgUp="Images/Military/MilBut1.0.png" imgDown="Images/Military/MilBut1.1.png" Height="224" toolTipPicture="Images/ToolTips/NukesToolTip.jpg" toolTipDescription="&quot;Отсюда наша Родина диктует свою непреклоную волю остальному мировому сообществу.&quot;" toolTipCost=""/>
-        <local:Button x:Name="WarButton" Canvas.Left="94" Canvas.Top="318" Width="464" imgUp="Images/Military/MilButWar0.png" imgDown="Images/Military/MilButWar1.png" Height="70"/>
-        <Canvas Height="35" Canvas.Left="539" Canvas.Top="410" Width="122" Background="#D8000000" HorizontalAlignment="Center"/>
-        <local:Button x:Name="NukeStrikeButton" Canvas.Left="914" Canvas.Top="311" Width="192" imgUp="Images/Military/MilButNuke0.png" imgDown="Images/Military/MilButNuke1.png" Height="84" toolTipPicture="Images/ToolTips/nukeStrikeToolTip.jpg" toolTipDescription="Да! надерем им всем жопы! Fuck yeah!"/>
-        <local:Button x:Name="NukeCancelButton" Canvas.Left="840" Canvas.Top="323" Width="59" imgUp="Images/Military/MilButCancel0.png" imgDown="Images/Military/MilButCancel1.png" Height="59"/>
-        <local:Button x:Name="LVLupButton" Canvas.Left="622" Canvas.Top="415" Width="25" imgUp="Images/LvlBut0.png" imgDown="Images/LvlBut1.png" Height="25"/>
-        <local:Button x:Name="HelpButton" Canvas.Left="552" Canvas.Top="415" Width="25" imgUp="Images/LvlHelp0.png" imgDown="Images/LvlHelp1.png" Height="25"/>
-        <Label x:Name="LVLlabel" Content="5" Canvas.Left="584" Canvas.Top="410" Height="35" FontSize="25" FontWeight="Bold" FontFamily="Euphemia" Foreground="White" Padding="-1,0,0,0" Width="30" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <local:Button Canvas.Left="914" Canvas.Top="132" Width="200" Height="271" imgUp="/Totality.Client.ClientComponents;component/Images/Foreign/ForeignInButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Foreign/ForeignInButtonDown.png" Cursor="Hand"/>
+        <local:Button Canvas.Left="640" Canvas.Top="132" Width="200" Height="271" imgUp="/Totality.Client.ClientComponents;component/Images/Foreign/ForeignSendButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Foreign/ForeignSendButtonDown.png" Cursor="Hand"/>
+        <Canvas Height="315" Canvas.Left="38" Canvas.Top="92" Width="510">
+            <Canvas.Background>
+                <ImageBrush Stretch="None" ImageSource="/Totality.Client.ClientComponents;component/Images/Foreign/ForeignMenuBack.png"/>
+            </Canvas.Background>
+            <ListBox x:Name="listBox" Height="250" Canvas.Left="14" Canvas.Top="48" Width="478" BorderBrush="#FFE7E3DF" Background="Transparent" FontFamily="Impact" FontSize="14"/>
+            
+        </Canvas>
     </Canvas>
 </UserControl>

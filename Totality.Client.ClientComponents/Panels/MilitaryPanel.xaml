@@ -33,7 +33,7 @@
             </local:Button.Effect>
         </local:Button>
         <local:Button x:Name="NukeStrikeButton" Canvas.Left="958" Canvas.Top="311" Width="192" imgUp="Images/Military/MilButNuke0.png" imgDown="Images/Military/MilButNuke1.png" Height="84" toolTipPicture="Images/ToolTips/nukeStrikeToolTip.jpg" toolTipDescription="Да! надерем им всем жопы! Fuck yeah!" Cursor="Hand"/>
-        <local:Button x:Name="NukesButton_Copy" Canvas.Left="734" Canvas.Top="69" Width="192" imgUp="/Totality.Client.ClientComponents;component/Images/Military/UranusButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Military/UranusButtonDown.png" Height="224" toolTipPicture="Images/ToolTips/NukesToolTip.jpg" toolTipDescription="&quot;Отсюда наша Родина диктует свою непреклоную волю остальному мировому сообществу.&quot;" toolTipCost="" UseLayoutRounding="True" SnapsToDevicePixels="True" Cursor="Hand">
+        <local:Button x:Name="UranusButton" Canvas.Left="734" Canvas.Top="69" Width="192" imgUp="/Totality.Client.ClientComponents;component/Images/Military/UranusButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Military/UranusButtonDown.png" Height="224" toolTipPicture="Images/ToolTips/NukesToolTip.jpg" toolTipDescription="&quot;Отсюда наша Родина диктует свою непреклоную волю остальному мировому сообществу.&quot;" toolTipCost="" UseLayoutRounding="True" SnapsToDevicePixels="True" Cursor="Hand">
             <local:Button.Effect>
                 <DropShadowEffect Opacity="0.7" Direction="270"/>
             </local:Button.Effect>
@@ -45,19 +45,19 @@
             <Canvas.Background>
                 <ImageBrush ImageSource="/Totality.Client.ClientComponents;component/Images/Military/UranusBack.png" Stretch="None"/>
             </Canvas.Background>
-            <Label x:Name="label1" Content="500" Canvas.Left="43" Canvas.Top="19" Height="46" Width="106" VerticalAlignment="Center" HorizontalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Padding="0" Foreground="#FF2DF900" FontFamily="Impact" FontSize="30"/>
+            <Label x:Name="UranusLabel" Content="500" Canvas.Left="43" Canvas.Top="19" Height="46" Width="106" VerticalAlignment="Center" HorizontalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Padding="0" Foreground="#FF2DF900" FontFamily="Impact" FontSize="30"/>
         </Canvas>
-        <local:Button x:Name="NukesButton_Copy1" Canvas.Left="506" Canvas.Top="69" Width="192" imgUp="/Totality.Client.ClientComponents;component/Images/Military/MissilesButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Military/MissilesButtonDown.png" Height="224" toolTipPicture="Images/ToolTips/NukesToolTip.jpg" toolTipDescription="&quot;Отсюда наша Родина диктует свою непреклоную волю остальному мировому сообществу.&quot;" toolTipCost="" Cursor="Hand">
+        <local:Button x:Name="MissilesButton" Canvas.Left="506" Canvas.Top="69" Width="192" imgUp="/Totality.Client.ClientComponents;component/Images/Military/MissilesButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Military/MissilesButtonDown.png" Height="224" toolTipPicture="Images/ToolTips/NukesToolTip.jpg" toolTipDescription="&quot;Отсюда наша Родина диктует свою непреклоную волю остальному мировому сообществу.&quot;" toolTipCost="" Cursor="Hand">
             <local:Button.Effect>
                 <DropShadowEffect Opacity="0.7" Direction="270"/>
             </local:Button.Effect>
         </local:Button>
-        <local:Button x:Name="NukesButton_Copy2" Canvas.Left="271" Canvas.Top="69" Width="192" imgUp="/Totality.Client.ClientComponents;component/Images/Military/MobilizeButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Military/MobilizeButtonDown.png" Height="224" toolTipPicture="Images/ToolTips/NukesToolTip.jpg" toolTipDescription="&quot;Отсюда наша Родина диктует свою непреклоную волю остальному мировому сообществу.&quot;" toolTipCost="" Cursor="Hand">
+        <local:Button x:Name="MobilizationButton" Canvas.Left="271" Canvas.Top="69" Width="192" imgUp="/Totality.Client.ClientComponents;component/Images/Military/MobilizeButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Military/MobilizeButtonDown.png" Height="224" toolTipPicture="Images/ToolTips/NukesToolTip.jpg" toolTipDescription="&quot;Отсюда наша Родина диктует свою непреклоную волю остальному мировому сообществу.&quot;" toolTipCost="" Cursor="Hand">
             <local:Button.Effect>
                 <DropShadowEffect Opacity="0.7" Direction="270"/>
             </local:Button.Effect>
         </local:Button>
-        <local:Button x:Name="NukesButton_Copy3" Canvas.Left="39" Canvas.Top="69" Width="192" imgUp="/Totality.Client.ClientComponents;component/Images/Military/WarButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Military/WarButtonDown.png" Height="224" toolTipPicture="Images/ToolTips/NukesToolTip.jpg" toolTipDescription="&quot;Отсюда наша Родина диктует свою непреклоную волю остальному мировому сообществу.&quot;" toolTipCost="" Cursor="Hand">
+        <local:Button x:Name="WarButton" Canvas.Left="39" Canvas.Top="69" Width="192" imgUp="/Totality.Client.ClientComponents;component/Images/Military/WarButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Military/WarButtonDown.png" Height="224" toolTipPicture="Images/ToolTips/NukesToolTip.jpg" toolTipDescription="&quot;Отсюда наша Родина диктует свою непреклоную волю остальному мировому сообществу.&quot;" toolTipCost="" Cursor="Hand">
             <local:Button.Effect>
                 <DropShadowEffect Opacity="0.7" Direction="270"/>
             </local:Button.Effect>

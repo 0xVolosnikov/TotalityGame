@@ -31,5 +31,6 @@
                 </Grid>
             </Border>
         </Canvas>
+        <Button x:Name="button" Content="Button" Canvas.Left="10" Canvas.Top="647" Width="75" Click="button_Click_1"/>
     </Canvas>
 </UserControl>

@@ -14,18 +14,18 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Totality.Model;
 
-namespace Totality.Client.ClientComponents.Dialogs.Military
+namespace Totality.Client.ClientComponents.Dialogs.Inner
 {
     /// <summary>
-    /// Логика взаимодействия для NukeStrikeDialog.xaml
+    /// Логика взаимодействия для ImproveDialog.xaml
     /// </summary>
-    public partial class NukeStrikeDialog : UserControl, Dialog
+    public partial class SuppressDialog : UserControl, Dialog
     {
         public delegate void ReceiveOrder(object sender, Order order, string text, long price);
         ReceiveOrder _receiveOrder;
-        Country _country;
+        private Country _country;
 
-        public NukeStrikeDialog(ReceiveOrder receiveOrder, Country country )
+        public SuppressDialog(ReceiveOrder receiveOrder, Country country)
         {
             _receiveOrder = receiveOrder;
             _country = country;
@@ -34,20 +34,13 @@ namespace Totality.Client.ClientComponents.Dialogs.Military
 
         private void acceptButton_Click(object sender, RoutedEventArgs e)
         {
-            //receiveOrder(this, new Order((int)Ministers.MinDef, "strike", new List<int>{ 0, 1 }));
-            canvas.Children.Add(new NukeStrikeCountDialog(receiveOrderFromChildren));
+            Order order = new Order(_country.Name);
+            _receiveOrder(this, order, "Подавить бунт", 0);
         }
 
         private void cancelButton_Click(object sender, RoutedEventArgs e)
         {
             _receiveOrder(this, null, null, 0);
-        }
-
-        public void receiveOrderFromChildren(object sender, Order order)
-        {
-            order.CountryName = _country.Name;
-            order.TargetCountryName = comboBox.SelectedValue.ToString();
-            _receiveOrder(this, order, "Ядерный удар", 0);
         }
     }
 }

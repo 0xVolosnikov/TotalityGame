@@ -1352,6 +1352,11 @@ namespace Totality.Client.GUI.ReferenceToServer {
                 }
             }
         }
+
+        public static explicit operator Model.Country(Country v)
+        {
+            throw new NotImplementedException();
+        }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]

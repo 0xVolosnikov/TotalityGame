@@ -14,30 +14,33 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Totality.Model;
 
-namespace Totality.Client.ClientComponents.Dialogs.Common
+namespace Totality.Client.ClientComponents.Dialogs.Military
 {
     /// <summary>
-    /// Логика взаимодействия для NukeStrikeDialog.xaml
+    /// Логика взаимодействия для MobilizeDialog.xaml
     /// </summary>
-    public partial class HelpDialog : UserControl, Dialog
+    public partial class MobilizeDialog : UserControl, Dialog
     {
-        public delegate void ReceiveOrder(Object sender, Order order);
-        ReceiveOrder receiveOrder;
-        int minister;
+        public delegate void ReceiveOrder(object sender, Order order, string text, long price);
+        private ReceiveOrder _receiveOrder;
+        private Country _country;
 
-        public HelpDialog(ReceiveOrder receiveOrder, int minister)
+        public MobilizeDialog(ReceiveOrder receiveOrder, Country country)
         {
-            this.receiveOrder = receiveOrder;
-            this.minister = minister;
+            _receiveOrder = receiveOrder;
+            _country = country;
             InitializeComponent();
         }
 
         private void acceptButton_Click(object sender, RoutedEventArgs e)
         {
+            Order order = new Order(_country.Name);
+            _receiveOrder(this, order, "Всеобщая мобилизация", 0);
         }
 
         private void cancelButton_Click(object sender, RoutedEventArgs e)
         {
+            _receiveOrder(this, null, null, 0);
         }
     }
 }

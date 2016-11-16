@@ -26,7 +26,7 @@
                 </Canvas.Background>
                 <Label x:Name="label3_Copy" Content="200" Canvas.Left="324" Canvas.Top="17" Width="63" Height="25" FontFamily="Impact" HorizontalContentAlignment="Center" FontSize="18" Padding="0" VerticalContentAlignment="Center"/>
                 <Image x:Name="image4_Copy" Height="41" Width="267" Source="Images/Industry/steelLine.png" Stretch="None" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Top="9" Canvas.Left="2"/>
-                <Button x:Name="button_Copy" Content="Button" Width="391" Height="62" Opacity="0" Cursor="Hand"/>
+                <local:Button x:Name="SteelButton" Height="62" Width="391" Opacity="0" Cursor="Hand" imgUp="Images/Industry/resBack.png" imgDown="Images/Industry/resBack.png"/>
             </Canvas>
             <Canvas Height="62" Canvas.Left="95" Canvas.Top="30" Width="391" SnapsToDevicePixels="True" UseLayoutRounding="True">
                 <Canvas.Background>
@@ -34,7 +34,6 @@
                 </Canvas.Background>
                 <Label x:Name="label3" Content="200" Canvas.Left="324" Canvas.Top="17" Width="63" Height="25" FontFamily="Impact" HorizontalContentAlignment="Center" FontSize="18" Padding="0" VerticalContentAlignment="Center"/>
                 <Image x:Name="image4" Height="41" Width="236" Source="Images/Industry/oilLine.png" Stretch="None" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Top="9" Canvas.Left="2"/>
-                <Button x:Name="button" Content="Button" Width="391" Height="62" Opacity="0" Cursor="Hand"/>
             </Canvas>
             <Canvas Height="62" Canvas.Left="95" Canvas.Top="182" Width="391">
                 <Canvas.Background>
@@ -42,7 +41,7 @@
                 </Canvas.Background>
                 <Label x:Name="label3_Copy1" Content="200" Canvas.Left="324" Canvas.Top="17" Width="63" Height="25" FontFamily="Impact" HorizontalContentAlignment="Center" FontSize="18" Padding="0" VerticalContentAlignment="Center"/>
                 <Image x:Name="image4_Copy1" Height="41" Width="111" Source="Images/Industry/woodLine.png" Stretch="None" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Top="9" Canvas.Left="2"/>
-                <Button x:Name="button_Copy1" Content="Button" Width="391" Height="62" Opacity="0" Cursor="Hand"/>
+                <local:Button x:Name="WoodButton" Height="62" Width="391" Opacity="0" Cursor="Hand" imgUp="Images/Industry/resBack.png" imgDown="Images/Industry/resBack.png"/>
             </Canvas>
             <Canvas Height="62" Canvas.Left="95" Canvas.Top="257" Width="391">
                 <Canvas.Background>
@@ -50,7 +49,7 @@
                 </Canvas.Background>
                 <Label x:Name="label3_Copy2" Content="200" Canvas.Left="324" Canvas.Top="17" Width="63" Height="25" FontFamily="Impact" HorizontalContentAlignment="Center" FontSize="18" Padding="0" VerticalContentAlignment="Center"/>
                 <Image x:Name="image4_Copy2" Height="41" Width="300" Source="Images/Industry/agroLine.png" Stretch="None" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Top="9" Canvas.Left="2"/>
-                <Button x:Name="button_Copy2" Content="Button" Width="391" Height="62" Opacity="0" Cursor="Hand"/>
+                <local:Button x:Name="AgroButton" Height="62" Width="391" Opacity="0" Cursor="Hand" imgUp="Images/Industry/resBack.png" imgDown="Images/Industry/resBack.png"/>
             </Canvas>
             <Label x:Name="label2" Content="50" Canvas.Left="237" Canvas.Top="238" FontFamily="Impact" FontSize="18"/>
             <Label x:Name="label2_Copy" Content="50" Canvas.Left="138" Canvas.Top="159" FontFamily="Impact" FontSize="18"/>
@@ -60,9 +59,10 @@
             <Image x:Name="image1" Height="53" Canvas.Left="26" Canvas.Top="107" Width="64" Source="Images/Industry/steel.png" Stretch="None"/>
             <Image x:Name="image2" Height="51" Canvas.Left="23" Canvas.Top="187" Width="64" Source="Images/Industry/wood.png" Stretch="None"/>
             <Image x:Name="image3" Height="50" Canvas.Left="26" Canvas.Top="261" Width="64" Source="Images/Industry/agro.png" Stretch="None"/>
+            <local:Button x:Name="OilButton" Canvas.Left="95" Canvas.Top="30" Height="62" Width="391" Opacity="0" Cursor="Hand" imgUp="Images/Industry/resBack.png" imgDown="Images/Industry/resBack.png"/>
         </Canvas>
-        <local:Button Canvas.Left="564" Canvas.Top="131" Width="210" Height="276" imgUp="Images/Industry/heavyIndustryButton.png" imgDown="Images/Industry/heavyIndustryButtonDown.png" Cursor="Hand" SnapsToDevicePixels="True"/>
-        <local:Button Canvas.Left="808" Canvas.Top="131" Width="210" Height="275" imgUp="Images/Industry/lightIndustryButton.png" imgDown="Images/Industry/lightIndustryButtonDown.png" Cursor="Hand" SnapsToDevicePixels="True"/>
+        <local:Button x:Name="HeavyButton" Canvas.Left="564" Canvas.Top="131" Width="210" Height="275" imgUp="Images/Industry/heavyIndustryButton.png" imgDown="Images/Industry/heavyIndustryButtonDown.png" Cursor="Hand"/>
+        <local:Button x:Name="LightButton" Canvas.Left="808" Canvas.Top="131" Width="210" Height="275" imgUp="Images/Industry/lightIndustryButton.png" imgDown="Images/Industry/lightIndustryButtonDown.png" Cursor="Hand" SnapsToDevicePixels="True"/>
         <Canvas Height="52" Canvas.Left="564" Canvas.Top="79" Width="210" SnapsToDevicePixels="True">
             <Canvas.Background>
                 <ImageBrush ImageSource="Images/Industry/heavyIndustryPowerBack.png" Stretch="None"/>

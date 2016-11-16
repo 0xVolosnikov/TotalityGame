@@ -22,20 +22,25 @@ namespace Totality.Client.ClientComponents.Dialogs.Military
     public partial class WarDialog : UserControl, Dialog
     {
         public delegate void ReceiveOrder(object sender, Order order, string text, long price);
-        ReceiveOrder receiveOrder;
+        private ReceiveOrder _receiveOrder;
+        private Country _country;
 
-        public WarDialog(ReceiveOrder receiveOrder )
+        public WarDialog(ReceiveOrder receiveOrder, Country country )
         {
-            this.receiveOrder = receiveOrder;
+            _receiveOrder = receiveOrder;
+            _country = country;
             InitializeComponent();
         }
 
         private void acceptButton_Click(object sender, RoutedEventArgs e)
         {
+            Order order = new Order(_country.Name, comboBox.SelectedValue.ToString());
+            _receiveOrder(this, order, "Ядерный удар", 0);
         }
 
         private void cancelButton_Click(object sender, RoutedEventArgs e)
         {
+            _receiveOrder(this, null, null, 0);
         }
     }
 }

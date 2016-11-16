@@ -36,6 +36,7 @@ namespace Totality.Client.GUI
         UserControl currentPanel;
         TransmitterServiceClient _client;
         private Country _country;
+        private Model.Country _countryModel;
         BackgroundWorker connectionSetter = new BackgroundWorker();
         private CallbackHandler _servCallbackHandler;
         private string _name;
@@ -44,6 +45,7 @@ namespace Totality.Client.GUI
         {
             _servCallbackHandler = new CallbackHandler();
             _servCallbackHandler.CountryUpdated += _servCallbackHandler_CountryUpdated;
+            _countryModel = new Model.Country("test");
 
             InitializeComponent();
             setAnims();
@@ -68,21 +70,30 @@ namespace Totality.Client.GUI
             buttons[9].MouseDown += (object sender, MouseButtonEventArgs e) => changePanel(_premierPanel);
 
             _industryPanel.Table = _ordersTable;
+            _industryPanel.CountryData = _countryModel;
+
             _financePanel.Table = _ordersTable;
+            _financePanel.CountryData = _countryModel;
+
             _militaryPanel.Table = _ordersTable;
+            _militaryPanel.CountryData = _countryModel;
+
             _foreignPanel.Table = _ordersTable;
             _mediaPanel.Table = _ordersTable;
+
             _innerPanel.Table = _ordersTable;
+            _innerPanel.CountryData = _countryModel;
+
             _securityPanel.Table = _ordersTable;
             _sciencePanel.Table = _ordersTable;
             _premierPanel.Table = _ordersTable;
 
-            _connectionPanel = new ConnectionPanel();
-            _connectionPanel.Video(new Uri(String.Format(@"{0}\video2.mp4", AppDomain.CurrentDomain.BaseDirectory, "turnoff"), UriKind.Absolute));
+           // _connectionPanel = new ConnectionPanel();
+            //_connectionPanel.Video(new Uri(String.Format(@"{0}\video2.mp4", AppDomain.CurrentDomain.BaseDirectory, "turnoff"), UriKind.Absolute));
 
-            _grid.Children.Add(_connectionPanel);
-            _connectionPanel.NameReceived += _connectionPanel_NameReceived;
-            _client = new ReferenceToServer.TransmitterServiceClient(new System.ServiceModel.InstanceContext(_servCallbackHandler));
+           // _grid.Children.Add(_connectionPanel);
+            //_connectionPanel.NameReceived += _connectionPanel_NameReceived;
+           // _client = new ReferenceToServer.TransmitterServiceClient(new System.ServiceModel.InstanceContext(_servCallbackHandler));
 
         }
 

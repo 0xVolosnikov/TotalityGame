@@ -26,19 +26,19 @@ namespace Totality.Client.ClientComponents
     {
         Dialog currentDialog;
         public OrdersTable Table;
+        public Country CountryData;
 
         public MilitaryPanel()
         {
             InitializeComponent();
-            /*
-            this.NukeStrikeButton.click += () => createDialog<NukeStrikeDialog>(new NukeStrikeDialog(receiveOrder));
-            this.WarButton.click += () => createDialog<WarDialog>(new WarDialog(receiveOrder));
-            this.DefendButton.click += () => createDialog<DefCountDialog>(new DefCountDialog(receiveOrder));
-            this.RaidButton.click += () => createDialog<RaidDialog>(new RaidDialog(receiveOrder));
-            this.NukeCancelButton.click += () => createDialog<CancelDialog>(new CancelDialog(receiveOrder));
-            this.NukesButton.click += () => createDialog<NukesCountDialog>(new NukesCountDialog(receiveOrder));
-            this.PRObutton.click += () => createDialog<PROcountDialog>(new PROcountDialog(receiveOrder));
-            */
+            
+            NukeStrikeButton.click += () => createDialog<NukeStrikeDialog>(new NukeStrikeDialog(receiveOrder, CountryData));
+            WarButton.click += () => createDialog<WarDialog>(new WarDialog(receiveOrder, CountryData));
+            NukesButton.click += () => createDialog<NukesCountDialog>(new NukesCountDialog(receiveOrder, CountryData));
+            MissilesButton.click += () => createDialog<PROcountDialog>(new PROcountDialog(receiveOrder, CountryData));
+            UranusButton.click += () => createDialog<UranusDialog>(new UranusDialog(receiveOrder, CountryData));
+            MobilizationButton.click += () => createDialog<MobilizeDialog>(new MobilizeDialog(receiveOrder, CountryData));
+            
         }
 
         private void createDialog<T>(Dialog dialog) where T : UIElement
@@ -54,7 +54,9 @@ namespace Totality.Client.ClientComponents
 
         public void receiveOrder(object sender, Order order, string text, long price)
         {
+            if (order != null)
             Table.addOrder(new OrderRecord(text, price.ToString() , order));
+
             canvas1.Children.Remove((UIElement)sender);
             currentDialog = null;     
         }

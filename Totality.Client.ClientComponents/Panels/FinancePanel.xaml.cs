@@ -28,16 +28,15 @@ namespace Totality.Client.ClientComponents
     {
         private Dialog _currentDialog;
         public OrdersTable Table;
+        public Country CountryData;
 
         public FinancePanel()
         {
             InitializeComponent();
-            /*
-            this.InvestButton.SnapsToDevicePixels = true;
-            this.LVLupButton.click += () => createDialog<LvlUpDialog>(new LvlUpDialog(receiveOrder, Mins.Finance));
-            this.InvestButton.click += () => createDialog<InvestDialog>(new InvestDialog(receiveOrder, Mins.Finance));
-            this.ExchangeButton.click += () => createDialog<ExchangeDialog>(new ExchangeDialog(receiveOrder, Mins.Finance));
-            this.TransButton.click += () => createDialog<TransDialog>(new TransDialog(receiveOrder, Mins.Finance));*/
+            
+            CurrencyButton.click += () => createDialog<CurrencyDialog>(new CurrencyDialog(receiveOrder, CountryData));
+            InterventionButton.click += () => createDialog<InterventionDialog>(new InterventionDialog(receiveOrder, CountryData));
+            TaxesButton.click += () => createDialog<TaxesDialog>(new TaxesDialog(receiveOrder, CountryData));
         }
 
         private void createDialog<T>(Dialog dialog) where T : UIElement
@@ -51,10 +50,13 @@ namespace Totality.Client.ClientComponents
             }
         }
 
-        public void receiveOrder(object sender, Order order)
+        public void receiveOrder(object sender, Order order, string text, long price)
         {
+            if (order != null)
+                Table.addOrder(new OrderRecord(text, price.ToString(), order));
+
             canvas1.Children.Remove((UIElement)sender);
-            _currentDialog = null;     
+            _currentDialog = null;
         }
     }
 }
