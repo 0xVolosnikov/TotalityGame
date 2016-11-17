@@ -34,9 +34,9 @@ namespace Totality.Client.ClientComponents
         {
             InitializeComponent();
             
-            CurrencyButton.click += () => createDialog<CurrencyDialog>(new CurrencyDialog(receiveOrder, CountryData));
-            InterventionButton.click += () => createDialog<InterventionDialog>(new InterventionDialog(receiveOrder, CountryData));
-            TaxesButton.click += () => createDialog<TaxesDialog>(new TaxesDialog(receiveOrder, CountryData));
+            CurrencyButton.click += () => createDialog<CurrencyDialog>(new CurrencyDialog(receiveOrder));
+            InterventionButton.click += () => createDialog<InterventionDialog>(new InterventionDialog(receiveOrder));
+            TaxesButton.click += () => createDialog<TaxesDialog>(new TaxesDialog(receiveOrder));
         }
 
         private void createDialog<T>(Dialog dialog) where T : UIElement

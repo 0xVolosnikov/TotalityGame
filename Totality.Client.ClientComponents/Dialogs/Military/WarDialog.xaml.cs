@@ -19,22 +19,23 @@ namespace Totality.Client.ClientComponents.Dialogs.Military
     /// <summary>
     /// Логика взаимодействия для NukeStrikeDialog.xaml
     /// </summary>
-    public partial class WarDialog : UserControl, Dialog
+    public partial class WarDialog : AbstractDialog, Dialog
     {
         public delegate void ReceiveOrder(object sender, Order order, string text, long price);
         private ReceiveOrder _receiveOrder;
-        private Country _country;
 
-        public WarDialog(ReceiveOrder receiveOrder, Country country )
+        public WarDialog(ReceiveOrder receiveOrder)
         {
             _receiveOrder = receiveOrder;
-            _country = country;
             InitializeComponent();
+
+            CountriesBox.ItemsSource = Countries;
+            CountriesBox.SelectedIndex = 0;
         }
 
         private void acceptButton_Click(object sender, RoutedEventArgs e)
         {
-            Order order = new Order(_country.Name, comboBox.SelectedValue.ToString());
+            Order order = new Order(CountryData.Name, CountriesBox.SelectedValue.ToString());
             _receiveOrder(this, order, "Ядерный удар", 0);
         }
 

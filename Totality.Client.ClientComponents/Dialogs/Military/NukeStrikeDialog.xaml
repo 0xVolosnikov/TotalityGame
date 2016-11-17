@@ -1,19 +1,19 @@
-﻿<UserControl x:Class="Totality.Client.ClientComponents.Dialogs.Military.NukeStrikeDialog"
+﻿<local:AbstractDialog x:Class="Totality.Client.ClientComponents.Dialogs.Military.NukeStrikeDialog"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Totality.Client.ClientComponents.Dialogs"
              mc:Ignorable="d" d:DesignWidth="607.389" Width="617" Height="323.5" BorderBrush="White" BorderThickness="5">
-    <UserControl.Effect>
+    <local:AbstractDialog.Effect>
         <DropShadowEffect RenderingBias="Quality" BlurRadius="7"/>
-    </UserControl.Effect>
+    </local:AbstractDialog.Effect>
     <Canvas x:Name="canvas" Background="#FF00000A">
         <Canvas Height="34" Canvas.Top="22" Width="607" Background="#FF5D0000">
             <Image x:Name="image" Height="50" Canvas.Left="278" Width="50" Source="/Totality.Client.ClientComponents;component/Images/interface/star.png" Canvas.Top="-9"/>
         </Canvas>
         <Label x:Name="label" Content="Выберите цель для удара" Canvas.Left="42" Canvas.Top="75" Width="520" Height="54" Foreground="White" FontSize="24" FontFamily="Arial Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold"/>
-        <ComboBox x:Name="comboBox" Canvas.Left="42" Canvas.Top="149" Width="520" Height="52">
+        <ComboBox x:Name="CountriesBox" Canvas.Left="42" Canvas.Top="149" Width="520" Height="52" FontFamily="Arial Black" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
             <ComboBox.Background>
                 <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                     <GradientStop Color="#FFCBC7C7" Offset="0"/>
@@ -38,4 +38,4 @@
             </Button.Background>
         </Button>
     </Canvas>
-</UserControl>
+</local:AbstractDialog>

@@ -32,12 +32,12 @@ namespace Totality.Client.ClientComponents
         public IndustryPanel()
         {
             InitializeComponent();
-            HeavyButton.click += () => createDialog<ImproveDialog>(new ImproveDialog(receiveOrder, CountryData, "Повысить тяжелую промышленную мощь?", "Повышение тяжелой промышленной мощи") );
-            LightButton.click += () => createDialog<ImproveDialog>(new ImproveDialog(receiveOrder, CountryData, "Повысить легкую промышленную мощь?", "Повышение легкой промышленной мощи"));
-            OilButton.click += () => createDialog<ImproveDialog>(new ImproveDialog(receiveOrder, CountryData, "Повысить производство нефти?", "Повышение производства нефти"));
-            SteelButton.click += () => createDialog<ImproveDialog>(new ImproveDialog(receiveOrder, CountryData, "Повысить производство стали?", "Повышение производства стали"));
-            WoodButton.click += () => createDialog<ImproveDialog>(new ImproveDialog(receiveOrder, CountryData, "Повысить производство древесины?", "Повышение производства древесины"));
-            AgroButton.click += () => createDialog<ImproveDialog>(new ImproveDialog(receiveOrder, CountryData, "Повысить производство с/х продукции?", "Повышение производства с/х продукции"));
+            HeavyButton.click += () => createDialog<ImproveDialog>(new ImproveDialog(receiveOrder, "Повысить тяжелую промышленную мощь?", "Повышение тяжелой промышленной мощи") );
+            LightButton.click += () => createDialog<ImproveDialog>(new ImproveDialog(receiveOrder, "Повысить легкую промышленную мощь?", "Повышение легкой промышленной мощи"));
+            OilButton.click += () => createDialog<ImproveDialog>(new ImproveDialog(receiveOrder, "Повысить производство нефти?", "Повышение производства нефти"));
+            SteelButton.click += () => createDialog<ImproveDialog>(new ImproveDialog(receiveOrder, "Повысить производство стали?", "Повышение производства стали"));
+            WoodButton.click += () => createDialog<ImproveDialog>(new ImproveDialog(receiveOrder, "Повысить производство древесины?", "Повышение производства древесины"));
+            AgroButton.click += () => createDialog<ImproveDialog>(new ImproveDialog(receiveOrder, "Повысить производство с/х продукции?", "Повышение производства с/х продукции"));
         }
 
         private void createDialog<T>(Dialog dialog) where T : UIElement

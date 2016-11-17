@@ -19,9 +19,9 @@ namespace Totality.Client.ClientComponents.Dialogs.Common
     /// <summary>
     /// Логика взаимодействия для NukeStrikeDialog.xaml
     /// </summary>
-    public partial class LvlUpDialog : UserControl, Dialog
+    public partial class LvlUpDialog : AbstractDialog, Dialog
     {
-        public delegate void ReceiveOrder(Object sender, Order order);
+        public delegate void ReceiveOrder(object sender, Order order);
         ReceiveOrder receiveOrder;
         int minister;
 

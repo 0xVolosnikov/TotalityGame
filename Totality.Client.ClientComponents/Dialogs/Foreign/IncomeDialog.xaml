@@ -1,0 +1,25 @@
+﻿<local:AbstractDialog x:Class="Totality.Client.ClientComponents.Dialogs.Foreign.IncomeDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Totality.Client.ClientComponents.Dialogs"
+             mc:Ignorable="d" d:DesignWidth="607.389" Width="617" Height="361.767" BorderBrush="White" BorderThickness="5">
+    <local:AbstractDialog.Effect>
+        <DropShadowEffect RenderingBias="Quality" BlurRadius="7"/>
+    </local:AbstractDialog.Effect>
+    <Canvas x:Name="canvas" Background="#FFC82E31">
+        <Canvas Height="45" Canvas.Top="23" Width="607" Background="#FF111717">
+            <Image x:Name="image" Height="74" Canvas.Left="263" Canvas.Top="-18" Width="74" RenderTransformOrigin="0.483,0.466" Stretch="None" Source="/Totality.Client.ClientComponents;component/Images/Foreign/ForeignBird.png"/>
+        </Canvas>
+        <Button x:Name="cancelButton" Content="Закрыть" Canvas.Left="208" Canvas.Top="306" Width="194" Height="36" FontFamily="Arial Black" FontSize="20" Click="cancelButton_Click">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                    <GradientStop Color="#FFF3F3F3" Offset="0"/>
+                    <GradientStop Color="#FFCDCDCD" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <ListBox x:Name="listBox" Height="204" Canvas.Left="10" Canvas.Top="84" Width="587"/>
+    </Canvas>
+</local:AbstractDialog>

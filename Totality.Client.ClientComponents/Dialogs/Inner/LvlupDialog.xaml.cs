@@ -19,22 +19,20 @@ namespace Totality.Client.ClientComponents.Dialogs.Inner
     /// <summary>
     /// Логика взаимодействия для ImproveDialog.xaml
     /// </summary>
-    public partial class LvlupDialog : UserControl, Dialog
+    public partial class LvlupDialog : AbstractDialog, Dialog
     {
         public delegate void ReceiveOrder(object sender, Order order, string text, long price);
         ReceiveOrder _receiveOrder;
-        private Country _country;
 
-        public LvlupDialog(ReceiveOrder receiveOrder, Country country)
+        public LvlupDialog(ReceiveOrder receiveOrder)
         {
             _receiveOrder = receiveOrder;
-            _country = country;
             InitializeComponent();
         }
 
         private void acceptButton_Click(object sender, RoutedEventArgs e)
         {
-            Order order = new Order(_country.Name);
+            Order order = new Order(CountryData.Name);
 
             _receiveOrder(this, order, "Повысить квалификацию МВД", 0);
 

@@ -20,16 +20,14 @@ namespace Totality.Client.ClientComponents.Dialogs.Finance
     /// <summary>
     /// Логика взаимодействия для NukeStrikeDialog.xaml
     /// </summary>
-    public partial class InterventionDialog : UserControl, Dialog
+    public partial class InterventionDialog : AbstractDialog, Dialog
     {
         public delegate void ReceiveOrder(object sender, Order order, string text, long price);
         ReceiveOrder _receiveOrder;
-        private Country _country;
 
-        public InterventionDialog(ReceiveOrder receiveOrder, Country country)
+        public InterventionDialog(ReceiveOrder receiveOrder)
         {
             _receiveOrder = receiveOrder;
-            _country = country;
             InitializeComponent();
         }
 

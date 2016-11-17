@@ -23,6 +23,6 @@
             </Canvas>
         </Canvas>
         <local:Button Canvas.Left="682" Canvas.Top="92" imgUp="/Totality.Client.ClientComponents;component/Images/Media/NewsButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Media/NewsButtonDown.png" Width="284" Height="313" Cursor="Hand"/>
-        <local:Button Canvas.Left="269" Canvas.Top="92" imgUp="/Totality.Client.ClientComponents;component/Images/Media/PropButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Media/PropButtonDown.png" Width="277" Height="308" Cursor="Hand"/>
+        <local:Button x:Name="PropagandaButton" Canvas.Left="269" Canvas.Top="92" imgUp="/Totality.Client.ClientComponents;component/Images/Media/PropButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Media/PropButtonDown.png" Width="277" Height="308" Cursor="Hand"/>
     </Canvas>
 </UserControl>

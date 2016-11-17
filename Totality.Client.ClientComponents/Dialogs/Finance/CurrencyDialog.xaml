@@ -1,16 +1,16 @@
-﻿<UserControl x:Class="Totality.Client.ClientComponents.Dialogs.Finance.CurrencyDialog"
+﻿<local:AbstractDialog x:Class="Totality.Client.ClientComponents.Dialogs.Finance.CurrencyDialog"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Totality.Client.ClientComponents.Dialogs"
              mc:Ignorable="d" d:DesignWidth="607.389" Width="617" Height="354.951" BorderBrush="White" BorderThickness="5">
-    <UserControl.Effect>
+    <local:AbstractDialog.Effect>
         <DropShadowEffect RenderingBias="Quality" BlurRadius="7"/>
-    </UserControl.Effect>
+    </local:AbstractDialog.Effect>
     <Canvas x:Name="canvas" Background="#FFEFBB00">
         <Canvas Height="48" Canvas.Top="20" Width="607" Background="Black"/>
-        <Image x:Name="image" Height="272" Canvas.Top="73" Width="607" Source="/Totality.Client.ClientComponents;component/Images/Finance/backForFinDial.png" Opacity="0.08" Stretch="Fill"/>
+        
         <Button x:Name="cancelButton" Content="Отмена" Canvas.Left="92" Canvas.Top="254" Width="194" Height="48" FontFamily="Arial Black" FontSize="20" Click="cancelButton_Click">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
@@ -35,6 +35,5 @@
                 </LinearGradientBrush>
             </ComboBox.Background>
         </ComboBox>
-        <Image x:Name="image1" Height="51" Canvas.Left="21" Canvas.Top="87" Width="561" Source="/Totality.Client.ClientComponents;component/Images/Finance/InvestText1.png"/>
     </Canvas>
-</UserControl>
+</local:AbstractDialog>

@@ -1,0 +1,51 @@
+﻿<local:AbstractDialog x:Class="Totality.Client.ClientComponents.Dialogs.Media.PropagandaDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Totality.Client.ClientComponents.Dialogs"
+             xmlns:we="clr-namespace:Totality.Client.ClientComponents.Dialogs.Media"
+             mc:Ignorable="d" d:DesignWidth="607.389" Width="617" Height="323.5" BorderBrush="White" BorderThickness="5">
+    <local:AbstractDialog.Effect>
+        <DropShadowEffect RenderingBias="Quality" BlurRadius="7"/>
+    </local:AbstractDialog.Effect>
+    <Canvas x:Name="canvas" Background="#FF513514">
+        <Canvas Height="39" Canvas.Top="23" Width="607" Background="#FF110B04">
+            <Image x:Name="image" Height="74" Canvas.Left="261" Canvas.Top="-17" Width="74" RenderTransformOrigin="0.483,0.466" Stretch="None" Source="/Totality.Client.ClientComponents;component/Images/Media/MediaNewspaper.png"/>
+        </Canvas>
+        <ComboBox x:Name="CountriesBox" Canvas.Left="145" Canvas.Top="89" Width="441" Height="52" FontFamily="Arial Black" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+            <ComboBox.Background>
+                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                    <GradientStop Color="#FFCBC7C7" Offset="0"/>
+                    <GradientStop Color="#FFCDCDCD" Offset="1"/>
+                </LinearGradientBrush>
+            </ComboBox.Background>
+        </ComboBox>
+        <Button x:Name="cancelButton" Content="Отмена" Canvas.Left="91" Canvas.Top="244" Width="194" Height="48" FontFamily="Arial Black" FontSize="20" Click="cancelButton_Click">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                    <GradientStop Color="#FFF3F3F3" Offset="0"/>
+                    <GradientStop Color="#FFCDCDCD" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button x:Name="acceptButton" Content="Подтвердить" Canvas.Left="315" Canvas.Top="244" Width="194" Height="48" Foreground="#FF02000C" FontSize="20" FontWeight="Bold" FontFamily="Arial Black" Click="acceptButton_Click">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                    <GradientStop Color="#FFF3F3F3" Offset="0"/>
+                    <GradientStop Color="#FFCDCDCD" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Label x:Name="label" Content="Страна" Canvas.Left="17" Canvas.Top="98" Foreground="White" FontFamily="Arial Black" FontSize="24"/>
+        <ComboBox x:Name="RegimeBox" Canvas.Left="145" Canvas.Top="166" Width="441" Height="52" FontFamily="Arial Black" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+            <ComboBox.Background>
+                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                    <GradientStop Color="#FFCBC7C7" Offset="0"/>
+                    <GradientStop Color="#FFCDCDCD" Offset="1"/>
+                </LinearGradientBrush>
+            </ComboBox.Background>
+        </ComboBox>
+        <Label x:Name="label_Copy" Content="Режим" Canvas.Left="17" Canvas.Top="172" Foreground="White" FontFamily="Arial Black" FontSize="24"/>
+    </Canvas>
+</local:AbstractDialog>

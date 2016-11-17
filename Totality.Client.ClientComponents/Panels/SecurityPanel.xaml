@@ -22,9 +22,9 @@
                 </Canvas.Background>
             </Canvas>
         </Canvas>
-        <local:Button Canvas.Left="893" Canvas.Top="82" Width="210" Height="321" imgUp="/Totality.Client.ClientComponents;component/Images/Security/SecurityShadowingButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Security/SecurityShadowingButtonDown.png" Cursor="Hand"/>
-        <local:Button Canvas.Left="669" Canvas.Top="82" Width="210" Height="321" imgUp="/Totality.Client.ClientComponents;component/Images/Security/SecurityCounterspyButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Security/SecurityCounterspyButtonDown.png" Cursor="Hand"/>
-        <local:Button Canvas.Left="447" Canvas.Top="82" Width="210" Height="321" imgUp="/Totality.Client.ClientComponents;component/Images/Security/SecurityPurgeButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Security/SecurityPurgeButtonDown.png" Cursor="Hand"/>
-        <local:Button Canvas.Left="90" Canvas.Top="82" Width="210" Height="321" imgUp="/Totality.Client.ClientComponents;component/Images/Security/SecurityNetsButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Security/SecurityNetsButtonDown.png" Cursor="Hand"/>
+        <local:Button x:Name="ShadowingButton" Canvas.Left="893" Canvas.Top="82" Width="210" Height="321" imgUp="/Totality.Client.ClientComponents;component/Images/Security/SecurityShadowingButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Security/SecurityShadowingButtonDown.png" Cursor="Hand"/>
+        <local:Button x:Name="CounterspyButton" Canvas.Left="669" Canvas.Top="82" Width="210" Height="321" imgUp="/Totality.Client.ClientComponents;component/Images/Security/SecurityCounterspyButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Security/SecurityCounterspyButtonDown.png" Cursor="Hand"/>
+        <local:Button x:Name="PurgeButton" Canvas.Left="447" Canvas.Top="82" Width="210" Height="321" imgUp="/Totality.Client.ClientComponents;component/Images/Security/SecurityPurgeButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Security/SecurityPurgeButtonDown.png" Cursor="Hand"/>
+        <local:Button x:Name="NetsButton" Canvas.Left="90" Canvas.Top="82" Width="210" Height="321" imgUp="/Totality.Client.ClientComponents;component/Images/Security/SecurityNetsButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Security/SecurityNetsButtonDown.png" Cursor="Hand"/>
     </Canvas>
 </UserControl>

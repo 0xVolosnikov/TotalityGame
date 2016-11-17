@@ -19,24 +19,22 @@ namespace Totality.Client.ClientComponents.Dialogs.Inner
     /// <summary>
     /// Логика взаимодействия для ImproveDialog.xaml
     /// </summary>
-    public partial class RepressionsDialog : UserControl, Dialog
+    public partial class RepressionsDialog : AbstractDialog, Dialog
     {
         public delegate void ReceiveOrder(object sender, Order order, string text, long price);
         ReceiveOrder _receiveOrder;
-        private Country _country;
 
-        public RepressionsDialog(ReceiveOrder receiveOrder, Country country)
+        public RepressionsDialog(ReceiveOrder receiveOrder)
         {
             _receiveOrder = receiveOrder;
-            _country = country;
             InitializeComponent();
         }
 
         private void acceptButton_Click(object sender, RoutedEventArgs e)
         {
-            Order order = new Order(_country.Name);
+            Order order = new Order(CountryData.Name);
 
-            if (_country.IsMobilized)
+            if (CountryData.IsMobilized)
             _receiveOrder(this, order, "Прекратить репрессии", 0);
             else
             _receiveOrder(this, order, "Начать репрессии", 0);

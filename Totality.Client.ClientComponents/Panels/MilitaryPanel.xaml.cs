@@ -32,12 +32,12 @@ namespace Totality.Client.ClientComponents
         {
             InitializeComponent();
             
-            NukeStrikeButton.click += () => createDialog<NukeStrikeDialog>(new NukeStrikeDialog(receiveOrder, CountryData));
-            WarButton.click += () => createDialog<WarDialog>(new WarDialog(receiveOrder, CountryData));
-            NukesButton.click += () => createDialog<NukesCountDialog>(new NukesCountDialog(receiveOrder, CountryData));
-            MissilesButton.click += () => createDialog<PROcountDialog>(new PROcountDialog(receiveOrder, CountryData));
-            UranusButton.click += () => createDialog<UranusDialog>(new UranusDialog(receiveOrder, CountryData));
-            MobilizationButton.click += () => createDialog<MobilizeDialog>(new MobilizeDialog(receiveOrder, CountryData));
+            NukeStrikeButton.click += () => createDialog<NukeStrikeDialog>(new NukeStrikeDialog(receiveOrder));
+            WarButton.click += () => createDialog<WarDialog>(new WarDialog(receiveOrder));
+            NukesButton.click += () => createDialog<NukesCountDialog>(new NukesCountDialog(receiveOrder));
+            MissilesButton.click += () => createDialog<PROcountDialog>(new PROcountDialog(receiveOrder));
+            UranusButton.click += () => createDialog<UranusDialog>(new UranusDialog(receiveOrder));
+            MobilizationButton.click += () => createDialog<MobilizeDialog>(new MobilizeDialog(receiveOrder));
             
         }
 

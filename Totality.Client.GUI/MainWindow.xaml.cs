@@ -20,6 +20,7 @@ using System.ServiceModel.Discovery;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using Totality.CommonClasses;
+using Totality.Client.ClientComponents.Dialogs;
 
 namespace Totality.Client.GUI
 {
@@ -69,6 +70,22 @@ namespace Totality.Client.GUI
             buttons[8].MouseDown += (object sender, MouseButtonEventArgs e) => changePanel(_sciencePanel);
             buttons[9].MouseDown += (object sender, MouseButtonEventArgs e) => changePanel(_premierPanel);
 
+            AbstractDialog.CountryData = _countryModel;
+            AbstractDialog.Countries.Add("Test"); //TEST
+            AbstractDialog.Countries.Add("Test2"); //TEST
+            AbstractDialog.Ministers.AddRange(new List<string>
+            {
+            "Министерство Промышленности",
+            "Министерство Финансов",
+            "Министерство Обороны",
+            "Министерство Иностранных Дел",
+            "Средства Массовой Информации",
+            "Министерство Внутренних Дел",
+            "Министерство Государственной Безопасности",
+            "Министерство Образования и Науки",
+            "Премьер-Министр"
+            });
+
             _industryPanel.Table = _ordersTable;
             _industryPanel.CountryData = _countryModel;
 
@@ -79,21 +96,28 @@ namespace Totality.Client.GUI
             _militaryPanel.CountryData = _countryModel;
 
             _foreignPanel.Table = _ordersTable;
+            _foreignPanel.CountryData = _countryModel;
+
             _mediaPanel.Table = _ordersTable;
 
             _innerPanel.Table = _ordersTable;
             _innerPanel.CountryData = _countryModel;
 
             _securityPanel.Table = _ordersTable;
-            _sciencePanel.Table = _ordersTable;
-            _premierPanel.Table = _ordersTable;
+            _securityPanel.CountryData = _countryModel;
 
-           // _connectionPanel = new ConnectionPanel();
+            _sciencePanel.Table = _ordersTable;
+            _sciencePanel.CountryData = _countryModel;
+
+            _premierPanel.Table = _ordersTable;
+            _premierPanel.CountryData = _countryModel;
+
+            // _connectionPanel = new ConnectionPanel();
             //_connectionPanel.Video(new Uri(String.Format(@"{0}\video2.mp4", AppDomain.CurrentDomain.BaseDirectory, "turnoff"), UriKind.Absolute));
 
-           // _grid.Children.Add(_connectionPanel);
+            // _grid.Children.Add(_connectionPanel);
             //_connectionPanel.NameReceived += _connectionPanel_NameReceived;
-           // _client = new ReferenceToServer.TransmitterServiceClient(new System.ServiceModel.InstanceContext(_servCallbackHandler));
+            // _client = new ReferenceToServer.TransmitterServiceClient(new System.ServiceModel.InstanceContext(_servCallbackHandler));
 
         }
 

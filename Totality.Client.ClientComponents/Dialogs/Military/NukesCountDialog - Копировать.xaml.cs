@@ -19,22 +19,20 @@ namespace Totality.Client.ClientComponents.Dialogs.Military
     /// <summary>
     /// Логика взаимодействия для MobilizeDialog.xaml
     /// </summary>
-    public partial class MobilizeDialog : UserControl, Dialog
+    public partial class MobilizeDialog : AbstractDialog, Dialog
     {
         public delegate void ReceiveOrder(object sender, Order order, string text, long price);
         private ReceiveOrder _receiveOrder;
-        private Country _country;
 
-        public MobilizeDialog(ReceiveOrder receiveOrder, Country country)
+        public MobilizeDialog(ReceiveOrder receiveOrder)
         {
             _receiveOrder = receiveOrder;
-            _country = country;
             InitializeComponent();
         }
 
         private void acceptButton_Click(object sender, RoutedEventArgs e)
         {
-            Order order = new Order(_country.Name);
+            Order order = new Order(CountryData.Name);
             _receiveOrder(this, order, "Всеобщая мобилизация", 0);
         }
 

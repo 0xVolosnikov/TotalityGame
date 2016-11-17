@@ -19,16 +19,14 @@ namespace Totality.Client.ClientComponents.Dialogs.Finance
     /// <summary>
     /// Логика взаимодействия для NukeStrikeDialog.xaml
     /// </summary>
-    public partial class CurrencyDialog : UserControl, Dialog
+    public partial class CurrencyDialog : AbstractDialog, Dialog
     {
         public delegate void ReceiveOrder(object sender, Order order, string text, long price);
         ReceiveOrder _receiveOrder;
-        private Country _country;
 
-        public CurrencyDialog(ReceiveOrder receiveOrder, Country country)
+        public CurrencyDialog(ReceiveOrder receiveOrder)
         {
             _receiveOrder = receiveOrder;
-            _country = country;
             InitializeComponent();
         }
 

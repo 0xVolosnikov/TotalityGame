@@ -81,6 +81,13 @@
     <Compile Include="ButtonToolTip.xaml.cs">
       <DependentUpon>ButtonToolTip.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\AbstractDialog.cs" />
+    <Compile Include="Dialogs\Foreign\IncomeDialog.xaml.cs">
+      <DependentUpon>IncomeDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Foreign\SendDialog.xaml.cs">
+      <DependentUpon>SendDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\Inner\LvlupDialog.xaml.cs">
       <DependentUpon>LvlupDialog.xaml</DependentUpon>
     </Compile>
@@ -90,11 +97,38 @@
     <Compile Include="Dialogs\Inner\RepressionsDialog.xaml.cs">
       <DependentUpon>RepressionsDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\Media\PropagandaDialog.xaml.cs">
+      <DependentUpon>PropagandaDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\Military\UranusDialog.xaml.cs">
       <DependentUpon>UranusDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\Military\NukesCountDialog - Копировать.xaml.cs">
       <DependentUpon>MobilizeDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Premier\LvlupDialog.xaml.cs">
+      <DependentUpon>LvlupDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Premier\AlertDialog.xaml.cs">
+      <DependentUpon>AlertDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Premier\ReorganizeDialog.xaml.cs">
+      <DependentUpon>ReorganizeDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Science\ImproveDialog.xaml.cs">
+      <DependentUpon>ImproveDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Security\CounterspyDialog.xaml.cs">
+      <DependentUpon>CounterspyDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Security\PurgeDialog.xaml.cs">
+      <DependentUpon>PurgeDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Security\ShadowingDialog.xaml.cs">
+      <DependentUpon>ShadowingDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Security\NetsDialog.xaml.cs">
+      <DependentUpon>NetsDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Panels\ConnectionPanel.xaml.cs">
       <DependentUpon>ConnectionPanel.xaml</DependentUpon>
@@ -205,6 +239,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Dialogs\Foreign\IncomeDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dialogs\Foreign\SendDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Dialogs\Inner\LvlupDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -217,11 +259,47 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Dialogs\Media\PropagandaDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Dialogs\Military\UranusDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Dialogs\Military\MobilizeDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dialogs\Premier\LvlupDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dialogs\Premier\AlertDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dialogs\Premier\ReorganizeDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dialogs\Science\ImproveDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dialogs\Security\CounterspyDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dialogs\Security\PurgeDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dialogs\Security\ShadowingDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dialogs\Security\NetsDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -557,6 +635,11 @@
     <Resource Include="Images\Premier\PremierReorganizeButton.png" />
     <Resource Include="Images\Premier\PremierReorganizeButtonDown.png" />
     <Resource Include="Images\Inner\PoliceBadge.png" />
+    <Resource Include="Images\Premier\PremierChess.png" />
+    <Resource Include="Images\Foreign\ForeignBird.png" />
+    <Resource Include="Images\Science\ScienceAtom.png" />
+    <Resource Include="Images\Security\SecurityEye.png" />
+    <Resource Include="Images\Media\MediaNewspaper.png" />
     <Content Include="video2.mp4">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

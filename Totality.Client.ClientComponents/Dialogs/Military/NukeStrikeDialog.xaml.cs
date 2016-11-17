@@ -19,17 +19,18 @@ namespace Totality.Client.ClientComponents.Dialogs.Military
     /// <summary>
     /// Логика взаимодействия для NukeStrikeDialog.xaml
     /// </summary>
-    public partial class NukeStrikeDialog : UserControl, Dialog
+    public partial class NukeStrikeDialog : AbstractDialog, Dialog
     {
         public delegate void ReceiveOrder(object sender, Order order, string text, long price);
         ReceiveOrder _receiveOrder;
-        Country _country;
 
-        public NukeStrikeDialog(ReceiveOrder receiveOrder, Country country )
+        public NukeStrikeDialog(ReceiveOrder receiveOrder)
         {
             _receiveOrder = receiveOrder;
-            _country = country;
             InitializeComponent();
+
+            CountriesBox.ItemsSource = Countries;
+            CountriesBox.SelectedIndex = 0;
         }
 
         private void acceptButton_Click(object sender, RoutedEventArgs e)
@@ -45,8 +46,8 @@ namespace Totality.Client.ClientComponents.Dialogs.Military
 
         public void receiveOrderFromChildren(object sender, Order order)
         {
-            order.CountryName = _country.Name;
-            order.TargetCountryName = comboBox.SelectedValue.ToString();
+            order.CountryName = CountryData.Name;
+            order.TargetCountryName = (string)CountriesBox.SelectedItem;
             _receiveOrder(this, order, "Ядерный удар", 0);
         }
     }

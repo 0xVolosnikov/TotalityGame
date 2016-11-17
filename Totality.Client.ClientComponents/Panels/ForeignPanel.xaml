@@ -167,8 +167,8 @@
                 </Canvas.Background>
             </Canvas>
         </Canvas>
-        <local:Button Canvas.Left="914" Canvas.Top="132" Width="200" Height="271" imgUp="/Totality.Client.ClientComponents;component/Images/Foreign/ForeignInButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Foreign/ForeignInButtonDown.png" Cursor="Hand"/>
-        <local:Button Canvas.Left="640" Canvas.Top="132" Width="200" Height="271" imgUp="/Totality.Client.ClientComponents;component/Images/Foreign/ForeignSendButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Foreign/ForeignSendButtonDown.png" Cursor="Hand"/>
+        <local:Button x:Name="IncomeButton" Canvas.Left="914" Canvas.Top="132" Width="200" Height="271" imgUp="/Totality.Client.ClientComponents;component/Images/Foreign/ForeignInButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Foreign/ForeignInButtonDown.png" Cursor="Hand"/>
+        <local:Button x:Name="SendButton" Canvas.Left="640" Canvas.Top="132" Width="200" Height="271" imgUp="/Totality.Client.ClientComponents;component/Images/Foreign/ForeignSendButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Foreign/ForeignSendButtonDown.png" Cursor="Hand"/>
         <Canvas Height="315" Canvas.Left="38" Canvas.Top="92" Width="510">
             <Canvas.Background>
                 <ImageBrush Stretch="None" ImageSource="/Totality.Client.ClientComponents;component/Images/Foreign/ForeignMenuBack.png"/>

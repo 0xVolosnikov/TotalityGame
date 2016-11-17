@@ -7,7 +7,7 @@ using System.Windows.Controls;
 
 namespace Totality.Client.ClientComponents.Dialogs
 {
-    public interface Dialog
+    public interface  Dialog 
     {
 
     }

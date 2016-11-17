@@ -32,9 +32,9 @@ namespace Totality.Client.ClientComponents
         public InnerPanel()
         {
             InitializeComponent();
-            RepressionsButton.click += () => createDialog<RepressionsDialog>(new RepressionsDialog(receiveOrder, CountryData));
-            SuppressButton.click += () => createDialog<SuppressDialog>(new SuppressDialog(receiveOrder, CountryData));
-            LvlupButton.click += () => createDialog<LvlupDialog>(new LvlupDialog(receiveOrder, CountryData));
+            RepressionsButton.click += () => createDialog<RepressionsDialog>(new RepressionsDialog(receiveOrder));
+            SuppressButton.click += () => createDialog<SuppressDialog>(new SuppressDialog(receiveOrder));
+            LvlupButton.click += () => createDialog<LvlupDialog>(new LvlupDialog(receiveOrder));
         }
 
         private void createDialog<T>(Dialog dialog) where T : UIElement

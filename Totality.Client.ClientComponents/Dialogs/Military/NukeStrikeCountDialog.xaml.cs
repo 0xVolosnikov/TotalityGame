@@ -19,9 +19,9 @@ namespace Totality.Client.ClientComponents.Dialogs.Military
     /// <summary>
     /// Логика взаимодействия для NukeStrikeCountDialog.xaml
     /// </summary>
-    public partial class NukeStrikeCountDialog : UserControl, Dialog
+    public partial class NukeStrikeCountDialog : AbstractDialog, Dialog
     {
-        public delegate void ReceiveOrder(Object sender, Order order);
+        public delegate void ReceiveOrder(object sender, Order order);
         ReceiveOrder receiveOrder;
 
         public NukeStrikeCountDialog(ReceiveOrder receiveOrder)

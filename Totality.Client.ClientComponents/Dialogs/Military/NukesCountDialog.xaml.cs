@@ -19,22 +19,20 @@ namespace Totality.Client.ClientComponents.Dialogs.Military
     /// <summary>
     /// Логика взаимодействия для NukeStrikeCountDialog.xaml
     /// </summary>
-    public partial class NukesCountDialog : UserControl, Dialog
+    public partial class NukesCountDialog : AbstractDialog, Dialog
     {
         public delegate void ReceiveOrder(object sender, Order order, string text, long price);
         private ReceiveOrder _receiveOrder;
-        private Country _country;
 
-        public NukesCountDialog(ReceiveOrder receiveOrder, Country country)
+        public NukesCountDialog(ReceiveOrder receiveOrder)
         {
             _receiveOrder = receiveOrder;
-            _country = country;
             InitializeComponent();
         }
 
         private void acceptButton_Click(object sender, RoutedEventArgs e)
         {
-            Order order = new Order(_country.Name);
+            Order order = new Order(CountryData.Name);
             order.Count = (long)integerUpDown.Value;
             _receiveOrder(this, order, "Производство ядерных ракет", 0);
         }

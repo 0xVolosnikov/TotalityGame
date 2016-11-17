@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Totality.Model;
+using Totality.Client.ClientComponents.Dialogs.Security;
 
 namespace Totality.Client.ClientComponents
 {
@@ -26,19 +27,15 @@ namespace Totality.Client.ClientComponents
     {
         Dialog currentDialog;
         public OrdersTable Table;
+        public Country CountryData;
 
         public SecurityPanel()
         {
             InitializeComponent();
-            /*this.NukeStrikeButton.click += () => createDialog<NukeStrikeDialog>(new NukeStrikeDialog(receiveOrder));
-            this.WarButton.click += () => createDialog<WarDialog>(new WarDialog(receiveOrder));
-            this.DefendButton.click += () => createDialog<DefCountDialog>(new DefCountDialog(receiveOrder));
-            this.RaidButton.click += () => createDialog<RaidDialog>(new RaidDialog(receiveOrder));
-            this.NukeCancelButton.click += () => createDialog<CancelDialog>(new CancelDialog(receiveOrder));
-            this.NukesButton.click += () => createDialog<NukesCountDialog>(new NukesCountDialog(receiveOrder));
-            this.PRObutton.click += () => createDialog<PROcountDialog>(new PROcountDialog(receiveOrder));
-            this.LVLupButton.click += () => createDialog<LvlUpDialog>(new LvlUpDialog(receiveOrder, (int)Ministers.MinDef));
-            this.HelpButton.click += () => createDialog<HelpDialog>(new HelpDialog(receiveOrder, (int)Ministers.MinDef));*/
+            PurgeButton.click += () => createDialog<PurgeDialog>(new PurgeDialog(receiveOrder));
+            CounterspyButton.click += () => createDialog<CounterspyDialog>(new CounterspyDialog(receiveOrder));
+            ShadowingButton.click += () => createDialog<ShadowingDialog>(new ShadowingDialog(receiveOrder));
+            NetsButton.click += () => createDialog<NetsDialog>(new NetsDialog(receiveOrder));
         }
 
         private void createDialog<T>(Dialog dialog) where T : UIElement
@@ -52,10 +49,13 @@ namespace Totality.Client.ClientComponents
             }
         }
 
-        public void receiveOrder(object sender, Order order)
+        public void receiveOrder(object sender, Order order, string text, long price)
         {
+            if (order != null)
+                Table.addOrder(new OrderRecord(text, price.ToString(), order));
+
             canvas1.Children.Remove((UIElement)sender);
-            currentDialog = null;     
+            currentDialog = null;
         }
     }
 }
