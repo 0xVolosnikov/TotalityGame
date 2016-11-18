@@ -46,14 +46,17 @@ namespace Totality.Client.GUI
         {
             _servCallbackHandler = new CallbackHandler();
             _servCallbackHandler.CountryUpdated += _servCallbackHandler_CountryUpdated;
+            //_servCallbackHandler.
             _countryModel = new Model.Country("test");
 
             InitializeComponent();
             setAnims();
+
             this.MouseWheel += MainWindow_MouseWheel;
             _ordersTable.PreviewMouseWheel += dataGrid1_PreviewMouseWheel;
             _ordersTable.MouseWheel += dataGrid1_MouseWheel;
             currentPanel = _ordersTable;
+
             for (int i = 1; i <= 11; i++)
             buttons.Add(FindName("but" + i) as MinisteryButton);
             foreach (MinisteryButton but in buttons)
@@ -69,6 +72,9 @@ namespace Totality.Client.GUI
             buttons[7].MouseDown += (object sender, MouseButtonEventArgs e) => changePanel(_securityPanel);
             buttons[8].MouseDown += (object sender, MouseButtonEventArgs e) => changePanel(_sciencePanel);
             buttons[9].MouseDown += (object sender, MouseButtonEventArgs e) => changePanel(_premierPanel);
+
+            AbstractPanel.CountryData = _countryModel;
+            AbstractPanel.Table = _ordersTable;
 
             AbstractDialog.CountryData = _countryModel;
             AbstractDialog.Countries.Add("Test"); //TEST
@@ -86,31 +92,6 @@ namespace Totality.Client.GUI
             "Премьер-Министр"
             });
 
-            _industryPanel.Table = _ordersTable;
-            _industryPanel.CountryData = _countryModel;
-
-            _financePanel.Table = _ordersTable;
-            _financePanel.CountryData = _countryModel;
-
-            _militaryPanel.Table = _ordersTable;
-            _militaryPanel.CountryData = _countryModel;
-
-            _foreignPanel.Table = _ordersTable;
-            _foreignPanel.CountryData = _countryModel;
-
-            _mediaPanel.Table = _ordersTable;
-
-            _innerPanel.Table = _ordersTable;
-            _innerPanel.CountryData = _countryModel;
-
-            _securityPanel.Table = _ordersTable;
-            _securityPanel.CountryData = _countryModel;
-
-            _sciencePanel.Table = _ordersTable;
-            _sciencePanel.CountryData = _countryModel;
-
-            _premierPanel.Table = _ordersTable;
-            _premierPanel.CountryData = _countryModel;
 
             // _connectionPanel = new ConnectionPanel();
             //_connectionPanel.Video(new Uri(String.Format(@"{0}\video2.mp4", AppDomain.CurrentDomain.BaseDirectory, "turnoff"), UriKind.Absolute));
@@ -118,6 +99,8 @@ namespace Totality.Client.GUI
             // _grid.Children.Add(_connectionPanel);
             //_connectionPanel.NameReceived += _connectionPanel_NameReceived;
             // _client = new ReferenceToServer.TransmitterServiceClient(new System.ServiceModel.InstanceContext(_servCallbackHandler));
+
+            _grid.Children.Add(new NukeAttackDialog());
 
         }
 
@@ -168,6 +151,7 @@ namespace Totality.Client.GUI
 
         private void _servCallbackHandler_CountryUpdated(Country country)
         {
+            changePanel(_ordersTable);
             _country = country;
             _header.UpdateMoney(country.Money);
             _header.UpdateNukes(country.NukesCount);

@@ -17,16 +17,14 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Totality.Model;
 
-namespace Totality.Client.ClientComponents
+namespace Totality.Client.ClientComponents.Panels
 {
     /// <summary>
     /// Логика взаимодействия для MilitaryPanel.xaml
     /// </summary>
-    public partial class MilitaryPanel : UserControl, InPanel
+    public partial class MilitaryPanel : AbstractPanel, InPanel
     {
         Dialog currentDialog;
-        public OrdersTable Table;
-        public Country CountryData;
 
         public MilitaryPanel()
         {

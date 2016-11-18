@@ -97,6 +97,9 @@
     <Compile Include="Dialogs\Inner\RepressionsDialog.xaml.cs">
       <DependentUpon>RepressionsDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\Media\NewsDialog.xaml.cs">
+      <DependentUpon>NewsDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\Media\PropagandaDialog.xaml.cs">
       <DependentUpon>PropagandaDialog.xaml</DependentUpon>
     </Compile>
@@ -130,6 +133,13 @@
     <Compile Include="Dialogs\Security\NetsDialog.xaml.cs">
       <DependentUpon>NetsDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="NukeAttackDialog.xaml.cs">
+      <DependentUpon>NukeAttackDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NukeRocketOrder.xaml.cs">
+      <DependentUpon>NukeRocketOrder.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\AbstractPanel.cs" />
     <Compile Include="Panels\ConnectionPanel.xaml.cs">
       <DependentUpon>ConnectionPanel.xaml</DependentUpon>
     </Compile>
@@ -259,6 +269,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Dialogs\Media\NewsDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Dialogs\Media\PropagandaDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -302,6 +316,14 @@
     <Page Include="Dialogs\Security\NetsDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="NukeAttackDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NukeRocketOrder.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Panels\ConnectionPanel.xaml">
       <SubType>Designer</SubType>
@@ -640,6 +662,8 @@
     <Resource Include="Images\Science\ScienceAtom.png" />
     <Resource Include="Images\Security\SecurityEye.png" />
     <Resource Include="Images\Media\MediaNewspaper.png" />
+    <Resource Include="Images\nukeRocket.png" />
+    <Resource Include="Images\Radiation.png" />
     <Content Include="video2.mp4">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

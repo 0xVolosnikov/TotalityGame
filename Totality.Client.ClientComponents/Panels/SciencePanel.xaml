@@ -1,9 +1,10 @@
-﻿<UserControl x:Class="Totality.Client.ClientComponents.SciencePanel"
+﻿<we:AbstractPanel x:Class="Totality.Client.ClientComponents.Panels.SciencePanel"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Totality.Client.ClientComponents"
+             xmlns:we="clr-namespace:Totality.Client.ClientComponents.Panels"
              mc:Ignorable="d" Width="1200" Height="445">
     <Canvas x:Name="canvas1" Width="1200" Height="445">
         <Canvas.Background>
@@ -49,4 +50,4 @@
         <Label x:Name="label1_Copy1" Content="10" Canvas.Left="629" Canvas.Top="116" Height="192" Width="165" FontFamily="Impact" FontSize="150" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="#FF007777" IsHitTestVisible="False"/>
         <Label x:Name="label1_Copy2" Content="3" Canvas.Left="928" Canvas.Top="116" Height="192" Width="165" FontFamily="Impact" FontSize="150" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="#FFC70303" IsHitTestVisible="False"/>
     </Canvas>
-</UserControl>
+</we:AbstractPanel>

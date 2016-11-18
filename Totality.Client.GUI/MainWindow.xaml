@@ -6,22 +6,21 @@
         xmlns:local="clr-namespace:Totality.Client.GUI"
         xmlns:Totality.Client.ClientComponents="clr-namespace:Totality.Client.ClientComponents;assembly=Totality.Client.ClientComponents" xmlns:Panels="clr-namespace:Totality.Client.ClientComponents.Panels;assembly=Totality.Client.ClientComponents" x:Class="Totality.Client.GUI.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="702" Width="1206.5">
+        Title="Totality" Height="702" Width="1206.5" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" UseLayoutRounding="True">
     <Grid x:Name="_grid">
         <Grid.Background>
             <ImageBrush ImageSource="Images/bgtexture.jpg" TileMode="Tile" ViewportUnits="Absolute" Viewport="0 0 500 300" Stretch="None"/>
         </Grid.Background>
-        <Totality.Client.ClientComponents:Header x:Name="_header" VerticalAlignment="Top" Margin="0,0,-1,0" Width="1200"/>
         <Canvas x:Name="canvas1" HorizontalAlignment="Left" Height="672" VerticalAlignment="Top" Width="1198">
-            <Totality.Client.ClientComponents:MilitaryPanel x:Name="_militaryPanel" Canvas.Top="50" Height="445" Width="1200" Canvas.Left="1203"/>
-            <Totality.Client.ClientComponents:FinancePanel x:Name="_financePanel" Canvas.Left="1203" Canvas.Top="50"/>
-            <Totality.Client.ClientComponents:ForeignPanel x:Name="_foreignPanel" Canvas.Left="1203" Canvas.Top="50"/>
-            <Totality.Client.ClientComponents:IndustryPanel x:Name="_industryPanel" Canvas.Left="1203" Canvas.Top="50"/>
-            <Totality.Client.ClientComponents:SecurityPanel x:Name="_securityPanel" Canvas.Left="1203" Canvas.Top="50"/>
-            <Totality.Client.ClientComponents:PremierPanel x:Name="_premierPanel" Canvas.Left="1203" Canvas.Top="50"/>
-            <Totality.Client.ClientComponents:MediaPanel x:Name="_mediaPanel" Canvas.Left="1203" Canvas.Top="50"/>
-            <Totality.Client.ClientComponents:InnerPanel x:Name="_innerPanel" Canvas.Left="1203" Canvas.Top="50"/>
-            <Totality.Client.ClientComponents:SciencePanel x:Name="_sciencePanel" Canvas.Left="1203" Canvas.Top="50"/>
+            <Panels:MilitaryPanel x:Name="_militaryPanel" Canvas.Top="50" Height="445" Width="1200" Canvas.Left="1203"/>
+            <Panels:FinancePanel x:Name="_financePanel" Canvas.Left="1203" Canvas.Top="50"/>
+            <Panels:ForeignPanel x:Name="_foreignPanel" Canvas.Left="1203" Canvas.Top="50"/>
+            <Panels:IndustryPanel x:Name="_industryPanel" Canvas.Left="1203" Canvas.Top="50"/>
+            <Panels:SecurityPanel x:Name="_securityPanel" Canvas.Left="1203" Canvas.Top="50"/>
+            <Panels:PremierPanel x:Name="_premierPanel" Canvas.Left="1203" Canvas.Top="50"/>
+            <Panels:MediaPanel x:Name="_mediaPanel" Canvas.Left="1203" Canvas.Top="50"/>
+            <Panels:InnerPanel x:Name="_innerPanel" Canvas.Left="1203" Canvas.Top="50"/>
+            <Panels:SciencePanel x:Name="_sciencePanel" Canvas.Left="1203" Canvas.Top="50"/>
             <Totality.Client.ClientComponents:OrdersTable x:Name="_ordersTable" HorizontalAlignment="Left" VerticalAlignment="Top" Height="445" Width="1198" Canvas.Top="50" startingLines="14" Canvas.Left="0" />
             <Image x:Name="image_Copy" Height="100" Canvas.Left="132" Canvas.Top="572" Width="100" Source="Images/line.png"/>
             <Totality.Client.ClientComponents:MinisteryButton x:Name="but2" Canvas.Left="133" Canvas.Top="511" imgDown="Images/but2.png" imgUp="Images/but1.png" Cursor="Hand"/>
@@ -46,5 +45,6 @@
             <Image x:Name="image_Copy9" Height="100" Canvas.Left="1068" Canvas.Top="572" Width="100" Source="Images/line.png"/>
             <Totality.Client.ClientComponents:MinisteryButton x:Name="but11" Canvas.Left="1069" Canvas.Top="511" imgDown="Images/but2.png" imgUp="Images/but1.png" Cursor="Hand"/>
         </Canvas>
+        <Totality.Client.ClientComponents:Header x:Name="_header" VerticalAlignment="Top" Margin="0,0,-1,0" Width="1200"/>
     </Grid>
 </Window>

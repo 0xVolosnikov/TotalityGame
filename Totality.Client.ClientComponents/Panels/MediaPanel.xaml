@@ -1,9 +1,10 @@
-﻿<UserControl x:Class="Totality.Client.ClientComponents.MediaPanel"
+﻿<we:AbstractPanel x:Class="Totality.Client.ClientComponents.Panels.MediaPanel"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Totality.Client.ClientComponents"
+             xmlns:we="clr-namespace:Totality.Client.ClientComponents.Panels"
              mc:Ignorable="d" Width="1200" Height="445">
     <Canvas x:Name="canvas1" Width="1200" Height="445">
         <Canvas.Background>
@@ -22,7 +23,7 @@
                 </Canvas.Background>
             </Canvas>
         </Canvas>
-        <local:Button Canvas.Left="682" Canvas.Top="92" imgUp="/Totality.Client.ClientComponents;component/Images/Media/NewsButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Media/NewsButtonDown.png" Width="284" Height="313" Cursor="Hand"/>
+        <local:Button x:Name="NewsButton" Canvas.Left="682" Canvas.Top="92" imgUp="/Totality.Client.ClientComponents;component/Images/Media/NewsButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Media/NewsButtonDown.png" Width="284" Height="313" Cursor="Hand"/>
         <local:Button x:Name="PropagandaButton" Canvas.Left="269" Canvas.Top="92" imgUp="/Totality.Client.ClientComponents;component/Images/Media/PropButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Media/PropButtonDown.png" Width="277" Height="308" Cursor="Hand"/>
     </Canvas>
-</UserControl>
+</we:AbstractPanel>

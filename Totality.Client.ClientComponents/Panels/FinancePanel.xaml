@@ -1,9 +1,10 @@
-﻿<UserControl x:Class="Totality.Client.ClientComponents.FinancePanel"
+﻿<we:AbstractPanel x:Class="Totality.Client.ClientComponents.Panels.FinancePanel"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Totality.Client.ClientComponents"
+             xmlns:we="clr-namespace:Totality.Client.ClientComponents.Panels"
              mc:Ignorable="d" Width="1200" Height="445">
     <Canvas x:Name="canvas1" Width="1200" Height="445">
         <Canvas.Background>
@@ -39,4 +40,4 @@
             </Canvas.Background>
         </Canvas>
     </Canvas>
-</UserControl>
+</we:AbstractPanel>

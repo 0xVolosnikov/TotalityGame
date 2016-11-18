@@ -18,16 +18,14 @@ using System.Windows.Shapes;
 using Totality.Model;
 using Totality.Client.ClientComponents.Dialogs.Industry;
 
-namespace Totality.Client.ClientComponents
+namespace Totality.Client.ClientComponents.Panels
 {
     /// <summary>
     /// Логика взаимодействия для MilitaryPanel.xaml
     /// </summary>
-    public partial class IndustryPanel : UserControl, InPanel
+    public partial class IndustryPanel : AbstractPanel, InPanel
     {
         Dialog currentDialog;
-        public OrdersTable Table;
-        public Country CountryData;
 
         public IndustryPanel()
         {

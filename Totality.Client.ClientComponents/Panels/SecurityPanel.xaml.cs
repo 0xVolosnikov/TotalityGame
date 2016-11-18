@@ -18,16 +18,14 @@ using System.Windows.Shapes;
 using Totality.Model;
 using Totality.Client.ClientComponents.Dialogs.Security;
 
-namespace Totality.Client.ClientComponents
+namespace Totality.Client.ClientComponents.Panels
 {
     /// <summary>
     /// Логика взаимодействия для MilitaryPanel.xaml
     /// </summary>
-    public partial class SecurityPanel : UserControl, InPanel
+    public partial class SecurityPanel : AbstractPanel, InPanel
     {
         Dialog currentDialog;
-        public OrdersTable Table;
-        public Country CountryData;
 
         public SecurityPanel()
         {
@@ -35,7 +33,7 @@ namespace Totality.Client.ClientComponents
             PurgeButton.click += () => createDialog<PurgeDialog>(new PurgeDialog(receiveOrder));
             CounterspyButton.click += () => createDialog<CounterspyDialog>(new CounterspyDialog(receiveOrder));
             ShadowingButton.click += () => createDialog<ShadowingDialog>(new ShadowingDialog(receiveOrder));
-            NetsButton.click += () => createDialog<NetsDialog>(new NetsDialog(receiveOrder));
+            NetsButton.click += () => createBigDialog<NetsDialog>(new NetsDialog(receiveOrder));
         }
 
         private void createDialog<T>(Dialog dialog) where T : UIElement
@@ -46,6 +44,17 @@ namespace Totality.Client.ClientComponents
                 canvas1.Children.Add((T)currentDialog);
                 Canvas.SetLeft((T)currentDialog, 295);
                 Canvas.SetTop((T)currentDialog, 68);
+            }
+        }
+
+        private void createBigDialog<T>(Dialog dialog) where T : UIElement
+        {
+            if (currentDialog == null)
+            {
+                currentDialog = dialog;
+                canvas1.Children.Add((T)currentDialog);
+                Canvas.SetLeft((T)currentDialog, (Width - ((UserControl)currentDialog).Width)/2.0 );
+                Canvas.SetTop((T)currentDialog, (41 + Height - ((UserControl)currentDialog).Height) / 2.0);
             }
         }
 

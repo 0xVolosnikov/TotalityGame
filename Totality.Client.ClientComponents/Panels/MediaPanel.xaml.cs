@@ -18,21 +18,20 @@ using System.Windows.Shapes;
 using Totality.Model;
 using Totality.Client.ClientComponents.Dialogs.Media;
 
-namespace Totality.Client.ClientComponents
+namespace Totality.Client.ClientComponents.Panels
 {
     /// <summary>
     /// Логика взаимодействия для MilitaryPanel.xaml
     /// </summary>
-    public partial class MediaPanel : UserControl, InPanel
+    public partial class MediaPanel : AbstractPanel, InPanel
     {
         Dialog currentDialog;
-        public OrdersTable Table;
-        public Country CountryData;
 
         public MediaPanel()
         {
             InitializeComponent();
             PropagandaButton.click += () => createDialog<PropagandaDialog>(new PropagandaDialog(receiveOrder));
+            NewsButton.click += () => createBigDialog<NewsDialog>(new NewsDialog(receiveOrder));
         }
 
 
@@ -44,6 +43,17 @@ namespace Totality.Client.ClientComponents
                 canvas1.Children.Add((T)currentDialog);
                 Canvas.SetLeft((T)currentDialog, 295);
                 Canvas.SetTop((T)currentDialog, 68);
+            }
+        }
+
+        private void createBigDialog<T>(Dialog dialog) where T : UIElement
+        {
+            if (currentDialog == null)
+            {
+                currentDialog = dialog;
+                canvas1.Children.Add((T)currentDialog);
+                Canvas.SetLeft((T)currentDialog, (Width - ((UserControl)currentDialog).Width) / 2.0);
+                Canvas.SetTop((T)currentDialog, (Height - ((UserControl)currentDialog).Height) / 2.0);
             }
         }
 

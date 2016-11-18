@@ -19,16 +19,14 @@ using Totality.Model;
 using Totality.Model.Diplomatical;
 using Totality.Client.ClientComponents.Dialogs.Foreign;
 
-namespace Totality.Client.ClientComponents
+namespace Totality.Client.ClientComponents.Panels
 {
     /// <summary>
     /// Логика взаимодействия для MilitaryPanel.xaml
     /// </summary>
-    public partial class ForeignPanel : UserControl, InPanel
+    public partial class ForeignPanel : AbstractPanel, InPanel
     {
         Dialog currentDialog;
-        public OrdersTable Table;
-        public Country CountryData;
 
         public ForeignPanel()
         {

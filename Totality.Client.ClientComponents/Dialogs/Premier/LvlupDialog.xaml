@@ -8,7 +8,7 @@
     <local:AbstractDialog.Effect>
         <DropShadowEffect RenderingBias="Quality" BlurRadius="7"/>
     </local:AbstractDialog.Effect>
-    <Canvas x:Name="canvas" Background="#FF1E1400">
+    <Canvas x:Name="canvas" Background="#FF46371A">
         <Canvas Height="39" Canvas.Top="23" Width="607" Background="Black">
             <Image x:Name="image" Height="74" Canvas.Left="263" Canvas.Top="-20" Width="74" RenderTransformOrigin="0.483,0.466" Stretch="None" Source="/Totality.Client.ClientComponents;component/Images/Premier/PremierChess.png"/>
         </Canvas>

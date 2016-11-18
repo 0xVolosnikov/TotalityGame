@@ -19,16 +19,14 @@ using Totality.Model;
 using Totality.CommonClasses;
 using Totality.Client.ClientComponents.Panels;
 
-namespace Totality.Client.ClientComponents
+namespace Totality.Client.ClientComponents.Panels
 {
     /// <summary>
     /// Логика взаимодействия для MilitaryPanel.xaml
     /// </summary>
-    public partial class FinancePanel : UserControl, InPanel
+    public partial class FinancePanel : AbstractPanel, InPanel
     {
         private Dialog _currentDialog;
-        public OrdersTable Table;
-        public Country CountryData;
 
         public FinancePanel()
         {

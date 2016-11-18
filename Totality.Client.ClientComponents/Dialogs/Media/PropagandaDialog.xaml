@@ -9,9 +9,9 @@
     <local:AbstractDialog.Effect>
         <DropShadowEffect RenderingBias="Quality" BlurRadius="7"/>
     </local:AbstractDialog.Effect>
-    <Canvas x:Name="canvas" Background="#FF513514">
-        <Canvas Height="39" Canvas.Top="23" Width="607" Background="#FF110B04">
-            <Image x:Name="image" Height="74" Canvas.Left="261" Canvas.Top="-17" Width="74" RenderTransformOrigin="0.483,0.466" Stretch="None" Source="/Totality.Client.ClientComponents;component/Images/Media/MediaNewspaper.png"/>
+    <Canvas x:Name="canvas" Background="#FF2C2C2C">
+        <Canvas Height="39" Canvas.Top="23" Width="607" Background="Black">
+            <Image x:Name="image" Height="72" Canvas.Left="265" Canvas.Top="-16" Width="84" RenderTransformOrigin="0.483,0.466" Stretch="None" Source="/Totality.Client.ClientComponents;component/Images/Media/MediaNewspaper.png"/>
         </Canvas>
         <ComboBox x:Name="CountriesBox" Canvas.Left="145" Canvas.Top="89" Width="441" Height="52" FontFamily="Arial Black" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
             <ComboBox.Background>
@@ -21,7 +21,7 @@
                 </LinearGradientBrush>
             </ComboBox.Background>
         </ComboBox>
-        <Button x:Name="cancelButton" Content="Отмена" Canvas.Left="91" Canvas.Top="244" Width="194" Height="48" FontFamily="Arial Black" FontSize="20" Click="cancelButton_Click">
+        <Button x:Name="cancelButton" Content="Отмена" Canvas.Left="78" Canvas.Top="244" Width="194" Height="48" FontFamily="Arial Black" FontSize="20" Click="cancelButton_Click">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                     <GradientStop Color="#FFF3F3F3" Offset="0"/>
@@ -29,7 +29,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button x:Name="acceptButton" Content="Подтвердить" Canvas.Left="315" Canvas.Top="244" Width="194" Height="48" Foreground="#FF02000C" FontSize="20" FontWeight="Bold" FontFamily="Arial Black" Click="acceptButton_Click">
+        <Button x:Name="acceptButton" Content="Подтвердить" Canvas.Left="344" Canvas.Top="244" Width="194" Height="48" Foreground="#FF02000C" FontSize="20" FontWeight="Bold" FontFamily="Arial Black" Click="acceptButton_Click">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                     <GradientStop Color="#FFF3F3F3" Offset="0"/>
