@@ -12,21 +12,22 @@ namespace Totality.Model
     public class NukeRocket
     {
         [DataMember]
-        public string From { get; }
+        public string From { get; set; }
         [DataMember]
-        public string To { get; }
+        public string To { get; set; }
         [DataMember]
         public int LifeTime { get; set; }
         [DataMember]
         public int Count { get; set; }
         [DataMember]
-        public Guid Id { get; }
+        public Guid Id { get; set; }
 
         public NukeRocket( string from, string to, int count)
         {
             Id = Guid.NewGuid();
             From = from;
             To = to;
+            Count = count;
             LifeTime = Constants.NukeRocketLifetime;
         }
     }

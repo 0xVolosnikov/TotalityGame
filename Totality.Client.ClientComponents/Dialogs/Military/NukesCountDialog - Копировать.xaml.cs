@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Totality.CommonClasses;
 using Totality.Model;
 
 namespace Totality.Client.ClientComponents.Dialogs.Military
@@ -21,6 +22,7 @@ namespace Totality.Client.ClientComponents.Dialogs.Military
     /// </summary>
     public partial class MobilizeDialog : AbstractDialog, Dialog
     {
+        private enum Orders { GeneralMobilization, Demobilization, IncreaseUranium, MakeNukes, MakeMissiles, NukeStrike, StartWar }
         public delegate void ReceiveOrder(object sender, Order order, string text, long price);
         private ReceiveOrder _receiveOrder;
 
@@ -33,6 +35,7 @@ namespace Totality.Client.ClientComponents.Dialogs.Military
         private void acceptButton_Click(object sender, RoutedEventArgs e)
         {
             Order order = new Order(CountryData.Name);
+            order.Ministery = (short)Mins.Military;
             _receiveOrder(this, order, "Всеобщая мобилизация", 0);
         }
 

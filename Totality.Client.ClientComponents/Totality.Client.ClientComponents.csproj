@@ -133,6 +133,9 @@
     <Compile Include="Dialogs\Security\NetsDialog.xaml.cs">
       <DependentUpon>NetsDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\SendDialog.xaml.cs">
+      <DependentUpon>SendDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="NukeAttackDialog.xaml.cs">
       <DependentUpon>NukeAttackDialog.xaml</DependentUpon>
     </Compile>
@@ -145,9 +148,6 @@
     </Compile>
     <Compile Include="Dialogs\Industry\ImproveDialog.xaml.cs">
       <DependentUpon>ImproveDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\Industry\LvlUpDialog.xaml.cs">
-      <DependentUpon>LvlUpDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\Finance\CurrencyDialog.xaml.cs">
       <DependentUpon>CurrencyDialog.xaml</DependentUpon>
@@ -228,6 +228,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Service References\ServiceReference1\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="StatButton.xaml.cs">
       <DependentUpon>StatButton.xaml</DependentUpon>
     </Compile>
@@ -242,6 +247,22 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="Service References\ServiceReference1\Arrays.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceReference1\service.wsdl" />
+    <None Include="Service References\ServiceReference1\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceReference1\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceReference1\Totality.Model.Diplomatical.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceReference1\Totality.Model.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <Resource Include="TrixieCyr-Plain.ttf" />
   </ItemGroup>
   <ItemGroup>
@@ -317,6 +338,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Dialogs\SendDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="NukeAttackDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -330,10 +355,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dialogs\Industry\ImproveDialog.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Dialogs\Industry\LvlUpDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -662,11 +683,25 @@
     <Resource Include="Images\Science\ScienceAtom.png" />
     <Resource Include="Images\Security\SecurityEye.png" />
     <Resource Include="Images\Media\MediaNewspaper.png" />
-    <Resource Include="Images\nukeRocket.png" />
     <Resource Include="Images\Radiation.png" />
+    <Resource Include="RadiaionSmall.png" />
+    <Resource Include="Images\RadiaionSmall.png" />
+    <Resource Include="Images\nukeRocket.png" />
+    <None Include="Service References\ServiceReference1\configuration91.svcinfo" />
+    <None Include="Service References\ServiceReference1\configuration.svcinfo" />
+    <None Include="Service References\ServiceReference1\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="video2.mp4">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\ServiceReference1\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

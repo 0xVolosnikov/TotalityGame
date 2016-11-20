@@ -10,7 +10,7 @@ namespace Totality.Client.ClientComponents.Panels
 {
     public class AbstractPanel : UserControl
     {
-        public static Country CountryData;
+        public static Country CountryData { get; set; }
         public static OrdersTable Table;
     }
 }

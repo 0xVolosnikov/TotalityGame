@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Totality.Client.GUI.ReferenceToServer;
+using Totality.Client.ClientComponents.ServiceReference1;
+using Totality.Model;
+using Totality.Model.Diplomatical;
 
 namespace Totality.Client.GUI
 {
@@ -12,13 +14,19 @@ namespace Totality.Client.GUI
         public delegate void CountryUpdatedHandler(Country country);
         public event CountryUpdatedHandler CountryUpdated;
 
+        public delegate void InitializeNukes();
+        public event InitializeNukes NukesInitialized;
+
+        public delegate void UpdateNukes(NukeRocket[] rockets);
+        public event UpdateNukes NukesUpdated;
+
         public CallbackHandler()
         {
         }
 
         public void InitializeNukeDialog()
         {
-            //throw new NotImplementedException();
+            NukesInitialized.Invoke();
         }
 
         public void SendContracts(DipContract[] contracts)
@@ -43,7 +51,7 @@ namespace Totality.Client.GUI
 
         public void UpdateNukeDialog(NukeRocket[] rockets)
         {
-            //throw new NotImplementedException();
+            NukesUpdated.Invoke(rockets);
         }
     }
 }

@@ -99,14 +99,29 @@
       <xs:element minOccurs="0" name="MissilesCount" type="xs:int" />
       <xs:element minOccurs="0" name="Money" type="xs:long" />
       <xs:element minOccurs="0" name="Mood" type="xs:double" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="NukesCount" type="xs:int" />
+      <xs:element minOccurs="0" name="PowerHeavyIndustry" type="xs:double" />
+      <xs:element minOccurs="0" name="PowerLightIndustry" type="xs:double" />
       <xs:element minOccurs="0" name="PremierLvl" type="xs:int" />
       <xs:element minOccurs="0" name="PremierLvlUpCost" type="xs:long" />
+      <xs:element minOccurs="0" name="ProdUranus" type="xs:double" />
       <xs:element minOccurs="0" name="ProductionUpgradeCost" type="xs:long" />
+      <xs:element minOccurs="0" name="ResAgricultural" type="xs:double" />
+      <xs:element minOccurs="0" name="ResOil" type="xs:double" />
+      <xs:element minOccurs="0" name="ResSteel" type="xs:double" />
+      <xs:element minOccurs="0" name="ResUranus" type="xs:double" />
+      <xs:element minOccurs="0" name="ResWood" type="xs:double" />
       <xs:element minOccurs="0" name="ShadowingLvl" type="xs:int" />
       <xs:element minOccurs="0" name="ShadowingLvlUpCost" type="xs:long" />
       <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="SpyNetworks" nillable="true" type="q5:ArrayOfKeyValueOfstringCountry.SpyNetworkZ8yiO27Z" />
       <xs:element minOccurs="0" name="TaxesLvl" type="xs:short" />
+      <xs:element minOccurs="0" name="UsedAgricultural" type="xs:double" />
+      <xs:element minOccurs="0" name="UsedHIpower" type="xs:double" />
+      <xs:element minOccurs="0" name="UsedLIpower" type="xs:double" />
+      <xs:element minOccurs="0" name="UsedOil" type="xs:double" />
+      <xs:element minOccurs="0" name="UsedSteel" type="xs:double" />
+      <xs:element minOccurs="0" name="UsedWood" type="xs:double" />
       <xs:element xmlns:q6="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="WarList" nillable="true" type="q6:ArrayOfstring" />
     </xs:sequence>
   </xs:complexType>

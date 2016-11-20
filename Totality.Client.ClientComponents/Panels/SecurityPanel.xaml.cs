@@ -1,6 +1,5 @@
 ﻿using Totality.Client.ClientComponents.Dialogs;
 using Totality.Client.ClientComponents.Dialogs.Military;
-using Totality.Client.ClientComponents.Dialogs.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;

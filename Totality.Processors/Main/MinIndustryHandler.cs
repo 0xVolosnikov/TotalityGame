@@ -49,15 +49,17 @@ namespace Totality.Handlers.Main
             {
                 res1 = (double)_dataLayer.GetProperty(order.CountryName, "FinalSteel");
                 res2 = (double)_dataLayer.GetProperty(order.CountryName, "FinalOil");
+                if (res1 < industryPower * Constants.IndustryUpgrade* Constants.IndustrySteelCoeff || res2 < industryPower * Constants.IndustryUpgrade* Constants.IndustryOilCoeff)
+                    return false;
             }
             else
             {
                 res1 = (double)_dataLayer.GetProperty(order.CountryName, "FinalWood");
                 res2 = (double)_dataLayer.GetProperty(order.CountryName, "FinalAgricultural");
+                if (res1 < industryPower * Constants.IndustryUpgrade* Constants.IndustryWoodCoeff || res2 < industryPower* Constants.IndustryUpgrade * Constants.IndustryAgroCoeff)
+                    return false;
             }
 
-            if (res1 < industryPower * Constants.IndustrySteelCoeff || res2 < industryPower * Constants.IndustryOilCoeff)
-                return false;
 
             money -= upgradeCost;
             _dataLayer.SetProperty(order.CountryName, "Money", money);

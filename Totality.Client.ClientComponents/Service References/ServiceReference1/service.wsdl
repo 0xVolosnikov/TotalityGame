@@ -173,9 +173,9 @@
   </wsdl:binding>
   <wsdl:service name="Transmitter">
     <wsdl:port name="NetTcpBinding_ITransmitterService" binding="tns:NetTcpBinding_ITransmitterService">
-      <soap12:address location="net.tcp://192.168.1.85:10577/transmitter" />
+      <soap12:address location="net.tcp://192.168.0.101:10577/transmitter" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://192.168.1.85:10577/transmitter</wsa10:Address>
+        <wsa10:Address>net.tcp://192.168.0.101:10577/transmitter</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
           <Dns>localhost</Dns>
         </Identity>

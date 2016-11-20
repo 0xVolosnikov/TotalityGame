@@ -22,6 +22,7 @@ namespace Totality.Client.ClientComponents.Dialogs.Finance
     /// </summary>
     public partial class TaxesDialog : AbstractDialog, Dialog
     {
+        private enum Orders { ChangeTaxes, PurchaseCurrency, SellCurrency, CurrencyInfusion };
         public delegate void ReceiveOrder(object sender, Order order, string text, long price);
         ReceiveOrder _receiveOrder;
 

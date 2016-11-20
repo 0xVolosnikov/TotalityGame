@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Totality.CommonClasses;
 using Totality.Model;
 
 namespace Totality.Client.ClientComponents.Dialogs.Security
@@ -21,6 +22,7 @@ namespace Totality.Client.ClientComponents.Dialogs.Security
     /// </summary>
     public partial class PurgeDialog : AbstractDialog, Dialog
     {
+        private enum Orders { ImproveNetwork, AddAgents, OrderToAgent, Purge, CounterSpyLvlUp, ShadowingUp, IntelligenceUp, Sabotage }
         public delegate void ReceiveOrder(object sender, Order order, string text, long price);
         ReceiveOrder _receiveOrder;
 
@@ -37,6 +39,8 @@ namespace Totality.Client.ClientComponents.Dialogs.Security
         {
             Order order = new Order(CountryData.Name);
             order.TargetMinistery = (short)MinistersBox.SelectedIndex;
+            order.OrderNum = (short)Orders.Purge;
+            order.Ministery = (short)Mins.Security;
             _receiveOrder(this, order, "Чистка в министерстве: " + MinistersBox.SelectedItem, 0);
         }
 

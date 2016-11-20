@@ -21,6 +21,7 @@ namespace Totality.Client.ClientComponents.Dialogs.Security
     /// </summary>
     public partial class NetsDialog : AbstractDialog, Dialog
     {
+        private enum Orders { ImproveNetwork, AddAgents, OrderToAgent, Purge, CounterSpyLvlUp, ShadowingUp, IntelligenceUp, Sabotage }
         public delegate void ReceiveOrder(object sender, Order order, string text, long price);
         ReceiveOrder _receiveOrder;
 

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Totality.CommonClasses;
 using Totality.Model;
 
 namespace Totality.Client.ClientComponents.Dialogs.Premier
@@ -21,6 +22,7 @@ namespace Totality.Client.ClientComponents.Dialogs.Premier
     /// </summary>
     public partial class ReorganizeDialog : AbstractDialog, Dialog
     {
+        private enum Orders { MinisteryReorganization, LvlUp, Alert, UnAlert }
         public delegate void ReceiveOrder(object sender, Order order, string text, long price);
         ReceiveOrder _receiveOrder;
 
@@ -37,6 +39,8 @@ namespace Totality.Client.ClientComponents.Dialogs.Premier
         {
             Order order = new Order(CountryData.Name);
             order.TargetMinistery = (short)MinistersBox.SelectedIndex;
+            order.OrderNum = (short)Orders.MinisteryReorganization;
+            order.Ministery = (short)Mins.Premier;
             _receiveOrder(this, order, "Реорганизация министерства: " + MinistersBox.SelectedItem, 0);
         }
 

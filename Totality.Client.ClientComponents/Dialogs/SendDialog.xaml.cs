@@ -12,32 +12,34 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Totality.CommonClasses;
 using Totality.Model;
 
-namespace Totality.Client.ClientComponents.Dialogs.Common
+namespace Totality.Client.ClientComponents.Dialogs
 {
     /// <summary>
     /// Логика взаимодействия для NukeStrikeDialog.xaml
     /// </summary>
-    public partial class LvlUpDialog : AbstractDialog, Dialog
+    public partial class SendDialog : AbstractDialog, Dialog
     {
-        public delegate void ReceiveOrder(object sender, Order order);
-        ReceiveOrder receiveOrder;
-        int minister;
+        private enum Orders { ImproveNetwork, AddAgents, OrderToAgent, Purge, CounterSpyLvlUp, ShadowingUp, IntelligenceUp, Sabotage }
+        public delegate void SendOrders(bool allowed, SendDialog sender);
+        SendOrders _sendOrders;
 
-        public LvlUpDialog(ReceiveOrder receiveOrder, int minister)
+        public SendDialog(SendOrders sendOrders)
         {
-            this.receiveOrder = receiveOrder;
-            this.minister = minister;
+            _sendOrders = sendOrders;
             InitializeComponent();
         }
 
         private void acceptButton_Click(object sender, RoutedEventArgs e)
         {
+            _sendOrders(true, this);
         }
 
         private void cancelButton_Click(object sender, RoutedEventArgs e)
         {
+            _sendOrders(false, this);
         }
     }
 }

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Totality.CommonClasses;
 using Totality.Model;
 
 namespace Totality.Client.ClientComponents.Dialogs.Industry
@@ -21,12 +22,15 @@ namespace Totality.Client.ClientComponents.Dialogs.Industry
     /// </summary>
     public partial class ImproveDialog : AbstractDialog, Dialog
     {
+        public enum Orders { ImproveHeavy, ImproveLight, IncreaseSteel, IncreaseOil, IncreaseWood, IncreaseAgricultural };
         public delegate void ReceiveOrder(object sender, Order order, string text, long price);
         ReceiveOrder _receiveOrder;
         private string _textOrder;
+        private Orders _type;
 
-        public ImproveDialog(ReceiveOrder receiveOrder, string textDial, string textOrder)
+        public ImproveDialog(ReceiveOrder receiveOrder, string textDial, string textOrder, Orders type)
         {
+            _type = type;
             _receiveOrder = receiveOrder;
             _textOrder = textOrder;
             InitializeComponent();
@@ -36,6 +40,8 @@ namespace Totality.Client.ClientComponents.Dialogs.Industry
         private void acceptButton_Click(object sender, RoutedEventArgs e)
         {
             Order order = new Order(CountryData.Name);
+            order.OrderNum = (short)_type;
+            order.Ministery = (short)Mins.Industry;
             _receiveOrder(this, order, _textOrder, 0);
         }
 

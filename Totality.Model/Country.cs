@@ -23,7 +23,8 @@ namespace Totality.Model
             }
         }
 
-        public string Name { get; }
+        [DataMember]
+        public string Name { get; set; }
         [DataMember]
         public long Money;
         [DataMember]
@@ -34,13 +35,21 @@ namespace Totality.Model
         [DataMember]
         public int[] MinsBlocks = new int[Constants.CountOfMinisters];
 
+        [DataMember]
         public double ResAgricultural;
+        [DataMember]
         public double ResWood;
+        [DataMember]
         public double ResSteel;
+        [DataMember]
         public double ResOil;
+        [DataMember]
         public double ProdUranus;
+        [DataMember]
         public double ResUranus;
+        [DataMember]
         public double PowerLightIndustry;
+        [DataMember]
         public double PowerHeavyIndustry;
 
         [DataMember]
@@ -56,11 +65,17 @@ namespace Totality.Model
         [DataMember]
         public double FinalHeavyIndustry;
 
+        [DataMember]
         public double UsedSteel;
+        [DataMember]
         public double UsedOil;
+        [DataMember]
         public double UsedWood;
+        [DataMember]
         public double UsedAgricultural;
+        [DataMember]
         public double UsedLIpower;
+        [DataMember]
         public double UsedHIpower;
 
         [DataMember]
@@ -174,6 +189,15 @@ namespace Totality.Model
             CounterSpyLvlUpCost = Constants.InitialCounterSpyLvlUpCost;
             ShadowingLvlUpCost = Constants.InitialShadowingLvlUpCost;
             IntelligenceLvlUpCost = Constants.InitialIntelligenceLvlUpCost;
+
+            ExtractScLvlUpExp = (int)Constants.InitialExtractScLvlUpExp;
+            ExtractScLvlUpCost = (int)Constants.InitialExtractScLvlUpCost;
+            HeavyScLvlUpExp = (int)Constants.InitialHeavyScLvlUpExp;
+            HeavyScLvlUpCost = (int)Constants.InitialHeavyScLvlUpCost;
+            LightScLvlUpExp = (int)Constants.InitialLightScLvlUpExp;
+            LightScLvlUpCost = (int)Constants.InitialLightScLvlUpCost;
+            MilitaryScLvlUpExp = (int)Constants.InitialMilitaryScLvlUpExp;
+            MilitaryScLvlUpCost = (int)Constants.InitialMilitaryScLvlUpCost;
 
             NationalCurrencyDemand = Constants.InitialNationalCurrencyDemand;
 

@@ -118,5 +118,21 @@ namespace Totality.GUI
         {
             _mainHandler.FinishStep();
         }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            _dataLayer.SetProperty("Test", "PowerHeavyIndustry", 10);
+            _dataLayer.SetProperty("Test", "PowerLightIndustry", 10);
+            _dataLayer.SetProperty("Test", "ResOil", 25);
+            _dataLayer.SetProperty("Test", "ResSteel", 25);
+            _dataLayer.SetProperty("Test", "ResWood", 25);
+            _dataLayer.SetProperty("Test", "ResAgricultural", 25);
+            _dataLayer.SetProperty("Test", "ExtractExperience", 5);
+            _dataLayer.SetProperty("Test", "HeavyExperience", 5);
+            _dataLayer.SetProperty("Test", "LightExperience", 5);
+            _dataLayer.SetProperty("Test", "MilitaryExperience", 5);
+
+            // _nukeHandler.StartAttack();
+        }
     }
 }

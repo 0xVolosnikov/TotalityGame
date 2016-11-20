@@ -43,7 +43,7 @@
             <Image x:Name="image_Copy8" Height="100" Canvas.Left="964" Canvas.Top="572" Width="100" Source="Images/line.png"/>
             <Totality.Client.ClientComponents:MinisteryButton x:Name="but10" Canvas.Left="965" Canvas.Top="511" imgDown="Images/but2.png" imgUp="Images/but1.png" Cursor="Hand"/>
             <Image x:Name="image_Copy9" Height="100" Canvas.Left="1068" Canvas.Top="572" Width="100" Source="Images/line.png"/>
-            <Totality.Client.ClientComponents:MinisteryButton x:Name="but11" Canvas.Left="1069" Canvas.Top="511" imgDown="Images/but2.png" imgUp="Images/but1.png" Cursor="Hand"/>
+            <Totality.Client.ClientComponents:Button x:Name="SendButton" Canvas.Left="1069" Canvas.Top="511" imgUp="Images/ButtonSend.png" imgDown="Images/ButtonSendDown.png" Cursor="Hand"/>
         </Canvas>
         <Totality.Client.ClientComponents:Header x:Name="_header" VerticalAlignment="Top" Margin="0,0,-1,0" Width="1200"/>
     </Grid>

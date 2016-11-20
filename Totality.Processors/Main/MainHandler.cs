@@ -35,7 +35,10 @@ namespace Totality.Handlers.Main
             _ministeryHandlers.Add(new MinPremierHandler(newsHandler, dataLayer, logger));
 
             (_ministeryHandlers[(short)Mins.Security] as MinSecurityHandler).SecretOrderProcessed += SecretOrderProcessed;
+
+            _nukeHandler.AttackEnded += _nukeHandler_AttackEnded;
         }
+
 
         private void SecretOrderProcessed(Order order)
         {
@@ -60,6 +63,10 @@ namespace Totality.Handlers.Main
 
             _nukeHandler.StartAttack();
 
+        }
+
+        private void _nukeHandler_AttackEnded()
+        {
             // fightBattles
 
             // followDipContracts
@@ -77,8 +84,6 @@ namespace Totality.Handlers.Main
             DipHandler.SendContractsToAll();
 
             _newsHandler.SendNews();
-
-
         }
 
         public void ProcessOrders()
@@ -106,11 +111,28 @@ namespace Totality.Handlers.Main
             {
                 foreach (string res in new List<string>{ "Steel", "Oil", "Wood", "Agricultural"} )
                 {
-                    _dataLayer.SetProperty(country.Key, "Used" + res, 0);
                     var extract = (double)_dataLayer.GetProperty(country.Key, "Res" + res);
                     extract *=  Math.Pow(Constants.ScienceBuff, (int)_dataLayer.GetProperty(country.Key, "ExtractScienceLvl" ));
                     // сюда добавить другие баффы
                     _dataLayer.SetProperty(country.Key, "Final" + res, extract);
+
+                    double usedRes = 0;
+                    switch (res)
+                    {
+                        case "Steel":
+                            usedRes = ((double)_dataLayer.GetProperty(country.Key, "PowerHeavyIndustry")) * Constants.IndustrySteelCoeff;
+                            break;
+                        case "Oil":
+                            usedRes = ((double)_dataLayer.GetProperty(country.Key, "PowerHeavyIndustry")) * Constants.IndustryOilCoeff;
+                            break;
+                        case "Wood":
+                            usedRes = ((double)_dataLayer.GetProperty(country.Key, "PowerLightIndustry")) * Constants.IndustryWoodCoeff;
+                            break;
+                        case "Agricultural":
+                            usedRes = ((double)_dataLayer.GetProperty(country.Key, "PowerLightIndustry")) * Constants.IndustryAgroCoeff;
+                            break;
+                    }
+                    _dataLayer.SetProperty(country.Key, "Used" + res, usedRes);
                 }
             }
         }

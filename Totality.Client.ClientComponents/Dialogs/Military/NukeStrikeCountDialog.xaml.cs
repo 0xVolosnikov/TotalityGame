@@ -21,6 +21,7 @@ namespace Totality.Client.ClientComponents.Dialogs.Military
     /// </summary>
     public partial class NukeStrikeCountDialog : AbstractDialog, Dialog
     {
+        private enum Orders { GeneralMobilization, Demobilization, IncreaseUranium, MakeNukes, MakeMissiles, NukeStrike, StartWar }
         public delegate void ReceiveOrder(object sender, Order order);
         ReceiveOrder receiveOrder;
 
@@ -32,7 +33,7 @@ namespace Totality.Client.ClientComponents.Dialogs.Military
 
         private void acceptButton_Click(object sender, RoutedEventArgs e)
         {
-            receiveOrder(this, new Order("", "") { Count = (int)integerUpDown.Value });
+            receiveOrder(this, new Order("", "") { Count = (int)integerUpDown.Value , OrderNum = (short)Orders.NukeStrike});
         }
 
         private void cancelButton_Click(object sender, RoutedEventArgs e)

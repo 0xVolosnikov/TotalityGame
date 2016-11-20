@@ -25,37 +25,37 @@
                 <Canvas.Background>
                     <ImageBrush Stretch="None" ImageSource="Images/Industry/resBack.png"/>
                 </Canvas.Background>
-                <Label x:Name="label3_Copy" Content="200" Canvas.Left="324" Canvas.Top="17" Width="63" Height="25" FontFamily="Impact" HorizontalContentAlignment="Center" FontSize="18" Padding="0" VerticalContentAlignment="Center"/>
-                <Image x:Name="image4_Copy" Height="41" Width="267" Source="Images/Industry/steelLine.png" Stretch="None" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Top="9" Canvas.Left="2"/>
+                <Label x:Name="SteelLabel" Content="200" Canvas.Left="324" Canvas.Top="17" Width="63" Height="25" FontFamily="Impact" HorizontalContentAlignment="Center" FontSize="18" Padding="0" VerticalContentAlignment="Center"/>
+                <Image x:Name="SteelLine" Height="41" Width="267" Source="Images/Industry/steelLine.png" Stretch="None" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Top="9" Canvas.Left="2"/>
                 <local:Button x:Name="SteelButton" Height="62" Width="391" Opacity="0" Cursor="Hand" imgUp="Images/Industry/resBack.png" imgDown="Images/Industry/resBack.png"/>
+                <Label x:Name="UsedSteelLabel" Content="50" Canvas.Left="117" Canvas.Top="-17" FontFamily="Impact" FontSize="18" Width="49" Padding="0" HorizontalContentAlignment="Center"/>
             </Canvas>
             <Canvas Height="62" Canvas.Left="95" Canvas.Top="30" Width="391" SnapsToDevicePixels="True" UseLayoutRounding="True">
                 <Canvas.Background>
                     <ImageBrush Stretch="None" ImageSource="Images/Industry/resBack.png"/>
                 </Canvas.Background>
-                <Label x:Name="label3" Content="200" Canvas.Left="324" Canvas.Top="17" Width="63" Height="25" FontFamily="Impact" HorizontalContentAlignment="Center" FontSize="18" Padding="0" VerticalContentAlignment="Center"/>
-                <Image x:Name="image4" Height="41" Width="236" Source="Images/Industry/oilLine.png" Stretch="None" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Top="9" Canvas.Left="2"/>
+                <Label x:Name="OilLabel" Content="200" Canvas.Left="324" Canvas.Top="17" Width="63" Height="25" FontFamily="Impact" HorizontalContentAlignment="Center" FontSize="18" Padding="0" VerticalContentAlignment="Center"/>
+                <Image x:Name="OilLine" Height="41" Width="236" Source="Images/Industry/oilLine.png" Stretch="None" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Top="9" Canvas.Left="2"/>
+                <Label x:Name="UsedOilLabel" Content="5000" Canvas.Left="95" Canvas.Top="-17" FontFamily="Impact" FontSize="18" Width="49" HorizontalContentAlignment="Center" Padding="0"/>
             </Canvas>
             <Canvas Height="62" Canvas.Left="95" Canvas.Top="182" Width="391">
                 <Canvas.Background>
                     <ImageBrush Stretch="None" ImageSource="Images/Industry/resBack.png"/>
                 </Canvas.Background>
-                <Label x:Name="label3_Copy1" Content="200" Canvas.Left="324" Canvas.Top="17" Width="63" Height="25" FontFamily="Impact" HorizontalContentAlignment="Center" FontSize="18" Padding="0" VerticalContentAlignment="Center"/>
-                <Image x:Name="image4_Copy1" Height="41" Width="111" Source="Images/Industry/woodLine.png" Stretch="None" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Top="9" Canvas.Left="2"/>
+                <Label x:Name="WoodLabel" Content="200" Canvas.Left="324" Canvas.Top="17" Width="63" Height="25" FontFamily="Impact" HorizontalContentAlignment="Center" FontSize="18" Padding="0" VerticalContentAlignment="Center"/>
+                <Image x:Name="WoodLine" Height="41" Width="111" Source="Images/Industry/woodLine.png" Stretch="None" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Top="9" Canvas.Left="2"/>
                 <local:Button x:Name="WoodButton" Height="62" Width="391" Opacity="0" Cursor="Hand" imgUp="Images/Industry/resBack.png" imgDown="Images/Industry/resBack.png"/>
+                <Label x:Name="UsedWoodLabel" Content="50" Canvas.Left="52" Canvas.Top="-17" FontFamily="Impact" FontSize="18" Width="49" HorizontalContentAlignment="Center" Padding="0"/>
             </Canvas>
             <Canvas Height="62" Canvas.Left="95" Canvas.Top="257" Width="391">
                 <Canvas.Background>
                     <ImageBrush Stretch="None" ImageSource="Images/Industry/resBack.png"/>
                 </Canvas.Background>
-                <Label x:Name="label3_Copy2" Content="200" Canvas.Left="324" Canvas.Top="17" Width="63" Height="25" FontFamily="Impact" HorizontalContentAlignment="Center" FontSize="18" Padding="0" VerticalContentAlignment="Center"/>
-                <Image x:Name="image4_Copy2" Height="41" Width="300" Source="Images/Industry/agroLine.png" Stretch="None" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Top="9" Canvas.Left="2"/>
+                <Label x:Name="AgroLabel" Content="200" Canvas.Left="324" Canvas.Top="17" Width="63" Height="25" FontFamily="Impact" HorizontalContentAlignment="Center" FontSize="18" Padding="0" VerticalContentAlignment="Center"/>
+                <Image x:Name="AgroLine" Height="41" Width="320" Source="Images/Industry/agroLine.png" Stretch="None" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Top="9" Canvas.Left="2"/>
                 <local:Button x:Name="AgroButton" Height="62" Width="391" Opacity="0" Cursor="Hand" imgUp="Images/Industry/resBack.png" imgDown="Images/Industry/resBack.png"/>
+                <Label x:Name="UsedAgroLabel" Content="50" Canvas.Left="134" Canvas.Top="-16" FontFamily="Impact" FontSize="18" Padding="0" HorizontalContentAlignment="Center" Width="49"/>
             </Canvas>
-            <Label x:Name="label2" Content="50" Canvas.Left="237" Canvas.Top="238" FontFamily="Impact" FontSize="18"/>
-            <Label x:Name="label2_Copy" Content="50" Canvas.Left="138" Canvas.Top="159" FontFamily="Impact" FontSize="18"/>
-            <Label x:Name="label2_Copy1" Content="50" Canvas.Left="222" Canvas.Top="84" FontFamily="Impact" FontSize="18"/>
-            <Label x:Name="label2_Copy2" Content="50" Canvas.Left="201" Canvas.Top="7" FontFamily="Impact" FontSize="18"/>
             <Image x:Name="image" Height="59" Canvas.Left="26" Canvas.Top="30" Width="69" Source="Images/Industry/oil.png" Stretch="None"/>
             <Image x:Name="image1" Height="53" Canvas.Left="26" Canvas.Top="107" Width="64" Source="Images/Industry/steel.png" Stretch="None"/>
             <Image x:Name="image2" Height="51" Canvas.Left="23" Canvas.Top="187" Width="64" Source="Images/Industry/wood.png" Stretch="None"/>
@@ -68,13 +68,13 @@
             <Canvas.Background>
                 <ImageBrush ImageSource="Images/Industry/heavyIndustryPowerBack.png" Stretch="None"/>
             </Canvas.Background>
-            <Label x:Name="label4" Content="500" Canvas.Left="43" Canvas.Top="10" Height="34" Width="123" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Padding="0" FontSize="28" FontFamily="Haettenschweiler" Foreground="#FF4F4F4F"/>
+            <Label x:Name="HeavyLabel" Content="500" Canvas.Left="43" Canvas.Top="10" Height="34" Width="123" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Padding="0" FontSize="28" FontFamily="Haettenschweiler" Foreground="#FF4F4F4F"/>
         </Canvas>
         <Canvas Height="52" Canvas.Left="808" Canvas.Top="79" Width="210">
             <Canvas.Background>
                 <ImageBrush ImageSource="Images/Industry/lightIndustryPowerBack.png" Stretch="None"/>
             </Canvas.Background>
-            <Label x:Name="label4_Copy" Content="500" Canvas.Left="43" Canvas.Top="10" Height="34" Width="123" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Padding="0" FontSize="28" FontFamily="Haettenschweiler" Foreground="#FF32514B" SnapsToDevicePixels="True"/>
+            <Label x:Name="LightLabel" Content="500" Canvas.Left="43" Canvas.Top="10" Height="34" Width="123" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Padding="0" FontSize="28" FontFamily="Haettenschweiler" Foreground="#FF32514B" SnapsToDevicePixels="True"/>
         </Canvas>
         <Canvas Height="281" Canvas.Left="1056" Canvas.Top="128" Width="100">
             <Canvas.Background>

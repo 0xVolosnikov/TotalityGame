@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Totality.CommonClasses;
 using Totality.Model;
 
 namespace Totality.Client.ClientComponents.Dialogs.Inner
@@ -21,6 +22,7 @@ namespace Totality.Client.ClientComponents.Dialogs.Inner
     /// </summary>
     public partial class RepressionsDialog : AbstractDialog, Dialog
     {
+        private enum Orders { SuppressRiot, Repressions, EndRepressions, LvlUp }
         public delegate void ReceiveOrder(object sender, Order order, string text, long price);
         ReceiveOrder _receiveOrder;
 
@@ -33,11 +35,18 @@ namespace Totality.Client.ClientComponents.Dialogs.Inner
         private void acceptButton_Click(object sender, RoutedEventArgs e)
         {
             Order order = new Order(CountryData.Name);
+            order.Ministery = (short)Mins.Inner;
 
             if (CountryData.IsMobilized)
-            _receiveOrder(this, order, "Прекратить репрессии", 0);
+            {
+                _receiveOrder(this, order, "Прекратить репрессии", 0);
+                order.OrderNum = (short)Orders.Repressions;
+            }
             else
-            _receiveOrder(this, order, "Начать репрессии", 0);
+            {
+                _receiveOrder(this, order, "Начать репрессии", 0);
+                order.OrderNum = (short)Orders.EndRepressions;
+            }
         }
 
         private void cancelButton_Click(object sender, RoutedEventArgs e)

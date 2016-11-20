@@ -1,6 +1,5 @@
 ﻿using Totality.Client.ClientComponents.Dialogs;
 using Totality.Client.ClientComponents.Dialogs.Military;
-using Totality.Client.ClientComponents.Dialogs.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,6 +56,11 @@ namespace Totality.Client.ClientComponents.Panels
 
             canvas1.Children.Remove((UIElement)sender);
             currentDialog = null;     
+        }
+
+        public void Update()
+        {
+            UranusLabel.Content = (int)CountryData.ResUranus;
         }
     }
 }

@@ -10,20 +10,23 @@
         <Canvas.Background>
             <ImageBrush ImageSource="/Totality.Client.ClientComponents;component/Images/Science/ScienceBackground.png"  Stretch="None"/>
         </Canvas.Background>
-        <Canvas Height="296" Canvas.Left="906" Canvas.Top="88" Width="280">
+        <Canvas Height="293" Canvas.Left="906" Canvas.Top="88" Width="280">
             <Canvas.Background>
                 <ImageBrush Stretch="None" ImageSource="/Totality.Client.ClientComponents;component/Images/Science/ScienceButtonBack.png"/>
             </Canvas.Background>
+            <Image x:Name="MilitaryLine" Height="150" Canvas.Top="143" Width="280" Stretch="None" Source="/Totality.Client.ClientComponents;component/Images/Science/ScienceMilitaryLine.png" UseLayoutRounding="True" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Canvas>
         <Canvas Height="296" Canvas.Left="607" Canvas.Top="88" Width="280">
             <Canvas.Background>
                 <ImageBrush Stretch="None" ImageSource="/Totality.Client.ClientComponents;component/Images/Science/ScienceButtonBack.png"/>
             </Canvas.Background>
+            <Image x:Name="LightLine" Height="296" Width="280" Stretch="None" Source="/Totality.Client.ClientComponents;component/Images/Science/ScienceLightLine.png" UseLayoutRounding="True" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Canvas>
-        <Canvas Height="296" Canvas.Left="308" Canvas.Top="88" Width="280">
+        <Canvas Height="293" Canvas.Left="308" Canvas.Top="88" Width="280" VerticalAlignment="Bottom">
             <Canvas.Background>
                 <ImageBrush Stretch="None" ImageSource="/Totality.Client.ClientComponents;component/Images/Science/ScienceButtonBack.png"/>
             </Canvas.Background>
+            <Image x:Name="HeavyLine" Height="296" Width="280" Stretch="None" Source="/Totality.Client.ClientComponents;component/Images/Science/ScienceHeavyLine.png" UseLayoutRounding="True" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
         </Canvas>
         <Canvas Height="43" Width="1200">
             <Canvas Height="43" Canvas.Top="2" Width="1200" Background="#FFE2E2E2">
@@ -32,22 +35,19 @@
             <Canvas Height="2" Canvas.Top="45" Width="1200" Background="#77FFFFFF"/>
             <Canvas Height="2" Width="1200" Background="#77FFFFFF"/>
         </Canvas>
-        <Image x:Name="image_Copy" Height="182" Canvas.Left="308" Canvas.Top="198" Width="280" Stretch="None" Source="/Totality.Client.ClientComponents;component/Images/Science/ScienceHeavyLine.png" UseLayoutRounding="True" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
         <local:Button x:Name="HeavyButton" Canvas.Left="308" Canvas.Top="88" Width="280" Height="296" imgUp="/Totality.Client.ClientComponents;component/Images/Science/ScienceHeavyButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Science/ScienceHeavyButtonDown.png" SnapsToDevicePixels="True" Cursor="Hand"/>
-        <Image x:Name="image_Copy2" Height="153" Canvas.Left="906" Canvas.Top="227" Width="280" Stretch="None" Source="/Totality.Client.ClientComponents;component/Images/Science/ScienceMilitaryLine.png" UseLayoutRounding="True" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <local:Button x:Name="MilitaryButton" Canvas.Left="906" Canvas.Top="88" Width="280" Height="296" imgUp="/Totality.Client.ClientComponents;component/Images/Science/ScienceMilitaryButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Science/ScienceMilitaryButtonDown.png" SnapsToDevicePixels="True" Cursor="Hand"/>
-        <Image x:Name="image_Copy1" Height="102" Canvas.Left="607" Canvas.Top="278" Width="280" Stretch="None" Source="/Totality.Client.ClientComponents;component/Images/Science/ScienceLightLine.png" UseLayoutRounding="True" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <local:Button x:Name="LightButton" Canvas.Left="607" Canvas.Top="88" Width="280" Height="296" imgUp="/Totality.Client.ClientComponents;component/Images/Science/ScienceLightButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Science/ScienceLightButtonDown.png" SnapsToDevicePixels="True" Cursor="Hand"/>
-        <Canvas Height="296" Canvas.Left="10" Canvas.Top="88" Width="280">
+        <Canvas Height="293" Canvas.Left="10" Canvas.Top="88" Width="280">
             <Canvas.Background>
                 <ImageBrush Stretch="None" ImageSource="/Totality.Client.ClientComponents;component/Images/Science/ScienceButtonBack.png"/>
             </Canvas.Background>
+            <Image x:Name="ExtractLine" Height="292" Canvas.Top="4" Width="280" Stretch="None" Source="/Totality.Client.ClientComponents;component/Images/Science/ScienceExtractLine.png" UseLayoutRounding="True" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         </Canvas>
-        <Image x:Name="image" Height="228" Canvas.Left="10" Canvas.Top="152" Width="280" Stretch="None" Source="/Totality.Client.ClientComponents;component/Images/Science/ScienceExtractLine.png" UseLayoutRounding="True" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
         <local:Button x:Name="ExtractButton" Canvas.Left="10" Canvas.Top="88" Width="280" Height="296" imgUp="/Totality.Client.ClientComponents;component/Images/Science/ScienceExtractButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Science/ScienceExtractButtonDown.png" SnapsToDevicePixels="True" Cursor="Hand"/>
-        <Label x:Name="label1" Content="7" Canvas.Left="32" Canvas.Top="116" Height="192" Width="165" FontFamily="Impact" FontSize="150" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" IsHitTestVisible="False"/>
-        <Label x:Name="label1_Copy" Content="8" Canvas.Left="328" Canvas.Top="116" Height="192" Width="166" FontFamily="Impact" FontSize="150" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="#FF474747" IsHitTestVisible="False"/>
-        <Label x:Name="label1_Copy1" Content="10" Canvas.Left="629" Canvas.Top="116" Height="192" Width="165" FontFamily="Impact" FontSize="150" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="#FF007777" IsHitTestVisible="False"/>
-        <Label x:Name="label1_Copy2" Content="3" Canvas.Left="928" Canvas.Top="116" Height="192" Width="165" FontFamily="Impact" FontSize="150" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="#FFC70303" IsHitTestVisible="False"/>
+        <Label x:Name="ExtractLabel" Content="7" Canvas.Left="32" Canvas.Top="116" Height="192" Width="165" FontFamily="Impact" FontSize="150" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" IsHitTestVisible="False"/>
+        <Label x:Name="HeavyLabel" Content="8" Canvas.Left="328" Canvas.Top="116" Height="192" Width="166" FontFamily="Impact" FontSize="150" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="#FF474747" IsHitTestVisible="False"/>
+        <Label x:Name="LightLabel" Content="10" Canvas.Left="629" Canvas.Top="116" Height="192" Width="165" FontFamily="Impact" FontSize="150" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="#FF007777" IsHitTestVisible="False"/>
+        <Label x:Name="MilitaryLabel" Content="3" Canvas.Left="928" Canvas.Top="116" Height="192" Width="165" FontFamily="Impact" FontSize="150" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="#FFC70303" IsHitTestVisible="False"/>
     </Canvas>
 </we:AbstractPanel>

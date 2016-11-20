@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Totality.CommonClasses;
 using Totality.Model;
 
 namespace Totality.Client.ClientComponents.Dialogs.Premier
@@ -21,6 +22,7 @@ namespace Totality.Client.ClientComponents.Dialogs.Premier
     /// </summary>
     public partial class LvlupDialog : AbstractDialog, Dialog
     {
+        private enum Orders { MinisteryReorganization, LvlUp, Alert, UnAlert }
         public delegate void ReceiveOrder(object sender, Order order, string text, long price);
         ReceiveOrder _receiveOrder;
 
@@ -33,6 +35,8 @@ namespace Totality.Client.ClientComponents.Dialogs.Premier
         private void acceptButton_Click(object sender, RoutedEventArgs e)
         {
             Order order = new Order(CountryData.Name);
+            order.OrderNum = (short)Orders.LvlUp;
+            order.Ministery = (short)Mins.Premier;
             _receiveOrder(this, order, "Усиление власти", 0);
         }
 

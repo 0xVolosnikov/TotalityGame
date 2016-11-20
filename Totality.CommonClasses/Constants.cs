@@ -10,6 +10,8 @@ namespace Totality.CommonClasses
         public static double IndustryUpgradeCostRate = 1.1;
         public static double IndustrySteelCoeff = 2;
         public static double IndustryOilCoeff = 2;
+        public static double IndustryWoodCoeff = 2;
+        public static double IndustryAgroCoeff = 2;
         public static double PremierLvlUpCostRatio = 1.1;
         public static double InnerLvlUpCostRatio = 1.1;
         public static double NetworkLvlUpCostRatio = 1.1;

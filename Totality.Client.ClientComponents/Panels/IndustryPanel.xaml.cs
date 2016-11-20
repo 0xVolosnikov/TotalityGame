@@ -1,6 +1,5 @@
 ﻿using Totality.Client.ClientComponents.Dialogs;
 using Totality.Client.ClientComponents.Dialogs.Military;
-using Totality.Client.ClientComponents.Dialogs.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,12 +29,12 @@ namespace Totality.Client.ClientComponents.Panels
         public IndustryPanel()
         {
             InitializeComponent();
-            HeavyButton.click += () => createDialog<ImproveDialog>(new ImproveDialog(receiveOrder, "Повысить тяжелую промышленную мощь?", "Повышение тяжелой промышленной мощи") );
-            LightButton.click += () => createDialog<ImproveDialog>(new ImproveDialog(receiveOrder, "Повысить легкую промышленную мощь?", "Повышение легкой промышленной мощи"));
-            OilButton.click += () => createDialog<ImproveDialog>(new ImproveDialog(receiveOrder, "Повысить производство нефти?", "Повышение производства нефти"));
-            SteelButton.click += () => createDialog<ImproveDialog>(new ImproveDialog(receiveOrder, "Повысить производство стали?", "Повышение производства стали"));
-            WoodButton.click += () => createDialog<ImproveDialog>(new ImproveDialog(receiveOrder, "Повысить производство древесины?", "Повышение производства древесины"));
-            AgroButton.click += () => createDialog<ImproveDialog>(new ImproveDialog(receiveOrder, "Повысить производство с/х продукции?", "Повышение производства с/х продукции"));
+            HeavyButton.click += () => createDialog<ImproveDialog>(new ImproveDialog(receiveOrder, "Повысить тяжелую промышленную мощь?", "Повышение тяжелой промышленной мощи", ImproveDialog.Orders.ImproveHeavy ) );
+            LightButton.click += () => createDialog<ImproveDialog>(new ImproveDialog(receiveOrder, "Повысить легкую промышленную мощь?", "Повышение легкой промышленной мощи", ImproveDialog.Orders.ImproveLight));
+            OilButton.click += () => createDialog<ImproveDialog>(new ImproveDialog(receiveOrder, "Повысить производство нефти?", "Повышение производства нефти", ImproveDialog.Orders.IncreaseOil));
+            SteelButton.click += () => createDialog<ImproveDialog>(new ImproveDialog(receiveOrder, "Повысить производство стали?", "Повышение производства стали", ImproveDialog.Orders.IncreaseSteel));
+            WoodButton.click += () => createDialog<ImproveDialog>(new ImproveDialog(receiveOrder, "Повысить производство древесины?", "Повышение производства древесины", ImproveDialog.Orders.IncreaseWood));
+            AgroButton.click += () => createDialog<ImproveDialog>(new ImproveDialog(receiveOrder, "Повысить производство с/х продукции?", "Повышение производства с/х продукции", ImproveDialog.Orders.IncreaseAgricultural));
         }
 
         private void createDialog<T>(Dialog dialog) where T : UIElement
@@ -56,6 +55,46 @@ namespace Totality.Client.ClientComponents.Panels
 
             canvas1.Children.Remove((UIElement)sender);
             currentDialog = null;
+        }
+
+        public void Update()
+        {
+            HeavyLabel.Content = (int)CountryData.FinalHeavyIndustry;
+            LightLabel.Content = (int)CountryData.FinalLightIndustry;
+            OilLabel.Content = (int)CountryData.FinalOil;
+            SteelLabel.Content = (int)CountryData.FinalSteel;
+            WoodLabel.Content = (int)CountryData.FinalWood;
+            AgroLabel.Content = (int)CountryData.FinalAgricultural;
+            
+            OilLine.Width = 320 * (CountryData.UsedOil / CountryData.FinalOil);
+            SteelLine.Width = 320 * (CountryData.UsedSteel / CountryData.FinalSteel);
+            WoodLine.Width = 320 * (CountryData.UsedWood / CountryData.FinalWood);
+            AgroLine.Width = 320 * (CountryData.UsedAgricultural / CountryData.FinalAgricultural);
+
+            UsedOilLabel.Content = (int)CountryData.UsedOil;
+            UsedSteelLabel.Content = (int)CountryData.UsedSteel;
+            UsedWoodLabel.Content = (int)CountryData.UsedWood;
+            UsedAgroLabel.Content = (int)CountryData.UsedAgricultural;
+
+            if (OilLine.Width > UsedOilLabel.Width)
+            Canvas.SetLeft(UsedOilLabel, Canvas.GetLeft(OilLine) + (OilLine.Width - UsedOilLabel.Width)/2.0);
+            else
+            Canvas.SetLeft(UsedOilLabel, Canvas.GetLeft(OilLine));
+
+            if (SteelLine.Width > UsedSteelLabel.Width)
+                Canvas.SetLeft(UsedSteelLabel, Canvas.GetLeft(SteelLine) + (SteelLine.Width - UsedSteelLabel.Width) / 2.0);
+            else
+                Canvas.SetLeft(UsedSteelLabel, Canvas.GetLeft(SteelLine));
+
+            if (WoodLine.Width > UsedWoodLabel.Width)
+                Canvas.SetLeft(UsedWoodLabel, Canvas.GetLeft(WoodLine) + (WoodLine.Width - UsedWoodLabel.Width) / 2.0);
+            else
+                Canvas.SetLeft(UsedWoodLabel, Canvas.GetLeft(WoodLine));
+
+            if (AgroLine.Width > UsedAgroLabel.Width)
+                Canvas.SetLeft(UsedAgroLabel, Canvas.GetLeft(AgroLine) + (AgroLine.Width - UsedAgroLabel.Width) / 2.0);
+            else
+                Canvas.SetLeft(UsedAgroLabel, Canvas.GetLeft(AgroLine));
         }
     }
 }

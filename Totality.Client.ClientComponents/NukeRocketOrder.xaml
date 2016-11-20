@@ -4,13 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Totality.Client.ClientComponents"
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300" Width="360" Height="140">
+             mc:Ignorable="d" d:DesignWidth="300" Width="361" Height="102">
     <Grid x:Name="grid">
-        <Label x:Name="label" Content="Цель:" HorizontalAlignment="Left" Margin="229,7,0,0" VerticalAlignment="Top" Width="106" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="17" Padding="0" FontFamily="Arial Black" FontSize="16"/>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="205,29,0,0" TextWrapping="Wrap" Text="????" VerticalAlignment="Top" Height="19" Width="155" TextAlignment="Center" FontFamily="Arial Black" Foreground="Red"/>
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="140" VerticalAlignment="Top" Width="45" Background="#FFFFAA15">
-            <Image x:Name="image" HorizontalAlignment="Left" Height="42" Margin="-48,50,-46,0" VerticalAlignment="Top" Width="136" Source="Images/nukeRocket.png" RenderTransformOrigin="0.5,0.5" SnapsToDevicePixels="True">
+        <Label x:Name="label" Content="Цель:" HorizontalAlignment="Left" Margin="228,2,0,0" VerticalAlignment="Top" Width="106" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="17" Padding="0" FontFamily="Arial Black" FontSize="16"/>
+        <TextBlock x:Name="TargetLabel" HorizontalAlignment="Left" Margin="204,22,0,0" TextWrapping="Wrap" Text="????" VerticalAlignment="Top" Height="19" Width="155" TextAlignment="Center" FontFamily="Arial Black" Foreground="Red"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="102" VerticalAlignment="Top" Width="45" Background="#FFFFAA15">
+            <Image x:Name="image" HorizontalAlignment="Left" Height="38" Margin="-28,36,-27,0" VerticalAlignment="Top" Width="98" Source="Images/nukeRocket.png" RenderTransformOrigin="0.5,0.5" SnapsToDevicePixels="True">
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -21,8 +20,8 @@
                 </Image.RenderTransform>
             </Image>
         </Border>
-        <Separator HorizontalAlignment="Left" Height="4" Margin="45,51,0,0" VerticalAlignment="Top" Width="330"/>
-        <Separator HorizontalAlignment="Left" Height="100" Margin="177,-23,0,0" VerticalAlignment="Top" Width="53" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" RenderTransformOrigin="0.5,0.5">
+        <Separator HorizontalAlignment="Left" Height="5" Margin="45,36,0,0" VerticalAlignment="Top" Width="317"/>
+        <Separator HorizontalAlignment="Left" Height="100" Margin="184,-30,0,0" VerticalAlignment="Top" Width="39" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" RenderTransformOrigin="0.5,0.5">
             <Separator.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -32,8 +31,10 @@
                 </TransformGroup>
             </Separator.RenderTransform>
         </Separator>
-        <Label x:Name="label_Copy" Content="Агрессор:" HorizontalAlignment="Left" Margin="71,7,0,0" VerticalAlignment="Top" Width="106" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="17" Padding="0" FontFamily="Arial Black" FontSize="16"/>
-        <TextBlock x:Name="textBlock_Copy" HorizontalAlignment="Left" Margin="45,29,0,0" TextWrapping="Wrap" Text="????" VerticalAlignment="Top" Height="19" Width="157" TextAlignment="Center" FontFamily="Arial Black" Foreground="#FF550000"/>
-        <Canvas HorizontalAlignment="Left" Height="52" Margin="45,72,0,0" VerticalAlignment="Top" Width="315" Background="#FFF50000"/>
+        <Label x:Name="label_Copy" Content="Агрессор:" HorizontalAlignment="Left" Margin="71,2,0,0" VerticalAlignment="Top" Width="106" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="17" Padding="0" FontFamily="Arial Black" FontSize="16"/>
+        <TextBlock x:Name="AgressorLabel" HorizontalAlignment="Left" Margin="45,22,0,0" TextWrapping="Wrap" Text="????" VerticalAlignment="Top" Height="19" Width="157" TextAlignment="Center" FontFamily="Arial Black" Foreground="#FF550000"/>
+        <Canvas x:Name="ProgressLine" HorizontalAlignment="Left" Height="37" Margin="45,39,0,0" VerticalAlignment="Top" Width="315" Background="#FFF50000"/>
+        <Label x:Name="CountLabel" Content="500" HorizontalAlignment="Left" Margin="45,76,0,0" VerticalAlignment="Top" Width="316" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="26" Padding="0" FontFamily="Arial Black" FontSize="22" Foreground="Black"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="102" VerticalAlignment="Top" Width="361"/>
     </Grid>
 </UserControl>

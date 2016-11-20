@@ -1,6 +1,5 @@
 ﻿using Totality.Client.ClientComponents.Dialogs;
 using Totality.Client.ClientComponents.Dialogs.Military;
-using Totality.Client.ClientComponents.Dialogs.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,7 +30,7 @@ namespace Totality.Client.ClientComponents.Panels
         public ForeignPanel()
         {
             InitializeComponent();
-            SendButton.click += () => createDialog<SendDialog>(new SendDialog(SendDiplomaticalMessage));
+            SendButton.click += () => createDialog<Dialogs.Foreign.SendDialog>(new Dialogs.Foreign.SendDialog(SendDiplomaticalMessage));
             IncomeButton.click += () => createDialog<IncomeDialog>(new IncomeDialog());
 
         }

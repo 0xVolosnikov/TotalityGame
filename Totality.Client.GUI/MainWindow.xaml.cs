@@ -14,13 +14,14 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Media.Animation;
 using Totality.Client.ClientComponents;
-using Totality.Client.GUI.ReferenceToServer;
 using Totality.Client.ClientComponents.Panels;
 using System.ServiceModel.Discovery;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using Totality.CommonClasses;
 using Totality.Client.ClientComponents.Dialogs;
+using Totality.Client.ClientComponents.ServiceReference1;
+using Totality.Model;
 
 namespace Totality.Client.GUI
 {
@@ -29,25 +30,28 @@ namespace Totality.Client.GUI
     /// </summary>
     public partial class MainWindow : Window
     {
-        List<MinisteryButton> buttons = new List<MinisteryButton>();
-        DoubleAnimation slideToLeft;
-        DoubleAnimation slideToCenter;
-        DoubleAnimation slideRightToCenter;
-        ConnectionPanel _connectionPanel;
-        UserControl currentPanel;
-        TransmitterServiceClient _client;
+        private List<MinisteryButton> buttons = new List<MinisteryButton>();
+        private DoubleAnimation slideToLeft;
+        private DoubleAnimation slideToCenter;
+        private DoubleAnimation slideRightToCenter;
+        private ConnectionPanel _connectionPanel;
+        private UserControl currentPanel;
+        private TransmitterServiceClient _client;
         private Country _country;
         private Model.Country _countryModel;
-        BackgroundWorker connectionSetter = new BackgroundWorker();
+        private BackgroundWorker connectionSetter = new BackgroundWorker();
         private CallbackHandler _servCallbackHandler;
         private string _name;
+        private NukeAttackDialog _nukeDialog;
+        private Dialog _currentDialog;
 
         public MainWindow()
         {
             _servCallbackHandler = new CallbackHandler();
             _servCallbackHandler.CountryUpdated += _servCallbackHandler_CountryUpdated;
+            _servCallbackHandler.NukesInitialized += _servCallbackHandler_NukesInitialized;
+            _servCallbackHandler.NukesUpdated += _servCallbackHandler_NukesUpdated;
             //_servCallbackHandler.
-            _countryModel = new Model.Country("test");
 
             InitializeComponent();
             setAnims();
@@ -57,7 +61,7 @@ namespace Totality.Client.GUI
             _ordersTable.MouseWheel += dataGrid1_MouseWheel;
             currentPanel = _ordersTable;
 
-            for (int i = 1; i <= 11; i++)
+            for (int i = 1; i <= 10; i++)
             buttons.Add(FindName("but" + i) as MinisteryButton);
             foreach (MinisteryButton but in buttons)
                 but.connectToButtons(buttons);
@@ -72,7 +76,9 @@ namespace Totality.Client.GUI
             buttons[7].MouseDown += (object sender, MouseButtonEventArgs e) => changePanel(_securityPanel);
             buttons[8].MouseDown += (object sender, MouseButtonEventArgs e) => changePanel(_sciencePanel);
             buttons[9].MouseDown += (object sender, MouseButtonEventArgs e) => changePanel(_premierPanel);
+            SendButton.click += createSendDialog;
 
+            _countryModel = new Model.Country("test");
             AbstractPanel.CountryData = _countryModel;
             AbstractPanel.Table = _ordersTable;
 
@@ -93,20 +99,56 @@ namespace Totality.Client.GUI
             });
 
 
-            // _connectionPanel = new ConnectionPanel();
-            //_connectionPanel.Video(new Uri(String.Format(@"{0}\video2.mp4", AppDomain.CurrentDomain.BaseDirectory, "turnoff"), UriKind.Absolute));
+            _connectionPanel = new ConnectionPanel();
+            _connectionPanel.Video(new Uri(String.Format(@"{0}\video2.mp4", AppDomain.CurrentDomain.BaseDirectory, "turnoff"), UriKind.Absolute));
 
-            // _grid.Children.Add(_connectionPanel);
-            //_connectionPanel.NameReceived += _connectionPanel_NameReceived;
-            // _client = new ReferenceToServer.TransmitterServiceClient(new System.ServiceModel.InstanceContext(_servCallbackHandler));
+             _grid.Children.Add(_connectionPanel);
+            _connectionPanel.NameReceived += _connectionPanel_NameReceived;
+             _client = new TransmitterServiceClient(new System.ServiceModel.InstanceContext(_servCallbackHandler));
 
-            _grid.Children.Add(new NukeAttackDialog());
+
+        }
+
+        private void _servCallbackHandler_NukesUpdated(NukeRocket[] rockets)
+        {
+            if (_nukeDialog != null)
+            {
+                _nukeDialog.UpdateRockets(rockets);
+            }
+            else
+            {
+                _nukeDialog = new NukeAttackDialog();
+                _nukeDialog.TryToShootDown += _nukeDialog_TryToShootDown;
+                _nukeDialog.UpdateRockets(rockets);
+            }
+        }
+
+        private void _nukeDialog_TryToShootDown(Guid Id)
+        {
+            _client.ShootDownNuke(_countryModel.Name, Id);
+        }
+
+        private void _servCallbackHandler_NukesInitialized()
+        {
+            _nukeDialog = new NukeAttackDialog();
+            _nukeDialog.TryToShootDown += _nukeDialog_TryToShootDown;
+            _grid.Children.Add(_nukeDialog);
+            Canvas.SetLeft(_nukeDialog, (_premierPanel.Width - (_nukeDialog).Width) / 2.0);
+            Canvas.SetTop(_nukeDialog, _header.Height + 41 + 10);
+        }
+
+        private void InitializeNuke()
+        {
 
         }
 
         private void _connectionPanel_NameReceived(string name)
         {
+            _countryModel = new Model.Country(name);
+            AbstractDialog.CountryData = _countryModel;
+            AbstractPanel.CountryData = _countryModel;
             _name = name;
+            _countryModel.MissilesCount = 1000;
             connectionSetter.DoWork += FindServer;
             connectionSetter.RunWorkerCompleted += ServerFound;
             connectionSetter.RunWorkerAsync();
@@ -143,20 +185,35 @@ namespace Totality.Client.GUI
 
         private void ClientChannelFaulted(object sender, EventArgs e)
         {
-            _client.Abort();
-            _client = new ReferenceToServer.TransmitterServiceClient(new System.ServiceModel.InstanceContext(_servCallbackHandler));
-            _connectionPanel.Dispatcher.Invoke(_connectionPanel.Open);
-            connectionSetter.RunWorkerAsync();
+            Dispatcher.BeginInvoke(new Action( () => {
+                _client.Abort();
+                _client = new TransmitterServiceClient(new System.ServiceModel.InstanceContext(_servCallbackHandler));
+                _connectionPanel.Open();
+                connectionSetter.RunWorkerAsync();
+            }));
+
         }
 
         private void _servCallbackHandler_CountryUpdated(Country country)
         {
+            _ordersTable.Clear();
+            IsEnabled = true;
+            if (_nukeDialog != null)
+            {
+                _grid.Children.Remove(_nukeDialog);
+                _nukeDialog = null;
+            }
             changePanel(_ordersTable);
             _country = country;
+            AbstractPanel.CountryData = country;
+            AbstractDialog.CountryData = country;
             _header.UpdateMoney(country.Money);
             _header.UpdateNukes(country.NukesCount);
             _header.UpdateMissiles(country.MissilesCount);
             _header.UpdateMood((short)country.Mood);
+            _industryPanel.Update();
+            _militaryPanel.Update();
+            _sciencePanel.Update();
         }
 
         private void setAnims()
@@ -184,12 +241,6 @@ namespace Totality.Client.GUI
             Canvas.SetTop(_ordersTable, Canvas.GetTop(_ordersTable) + e.Delta*0.1);
         }
 
-        private void button_Click(object sender, RoutedEventArgs e)
-        {
-            _ordersTable.addOrder(new OrderRecord("тест", "2000"));
-            
-        }
-
         private void dataGrid1_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
         {
             ((OrdersTable)sender).CaptureMouse();
@@ -198,6 +249,26 @@ namespace Totality.Client.GUI
         private void dataGrid1_MouseWheel(object sender, MouseWheelEventArgs e)
         {
             ((OrdersTable)sender).ReleaseMouseCapture();
+        }
+
+        private void createSendDialog()
+        {
+            SendDialog dial = new SendDialog(sendOrders);
+            canvas1.Children.Add(dial);
+            Canvas.SetLeft(dial, (Width - dial.Width) / 2);
+            Canvas.SetTop(dial, Canvas.GetTop(_industryPanel) + (_industryPanel.Height - dial.Height) / 2);
+        }
+
+        private void sendOrders(bool allowed, SendDialog sender )
+        {
+            if (allowed)
+            {
+                List<Order> orders = _ordersTable.GetOrders();
+
+                _client.AddOrders(orders.ToArray());
+                IsEnabled = false;
+            }
+            canvas1.Children.Remove(sender);
         }
     }
 }

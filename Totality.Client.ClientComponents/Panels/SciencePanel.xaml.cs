@@ -1,6 +1,5 @@
 ﻿using Totality.Client.ClientComponents.Dialogs;
 using Totality.Client.ClientComponents.Dialogs.Military;
-using Totality.Client.ClientComponents.Dialogs.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,10 +29,10 @@ namespace Totality.Client.ClientComponents.Panels
         public SciencePanel()
         {
             InitializeComponent();
-            ExtractButton.click += () => createDialog<ImproveDialog>(new ImproveDialog(receiveOrder, "Улучшить технологии добывающей промышленности?", "Улучшение технологий добывающей промышленности"));
-            HeavyButton.click += () => createDialog<ImproveDialog>(new ImproveDialog(receiveOrder, "Улучшить технологии тяжелой промышленности?", "Улучшение технологий тяжелой промышленности"));
-            LightButton.click += () => createDialog<ImproveDialog>(new ImproveDialog(receiveOrder, "Улучшить технологии легкой промышленности?", "Улучшение технологий легкой промышленности"));
-            MilitaryButton.click += () => createDialog<ImproveDialog>(new ImproveDialog(receiveOrder, "Улучшить военные технологии?", "Военных технологий"));
+            ExtractButton.click += () => createDialog<ImproveDialog>(new ImproveDialog(receiveOrder, "Улучшить технологии добывающей промышленности?", "Улучшение технологий добывающей промышленности", ImproveDialog.Orders.ImproveExtract));
+            HeavyButton.click += () => createDialog<ImproveDialog>(new ImproveDialog(receiveOrder, "Улучшить технологии тяжелой промышленности?", "Улучшение технологий тяжелой промышленности", ImproveDialog.Orders.ImproveHeavy));
+            LightButton.click += () => createDialog<ImproveDialog>(new ImproveDialog(receiveOrder, "Улучшить технологии легкой промышленности?", "Улучшение технологий легкой промышленности", ImproveDialog.Orders.ImproveLight));
+            MilitaryButton.click += () => createDialog<ImproveDialog>(new ImproveDialog(receiveOrder, "Улучшить военные технологии?", "Улучшение военных технологий", ImproveDialog.Orders.ImproveMilitary));
         }
 
         private void createDialog<T>(Dialog dialog) where T : UIElement
@@ -54,6 +53,23 @@ namespace Totality.Client.ClientComponents.Panels
 
             canvas1.Children.Remove((UIElement)sender);
             currentDialog = null;
+        }
+
+        public void Update()
+        {
+            ExtractLabel.Content = CountryData.ExtractScienceLvl;
+            HeavyLabel.Content = CountryData.HeavyScienceLvl;
+            LightLabel.Content = CountryData.LightScienceLvl;
+            MilitaryLabel.Content = CountryData.MilitaryScienceLvl;
+
+            ExtractLine.Height = (19 + 273 * (CountryData.ExtractExperience / (double)CountryData.ExtractScLvlUpExp));
+            Canvas.SetTop(ExtractLine, 295 -  ExtractLine.Height);
+            HeavyLine.Height = 19 + 273 * (CountryData.HeavyExperience / (double)CountryData.HeavyScLvlUpExp);
+            Canvas.SetTop(HeavyLine, 295 - HeavyLine.Height);
+            LightLine.Height = 19 + 273 * (CountryData.LightExperience / (double)CountryData.LightScLvlUpExp);
+            Canvas.SetTop(LightLine, 295 - LightLine.Height);
+            MilitaryLine.Height = 19 + 273 * (CountryData.MilitaryExperience / (double)CountryData.MilitaryScLvlUpExp);
+            Canvas.SetTop(MilitaryLine, 295 - MilitaryLine.Height);
         }
     }
 }

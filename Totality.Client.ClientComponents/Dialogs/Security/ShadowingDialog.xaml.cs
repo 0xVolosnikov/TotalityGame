@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Totality.CommonClasses;
 using Totality.Model;
 
 namespace Totality.Client.ClientComponents.Dialogs.Security
@@ -21,6 +22,7 @@ namespace Totality.Client.ClientComponents.Dialogs.Security
     /// </summary>
     public partial class ShadowingDialog : AbstractDialog, Dialog
     {
+        private enum Orders { ImproveNetwork, AddAgents, OrderToAgent, Purge, CounterSpyLvlUp, ShadowingUp, IntelligenceUp, Sabotage }
         public delegate void ReceiveOrder(object sender, Order order, string text, long price);
         ReceiveOrder _receiveOrder;
 
@@ -33,6 +35,8 @@ namespace Totality.Client.ClientComponents.Dialogs.Security
         private void acceptButton_Click(object sender, RoutedEventArgs e)
         {
             Order order = new Order(CountryData.Name);
+            order.OrderNum = (short)Orders.ShadowingUp;
+            order.Ministery = (short)Mins.Security;
             _receiveOrder(this, order, "Усиление слежки", 0);
         }
 

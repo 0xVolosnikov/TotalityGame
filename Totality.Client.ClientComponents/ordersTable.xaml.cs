@@ -14,6 +14,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Totality.Model;
 
 namespace Totality.Client.ClientComponents
 {
@@ -62,6 +63,26 @@ namespace Totality.Client.ClientComponents
                     this.Height = this.dataGrid.Height + this.image.Height;
                 }
             }            
+        }
+
+        public List<Order> GetOrders()
+        {
+            List<Order> orders = new List<Order>();
+
+            for (int i = 0; i < orderRecords.Count; i++)
+            {
+                if (orderRecords[i].Order == null) break;
+
+                orders.Add(orderRecords[i].Order);
+            }
+
+            return orders;
+        }
+
+        public void Clear()
+        {
+            orderRecords.Clear();
+            for (int i = 0; i < startingLines; i++) orderRecords.Add(new Totality.Client.ClientComponents.OrderRecord("", ""));
         }
 
         private void DataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
