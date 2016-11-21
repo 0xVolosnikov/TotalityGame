@@ -139,6 +139,26 @@
   <ItemGroup>
     <Resource Include="Images\ButtonSend.png" />
     <Resource Include="Images\ButtonSendDown.png" />
+    <Resource Include="Images\MilitaryButton.png" />
+    <Resource Include="Images\MilitaryButtonDown.png" />
+    <Resource Include="Images\ForeignButton.png" />
+    <Resource Include="Images\ForeignButtonDown.png" />
+    <Resource Include="Images\IndustryButton.png" />
+    <Resource Include="Images\IndustryButtonDown.png" />
+    <Resource Include="Images\FinanceButton.png" />
+    <Resource Include="Images\FinanceButtonDown.png" />
+    <Resource Include="Images\MediaButton.png" />
+    <Resource Include="Images\MediaButtonDown.png" />
+    <Resource Include="Images\InnerButton.png" />
+    <Resource Include="Images\InnerButtonDown.png" />
+    <Resource Include="Images\SecurityButton.png" />
+    <Resource Include="Images\SecurityButtonDown.png" />
+    <Resource Include="Images\ScienceButton.png" />
+    <Resource Include="Images\ScienceButtonDown.png" />
+    <Resource Include="Images\PremierButton.png" />
+    <Resource Include="Images\PremierButtonDown.png" />
+    <Resource Include="Images\ListButton.png" />
+    <Resource Include="Images\ListButtonDown.png" />
     <Content Include="video2.mp4">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

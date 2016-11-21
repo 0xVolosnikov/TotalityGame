@@ -42,6 +42,11 @@ namespace Totality.Client.ClientComponents
 
         }
 
+        public void Update()
+        {
+            if (imgUp != null)
+                this.image.Source = imgUp;
+        }
 
         private void Button_Loaded(object sender, RoutedEventArgs e)
         {

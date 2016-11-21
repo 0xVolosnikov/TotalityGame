@@ -44,7 +44,7 @@ namespace Totality.CommonClasses
 
         public static int PurgeCost = 10000;
 
-        public static int CountOfMinisters = 8;
+        public static int CountOfMinisters = 9;
         public static int ReorganizingTime = 2;
         public static int SabotageTime = 1;
         public static int PurgeTime = 1;

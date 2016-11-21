@@ -35,8 +35,7 @@ namespace Totality.Client.ClientComponents
             deleteAllButton.Header = "Очистить все";
             deleteAllButton.Icon = new System.Windows.Controls.Image
             {
-                Source = new BitmapImage(new Uri("remove.png", UriKind.Relative))
-                
+                Source = new BitmapImage(new Uri(@"/Totality.Client.ClientComponents;component/Images/remove.png", UriKind.Relative))    
             };
             deleteAllButton.Click += DeleteAllButton_Click;
             this.ContextMenu.Items.Add(deleteAllButton);

@@ -19,6 +19,7 @@ namespace Totality.Handlers.Nuke
         private SynchronizedCollection<NukeRocket> _rockets = new SynchronizedCollection<NukeRocket>();
         private List<NukeRocket> _rockets2 = new List<NukeRocket>();
         private ITransmitter _transmitter;
+        private Random rand = new Random();
 
         public delegate void AttackEnd();
         public event AttackEnd AttackEnded;
@@ -97,11 +98,18 @@ namespace Totality.Handlers.Nuke
                         _rockets[i].LifeTime -= _delay;
                         _rockets2[i].LifeTime -= _delay;
                     
-                    if (_rockets2[i].LifeTime <= 0 && _rockets2.Count > 0)
+                    if (_rockets2[i].LifeTime <= 0 && _rockets2[i].Count > 0)
                     {
-                        //Country curCountry = _dataLayer.GetCountry(_rockets2[i].To);
-                        // ToDo: ядерный взрыв
-                        //_dataLayer.UpdateCountry(curCountry);
+                        Country curCountry = _dataLayer.GetCountry(_rockets2[i].To);
+                        curCountry.ResOil *= (getNukesDamage(_rockets2[i].Count, curCountry.IsAlerted) );
+                        curCountry.ResSteel *= (getNukesDamage(_rockets2[i].Count, curCountry.IsAlerted));
+                        curCountry.ResWood *= (getNukesDamage(_rockets2[i].Count, curCountry.IsAlerted));
+                        curCountry.ResAgricultural *= (getNukesDamage(_rockets2[i].Count, curCountry.IsAlerted));
+                        curCountry.ProdUranus *= (getNukesDamage(_rockets2[i].Count, curCountry.IsAlerted));
+                        curCountry.PowerHeavyIndustry *= (getNukesDamage(_rockets2[i].Count, curCountry.IsAlerted));
+                        curCountry.PowerLightIndustry*= (getNukesDamage(_rockets2[i].Count, curCountry.IsAlerted));
+                        curCountry.Mood *= (getNukesDamage(_rockets2[i].Count, curCountry.IsAlerted));
+                        _dataLayer.UpdateCountry(curCountry);
                     }
                 }
 
@@ -121,6 +129,15 @@ namespace Totality.Handlers.Nuke
             _timer.ReportProgress(0);
         }
 
+        private double getNukesDamage(int count, bool isAlerted)
+        {
+            var min = Math.Pow(0.95, count);
+            var max = Math.Pow(0.85, count);
+            var dif = max - min;
+            if (isAlerted) dif /= 3;
+
+            return min + (dif/rand.Next(1,1000));
+        }
 
     }
 }

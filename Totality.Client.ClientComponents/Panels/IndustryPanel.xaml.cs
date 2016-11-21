@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Totality.Model;
 using Totality.Client.ClientComponents.Dialogs.Industry;
+using Totality.CommonClasses;
 
 namespace Totality.Client.ClientComponents.Panels
 {
@@ -95,6 +96,44 @@ namespace Totality.Client.ClientComponents.Panels
                 Canvas.SetLeft(UsedAgroLabel, Canvas.GetLeft(AgroLine) + (AgroLine.Width - UsedAgroLabel.Width) / 2.0);
             else
                 Canvas.SetLeft(UsedAgroLabel, Canvas.GetLeft(AgroLine));
+
+
+            if (CountryData.MinsBlocks[(short)Mins.Industry] > 0 && !isBlocked)
+            {
+                isBlocked = true;
+                var uriSource = new Uri(@"/Totality.Client.ClientComponents;component/Panels/Images/Industry/heavyIndustryButtonDeactivated.png", UriKind.Relative);
+                HeavyButton.imgUp = new BitmapImage(uriSource);
+                HeavyButton.Update();
+                HeavyButton.IsEnabled = false;
+
+                uriSource = new Uri(@"/Totality.Client.ClientComponents;component/Panels/Images/Industry/lightIndustryButtonDeactivated.png", UriKind.Relative);
+                LightButton.imgUp = new BitmapImage(uriSource);
+                LightButton.Update();
+                LightButton.IsEnabled = false;
+
+                OilButton.IsEnabled = false;
+                SteelButton.IsEnabled = false;
+                WoodButton.IsEnabled = false;
+                AgroButton.IsEnabled = false;
+            }
+            else if (isBlocked && CountryData.MinsBlocks[(short)Mins.Industry] == 0)
+            {
+                isBlocked = false;
+                var uriSource = new Uri(@"/Totality.Client.ClientComponents;component/Panels/Images/Industry/heavyIndustryButton.png", UriKind.Relative);
+                HeavyButton.imgUp = new BitmapImage(uriSource);
+                HeavyButton.Update();
+                HeavyButton.IsEnabled = true;
+
+                uriSource = new Uri(@"/Totality.Client.ClientComponents;component/Panels/Images/Industry/lightIndustryButton.png", UriKind.Relative);
+                LightButton.imgUp = new BitmapImage(uriSource);
+                LightButton.Update();
+                LightButton.IsEnabled = true;
+
+                OilButton.IsEnabled = true;
+                SteelButton.IsEnabled = true;
+                WoodButton.IsEnabled = true;
+                AgroButton.IsEnabled = true;
+            }
         }
     }
 }

@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="Totality.Client.ClientComponents.Panels.WaitingPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:gif="http://wpfanimatedgif.codeplex.com" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Totality.Client.ClientComponents.Panels"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300" Width="1198" Height="700" OpacityMask="Black">
+    <Canvas x:Name="_canvas" Background="#B2000000">
+        <Border x:Name="_border" BorderBrush="#FF666666" BorderThickness="4" Height="519" Canvas.Left="158" Canvas.Top="84" Width="887" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Canvas>
+                <Canvas.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="White" Offset="0"/>
+                        <GradientStop Color="#FF919191" Offset="1"/>
+                    </LinearGradientBrush>
+                </Canvas.Background>
+                <Label x:Name="label" Content="Ожидаем конца хода..." Canvas.Left="10" Canvas.Top="386" Height="119" Width="859" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="48" FontFamily="Arial Black" Foreground="#FF490000"/>
+                <Canvas Height="61" Width="879" Background="#FF5D0000">
+                    <Label x:Name="label1" Content="Totality" Canvas.Left="198" Canvas.Top="-36" Height="132" Width="485" Foreground="White" Padding="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontFamily="Bauhaus 93" FontSize="48" FontWeight="Bold"/>
+                </Canvas>
+                <Image x:Name="TimeImage" Height="256" Canvas.Left="312" Canvas.Top="118" Width="256" Stretch="None" Source="/Totality.Client.ClientComponents;component/Images/TimeIcon.png"/>
+            </Canvas>
+        </Border>
+    </Canvas>
+</UserControl>

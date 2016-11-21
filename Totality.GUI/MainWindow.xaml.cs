@@ -121,16 +121,17 @@ namespace Totality.GUI
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            _dataLayer.SetProperty("Test", "PowerHeavyIndustry", 10);
-            _dataLayer.SetProperty("Test", "PowerLightIndustry", 10);
-            _dataLayer.SetProperty("Test", "ResOil", 25);
-            _dataLayer.SetProperty("Test", "ResSteel", 25);
-            _dataLayer.SetProperty("Test", "ResWood", 25);
-            _dataLayer.SetProperty("Test", "ResAgricultural", 25);
+            _dataLayer.SetProperty("Test", "PowerHeavyIndustry", 100);
+            _dataLayer.SetProperty("Test", "PowerLightIndustry", 100);
+            _dataLayer.SetProperty("Test", "ResOil", 250);
+            _dataLayer.SetProperty("Test", "ResSteel", 250);
+            _dataLayer.SetProperty("Test", "ResWood", 250);
+            _dataLayer.SetProperty("Test", "ResAgricultural", 250);
             _dataLayer.SetProperty("Test", "ExtractExperience", 5);
             _dataLayer.SetProperty("Test", "HeavyExperience", 5);
             _dataLayer.SetProperty("Test", "LightExperience", 5);
             _dataLayer.SetProperty("Test", "MilitaryExperience", 5);
+            _dataLayer.SetProperty("Test", "NukesCount", 100);
 
             // _nukeHandler.StartAttack();
         }

@@ -55,5 +55,45 @@ namespace Totality.Client.ClientComponents.Panels
             canvas1.Children.Remove((UIElement)sender);
             _currentDialog = null;
         }
+
+        public void Update()
+        {
+            if (CountryData.MinsBlocks[(short)Mins.Finance] > 0)
+            {
+                isBlocked = true;
+                var uriSource = new Uri(@"/Totality.Client.ClientComponents;component/Images/Finance/CurrencyButtonDeactivated.png", UriKind.Relative);
+                CurrencyButton.imgUp = new BitmapImage(uriSource);
+                CurrencyButton.Update();
+                CurrencyButton.IsEnabled = false;
+
+                uriSource = new Uri(@"/Totality.Client.ClientComponents;component/Images/Finance/InterventionButtonDeactivated.png", UriKind.Relative);
+                InterventionButton.imgUp = new BitmapImage(uriSource);
+                InterventionButton.Update();
+                InterventionButton.IsEnabled = false;
+
+                uriSource = new Uri(@"/Totality.Client.ClientComponents;component/Images/Finance/TaxesButtonDownDeactivated.png", UriKind.Relative);
+                TaxesButton.imgUp = new BitmapImage(uriSource);
+                TaxesButton.Update();
+                TaxesButton.IsEnabled = false;
+            }
+            else if (isBlocked)
+            {
+                isBlocked = false;
+                var uriSource = new Uri(@"/Totality.Client.ClientComponents;component/Images/Finance/CurrencyButton.png", UriKind.Relative);
+                CurrencyButton.imgUp = new BitmapImage(uriSource);
+                CurrencyButton.Update();
+                CurrencyButton.IsEnabled = true;
+
+                uriSource = new Uri(@"/Totality.Client.ClientComponents;component/Images/Finance/InterventionButton.png", UriKind.Relative);
+                InterventionButton.imgUp = new BitmapImage(uriSource);
+                InterventionButton.Update();
+                InterventionButton.IsEnabled = true;
+
+                uriSource = new Uri(@"/Totality.Client.ClientComponents;component/Images/Finance/TaxesButton.png", UriKind.Relative);
+                TaxesButton.imgUp = new BitmapImage(uriSource);
+                TaxesButton.Update();
+                TaxesButton.IsEnabled = true;
+            }
+        }
     }
 }

@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Totality.Model;
+using Totality.CommonClasses;
 
 namespace Totality.Client.ClientComponents.Panels
 {
@@ -61,6 +62,39 @@ namespace Totality.Client.ClientComponents.Panels
         public void Update()
         {
             UranusLabel.Content = (int)CountryData.ResUranus;
+
+            if (CountryData.MinsBlocks[(short)Mins.Military] > 0 && !isBlocked)
+            {
+                isBlocked = true;
+                deActivateButton(WarButton, "/Totality.Client.ClientComponents;component/Images/Military/WarButtonDeactivated.png");
+                deActivateButton(MobilizationButton, "/Totality.Client.ClientComponents;component/Images/Military/WarButtonDeactivated.png");
+                deActivateButton(MissilesButton, "/Totality.Client.ClientComponents;component/Images/Military/MissilesButtonDeactivated.png");
+                deActivateButton(NukesButton, "/Totality.Client.ClientComponents;component/Images/Military/NukesButtonDeactivated.png");
+                deActivateButton(UranusButton, "/Totality.Client.ClientComponents;component/Images/Military/UranusButtonDeactivated.png");
+
+            }
+            else if (isBlocked && CountryData.MinsBlocks[(short)Mins.Military] == 0)
+            {
+                isBlocked = false;
+                activateButton(WarButton, "/Totality.Client.ClientComponents;component/Images/Military/WarButton.png");
+                activateButton(MobilizationButton, "/Totality.Client.ClientComponents;component/Images/Military/WarButton.png");
+                activateButton(MissilesButton, "/Totality.Client.ClientComponents;component/Images/Military/MissilesButton.png");
+                activateButton(NukesButton, "/Totality.Client.ClientComponents;component/Images/Military/NukesButton.png");
+                activateButton(UranusButton, "/Totality.Client.ClientComponents;component/Images/Military/UranusButton.png");
+            }
+
+            if (CountryData.IsMobilized)
+            {
+                var uriSource = new Uri(@"/Totality.Client.ClientComponents;component/Images/Military/MobilizeButtonActive.png", UriKind.Relative);
+                MobilizationButton.imgUp = new BitmapImage(uriSource);
+                MobilizationButton.Update();
+            }
+            else if (!isBlocked)
+            {
+                var uriSource = new Uri(@"/Totality.Client.ClientComponents;component/Images/Military/MobilizeButton.png", UriKind.Relative);
+                MobilizationButton.imgUp = new BitmapImage(uriSource);
+                MobilizationButton.Update();
+            }
         }
     }
 }

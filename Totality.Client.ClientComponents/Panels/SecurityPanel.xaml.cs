@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Totality.Model;
 using Totality.Client.ClientComponents.Dialogs.Security;
+using Totality.CommonClasses;
 
 namespace Totality.Client.ClientComponents.Panels
 {
@@ -64,6 +65,27 @@ namespace Totality.Client.ClientComponents.Panels
 
             canvas1.Children.Remove((UIElement)sender);
             currentDialog = null;
+        }
+
+        public void Update()
+        {
+            if (CountryData.MinsBlocks[(short)Mins.Security] > 0 && !isBlocked)
+            {
+                isBlocked = true;
+                deActivateButton(NetsButton, "/Totality.Client.ClientComponents;component/Images/Security/SecurityNetsButtonDeactivated.png");
+                deActivateButton(ShadowingButton, "/Totality.Client.ClientComponents;component/Images/Security/SecurityShadowingButtonDeactivated.png");
+                deActivateButton(CounterspyButton, "/Totality.Client.ClientComponents;component/Images/Security/SecurityCounterspyButtonDeactivated.png");
+                deActivateButton(PurgeButton, "/Totality.Client.ClientComponents;component/Images/Security/SecurityPurgeButtonDeactivated.png");
+
+            }
+            else if (isBlocked && CountryData.MinsBlocks[(short)Mins.Security] == 0)
+            {
+                isBlocked = false;
+                activateButton(NetsButton, "/Totality.Client.ClientComponents;component/Images/Security/SecurityNetsButton.png");
+                activateButton(ShadowingButton, "/Totality.Client.ClientComponents;component/Images/Security/SecurityShadowingButton.png");
+                activateButton(CounterspyButton, "/Totality.Client.ClientComponents;component/Images/Security/SecurityCounterspyButton.png");
+                activateButton(PurgeButton, "/Totality.Client.ClientComponents;component/Images/Security/SecurityPurgeButton.png");
+            }
         }
     }
 }

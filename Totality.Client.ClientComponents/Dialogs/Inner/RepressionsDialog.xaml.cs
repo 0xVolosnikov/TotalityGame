@@ -30,6 +30,15 @@ namespace Totality.Client.ClientComponents.Dialogs.Inner
         {
             _receiveOrder = receiveOrder;
             InitializeComponent();
+
+            if (CountryData.IsRepressed)
+            {
+                textBlock.Text = "Отменить репрессии?";
+            }
+            else
+            {
+                textBlock.Text = "Начать репрессии?";
+            }
         }
 
         private void acceptButton_Click(object sender, RoutedEventArgs e)
@@ -37,15 +46,15 @@ namespace Totality.Client.ClientComponents.Dialogs.Inner
             Order order = new Order(CountryData.Name);
             order.Ministery = (short)Mins.Inner;
 
-            if (CountryData.IsMobilized)
+            if (CountryData.IsRepressed)
             {
                 _receiveOrder(this, order, "Прекратить репрессии", 0);
-                order.OrderNum = (short)Orders.Repressions;
+                order.OrderNum = (short)Orders.EndRepressions;
             }
             else
             {
                 _receiveOrder(this, order, "Начать репрессии", 0);
-                order.OrderNum = (short)Orders.EndRepressions;
+                order.OrderNum = (short)Orders.Repressions;
             }
         }
 

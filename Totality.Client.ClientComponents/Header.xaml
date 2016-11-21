@@ -27,7 +27,7 @@
                 <Image x:Name="smile" Height="38" Width="37" Source="Images/Interface/smile.png" Stretch="None"/>
                 <Label x:Name="LMood" Content="100%" Canvas.Left="37" Height="38" Width="66" Foreground="White" FontFamily="Euphemia" FontSize="20" FontWeight="Bold"/>
             </Canvas>
-            <local:StatButton Canvas.Left="478" Canvas.Top="6" Width="244"/>
+            <local:StatButton x:Name="statButton" Canvas.Left="478" Canvas.Top="6" Width="244" Cursor="Hand"/>
         </Canvas>
         <Canvas Background="DarkOrange" Height="4" VerticalAlignment="Bottom"/>
 

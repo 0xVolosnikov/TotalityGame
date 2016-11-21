@@ -26,6 +26,8 @@ namespace Totality.Handlers.Main
 
                 case (int)Orders.Alert: return alert(order);
 
+                case (int)Orders.UnAlert: return unAlert(order);
+
                 default: throw new ArgumentException("Order " + order + " not found in " + typeof(MinPremierHandler));
             }
         }

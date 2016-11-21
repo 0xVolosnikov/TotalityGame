@@ -30,13 +30,31 @@ namespace Totality.Client.ClientComponents.Dialogs.Premier
         {
             _receiveOrder = receiveOrder;
             InitializeComponent();
+
+            if (CountryData.IsAlerted)
+            {
+                textBlock.Text = "Отменить чрезвычайное положение?";
+            }
+            else
+            {
+                textBlock.Text = "Объявить чрезвычайное положение?";
+            }
         }
 
         private void acceptButton_Click(object sender, RoutedEventArgs e)
         {
             Order order = new Order(CountryData.Name);
             order.Ministery = (short)Mins.Premier;
-            _receiveOrder(this, order, "Объявление чрезвычайного положения", 0);
+            if (CountryData.IsAlerted)
+            {
+                order.OrderNum = (short)Orders.UnAlert;
+                _receiveOrder(this, order, "Отмена чрезвычайного положения", 0);
+            }
+            else
+            {
+                order.OrderNum = (short)Orders.Alert;
+                _receiveOrder(this, order, "Объявление чрезвычайного положения", 0);
+            }
         }
 
         private void cancelButton_Click(object sender, RoutedEventArgs e)

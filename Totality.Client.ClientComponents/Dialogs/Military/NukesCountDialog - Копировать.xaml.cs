@@ -30,13 +30,31 @@ namespace Totality.Client.ClientComponents.Dialogs.Military
         {
             _receiveOrder = receiveOrder;
             InitializeComponent();
+
+            if (CountryData.IsMobilized)
+            {
+                label.Content = "Отменить мобилизацию?";
+            }
+            else
+            {
+                label.Content = "Мобилизовать страну?";
+            }
         }
 
         private void acceptButton_Click(object sender, RoutedEventArgs e)
         {
             Order order = new Order(CountryData.Name);
             order.Ministery = (short)Mins.Military;
-            _receiveOrder(this, order, "Всеобщая мобилизация", 0);
+            if (CountryData.IsMobilized)
+            {
+                order.OrderNum = (short)Orders.Demobilization;
+                _receiveOrder(this, order, "Демобилизация", 0);
+            }
+            else
+            {
+                order.OrderNum = (short)Orders.GeneralMobilization;
+                _receiveOrder(this, order, "Всеобщая мобилизация", 0);
+            }
         }
 
         private void cancelButton_Click(object sender, RoutedEventArgs e)

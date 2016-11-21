@@ -34,6 +34,13 @@ namespace Totality.Client.ClientComponents
             
         }
 
+
+        public void DoClick()
+        {
+            Image_MouseDown(this, null);
+        }
+
+
         private void MinisteryButton_Loaded(object sender, RoutedEventArgs e)
         {
             if (imgUp != null)
@@ -42,7 +49,7 @@ namespace Totality.Client.ClientComponents
 
         public void connectToAnotherButton(MinisteryButton anotherButton)
         {
-            anotherButton.MouseDown += release;
+            anotherButton.click += release;
         }
 
         public void connectToButtons(List<MinisteryButton> buttons)
@@ -55,7 +62,7 @@ namespace Totality.Client.ClientComponents
             }
         }
 
-        public void release(object sender, EventArgs e)
+        public void release()
         {
             if (isDown)
             {
@@ -65,7 +72,7 @@ namespace Totality.Client.ClientComponents
             }
         }
 
-        private void Image_MouseDown(object sender, MouseButtonEventArgs e)
+        public void Image_MouseDown(object sender, MouseButtonEventArgs e)
         {
          if (!isDown)
             {

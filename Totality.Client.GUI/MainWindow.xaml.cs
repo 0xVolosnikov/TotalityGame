@@ -43,49 +43,59 @@ namespace Totality.Client.GUI
         private CallbackHandler _servCallbackHandler;
         private string _name;
         private NukeAttackDialog _nukeDialog;
-        private Dialog _currentDialog;
+        private WaitingPanel _waitingPanel;
+        private StatPanel _statPanel;
 
         public MainWindow()
         {
-            _servCallbackHandler = new CallbackHandler();
-            _servCallbackHandler.CountryUpdated += _servCallbackHandler_CountryUpdated;
-            _servCallbackHandler.NukesInitialized += _servCallbackHandler_NukesInitialized;
-            _servCallbackHandler.NukesUpdated += _servCallbackHandler_NukesUpdated;
-            //_servCallbackHandler.
+            try
+            {
+                _servCallbackHandler = new CallbackHandler();
+                _servCallbackHandler.CountryUpdated += _servCallbackHandler_CountryUpdated;
+                _servCallbackHandler.NukesInitialized += _servCallbackHandler_NukesInitialized;
+                _servCallbackHandler.NukesUpdated += _servCallbackHandler_NukesUpdated;
+                //_servCallbackHandler.
 
-            InitializeComponent();
-            setAnims();
+                InitializeComponent();
+                setAnims();
 
-            this.MouseWheel += MainWindow_MouseWheel;
-            _ordersTable.PreviewMouseWheel += dataGrid1_PreviewMouseWheel;
-            _ordersTable.MouseWheel += dataGrid1_MouseWheel;
-            currentPanel = _ordersTable;
+                _header.StatButtonClicked += _header_StatButtonClicked;
+                _statPanel = new StatPanel();
+                _statPanel.Visibility = Visibility.Hidden;
+                canvas1.Children.Add(_statPanel);
+                Canvas.SetTop(_statPanel, 50);
 
-            for (int i = 1; i <= 10; i++)
-            buttons.Add(FindName("but" + i) as MinisteryButton);
-            foreach (MinisteryButton but in buttons)
-                but.connectToButtons(buttons);
 
-            buttons[0].MouseDown += (object sender, MouseButtonEventArgs e) => changePanel(_ordersTable);
-            buttons[1].MouseDown += (object sender, MouseButtonEventArgs e) => changePanel(_industryPanel);
-            buttons[2].MouseDown += (object sender, MouseButtonEventArgs e) => changePanel(_financePanel);
-            buttons[3].MouseDown += (object sender, MouseButtonEventArgs e) => changePanel(_militaryPanel);
-            buttons[4].MouseDown += (object sender, MouseButtonEventArgs e) => changePanel(_foreignPanel);
-            buttons[5].MouseDown += (object sender, MouseButtonEventArgs e) => changePanel(_mediaPanel);
-            buttons[6].MouseDown += (object sender, MouseButtonEventArgs e) => changePanel(_innerPanel);
-            buttons[7].MouseDown += (object sender, MouseButtonEventArgs e) => changePanel(_securityPanel);
-            buttons[8].MouseDown += (object sender, MouseButtonEventArgs e) => changePanel(_sciencePanel);
-            buttons[9].MouseDown += (object sender, MouseButtonEventArgs e) => changePanel(_premierPanel);
-            SendButton.click += createSendDialog;
+                this.MouseWheel += MainWindow_MouseWheel;
+                _ordersTable.PreviewMouseWheel += dataGrid1_PreviewMouseWheel;
+                _ordersTable.MouseWheel += dataGrid1_MouseWheel;
+                currentPanel = _ordersTable;
 
-            _countryModel = new Model.Country("test");
-            AbstractPanel.CountryData = _countryModel;
-            AbstractPanel.Table = _ordersTable;
+                for (int i = 1; i <= 10; i++)
+                    buttons.Add(FindName("but" + i) as MinisteryButton);
+                foreach (MinisteryButton but in buttons)
+                    but.connectToButtons(buttons);
 
-            AbstractDialog.CountryData = _countryModel;
-            AbstractDialog.Countries.Add("Test"); //TEST
-            AbstractDialog.Countries.Add("Test2"); //TEST
-            AbstractDialog.Ministers.AddRange(new List<string>
+                buttons[0].MouseDown += (object sender, MouseButtonEventArgs e) => changePanel(_ordersTable);
+                buttons[1].MouseDown += (object sender, MouseButtonEventArgs e) => changePanel(_industryPanel);
+                buttons[2].MouseDown += (object sender, MouseButtonEventArgs e) => changePanel(_financePanel);
+                buttons[3].MouseDown += (object sender, MouseButtonEventArgs e) => changePanel(_militaryPanel);
+                buttons[4].MouseDown += (object sender, MouseButtonEventArgs e) => changePanel(_foreignPanel);
+                buttons[5].MouseDown += (object sender, MouseButtonEventArgs e) => changePanel(_mediaPanel);
+                buttons[6].MouseDown += (object sender, MouseButtonEventArgs e) => changePanel(_innerPanel);
+                buttons[7].MouseDown += (object sender, MouseButtonEventArgs e) => changePanel(_securityPanel);
+                buttons[8].MouseDown += (object sender, MouseButtonEventArgs e) => changePanel(_sciencePanel);
+                buttons[9].MouseDown += (object sender, MouseButtonEventArgs e) => changePanel(_premierPanel);
+                SendButton.click += createSendDialog;
+
+                _countryModel = new Model.Country("test");
+                AbstractPanel.CountryData = _countryModel;
+                AbstractPanel.Table = _ordersTable;
+
+                AbstractDialog.CountryData = _countryModel;
+                AbstractDialog.Countries.Add("Test"); //TEST
+                AbstractDialog.Countries.Add("Test2"); //TEST
+                AbstractDialog.Ministers.AddRange(new List<string>
             {
             "Министерство Промышленности",
             "Министерство Финансов",
@@ -99,14 +109,26 @@ namespace Totality.Client.GUI
             });
 
 
-            _connectionPanel = new ConnectionPanel();
-            _connectionPanel.Video(new Uri(String.Format(@"{0}\video2.mp4", AppDomain.CurrentDomain.BaseDirectory, "turnoff"), UriKind.Absolute));
+                _connectionPanel = new ConnectionPanel();
+                _connectionPanel.Video(new Uri(String.Format(@"{0}\video2.mp4", AppDomain.CurrentDomain.BaseDirectory, "turnoff"), UriKind.Absolute));
 
-             _grid.Children.Add(_connectionPanel);
-            _connectionPanel.NameReceived += _connectionPanel_NameReceived;
-             _client = new TransmitterServiceClient(new System.ServiceModel.InstanceContext(_servCallbackHandler));
+               _waitingPanel = new WaitingPanel();
+                _grid.Children.Add(_waitingPanel);
 
+                _grid.Children.Add(_connectionPanel);
+                _connectionPanel.NameReceived += _connectionPanel_NameReceived;
+                _client = new TransmitterServiceClient(new System.ServiceModel.InstanceContext(_servCallbackHandler));
 
+            }
+            catch (Exception e)
+            {
+                System.Console.WriteLine(e.Message);
+            }
+        }
+
+        private void _header_StatButtonClicked()
+        {
+            _statPanel.Visibility = Visibility.Visible;
         }
 
         private void _servCallbackHandler_NukesUpdated(NukeRocket[] rockets)
@@ -197,12 +219,13 @@ namespace Totality.Client.GUI
         private void _servCallbackHandler_CountryUpdated(Country country)
         {
             _ordersTable.Clear();
-            IsEnabled = true;
+            _waitingPanel.Close();
             if (_nukeDialog != null)
             {
                 _grid.Children.Remove(_nukeDialog);
                 _nukeDialog = null;
             }
+            but1.DoClick();
             changePanel(_ordersTable);
             _country = country;
             AbstractPanel.CountryData = country;
@@ -211,9 +234,20 @@ namespace Totality.Client.GUI
             _header.UpdateNukes(country.NukesCount);
             _header.UpdateMissiles(country.MissilesCount);
             _header.UpdateMood((short)country.Mood);
+
             _industryPanel.Update();
+            _financePanel.Update();
             _militaryPanel.Update();
+            _mediaPanel.Update();
+            _foreignPanel.Update();
+            _innerPanel.Update();
+            _securityPanel.Update();
             _sciencePanel.Update();
+            _premierPanel.Update();
+
+            _statPanel.Update();
+
+
         }
 
         private void setAnims()
@@ -266,7 +300,8 @@ namespace Totality.Client.GUI
                 List<Order> orders = _ordersTable.GetOrders();
 
                 _client.AddOrders(orders.ToArray());
-                IsEnabled = false;
+                _waitingPanel.Open();
+
             }
             canvas1.Children.Remove(sender);
         }

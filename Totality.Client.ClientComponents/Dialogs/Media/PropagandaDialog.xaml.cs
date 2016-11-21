@@ -31,16 +31,18 @@ namespace Totality.Client.ClientComponents.Dialogs.Media
             _receiveOrder = receiveOrder;
             InitializeComponent();
 
+            List<string> regimes = new List<string>{"Негативное","Нейтральное","Позитивное" };
+
             CountriesBox.ItemsSource = Countries;
             CountriesBox.SelectedIndex = 0;
         }
 
         private void acceptButton_Click(object sender, RoutedEventArgs e)
         {
-            Order order = new Order(CountryData.Name);
-            // order.TargetMinistery = comboBox.;
+            Order order = new Order(CountryData.Name, CountriesBox.SelectedValue.ToString());
             order.OrderNum = (short)Orders.ChangePropDirection;
             order.Ministery = (short)Mins.Media;
+            order.Value = (short)RegimeBox.SelectedIndex;
             _receiveOrder(this, order, "Смена направления пропаганды", 0);
         }
 

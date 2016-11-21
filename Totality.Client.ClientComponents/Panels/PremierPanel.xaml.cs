@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Totality.Model;
 using Totality.Client.ClientComponents.Dialogs.Premier;
+using Totality.CommonClasses;
 
 namespace Totality.Client.ClientComponents.Panels
 {
@@ -52,6 +53,38 @@ namespace Totality.Client.ClientComponents.Panels
 
             canvas1.Children.Remove((UIElement)sender);
             currentDialog = null;
+        }
+
+        public void Update()
+        {
+            if (CountryData.MinsBlocks[(short)Mins.Premier] > 0 && !isBlocked)
+            {
+                isBlocked = true;
+                deActivateButton(ReorganizeButton, "/Totality.Client.ClientComponents;component/Images/Premier/PremierReorganizeButtonDeactivated.png");
+                deActivateButton(AlertButton, "/Totality.Client.ClientComponents;component/Images/Premier/PremierAlertButtonDeactivated.png");
+                deActivateButton(LvlupButton, "/Totality.Client.ClientComponents;component/Images/Premier/PremierLvlupButtonDeactivated.png");
+
+            }
+            else if (isBlocked && CountryData.MinsBlocks[(short)Mins.Premier] == 0)
+            {
+                isBlocked = false;
+                activateButton(ReorganizeButton, "/Totality.Client.ClientComponents;component/Images/Premier/PremierReorganizeButton.png");
+                activateButton(AlertButton, "/Totality.Client.ClientComponents;component/Images/Premier/PremierAlertButton.png");
+                activateButton(LvlupButton, "/Totality.Client.ClientComponents;component/Images/Premier/PremierLvlupButton.png");
+            }
+
+            if (CountryData.IsAlerted)
+            {
+                var uriSource = new Uri(@"/Totality.Client.ClientComponents;component/Images/Premier/PremierAlertButtonActive.png", UriKind.Relative);
+                AlertButton.imgUp = new BitmapImage(uriSource);
+                AlertButton.Update();
+            }
+            else if (!isBlocked)
+            {
+                var uriSource = new Uri(@"/Totality.Client.ClientComponents;component/Images/Premier/PremierAlertButton.png", UriKind.Relative);
+                AlertButton.imgUp = new BitmapImage(uriSource);
+                AlertButton.Update();
+            }
         }
     }
 }

@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Totality.Model;
 using Totality.Client.ClientComponents.Dialogs.Media;
+using Totality.CommonClasses;
 
 namespace Totality.Client.ClientComponents.Panels
 {
@@ -63,6 +64,36 @@ namespace Totality.Client.ClientComponents.Panels
 
             canvas1.Children.Remove((UIElement)sender);
             currentDialog = null;
+        }
+
+        public void Update()
+        {
+            if (CountryData.MinsBlocks[(short)Mins.Media] > 0 && !isBlocked)
+            {
+                isBlocked = true;
+                var uriSource = new Uri(@"/Totality.Client.ClientComponents;component/Images/Media/PropButtonDeactivated.png", UriKind.Relative);
+                NewsButton.imgUp = new BitmapImage(uriSource);
+                NewsButton.Update();
+                NewsButton.IsEnabled = false;
+
+                uriSource = new Uri(@"/Totality.Client.ClientComponents;component/Images/Media/NewsButtonDeactivated.png", UriKind.Relative);
+                PropagandaButton.imgUp = new BitmapImage(uriSource);
+                PropagandaButton.Update();
+                PropagandaButton.IsEnabled = false;
+            }
+            else if (isBlocked && CountryData.MinsBlocks[(short)Mins.Media] == 0)
+            {
+                isBlocked = false;
+                var uriSource = new Uri(@"/Totality.Client.ClientComponents;component/Images/Media/PropButton.png", UriKind.Relative);
+                NewsButton.imgUp = new BitmapImage(uriSource);
+                NewsButton.Update();
+                NewsButton.IsEnabled = true;
+
+                uriSource = new Uri(@"/Totality.Client.ClientComponents;component/Images/Media/NewsButton.png", UriKind.Relative);
+                PropagandaButton.imgUp = new BitmapImage(uriSource);
+                PropagandaButton.Update();
+                PropagandaButton.IsEnabled = true;
+            }
         }
     }
 }

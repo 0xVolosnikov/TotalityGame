@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Totality.Model;
 using Totality.Client.ClientComponents.Dialogs.Science;
+using Totality.CommonClasses;
 
 namespace Totality.Client.ClientComponents.Panels
 {
@@ -70,6 +71,24 @@ namespace Totality.Client.ClientComponents.Panels
             Canvas.SetTop(LightLine, 295 - LightLine.Height);
             MilitaryLine.Height = 19 + 273 * (CountryData.MilitaryExperience / (double)CountryData.MilitaryScLvlUpExp);
             Canvas.SetTop(MilitaryLine, 295 - MilitaryLine.Height);
+
+            if (CountryData.MinsBlocks[(short)Mins.Science] > 0 && !isBlocked)
+            {
+                isBlocked = true;
+                deActivateButton(ExtractButton, "/Totality.Client.ClientComponents;component/Images/Science/ScienceExtractButtonDeactivated.png");
+                deActivateButton(HeavyButton, "/Totality.Client.ClientComponents;component/Images/Science/ScienceHeavyButtonDeactivated.png");
+                deActivateButton(LightButton, "/Totality.Client.ClientComponents;component/Images/Science/ScienceLightButtonDeactivated.png");
+                deActivateButton(MilitaryButton, "/Totality.Client.ClientComponents;component/Images/Science/ScienceMilitaryButtonDeactivated.png");
+
+            }
+            else if (isBlocked && CountryData.MinsBlocks[(short)Mins.Science] == 0)
+            {
+                isBlocked = false;
+                activateButton(ExtractButton, "/Totality.Client.ClientComponents;component/Images/Science/ScienceExtractButton.png");
+                activateButton(HeavyButton, "/Totality.Client.ClientComponents;component/Images/Science/ScienceHeavyButton.png");
+                activateButton(LightButton, "/Totality.Client.ClientComponents;component/Images/Science/ScienceLightButton.png");
+                activateButton(MilitaryButton, "/Totality.Client.ClientComponents;component/Images/Science/ScienceMilitaryButton.png");
+            }
         }
     }
 }

@@ -61,6 +61,14 @@ namespace Totality.Handlers.Main
         {
             ProcessOrders();
 
+            foreach (KeyValuePair<string, Queue<Order>> country in _ordersBase)
+            {
+                Country cur = (Country)_dataLayer.GetCountry(country.Key);
+                cur.Mood = 100;
+                if (cur.IsRepressed) cur.Mood += 10;
+                _dataLayer.UpdateCountry(cur);
+            }
+
             _nukeHandler.StartAttack();
 
         }
@@ -78,6 +86,19 @@ namespace Totality.Handlers.Main
             updateUranus();
 
             updateIndustries();
+
+            foreach (KeyValuePair<string, Queue<Order>> cou in _ordersBase)
+            {
+                Country cur = _dataLayer.GetCountry(cou.Key);
+                for (int i = 0; i < cur.MinsBlocks.Count(); i++)
+                {
+                    if (cur.MinsBlocks[i] > 0)
+                        cur.MinsBlocks[i]--;
+                }
+                _dataLayer.UpdateCountry(cur);
+            }
+
+            updateMood();
 
             updateClients();
 
@@ -112,6 +133,10 @@ namespace Totality.Handlers.Main
                 foreach (string res in new List<string>{ "Steel", "Oil", "Wood", "Agricultural"} )
                 {
                     var extract = (double)_dataLayer.GetProperty(country.Key, "Res" + res);
+                    if ((bool)_dataLayer.GetProperty(country.Key, "IsRepressed"))
+                        extract *= 0.98;
+                    _dataLayer.SetProperty(country.Key, "Res" + res, extract);
+
                     extract *=  Math.Pow(Constants.ScienceBuff, (int)_dataLayer.GetProperty(country.Key, "ExtractScienceLvl" ));
                     // сюда добавить другие баффы
                     _dataLayer.SetProperty(country.Key, "Final" + res, extract);
@@ -154,16 +179,45 @@ namespace Totality.Handlers.Main
             {
                     _dataLayer.SetProperty(country.Key, "UsedLIpower", 0);
                     var LIpower = (double)_dataLayer.GetProperty(country.Key, "PowerLightIndustry");
-                    LIpower *= Math.Pow(Constants.ScienceBuff, (int)_dataLayer.GetProperty(country.Key, "LightScienceLvl"));
+
+                if ((bool)_dataLayer.GetProperty(country.Key, "IsRepressed"))
+                    LIpower *= 0.98;
+                _dataLayer.SetProperty(country.Key, "PowerLightIndustry", LIpower);
+
+                LIpower *= Math.Pow(Constants.ScienceBuff, (int)_dataLayer.GetProperty(country.Key, "LightScienceLvl"));
                     // сюда добавить другие баффы
                     _dataLayer.SetProperty(country.Key, "FinalLightIndustry", LIpower);
 
                 _dataLayer.SetProperty(country.Key, "UsedHIpower", 0);
                 var HIpower = (double)_dataLayer.GetProperty(country.Key, "PowerHeavyIndustry");
+
+                if ((bool)_dataLayer.GetProperty(country.Key, "IsRepressed"))
+                    HIpower *= 0.98;
+                _dataLayer.SetProperty(country.Key, "PowerHeavyIndustry", HIpower);
+
                 HIpower *= Math.Pow(Constants.ScienceBuff, (int)_dataLayer.GetProperty(country.Key, "HeavyScienceLvl"));
                 // сюда добавить другие баффы
                 _dataLayer.SetProperty(country.Key, "FinalHeavyIndustry", HIpower);
             }
+        }
+
+        private void updateMood()
+        {
+            foreach (KeyValuePair<string, Queue<Order>> country in _ordersBase)
+            {
+                Country cur = (Country)_dataLayer.GetCountry(country.Key);
+                if ( (cur.PowerHeavyIndustry - cur.PowerLightIndustry)/ cur.PowerLightIndustry > 0.3)
+                {
+                    cur.Mood *= (1 - (cur.PowerHeavyIndustry - cur.PowerLightIndustry) / (cur.PowerLightIndustry * 3));
+                }
+                else
+                {
+                    cur.Mood *= 1 + 0.1 + (cur.PowerLightIndustry - cur.PowerHeavyIndustry) / (cur.PowerLightIndustry * 3);
+                }
+                if (cur.Mood > 100) cur.Mood = 100;
+                _dataLayer.UpdateCountry(cur);
+            }
+
         }
 
         private void updateClients()

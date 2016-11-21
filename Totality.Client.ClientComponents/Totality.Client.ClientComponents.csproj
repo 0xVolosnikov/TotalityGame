@@ -143,6 +143,12 @@
       <DependentUpon>NukeRocketOrder.xaml</DependentUpon>
     </Compile>
     <Compile Include="Panels\AbstractPanel.cs" />
+    <Compile Include="Panels\StatPanel.xaml.cs">
+      <DependentUpon>StatPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\WaitingPanel.xaml.cs">
+      <DependentUpon>WaitingPanel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Panels\ConnectionPanel.xaml.cs">
       <DependentUpon>ConnectionPanel.xaml</DependentUpon>
     </Compile>
@@ -349,6 +355,14 @@
     <Page Include="NukeRocketOrder.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Panels\StatPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Panels\WaitingPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Panels\ConnectionPanel.xaml">
       <SubType>Designer</SubType>
@@ -693,6 +707,42 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <Resource Include="Images\TimeIcon.png" />
+    <Resource Include="Images\Premier\PremierAlertButtonActive.png" />
+    <Resource Include="Images\Military\MobilizeButtonActive.png" />
+    <Resource Include="Images\Inner\RepressionsButtonActive.png" />
+    <Resource Include="Images\remove.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Finance\CurrencyButtonDeactivated.png" />
+    <Resource Include="Images\Finance\InterventionButtonDeactivated.png" />
+    <Resource Include="Images\Finance\TaxesButtonDownDeactivated.png" />
+    <Resource Include="Images\Foreign\ForeignInButtonDeactivated.png" />
+    <Resource Include="Images\Foreign\ForeignSendButtonDeactivated.png" />
+    <Resource Include="Images\Inner\InnerLvlUpButtonDeactivated.png" />
+    <Resource Include="Images\Inner\RepressionsButtonDeactivated.png" />
+    <Resource Include="Images\Inner\SuppressButtonDeactivated.png" />
+    <Resource Include="Images\Media\NewsButtonDeactivated.png" />
+    <Resource Include="Images\Media\PropButtonDeactivated.png" />
+    <Resource Include="Images\Military\MissilesButtonDeactivated.png" />
+    <Resource Include="Images\Military\MobilizeButtonDeactivated.png" />
+    <Resource Include="Images\Military\NukesButtonDeactivated.png" />
+    <Resource Include="Images\Military\UranusButtonDeactivated.png" />
+    <Resource Include="Images\Military\WarButtonDeactivated.png" />
+    <Resource Include="Images\Premier\PremierAlertButtonDeactivated.png" />
+    <Resource Include="Images\Premier\PremierLvlupButtonDeactivated.png" />
+    <Resource Include="Images\Premier\PremierReorganizeButtonDeactivated.png" />
+    <Resource Include="Images\Science\ScienceExtractButtonDeactivated.png" />
+    <Resource Include="Images\Science\ScienceHeavyButtonDeactivated.png" />
+    <Resource Include="Images\Science\ScienceLightButtonDeactivated.png" />
+    <Resource Include="Images\Science\ScienceMilitaryButtonDeactivated.png" />
+    <Resource Include="Images\Security\SecurityCounterspyButtonDeactivated.png" />
+    <Resource Include="Images\Security\SecurityNetsButtonDeactivated.png" />
+    <Resource Include="Images\Security\SecurityPurgeButtonDeactivated.png" />
+    <Resource Include="Images\Security\SecurityShadowingButtonDeactivated.png" />
+    <Resource Include="Panels\Images\Industry\heavyIndustryButtonDeactivated.png" />
+    <Resource Include="Panels\Images\Industry\lightIndustryButtonDeactivated.png" />
+    <Resource Include="Images\StatBack.jpg" />
     <Content Include="video2.mp4">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

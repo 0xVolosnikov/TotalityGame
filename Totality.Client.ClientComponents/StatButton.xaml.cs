@@ -20,6 +20,9 @@ namespace Totality.Client.ClientComponents
     /// </summary>
     public partial class StatButton : UserControl
     {
+        public delegate void Click();
+        public event Click click;
+
         public StatButton()
         {
             InitializeComponent();
@@ -47,6 +50,7 @@ namespace Totality.Client.ClientComponents
         protected override void OnMouseUp(MouseButtonEventArgs e)
         {
             base.OnMouseUp(e);
+            click?.Invoke();
             this.canvas.Background = new SolidColorBrush(Color.FromRgb(0, 4, 25));
         }
     }

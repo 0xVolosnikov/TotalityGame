@@ -20,10 +20,15 @@ namespace Totality.Client.ClientComponents
     /// </summary>
     public partial class Header : UserControl
     {
+        public delegate void Clicked();
+        public event Clicked StatButtonClicked;
+
         public Header()
         {
             InitializeComponent();
+            statButton.click += () => StatButtonClicked?.Invoke();
         }
+
 
         public void UpdateMoney (long money)
         {
@@ -44,5 +49,6 @@ namespace Totality.Client.ClientComponents
         {
             this.LMood.Content = value.ToString();
         }
+
     }
 }

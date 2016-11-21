@@ -23,25 +23,25 @@
             <Panels:SciencePanel x:Name="_sciencePanel" Canvas.Left="1203" Canvas.Top="50"/>
             <Totality.Client.ClientComponents:OrdersTable x:Name="_ordersTable" HorizontalAlignment="Left" VerticalAlignment="Top" Height="445" Width="1198" Canvas.Top="50" startingLines="14" Canvas.Left="0" />
             <Image x:Name="image_Copy" Height="100" Canvas.Left="132" Canvas.Top="572" Width="100" Source="Images/line.png"/>
-            <Totality.Client.ClientComponents:MinisteryButton x:Name="but2" Canvas.Left="133" Canvas.Top="511" imgDown="Images/but2.png" imgUp="Images/but1.png" Cursor="Hand"/>
+            <Totality.Client.ClientComponents:MinisteryButton x:Name="but2" Canvas.Left="133" Canvas.Top="511" imgDown="Images/IndustryButtonDown.png" imgUp="Images/IndustryButton.png" Cursor="Hand"/>
             <Image x:Name="image" Height="100" Canvas.Left="28" Canvas.Top="572" Width="100" Source="Images/line.png"/>
-            <Totality.Client.ClientComponents:MinisteryButton x:Name="but1" Canvas.Left="29" Canvas.Top="511" imgDown="Images/but2.png" imgUp="Images/but1.png" Cursor="Hand"/>
+            <Totality.Client.ClientComponents:MinisteryButton x:Name="but1" Canvas.Left="29" Canvas.Top="511" imgDown="Images/ListButtonDown.png" imgUp="Images/ListButton.png" Cursor="Hand"/>
             <Image x:Name="image_Copy1" Height="100" Canvas.Left="236" Canvas.Top="572" Width="100" Source="Images/line.png"/>
-            <Totality.Client.ClientComponents:MinisteryButton x:Name="but3" Canvas.Left="237" Canvas.Top="511" imgDown="Images/but2.png" imgUp="Images/but1.png" Cursor="Hand"/>
+            <Totality.Client.ClientComponents:MinisteryButton x:Name="but3" Canvas.Left="237" Canvas.Top="511" imgDown="Images/FinanceButtonDown.png" imgUp="Images/FinanceButton.png" Cursor="Hand"/>
             <Image x:Name="image_Copy2" Height="100" Canvas.Left="340" Canvas.Top="572" Width="100" Source="Images/line.png"/>
-            <Totality.Client.ClientComponents:MinisteryButton x:Name="but4" Canvas.Left="341" Canvas.Top="511" imgDown="Images/but2.png" imgUp="Images/but1.png" Cursor="Hand"/>
+            <Totality.Client.ClientComponents:MinisteryButton x:Name="but4" Canvas.Left="341" Canvas.Top="511" imgDown="Images/MilitaryButtonDown.png" imgUp="Images/MilitaryButton.png" Cursor="Hand"/>
             <Image x:Name="image_Copy3" Height="100" Canvas.Left="444" Canvas.Top="572" Width="100" Source="Images/line.png"/>
-            <Totality.Client.ClientComponents:MinisteryButton x:Name="but5" Canvas.Left="445" Canvas.Top="511" imgDown="Images/but2.png" imgUp="Images/but1.png" Cursor="Hand"/>
+            <Totality.Client.ClientComponents:MinisteryButton x:Name="but5" Canvas.Left="445" Canvas.Top="511" imgDown="Images/ForeignButtonDown.png" imgUp="Images/ForeignButton.png" Cursor="Hand"/>
             <Image x:Name="image_Copy4" Height="100" Canvas.Left="548" Canvas.Top="572" Width="100" Source="Images/line.png"/>
-            <Totality.Client.ClientComponents:MinisteryButton x:Name="but6" Canvas.Left="549" Canvas.Top="511" imgDown="Images/but2.png" imgUp="Images/but1.png" Cursor="Hand"/>
+            <Totality.Client.ClientComponents:MinisteryButton x:Name="but6" Canvas.Left="549" Canvas.Top="511" imgDown="Images/MediaButtonDown.png" imgUp="Images/MediaButton.png" Cursor="Hand"/>
             <Image x:Name="image_Copy5" Height="100" Canvas.Left="652" Canvas.Top="572" Width="100" Source="Images/line.png"/>
-            <Totality.Client.ClientComponents:MinisteryButton x:Name="but7" Canvas.Left="653" Canvas.Top="511" imgDown="Images/but2.png" imgUp="Images/but1.png" Cursor="Hand"/>
+            <Totality.Client.ClientComponents:MinisteryButton x:Name="but7" Canvas.Left="653" Canvas.Top="511" imgDown="Images/InnerButtonDown.png" imgUp="Images/InnerButton.png" Cursor="Hand"/>
             <Image x:Name="image_Copy6" Height="100" Canvas.Left="756" Canvas.Top="572" Width="100" Source="Images/line.png"/>
-            <Totality.Client.ClientComponents:MinisteryButton x:Name="but8" Canvas.Left="757" Canvas.Top="511" imgDown="Images/but2.png" imgUp="Images/but1.png" Cursor="Hand"/>
+            <Totality.Client.ClientComponents:MinisteryButton x:Name="but8" Canvas.Left="757" Canvas.Top="511" imgDown="Images/SecurityButtonDown.png" imgUp="Images/SecurityButton.png" Cursor="Hand"/>
             <Image x:Name="image_Copy7" Height="100" Canvas.Left="860" Canvas.Top="572" Width="100" Source="Images/line.png"/>
-            <Totality.Client.ClientComponents:MinisteryButton x:Name="but9" Canvas.Left="861" Canvas.Top="511" imgDown="Images/but2.png" imgUp="Images/but1.png" Cursor="Hand"/>
+            <Totality.Client.ClientComponents:MinisteryButton x:Name="but9" Canvas.Left="861" Canvas.Top="511" imgDown="Images/ScienceButtonDown.png" imgUp="Images/ScienceButton.png" Cursor="Hand"/>
             <Image x:Name="image_Copy8" Height="100" Canvas.Left="964" Canvas.Top="572" Width="100" Source="Images/line.png"/>
-            <Totality.Client.ClientComponents:MinisteryButton x:Name="but10" Canvas.Left="965" Canvas.Top="511" imgDown="Images/but2.png" imgUp="Images/but1.png" Cursor="Hand"/>
+            <Totality.Client.ClientComponents:MinisteryButton x:Name="but10" Canvas.Left="965" Canvas.Top="511" imgDown="Images/PremierButtonDown.png" imgUp="Images/PremierButton.png" Cursor="Hand"/>
             <Image x:Name="image_Copy9" Height="100" Canvas.Left="1068" Canvas.Top="572" Width="100" Source="Images/line.png"/>
             <Totality.Client.ClientComponents:Button x:Name="SendButton" Canvas.Left="1069" Canvas.Top="511" imgUp="Images/ButtonSend.png" imgDown="Images/ButtonSendDown.png" Cursor="Hand"/>
         </Canvas>
