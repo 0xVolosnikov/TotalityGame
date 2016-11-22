@@ -26,12 +26,16 @@ namespace Totality.Client.ClientComponents.Panels
     public partial class FinancePanel : AbstractPanel, InPanel
     {
         private Dialog _currentDialog;
+        private CurrencyDialog _currencyDialog;
 
         public FinancePanel()
         {
             InitializeComponent();
-            
-            CurrencyButton.click += () => createDialog<CurrencyDialog>(new CurrencyDialog(receiveOrder));
+            _currencyDialog = new CurrencyDialog(receiveOrder);
+            _currencyDialog.Visibility = Visibility.Hidden;
+            canvas1.Children.Add(_currencyDialog);
+
+            CurrencyButton.click += () => createCurrencyDialog<CurrencyDialog>();
             InterventionButton.click += () => createDialog<InterventionDialog>(new InterventionDialog(receiveOrder));
             TaxesButton.click += () => createDialog<TaxesDialog>(new TaxesDialog(receiveOrder));
         }
@@ -47,17 +51,37 @@ namespace Totality.Client.ClientComponents.Panels
             }
         }
 
+        private void createCurrencyDialog<T>() where T : UIElement
+        {
+            if (_currentDialog == null)
+            {
+                _currencyDialog.Visibility = Visibility.Visible;
+            }
+        }
+
         public void receiveOrder(object sender, Order order, string text, long price)
         {
             if (order != null)
+            {
                 Table.addOrder(new OrderRecord(text, price.ToString(), order));
 
-            canvas1.Children.Remove((UIElement)sender);
-            _currentDialog = null;
+                if (order.OrderNum != (short)CurrencyDialog.Orders.PurchaseCurrency && order.OrderNum != (short)CurrencyDialog.Orders.SellCurrency)
+                    canvas1.Children.Remove((UIElement)sender);
+                else
+                    _currencyDialog.Visibility = Visibility.Hidden;
+                _currentDialog = null;
+            }
+            else
+            {
+                canvas1.Children.Remove((UIElement)sender);
+                _currentDialog = null;
+            }
         }
 
         public void Update()
         {
+            _currencyDialog.Update();
+
             if (CountryData.MinsBlocks[(short)Mins.Finance] > 0)
             {
                 isBlocked = true;

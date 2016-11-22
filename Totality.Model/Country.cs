@@ -24,6 +24,8 @@ namespace Totality.Model
         }
 
         [DataMember]
+        public string Alliance;
+        [DataMember]
         public string Name { get; set; }
         [DataMember]
         public long Money;
@@ -115,6 +117,8 @@ namespace Totality.Model
         public long NationalCurrencyDemand;
         [DataMember]
         public Dictionary<string, long> CurrencyAccounts = new Dictionary<string, long>();
+        [DataMember]
+        public Dictionary<string, double> CurrencyRatios = new Dictionary<string, double>();
 
         [DataMember]
         public int LvlResIndustry;
@@ -181,6 +185,7 @@ namespace Totality.Model
 
         public Country(string name)
         {
+            Alliance = name;
             Money = Constants.InitialMoney;
             PremierLvlUpCost = Constants.InitialPremierLvlUpCost;
             IndustryUpgradeCost = Constants.InitialIndustryUpgradeCost;

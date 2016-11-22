@@ -34,7 +34,11 @@ namespace Totality.Client.ClientComponents.Dialogs.Finance
 
         private void acceptButton_Click(object sender, RoutedEventArgs e)
         {
-
+            Order order = new Order(CountryData.Name);
+            order.Ministery = (short)Mins.Finance;
+            order.OrderNum = (short)Orders.CurrencyInfusion;
+            order.Value = (short)(doubleUpDown.Value*100);
+            _receiveOrder(this, order, "Изменение уровня налогов: " + order.Value, order.Count);
         }
 
         private void cancelButton_Click(object sender, RoutedEventArgs e)

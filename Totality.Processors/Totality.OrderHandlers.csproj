@@ -7,8 +7,8 @@
     <ProjectGuid>{2F3D18D6-560B-41C3-909B-59B682DF63E3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Totality.Processors</RootNamespace>
-    <AssemblyName>Processors</AssemblyName>
+    <RootNamespace>Totality.OrderHandlers</RootNamespace>
+    <AssemblyName>OrderHandlers</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Battle.cs" />
     <Compile Include="Diplomatical\DiplomaticalHandler.cs" />
     <Compile Include="AbstractHandler.cs" />
     <Compile Include="Main\MainHandler.cs" />

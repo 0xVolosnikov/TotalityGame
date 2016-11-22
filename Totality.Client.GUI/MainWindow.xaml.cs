@@ -93,8 +93,7 @@ namespace Totality.Client.GUI
                 AbstractPanel.Table = _ordersTable;
 
                 AbstractDialog.CountryData = _countryModel;
-                AbstractDialog.Countries.Add("Test"); //TEST
-                AbstractDialog.Countries.Add("Test2"); //TEST
+                AbstractDialog.CurrentStep = -1;
                 AbstractDialog.Ministers.AddRange(new List<string>
             {
             "Министерство Промышленности",
@@ -230,6 +229,8 @@ namespace Totality.Client.GUI
             _country = country;
             AbstractPanel.CountryData = country;
             AbstractDialog.CountryData = country;
+            AbstractDialog.Countries = country.CurrencyRatios.Keys.ToList();
+            AbstractDialog.CurrentStep++;
             _header.UpdateMoney(country.Money);
             _header.UpdateNukes(country.NukesCount);
             _header.UpdateMissiles(country.MissilesCount);

@@ -54,9 +54,11 @@
   <xs:element name="News" nillable="true" type="tns:News" />
   <xs:complexType name="Country">
     <xs:sequence>
+      <xs:element minOccurs="0" name="Alliance" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="CounterSpyLvl" type="xs:int" />
       <xs:element minOccurs="0" name="CounterSpyLvlUpCost" type="xs:long" />
       <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="CurrencyAccounts" nillable="true" type="q2:ArrayOfKeyValueOfstringlong" />
+      <xs:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="CurrencyRatios" nillable="true" type="q3:ArrayOfKeyValueOfstringdouble" />
       <xs:element minOccurs="0" name="Ecology" type="xs:double" />
       <xs:element minOccurs="0" name="ExtractExperience" type="xs:int" />
       <xs:element minOccurs="0" name="ExtractScLvlUpCost" type="xs:long" />
@@ -89,13 +91,13 @@
       <xs:element minOccurs="0" name="LvlLightIndustry" type="xs:int" />
       <xs:element minOccurs="0" name="LvlMilitary" type="xs:int" />
       <xs:element minOccurs="0" name="LvlResIndustry" type="xs:int" />
-      <xs:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="MassMedia" nillable="true" type="q3:ArrayOfKeyValueOfstringshort" />
+      <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="MassMedia" nillable="true" type="q4:ArrayOfKeyValueOfstringshort" />
       <xs:element minOccurs="0" name="MilitaryExperience" type="xs:int" />
       <xs:element minOccurs="0" name="MilitaryPower" type="xs:double" />
       <xs:element minOccurs="0" name="MilitaryScLvlUpCost" type="xs:long" />
       <xs:element minOccurs="0" name="MilitaryScLvlUpExp" type="xs:int" />
       <xs:element minOccurs="0" name="MilitaryScienceLvl" type="xs:int" />
-      <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="MinsBlocks" nillable="true" type="q4:ArrayOfint" />
+      <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="MinsBlocks" nillable="true" type="q5:ArrayOfint" />
       <xs:element minOccurs="0" name="MissilesCount" type="xs:int" />
       <xs:element minOccurs="0" name="Money" type="xs:long" />
       <xs:element minOccurs="0" name="Mood" type="xs:double" />
@@ -114,7 +116,7 @@
       <xs:element minOccurs="0" name="ResWood" type="xs:double" />
       <xs:element minOccurs="0" name="ShadowingLvl" type="xs:int" />
       <xs:element minOccurs="0" name="ShadowingLvlUpCost" type="xs:long" />
-      <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="SpyNetworks" nillable="true" type="q5:ArrayOfKeyValueOfstringCountry.SpyNetworkZ8yiO27Z" />
+      <xs:element xmlns:q6="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="SpyNetworks" nillable="true" type="q6:ArrayOfKeyValueOfstringCountry.SpyNetworkZ8yiO27Z" />
       <xs:element minOccurs="0" name="TaxesLvl" type="xs:short" />
       <xs:element minOccurs="0" name="UsedAgricultural" type="xs:double" />
       <xs:element minOccurs="0" name="UsedHIpower" type="xs:double" />
@@ -122,14 +124,14 @@
       <xs:element minOccurs="0" name="UsedOil" type="xs:double" />
       <xs:element minOccurs="0" name="UsedSteel" type="xs:double" />
       <xs:element minOccurs="0" name="UsedWood" type="xs:double" />
-      <xs:element xmlns:q6="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="WarList" nillable="true" type="q6:ArrayOfstring" />
+      <xs:element xmlns:q7="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="WarList" nillable="true" type="q7:ArrayOfstring" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Country" nillable="true" type="tns:Country" />
   <xs:complexType name="Country.SpyNetwork">
     <xs:sequence>
       <xs:element minOccurs="0" name="NetLvl" type="xs:int" />
-      <xs:element xmlns:q7="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Recruit" nillable="true" type="q7:ArrayOfboolean" />
+      <xs:element xmlns:q8="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Recruit" nillable="true" type="q8:ArrayOfboolean" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Country.SpyNetwork" nillable="true" type="tns:Country.SpyNetwork" />

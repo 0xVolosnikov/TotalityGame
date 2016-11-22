@@ -10,7 +10,6 @@
         <Canvas.Background>
             <ImageBrush ImageSource="Images/Military/militaryBack.jpg" TileMode="Tile" ViewportUnits="Absolute" Viewport="0 0 1680 1050"/>
         </Canvas.Background>
-        <Canvas Height="6" Canvas.Left="39" Canvas.Top="359" Width="659" Background="#FF830000"/>
         <Canvas Height="43" Width="1200">
             <Canvas.Effect>
                 <DropShadowEffect/>
@@ -63,21 +62,24 @@
                 <DropShadowEffect Opacity="0.7" Direction="270"/>
             </local:Button.Effect>
         </local:Button>
-        <Canvas Height="6" Canvas.Left="39" Canvas.Top="345" Width="659" Background="#FF830000"/>
-        <Image x:Name="image" Height="51" Canvas.Left="108" Canvas.Top="326" Width="54" Source="/Totality.Client.ClientComponents;component/Images/Interface/star.png" Stretch="None">
-            <Image.Effect>
-                <DropShadowEffect BlurRadius="2" ShadowDepth="1" Opacity="0.6"/>
-            </Image.Effect>
-        </Image>
-        <Image x:Name="image_Copy" Height="47" Canvas.Left="342" Canvas.Top="326" Width="50" Source="/Totality.Client.ClientComponents;component/Images/Interface/star.png" Stretch="None">
-            <Image.Effect>
-                <DropShadowEffect ShadowDepth="1" BlurRadius="2" Opacity="0.6"/>
-            </Image.Effect>
-        </Image>
-        <Image x:Name="image_Copy1" Height="47" Canvas.Left="578" Canvas.Top="326" Width="50" Source="/Totality.Client.ClientComponents;component/Images/Interface/star.png" Stretch="None">
-            <Image.Effect>
-                <DropShadowEffect ShadowDepth="1" BlurRadius="2" Opacity="0.6"/>
-            </Image.Effect>
-        </Image>
+        <Canvas Height="84" Canvas.Left="40" Canvas.Top="311" Width="660" SnapsToDevicePixels="True" Background="#CC1B1B1B">
+            <Canvas.Effect>
+                <DropShadowEffect Direction="270"/>
+            </Canvas.Effect>
+            <Border BorderBrush="#FF8B3939" BorderThickness="5" Height="84" Width="660">
+                <Image x:Name="image_Copy1" Source="/Totality.Client.ClientComponents;component/Images/Interface/star.png" Stretch="None" Margin="6,12,593,14">
+                    <Image.Effect>
+                        <DropShadowEffect ShadowDepth="1" BlurRadius="2" Opacity="0.6"/>
+                    </Image.Effect>
+                </Image>
+            </Border>
+            <Label x:Name="label1" Content="Военная мощь:" Height="54" Width="247" Foreground="#FFFF0606" FontFamily="Impact" FontSize="36" VerticalContentAlignment="Center" Canvas.Top="16" Canvas.Left="72"/>
+            <Image x:Name="image_Copy" Height="46" Canvas.Left="592" Canvas.Top="18" Width="50" Source="/Totality.Client.ClientComponents;component/Images/Interface/star.png" Stretch="None">
+                <Image.Effect>
+                    <DropShadowEffect ShadowDepth="1" BlurRadius="2" Opacity="0.6"/>
+                </Image.Effect>
+            </Image>
+            <Label x:Name="MilitaryPowerLabel" Content="200" Height="54" Width="246" Foreground="White" FontFamily="Impact" FontSize="33" VerticalContentAlignment="Center" Canvas.Top="17" Canvas.Left="324" Cursor="None"/>
+        </Canvas>
     </Canvas>
 </we:AbstractPanel>

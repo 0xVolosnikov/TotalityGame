@@ -62,6 +62,7 @@ namespace Totality.Client.ClientComponents.Panels
         public void Update()
         {
             UranusLabel.Content = (int)CountryData.ResUranus;
+            MilitaryPowerLabel.Content = String.Format("{0:0.#}",CountryData.MilitaryPower);
 
             if (CountryData.MinsBlocks[(short)Mins.Military] > 0 && !isBlocked)
             {

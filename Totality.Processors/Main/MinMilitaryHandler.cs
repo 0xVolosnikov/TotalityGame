@@ -136,8 +136,8 @@ namespace Totality.Handlers.Main
             _dataLayer.SetProperty(order.CountryName, "WarList", warList);
 
             var targetWarList = (List<string>)_dataLayer.GetProperty(order.TargetCountryName, "WarList");
-            warList.Add(order.CountryName);
-            _dataLayer.SetProperty(order.TargetCountryName, "WarList", warList);
+            targetWarList.Add(order.CountryName);
+            _dataLayer.SetProperty(order.TargetCountryName, "WarList", targetWarList);
 
             return true;
         }

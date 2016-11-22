@@ -121,6 +121,7 @@ namespace Totality.GUI
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
+            _dataLayer.SetProperty("Test", "Money", 1000000000);
             _dataLayer.SetProperty("Test", "PowerHeavyIndustry", 100);
             _dataLayer.SetProperty("Test", "PowerLightIndustry", 100);
             _dataLayer.SetProperty("Test", "ResOil", 250);
@@ -132,6 +133,21 @@ namespace Totality.GUI
             _dataLayer.SetProperty("Test", "LightExperience", 5);
             _dataLayer.SetProperty("Test", "MilitaryExperience", 5);
             _dataLayer.SetProperty("Test", "NukesCount", 100);
+
+            _dataLayer.SetProperty("Test2", "Money", 1000000000);
+            _dataLayer.SetProperty("Test2", "PowerHeavyIndustry", 100);
+            _dataLayer.SetProperty("Test2", "PowerLightIndustry", 100);
+            _dataLayer.SetProperty("Test2", "ResOil", 250);
+            _dataLayer.SetProperty("Test2", "ResSteel", 250);
+            _dataLayer.SetProperty("Test2", "ResWood", 250);
+            _dataLayer.SetProperty("Test2", "ResAgricultural", 250);
+            _dataLayer.SetProperty("Test2", "ExtractExperience", 5);
+            _dataLayer.SetProperty("Test2", "HeavyExperience", 5);
+            _dataLayer.SetProperty("Test2", "LightExperience", 5);
+            _dataLayer.SetProperty("Test2", "MilitaryExperience", 5);
+            _dataLayer.SetProperty("Test2", "NukesCount", 100);
+
+            _dataLayer.SetCurrencyOnStock("Test2", 2500000000);
 
             // _nukeHandler.StartAttack();
         }

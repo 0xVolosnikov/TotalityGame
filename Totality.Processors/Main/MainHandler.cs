@@ -7,6 +7,7 @@ using Totality.Handlers.News;
 using Totality.Handlers.Nuke;
 using Totality.Model;
 using Totality.Model.Interfaces;
+using Totality.OrderHandlers;
 
 namespace Totality.Handlers.Main
 {
@@ -18,6 +19,7 @@ namespace Totality.Handlers.Main
         private List<Order> _currentOrdersLine = new List<Order>();
         private NukeHandler _nukeHandler;
         public DiplomaticalHandler DipHandler { get; set; }
+        private List<Battle> battles = new List<Battle>();
 
 
         public MainHandler(NewsHandler newsHandler, IDataLayer dataLayer, ILogger logger, NukeHandler nukeHandler) : base(newsHandler, dataLayer, logger)
@@ -75,7 +77,7 @@ namespace Totality.Handlers.Main
 
         private void _nukeHandler_AttackEnded()
         {
-            // fightBattles
+            fightBattles();
 
             // followDipContracts
 
@@ -100,11 +102,108 @@ namespace Totality.Handlers.Main
 
             updateMood();
 
+            updateCurrencyRatios();
+
             updateClients();
 
             DipHandler.SendContractsToAll();
 
             _newsHandler.SendNews();
+        }
+
+        private void fightBattles()
+        {
+            
+
+            var countries = _dataLayer.GetCountries();
+            foreach (KeyValuePair<string, Queue<Order>> country in _ordersBase)
+            {
+                for (int i = 0; i < countries[country.Key].WarList.Count; i++)
+                {
+                    var we = countries[country.Key];
+                    var enemy = countries[countries[country.Key].WarList[i]];
+                    if (!battles.Any(x => x.Alliances.ContainsKey(we.Alliance) && x.Alliances.ContainsKey(enemy.Alliance)))
+                    {
+                        var battle = new Battle(we.Alliance, enemy.Alliance);
+
+                        var allies = countries.Values.Where(x => x.Alliance.Equals(we.Alliance)).ToList();
+                        foreach (Country al in allies)
+                            battle.Alliances[we.Alliance].Add(al.Name);
+
+                        var enemies = countries.Values.Where(x => x.Alliance.Equals(enemy.Alliance)).ToList();
+                        foreach (Country en in enemies)
+                            battle.Alliances[enemy.Alliance].Add(en.Name);
+
+                        battles.Add(battle);
+                    } else
+                    {
+                        var curBattle = battles.First(x => x.Alliances.ContainsKey(we.Alliance) && x.Alliances.ContainsKey(enemy.Alliance));
+                        if (!curBattle.Alliances[we.Alliance].Contains(we.Name)) curBattle.Alliances[we.Alliance].Add(we.Name);
+                        if (!curBattle.Alliances[enemy.Alliance].Contains(enemy.Name)) curBattle.Alliances[enemy.Alliance].Add(enemy.Name);
+                    }
+                }
+            }
+
+            for (int i = 0; i < battles.Count; i++)
+            {
+                if (battles[i].step == 0)
+                {
+                    battles[i].step++;
+                    continue;
+                }
+
+                Dictionary<string, double> powers = new Dictionary<string, double>();
+                foreach (KeyValuePair<string, List<string>> al in battles[i].Alliances)
+                {
+                    powers.Add(al.Key, 0);
+                    foreach (string country in al.Value)
+                    {
+                        powers[al.Key] += countries[country].MilitaryPower;
+                    }
+                }
+
+                var armies = battles[i].Alliances.ToList();
+                for (int j = 0; j < 2; j++)
+                {
+                    for (int k = 0; k < armies[j].Value.Count; k++)
+                    {
+                        for (int p = 0; p < 2; p++)
+                        {
+                            if (p == j) continue;
+                            countries[armies[j].Value[k]].MilitaryPower -= (powers[armies[p].Key] / armies[j].Value.Count)* 0.75;
+                            if (countries[armies[j].Value[k]].MilitaryPower < 0) countries[armies[j].Value[k]].MilitaryPower = 0;
+
+                            if (powers[armies[p].Key] > powers[armies[j].Key])
+                            {
+                                countries[armies[j].Value[k]].ResOil -= ((powers[armies[p].Key] - powers[armies[j].Key]) / (armies[j].Value.Count))*0.75;
+                                if (countries[armies[j].Value[k]].ResOil < 0) countries[armies[j].Value[k]].ResOil = 0;
+
+                                    countries[armies[j].Value[k]].ResSteel -= ((powers[armies[p].Key] - powers[armies[j].Key]) / (armies[j].Value.Count)) * 0.75;
+                                if (countries[armies[j].Value[k]].ResSteel < 0) countries[armies[j].Value[k]].ResSteel = 0;
+
+                                countries[armies[j].Value[k]].ResWood -= ((powers[armies[p].Key] - powers[armies[j].Key]) / (armies[j].Value.Count)) * 0.75;
+                                if (countries[armies[j].Value[k]].ResWood < 0) countries[armies[j].Value[k]].ResWood = 0;
+
+                                countries[armies[j].Value[k]].ResAgricultural -= ((powers[armies[p].Key] - powers[armies[j].Key]) / (armies[j].Value.Count)) * 0.75;
+                                if (countries[armies[j].Value[k]].ResAgricultural < 0) countries[armies[j].Value[k]].ResAgricultural = 0;
+
+                                countries[armies[j].Value[k]].PowerHeavyIndustry -= ((powers[armies[p].Key] - powers[armies[j].Key]) / (armies[j].Value.Count)) * 0.75;
+                                if (countries[armies[j].Value[k]].PowerHeavyIndustry < 0) countries[armies[j].Value[k]].PowerHeavyIndustry = 0;
+
+                                countries[armies[j].Value[k]].PowerLightIndustry -= ((powers[armies[p].Key] - powers[armies[j].Key]) / (armies[j].Value.Count)) * 0.75;
+                                if (countries[armies[j].Value[k]].PowerLightIndustry < 0) countries[armies[j].Value[k]].PowerLightIndustry = 0;
+                            }
+                        }
+                    }
+                }
+               
+            }
+
+            var cs = countries.Values.ToList();
+            for (int c = 0; c < countries.Values.Count; c++)
+            {
+                _dataLayer.UpdateCountry(cs[c]);
+            }
         }
 
         public void ProcessOrders()
@@ -220,6 +319,43 @@ namespace Totality.Handlers.Main
 
         }
 
+        private void updateCurrencyRatios()
+        {
+            var countries = _dataLayer.GetCountries();
+            foreach (KeyValuePair<string, Queue<Order>> country in _ordersBase)
+            {
+                foreach (KeyValuePair<string, Queue<Order>> anotherCountry in _ordersBase)
+                {
+                    if (country.Key.Equals(anotherCountry.Key)) continue;
+
+                    if (countries[country.Key].CurrencyRatios.ContainsKey(anotherCountry.Key))
+                        countries[country.Key].CurrencyRatios[anotherCountry.Key] = FinancialTools.GetCurrencyRation(
+                            countries[country.Key].NationalCurrencyDemand,
+                            countries[anotherCountry.Key].NationalCurrencyDemand,
+                            _dataLayer.GetCurrencyOnStock(country.Key),
+                            _dataLayer.GetCurrencyOnStock(anotherCountry.Key));
+                    else
+                    {
+                        countries[country.Key].CurrencyRatios.Add
+                            (anotherCountry.Key, 
+                                FinancialTools.GetCurrencyRation(
+                                countries[country.Key].NationalCurrencyDemand,
+                                countries[anotherCountry.Key].NationalCurrencyDemand,
+                                _dataLayer.GetCurrencyOnStock(country.Key),
+                                _dataLayer.GetCurrencyOnStock(anotherCountry.Key)
+                                )
+                            );
+                    }
+
+                    if (!countries[country.Key].CurrencyAccounts.ContainsKey(anotherCountry.Key))
+                        countries[country.Key].CurrencyAccounts.Add(anotherCountry.Key, 0);
+
+                }
+                _dataLayer.UpdateCountry(countries[country.Key]);
+            }
+        }
+
+
         private void updateClients()
         {
             Transmitter.UpdateClients( _dataLayer.GetCountries() );
@@ -238,23 +374,22 @@ namespace Totality.Handlers.Main
                 {
                     var delta = HIpower * Constants.MobilizeBuff - militaryPower * Math.Pow(Constants.MilitaryScienceBuffRatio, militaryScience);
                     var increase = (delta) * Constants.MilitaryGrowthRatio;
-                    if (delta > 0) increase *= Constants.MobilizeBuff;
+                    if (delta > 0) increase *= Constants.MobilizeBuff/2;
                     militaryPower += increase;
+                    if (militaryPower < 0) militaryPower = 0;
 
-                    var clearHIpower = (double)_dataLayer.GetProperty(country.Key, "PowerHeavyIndustry");
-                    clearHIpower *= Constants.MobilizeDebuff;
-                    _dataLayer.SetProperty(country.Key, "PowerHeavyIndustry", clearHIpower);
-
-                    var clearLIpower = (double)_dataLayer.GetProperty(country.Key, "PowerLightIndustry");
-                    clearHIpower *= Constants.MobilizeDebuff;
-                    _dataLayer.SetProperty(country.Key, "PowerLightIndustry", clearLIpower);
+                    var money = (long)_dataLayer.GetProperty(country.Key, "Money");
+                    money -= (long)(HIpower*(Constants.MobilizeBuff - 1)*(long)_dataLayer.GetProperty(country.Key, "IndustryUpgradeCost"));
+                    _dataLayer.SetProperty(country.Key, "Money", money);
                 }
                 else
                 {
                     var delta = HIpower - militaryPower * Math.Pow(Constants.MilitaryScienceBuffRatio, militaryScience);
                     var increase = (delta) * Constants.MilitaryGrowthRatio;
-                    if (delta < 0) increase /= 2;
+                    if (delta < 0) increase /= 6;
+                    else increase /= 4;
                     militaryPower += increase;
+                    if (militaryPower < 0) militaryPower = 0;
                 }
 
                 _dataLayer.SetProperty(country.Key, "MilitaryPower", militaryPower);
