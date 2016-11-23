@@ -124,5 +124,9 @@ namespace Totality.TransmitterService
             }
         }
 
+        public Country GetCountryData(string name)
+        {
+            return MainHandler.GetCountry(name);
+        }
     }
 }

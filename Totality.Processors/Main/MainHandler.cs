@@ -42,6 +42,11 @@ namespace Totality.Handlers.Main
         }
 
 
+        public Country GetCountry(string name)
+        {
+            return _dataLayer.GetCountry(name);
+        }
+
         private void SecretOrderProcessed(Order order)
         {
             order.isSecret = true;
@@ -79,6 +84,8 @@ namespace Totality.Handlers.Main
         {
             fightBattles();
 
+            updateMoney();
+
             // followDipContracts
 
             updateMilitaryPower();
@@ -109,6 +116,16 @@ namespace Totality.Handlers.Main
             DipHandler.SendContractsToAll();
 
             _newsHandler.SendNews();
+        }
+
+        private void updateMoney()
+        {
+            var countries = _dataLayer.GetCountries();
+            foreach (KeyValuePair<string, Queue<Order>> country in _ordersBase)
+            {
+                countries[country.Key].Money += (long)(countries[country.Key].FinalLightIndustry * Constants.LightPowerProfit * (countries[country.Key].TaxesLvl/100.0));
+                _dataLayer.UpdateCountry(countries[country.Key]);
+            }
         }
 
         private void fightBattles()
@@ -305,14 +322,13 @@ namespace Totality.Handlers.Main
             foreach (KeyValuePair<string, Queue<Order>> country in _ordersBase)
             {
                 Country cur = (Country)_dataLayer.GetCountry(country.Key);
+                cur.Mood -= cur.TaxesLvl / 10.0;
+                cur.Mood *= Math.Pow(1.05, cur.InnerLvl - 1);
                 if ( (cur.PowerHeavyIndustry - cur.PowerLightIndustry)/ cur.PowerLightIndustry > 0.3)
                 {
                     cur.Mood *= (1 - (cur.PowerHeavyIndustry - cur.PowerLightIndustry) / (cur.PowerLightIndustry * 3));
                 }
-                else
-                {
-                    cur.Mood *= 1 + 0.1 + (cur.PowerLightIndustry - cur.PowerHeavyIndustry) / (cur.PowerLightIndustry * 3);
-                }
+
                 if (cur.Mood > 100) cur.Mood = 100;
                 _dataLayer.UpdateCountry(cur);
             }
@@ -399,14 +415,16 @@ namespace Totality.Handlers.Main
 
         public void AddCountry(string name)
         {
-            _ordersBase.Add(name, new Queue<Order>());
-            _dataLayer.AddCountry(new Country(name));
+            if (!_ordersBase.ContainsKey(name))
+            {
+                _ordersBase.Add(name, new Queue<Order>());
+                _dataLayer.AddCountry(new Country(name));
+            }
         }
 
         public void RemoveCountry(string name)
         {
             _ordersBase.Remove(name);
-
         }
 
     }

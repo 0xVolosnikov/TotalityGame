@@ -20,7 +20,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <ComboBox x:Name="CountriesBox" Canvas.Left="156" Canvas.Top="58" Width="328" Height="52" FontFamily="Arial Black" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+        <ComboBox x:Name="CountriesBox" Canvas.Left="156" Canvas.Top="58" Width="328" Height="52" FontFamily="Arial Black" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" SelectionChanged="CountriesBox_SelectionChanged">
             <ComboBox.Background>
                 <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                     <GradientStop Color="#FFCBC7C7" Offset="0"/>
@@ -30,7 +30,7 @@
         </ComboBox>
         <Label x:Name="label_Copy" Content="Страна" Canvas.Top="58" Width="114" Height="54" Foreground="White" FontSize="24" FontFamily="Arial Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" Canvas.Left="32"/>
         <TextBlock x:Name="textBlock" Canvas.Left="558" TextWrapping="Wrap" Text="Уровень сети" Canvas.Top="58" Height="54" Width="122" Foreground="White" FontFamily="Arial Black" FontSize="24" TextAlignment="Center"/>
-        <Button x:Name="button" Content="0" Canvas.Left="684" Canvas.Top="58" Width="56" Height="52" FontFamily="Arial Black" FontSize="36">
+        <Button x:Name="levelButton" Content="0" Canvas.Left="684" Canvas.Top="58" Width="56" Height="52" FontFamily="Arial Black" FontSize="36" Click="levelButton_Click">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                     <GradientStop Color="#FFCFFFBC" Offset="0"/>
@@ -39,7 +39,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Separator Height="13" Canvas.Left="40" Margin="0" Canvas.Top="118" Width="756"/>
+        <Separator Height="13" Canvas.Left="40" Margin="0" Canvas.Top="111" Width="756"/>
         <Button x:Name="cancelButton_Copy" Content="Информация" Canvas.Left="10" Canvas.Top="328" Width="164" Height="34" FontFamily="Arial Black" FontSize="20" Click="cancelButton_Click">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
@@ -48,6 +48,8 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <ListBox x:Name="listBox" Height="174" Canvas.Left="40" Canvas.Top="140" Width="756" Background="#FFCDCDCD"/>
+        <ScrollViewer Height="178" Canvas.Left="40" Canvas.Top="129" Width="756">
+            <WrapPanel x:Name="_wrap" Width="756" Background="#FFDBDBDB" Orientation="Vertical"/>
+        </ScrollViewer>
     </Canvas>
 </local:AbstractDialog>

@@ -38,6 +38,12 @@ namespace Totality.Client.ClientComponents.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITransmitterService/DipMsg", ReplyAction="http://tempuri.org/ITransmitterService/DipMsgResponse")]
         System.Threading.Tasks.Task<bool> DipMsgAsync(Totality.Model.Diplomatical.DipMsg msg);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITransmitterService/GetCountryData", ReplyAction="http://tempuri.org/ITransmitterService/GetCountryDataResponse")]
+        Totality.Model.Country GetCountryData(string name);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITransmitterService/GetCountryData", ReplyAction="http://tempuri.org/ITransmitterService/GetCountryDataResponse")]
+        System.Threading.Tasks.Task<Totality.Model.Country> GetCountryDataAsync(string name);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -120,6 +126,14 @@ namespace Totality.Client.ClientComponents.ServiceReference1 {
         
         public System.Threading.Tasks.Task<bool> DipMsgAsync(Totality.Model.Diplomatical.DipMsg msg) {
             return base.Channel.DipMsgAsync(msg);
+        }
+        
+        public Totality.Model.Country GetCountryData(string name) {
+            return base.Channel.GetCountryData(name);
+        }
+        
+        public System.Threading.Tasks.Task<Totality.Model.Country> GetCountryDataAsync(string name) {
+            return base.Channel.GetCountryDataAsync(name);
         }
     }
 }

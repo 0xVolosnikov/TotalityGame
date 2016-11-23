@@ -25,6 +25,8 @@ namespace Totality.TransmitterService
         [OperationContract]
         bool DipMsg(DipMsg msg);
 
+        [OperationContract]
+        Country GetCountryData(string name);
     }
 
     public interface ICallbackService

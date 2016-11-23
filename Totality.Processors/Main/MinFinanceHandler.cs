@@ -33,7 +33,7 @@ namespace Totality.Handlers.Main
 
         private bool ChangeTaxes(Order order)
         {
-            if (order.Value > 100)
+            if (order.Value > 100 || order.Value < 0)
                 return false;
 
             _dataLayer.SetProperty(order.CountryName, "TaxesLvl", order.Value);

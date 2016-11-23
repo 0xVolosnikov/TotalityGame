@@ -133,6 +133,7 @@ namespace Totality.GUI
             _dataLayer.SetProperty("Test", "LightExperience", 5);
             _dataLayer.SetProperty("Test", "MilitaryExperience", 5);
             _dataLayer.SetProperty("Test", "NukesCount", 100);
+            _dataLayer.SetProperty("Test", "IntelligenceLvl", 100);
 
             _dataLayer.SetProperty("Test2", "Money", 1000000000);
             _dataLayer.SetProperty("Test2", "PowerHeavyIndustry", 100);

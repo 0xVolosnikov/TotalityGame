@@ -17,25 +17,25 @@ using System.Windows.Shapes;
 using Totality.Model;
 using Totality.Client.ClientComponents.Dialogs.Security;
 using Totality.CommonClasses;
-using Totality.Client.ClientComponents.ServiceReference1;
 
-namespace Totality.Client.ClientComponents.Panels
+namespace Totality.Client.ClientComponents.Dialogs.SecretPanels
 {
     /// <summary>
     /// Логика взаимодействия для MilitaryPanel.xaml
     /// </summary>
-    public partial class SecurityPanel : AbstractPanel, InPanel
+    public partial class SecretSecurityPanel : SecretAbstractPanel, InPanel
     {
         Dialog currentDialog;
-        public TransmitterServiceClient _client;
+        public delegate void ReceiveOrder(object sender, Order order);
+        ReceiveOrder _receiveOrder;
 
-        public SecurityPanel()
+        public SecretSecurityPanel(ReceiveOrder receiveOrder)
         {
+            _receiveOrder = receiveOrder;
             InitializeComponent();
-            PurgeButton.click += () => createDialog<PurgeDialog>(new PurgeDialog(receiveOrder));
-            CounterspyButton.click += () => createDialog<CounterspyDialog>(new CounterspyDialog(receiveOrder));
-            ShadowingButton.click += () => createDialog<ShadowingDialog>(new ShadowingDialog(receiveOrder));
-            NetsButton.click += () => createBigDialog<NetsDialog>(new NetsDialog(receiveOrder, _client));
+            PurgeButton.click += () => createDialog<PurgeDialog>(new PurgeDialog(SReceiveOrder));
+            CounterspyButton.click += () => createDialog<CounterspyDialog>(new CounterspyDialog(SReceiveOrder));
+            ShadowingButton.click += () => createDialog<ShadowingDialog>(new ShadowingDialog(SReceiveOrder));
         }
 
         private void createDialog<T>(Dialog dialog) where T : UIElement
@@ -60,11 +60,9 @@ namespace Totality.Client.ClientComponents.Panels
             }
         }
 
-        public void receiveOrder(object sender, Order order, string text, long price)
+        public void SReceiveOrder(object sender, Order order, string text, long price)
         {
-            if (order != null)
-                Table.addOrder(new OrderRecord(text, price.ToString(), order));
-
+            _receiveOrder(this, order);
             canvas1.Children.Remove((UIElement)sender);
             currentDialog = null;
         }
@@ -74,7 +72,6 @@ namespace Totality.Client.ClientComponents.Panels
             if (CountryData.MinsBlocks[(short)Mins.Security] > 0 && !isBlocked)
             {
                 isBlocked = true;
-                deActivateButton(NetsButton, "/Totality.Client.ClientComponents;component/Images/Security/SecurityNetsButtonDeactivated.png");
                 deActivateButton(ShadowingButton, "/Totality.Client.ClientComponents;component/Images/Security/SecurityShadowingButtonDeactivated.png");
                 deActivateButton(CounterspyButton, "/Totality.Client.ClientComponents;component/Images/Security/SecurityCounterspyButtonDeactivated.png");
                 deActivateButton(PurgeButton, "/Totality.Client.ClientComponents;component/Images/Security/SecurityPurgeButtonDeactivated.png");
@@ -83,11 +80,15 @@ namespace Totality.Client.ClientComponents.Panels
             else if (isBlocked && CountryData.MinsBlocks[(short)Mins.Security] == 0)
             {
                 isBlocked = false;
-                activateButton(NetsButton, "/Totality.Client.ClientComponents;component/Images/Security/SecurityNetsButton.png");
                 activateButton(ShadowingButton, "/Totality.Client.ClientComponents;component/Images/Security/SecurityShadowingButton.png");
                 activateButton(CounterspyButton, "/Totality.Client.ClientComponents;component/Images/Security/SecurityCounterspyButton.png");
                 activateButton(PurgeButton, "/Totality.Client.ClientComponents;component/Images/Security/SecurityPurgeButton.png");
             }
+        }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            _receiveOrder(this, null);
         }
     }
 }

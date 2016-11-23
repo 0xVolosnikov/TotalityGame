@@ -14,5 +14,7 @@ namespace Totality.Client.ClientComponents.Dialogs
         public static List<string> Countries = new List<string>();
         public static List<string> Ministers = new List<string>();
         public static int CurrentStep;
+
+        public Country LocalCountryData;
     }
 }

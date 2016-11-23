@@ -15,36 +15,37 @@ using System.Windows.Shapes;
 using Totality.CommonClasses;
 using Totality.Model;
 
-namespace Totality.Client.ClientComponents.Dialogs.Finance
+namespace Totality.Client.ClientComponents.Dialogs.Security
 {
     /// <summary>
     /// Логика взаимодействия для NukeStrikeDialog.xaml
     /// </summary>
-    public partial class TaxesDialog : AbstractDialog, Dialog
+    public partial class RecruitDialog : AbstractDialog, Dialog
     {
-        private enum Orders { ChangeTaxes, PurchaseCurrency, SellCurrency, CurrencyInfusion };
-        public delegate void ReceiveOrder(object sender, Order order, string text, long price);
+        private enum Orders { ImproveNetwork, AddAgents, OrderToAgent, Purge, CounterSpyLvlUp, ShadowingUp, IntelligenceUp, Sabotage }
+        public delegate void ReceiveOrder(object sender, Order order);
         ReceiveOrder _receiveOrder;
+        int _ministery;
 
-        public TaxesDialog(ReceiveOrder receiveOrder)
+        public RecruitDialog(ReceiveOrder receiveOrder, int ministery)
         {
+            _ministery = ministery;
             _receiveOrder = receiveOrder;
             InitializeComponent();
-            doubleUpDown.Value = CountryData.TaxesLvl / 100.0;
         }
 
         private void acceptButton_Click(object sender, RoutedEventArgs e)
         {
             Order order = new Order(CountryData.Name);
-            order.Ministery = (short)Mins.Finance;
-            order.OrderNum = (short)Orders.ChangeTaxes;
-            order.Value = (short)(doubleUpDown.Value*100);
-            _receiveOrder(this, order, "Изменение уровня налогов: " + order.Value, order.Count);
+            order.OrderNum = (short)Orders.AddAgents;
+            order.Ministery = (short)Mins.Security;
+            order.TargetMinistery = (short)_ministery;
+            _receiveOrder(this, order);
         }
 
         private void cancelButton_Click(object sender, RoutedEventArgs e)
         {
-            _receiveOrder(this, null, null, 0);
+            _receiveOrder(this, null);
         }
     }
 }

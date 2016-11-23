@@ -203,6 +203,7 @@ namespace Totality.Model
             LightScLvlUpCost = (int)Constants.InitialLightScLvlUpCost;
             MilitaryScLvlUpExp = (int)Constants.InitialMilitaryScLvlUpExp;
             MilitaryScLvlUpCost = (int)Constants.InitialMilitaryScLvlUpCost;
+            TaxesLvl = 75;
 
             NationalCurrencyDemand = Constants.InitialNationalCurrencyDemand;
 

@@ -70,6 +70,7 @@ namespace Totality.CommonClasses
         public static long InitialLightScLvlUpExp = 5;
         public static long InitialMilitaryScLvlUpCost = 1000;
         public static long InitialMilitaryScLvlUpExp = 5;
+        public static long LightPowerProfit = 10000;
 
         public static int MaxNetworkLvl = 3;
         public static int MinAgentLvl = 3;

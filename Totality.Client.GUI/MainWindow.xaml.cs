@@ -118,6 +118,8 @@ namespace Totality.Client.GUI
                 _connectionPanel.NameReceived += _connectionPanel_NameReceived;
                 _client = new TransmitterServiceClient(new System.ServiceModel.InstanceContext(_servCallbackHandler));
 
+                _securityPanel._client = _client;
+
             }
             catch (Exception e)
             {

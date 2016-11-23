@@ -150,8 +150,40 @@
     <Compile Include="Dialogs\Security\CounterspyDialog.xaml.cs">
       <DependentUpon>CounterspyDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\Security\RecruitDialog.xaml.cs">
+      <DependentUpon>RecruitDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\Security\PurgeDialog.xaml.cs">
       <DependentUpon>PurgeDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Security\sample_model.cs" />
+    <Compile Include="Dialogs\Security\SecretPanels\SecretAbstractPanel.cs" />
+    <Compile Include="Dialogs\Security\SecretPanels\SecretFinancePanel.xaml.cs">
+      <DependentUpon>SecretFinancePanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Security\SecretPanels\SecretForeignPanel.xaml.cs">
+      <DependentUpon>SecretForeignPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Security\SecretPanels\SecretIndustryPanel.xaml.cs">
+      <DependentUpon>SecretIndustryPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Security\SecretPanels\SecretInnerPanel.xaml.cs">
+      <DependentUpon>SecretInnerPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Security\SecretPanels\SecretMediaPanel.xaml.cs">
+      <DependentUpon>SecretMediaPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Security\SecretPanels\SecretMilitaryPanel.xaml.cs">
+      <DependentUpon>SecretMilitaryPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Security\SecretPanels\SecretPremierPanel.xaml.cs">
+      <DependentUpon>SecretPremierPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Security\SecretPanels\SecretSciencePanel.xaml.cs">
+      <DependentUpon>SecretSciencePanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Security\SecretPanels\SecretSecurityPanel.xaml.cs">
+      <DependentUpon>SecretSecurityPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\Security\ShadowingDialog.xaml.cs">
       <DependentUpon>ShadowingDialog.xaml</DependentUpon>
@@ -274,6 +306,7 @@
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\Totality.Model.Country.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -362,7 +395,47 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Dialogs\Security\RecruitDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Dialogs\Security\PurgeDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dialogs\Security\SecretPanels\SecretFinancePanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dialogs\Security\SecretPanels\SecretForeignPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dialogs\Security\SecretPanels\SecretIndustryPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dialogs\Security\SecretPanels\SecretInnerPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dialogs\Security\SecretPanels\SecretMediaPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dialogs\Security\SecretPanels\SecretMilitaryPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dialogs\Security\SecretPanels\SecretPremierPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dialogs\Security\SecretPanels\SecretSciencePanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dialogs\Security\SecretPanels\SecretSecurityPanel.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
