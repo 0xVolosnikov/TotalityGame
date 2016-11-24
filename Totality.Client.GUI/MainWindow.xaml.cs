@@ -55,6 +55,8 @@ namespace Totality.Client.GUI
                 _servCallbackHandler.NukesInitialized += _servCallbackHandler_NukesInitialized;
                 _servCallbackHandler.NukesUpdated += _servCallbackHandler_NukesUpdated;
                 _servCallbackHandler.NewsReceived += _servCallbackHandler_NewsReceived;
+                _servCallbackHandler.ContractsReceived += _servCallbackHandler_ContractsReceived;
+                _servCallbackHandler.MessageReceived += _servCallbackHandler_MessageReceived;
 
                 InitializeComponent();
                 setAnims();
@@ -119,12 +121,23 @@ namespace Totality.Client.GUI
                 _client = new TransmitterServiceClient(new System.ServiceModel.InstanceContext(_servCallbackHandler));
 
                 _securityPanel._client = _client;
+                _foreignPanel._client = _client;
 
             }
             catch (Exception e)
             {
                 System.Console.WriteLine(e.Message);
             }
+        }
+
+        private void _servCallbackHandler_MessageReceived(Model.Diplomatical.DipMsg msg)
+        {
+            _foreignPanel.ReceiveMessage(msg);
+        }
+
+        private void _servCallbackHandler_ContractsReceived(Model.Diplomatical.DipContract[] contracts)
+        {
+            _foreignPanel.ReceiveContracts(contracts);
         }
 
         private void _servCallbackHandler_NewsReceived(News[] news)
@@ -231,8 +244,6 @@ namespace Totality.Client.GUI
                 _grid.Children.Remove(_nukeDialog);
                 _nukeDialog = null;
             }
-            but1.DoClick();
-            changePanel(_ordersTable);
             _country = country;
             AbstractPanel.CountryData = country;
             AbstractDialog.CountryData = country;
@@ -254,6 +265,10 @@ namespace Totality.Client.GUI
             _premierPanel.Update();
 
             _statPanel.Update();
+
+            but6.DoClick();
+            changePanel(_mediaPanel);
+            _mediaPanel.OpenNews();
 
 
         }

@@ -25,14 +25,14 @@ namespace Totality.Client.ClientComponents.Panels
     /// </summary>
     public partial class MediaPanel : AbstractPanel, InPanel
     {
-        Dialog currentDialog;
+        AbstractDialog currentDialog;
         List<News> _news = new List<News>();
 
         public MediaPanel()
         {
             InitializeComponent();
-            PropagandaButton.click += () => createDialog<PropagandaDialog>(new PropagandaDialog(receiveOrder));
-            NewsButton.click += () => createBigDialog<NewsDialog>(new NewsDialog(receiveOrder, _news));
+            PropagandaButton.click += () => createDialog(new PropagandaDialog(receiveOrder));
+            NewsButton.click += () => createBigDialog(new NewsDialog(receiveOrder, _news));
         }
 
         public void ReceiveNews (News[] news)
@@ -41,25 +41,33 @@ namespace Totality.Client.ClientComponents.Panels
             _news.AddRange(news);
         }
 
-        private void createDialog<T>(Dialog dialog) where T : UIElement
+        public void OpenNews()
+        {
+            if (canvas1.Children.Contains(currentDialog))
+            canvas1.Children.Remove(currentDialog);
+
+            createBigDialog(new NewsDialog(receiveOrder, _news));
+        }
+
+        private void createDialog(AbstractDialog dialog) 
         {
             if (currentDialog == null)
             {
                 currentDialog = dialog;
-                canvas1.Children.Add((T)currentDialog);
-                Canvas.SetLeft((T)currentDialog, 295);
-                Canvas.SetTop((T)currentDialog, 68);
+                canvas1.Children.Add(currentDialog);
+                Canvas.SetLeft(currentDialog, 295);
+                Canvas.SetTop(currentDialog, 68);
             }
         }
 
-        private void createBigDialog<T>(Dialog dialog) where T : UIElement
+        private void createBigDialog(AbstractDialog dialog)
         {
             if (currentDialog == null)
             {
                 currentDialog = dialog;
-                canvas1.Children.Add((T)currentDialog);
-                Canvas.SetLeft((T)currentDialog, (Width - ((UserControl)currentDialog).Width) / 2.0);
-                Canvas.SetTop((T)currentDialog, (Height - ((UserControl)currentDialog).Height) / 2.0);
+                canvas1.Children.Add(currentDialog);
+                Canvas.SetLeft(currentDialog, (Width - ((UserControl)currentDialog).Width) / 2.0);
+                Canvas.SetTop(currentDialog, (Height - ((UserControl)currentDialog).Height) / 2.0);
             }
         }
 

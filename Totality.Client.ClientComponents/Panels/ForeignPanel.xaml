@@ -150,7 +150,7 @@
             <Setter Property="Template" Value="{StaticResource VerticalScrollBar}"/>
         </Style>
     </UserControl.Resources>
-    
+
     <Canvas x:Name="canvas1" Width="1200" Height="445">
         <Canvas.Background>
             <ImageBrush ImageSource="/Totality.Client.ClientComponents;component/Images/Foreign/ForeignBackground.png" Stretch="None"/>
@@ -174,8 +174,10 @@
             <Canvas.Background>
                 <ImageBrush Stretch="None" ImageSource="/Totality.Client.ClientComponents;component/Images/Foreign/ForeignMenuBack.png"/>
             </Canvas.Background>
-            <ListBox x:Name="listBox" Height="250" Canvas.Left="14" Canvas.Top="48" Width="478" BorderBrush="#FFE7E3DF" Background="Transparent" FontFamily="Impact" FontSize="14"/>
-            
+            <ScrollViewer Height="249" Canvas.Left="14" Canvas.Top="48" Width="478">
+                <WrapPanel x:Name="_wrap" Width="461" ItemWidth="461" Orientation="Vertical" ItemHeight="35"/>
+            </ScrollViewer>
+
         </Canvas>
     </Canvas>
 </we:AbstractPanel>

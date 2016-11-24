@@ -48,6 +48,20 @@ namespace Totality.Client.ClientComponents.Dialogs.Media
                 Panel1.Children.Add(leftList.Last());
             }
 
+            foreach (News n in news.Where(x => !x.IsOur))
+            {
+                var record = new System.Windows.Controls.TextBlock();
+                record.Width = 468;
+                record.FontSize = 21;
+                var c = new FontFamilyConverter();
+                record.FontFamily = (FontFamily)c.ConvertFrom("Aparajita");
+                record.Text = n.text;
+                record.TextWrapping = TextWrapping.Wrap;
+                rightList.Add(record);
+                Panel2.Children.Add(rightList.Last());
+            }
+
+
         }
 
         private void cancelButton_Click(object sender, RoutedEventArgs e)

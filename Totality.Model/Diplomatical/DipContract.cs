@@ -6,11 +6,31 @@ namespace Totality.Model.Diplomatical
     [DataContract]
     public class DipContract
     {
-        public Guid Id { get; }
-        public string From { get; }
-        public string To { get; }
+        [DataMember]
+        public Guid Id;
+        [DataMember]
+        public string From;
+        [DataMember]
+        public string To;
+        [DataMember]
         public DipMsg.Types Type;
+        [DataMember]
         public bool Broken = false;
+        [DataMember]
+        public long Price;
+        [DataMember]
+        public int Count;
+        [DataMember]
+        public int Time;
+        [DataMember]
+        public string Res;
+        [DataMember]
+        public string Description;
+        [DataMember]
+        public string Text;
+        [DataMember]
+        public bool IsFinished = false;
+
         public DipContract(DipMsg.Types type, string from, string to)
         {
             Id = Guid.NewGuid();

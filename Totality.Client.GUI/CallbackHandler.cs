@@ -23,6 +23,12 @@ namespace Totality.Client.GUI
         public delegate void NewsReceivedDelegate(News[] news);
         public event NewsReceivedDelegate NewsReceived;
 
+        public delegate void ContractsReceivedDelegate(DipContract[] contracts);
+        public event ContractsReceivedDelegate ContractsReceived;
+
+        public delegate void ContractsReceivedMessage(DipMsg msg);
+        public event ContractsReceivedMessage MessageReceived;
+
         public CallbackHandler()
         {
         }
@@ -34,12 +40,12 @@ namespace Totality.Client.GUI
 
         public void SendContracts(DipContract[] contracts)
         {
-            //throw new NotImplementedException();
+            ContractsReceived.Invoke(contracts);
         }
 
         public void SendDip(DipMsg msg)
         {
-            //throw new NotImplementedException();
+            MessageReceived.Invoke(msg);
         }
 
         public void SendNews(News[] newsList)

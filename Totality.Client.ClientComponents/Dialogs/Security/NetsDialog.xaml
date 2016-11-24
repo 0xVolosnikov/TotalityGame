@@ -12,7 +12,7 @@
         <Canvas Height="39" Canvas.Top="9" Width="836" Background="#FF3C8296">
             <Image x:Name="image" Height="82" Canvas.Left="372" Width="100" Canvas.Top="-25" Stretch="None" Source="/Totality.Client.ClientComponents;component/Images/Security/SecurityEye.png"/>
         </Canvas>
-        <Button x:Name="cancelButton" Content="Закрыть" Canvas.Left="662" Canvas.Top="328" Width="164" Height="34" FontFamily="Arial Black" FontSize="20" Click="cancelButton_Click">
+        <Button x:Name="cancelButton" Content="Закрыть" Canvas.Left="341" Canvas.Top="328" Width="164" Height="34" FontFamily="Arial Black" FontSize="20" Click="cancelButton_Click">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                     <GradientStop Color="#FFF3F3F3" Offset="0"/>
@@ -40,14 +40,6 @@
             </Button.Background>
         </Button>
         <Separator Height="13" Canvas.Left="40" Margin="0" Canvas.Top="111" Width="756"/>
-        <Button x:Name="cancelButton_Copy" Content="Информация" Canvas.Left="10" Canvas.Top="328" Width="164" Height="34" FontFamily="Arial Black" FontSize="20" Click="cancelButton_Click">
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                    <GradientStop Color="#FFF3F3F3" Offset="0"/>
-                    <GradientStop Color="#FFCDCDCD" Offset="1"/>
-                </LinearGradientBrush>
-            </Button.Background>
-        </Button>
         <ScrollViewer Height="178" Canvas.Left="40" Canvas.Top="129" Width="756">
             <WrapPanel x:Name="_wrap" Width="756" Background="#FFDBDBDB" Orientation="Vertical"/>
         </ScrollViewer>

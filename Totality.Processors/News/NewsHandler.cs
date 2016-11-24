@@ -48,6 +48,7 @@ namespace Totality.Handlers.News
 
             Transmitter.SendNews(_newsBase);
             _newsBase.Clear();
+            _broadNewsBase.Clear();
         }
     }
 }

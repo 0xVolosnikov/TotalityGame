@@ -8,16 +8,27 @@ namespace Totality.Model.Diplomatical
     {
         public enum Types { Trade, Peace, Alliance, CurrencyAlliance, Transfer, MilitaryTraining, Other };
 
-        public string From { get; }
-        public string To { get; }
-        public string Offer; //  программно сгенерированное описание контракта
-        public string Text; //  дополнительный текст
+        [DataMember]
+        public string From;
+        [DataMember]
+        public string To;
+        [DataMember]
+        public string Description;
+        [DataMember]
+        public string Text;
+        [DataMember]
         public Types Type;
+        [DataMember]
         public string Resource;
+        [DataMember]
         public long Price;
+        [DataMember]
         public bool Applied = false;
+        [DataMember]
         public Guid Id;
+        [DataMember]
         public int Time;
+        [DataMember]
         public long Count;
 
         public DipMsg(string from, string to)

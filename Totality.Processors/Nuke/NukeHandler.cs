@@ -101,6 +101,9 @@ namespace Totality.Handlers.Nuke
                     if (_rockets2[i].LifeTime <= 0 && _rockets2[i].Count > 0)
                     {
                         Country curCountry = _dataLayer.GetCountry(_rockets2[i].To);
+                        _newsHandler.AddBroadNews(new Model.News(false) { text = "В стране " + curCountry.Name + " произошел ядерный взрыв!" });
+                        _newsHandler.AddNews(curCountry.Name, new Model.News(true) { text = "В нашей стране произошел ядерный взрыв!", color = "Red" });
+
                         curCountry.ResOil *= (getNukesDamage(_rockets2[i].Count, curCountry.IsAlerted) );
                         curCountry.ResSteel *= (getNukesDamage(_rockets2[i].Count, curCountry.IsAlerted));
                         curCountry.ResWood *= (getNukesDamage(_rockets2[i].Count, curCountry.IsAlerted));

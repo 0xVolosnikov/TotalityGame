@@ -192,7 +192,6 @@
             <Label x:Name="label" Content="ЯДЕРНАЯ ТРЕВОГА" HorizontalAlignment="Left" Margin="380,7,0,0" VerticalAlignment="Top" Width="600" Height="59" Background="Black" Foreground="#FFFFD100" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="36" FontFamily="Arial Black" Padding="0"/>
             <Image x:Name="RadioSign" HorizontalAlignment="Left" Height="150" Margin="608,120,0,0" VerticalAlignment="Top" Width="150" Stretch="None" Source="Images/Radiation.png" IsEnabled="False"/>
             <Button x:Name="ShootDownButton" Content="Сбить" HorizontalAlignment="Left" Margin="518,327,0,0" VerticalAlignment="Top" Width="330" Height="86" Background="#FFF7F7F7" BorderThickness="2,3,3,3" FontFamily="Arial Black" FontSize="48" Click="ShootDownButton_Click" Cursor="Hand" Focusable="False" />
-            <Slider x:Name="slider" Style="{StaticResource Horizontal_Slider}"  HorizontalAlignment="Left" Margin="864,71,0,0" VerticalAlignment="Top" Height="342" Width="105" IsDirectionReversed="False" Orientation="Vertical" Value="10" ValueChanged="slider_ValueChanged"/>
             <ListBox x:Name="RocketBox" HorizontalAlignment="Left" Height="425" VerticalAlignment="Top" Width="382" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Visible"/>
         </Grid>
     </Border>

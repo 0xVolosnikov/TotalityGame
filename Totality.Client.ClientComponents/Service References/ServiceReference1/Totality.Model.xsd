@@ -132,6 +132,8 @@
   <xs:complexType name="News">
     <xs:sequence>
       <xs:element minOccurs="0" name="IsOur" type="xs:boolean" />
+      <xs:element minOccurs="0" name="color" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="picture" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="text" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>

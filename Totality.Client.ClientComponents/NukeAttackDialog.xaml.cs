@@ -70,10 +70,5 @@ namespace Totality.Client.ClientComponents
         {
            TryToShootDown?.Invoke(_rockets[RocketBox.SelectedIndex].Id);
         }
-
-        private void slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            Count = (int)slider.Value;
-        }
     }
 }

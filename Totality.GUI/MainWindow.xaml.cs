@@ -35,17 +35,7 @@ namespace Totality.GUI
             _transmitter = new Transmitter(_logger);
             _newsHandler = new NewsHandler();
 
-            var hostName = System.Net.Dns.GetHostName();
-            List<IPAddress> serverIps = new List<IPAddress>( System.Net.Dns.GetHostEntry(hostName).AddressList );
-            try
-            {
-                _host = new ServiceHost(_transmitter, new Uri("net.tcp://" + serverIps.Find(x => x.ToString().StartsWith("192.168.1.") || x.ToString().StartsWith("192.168.0.")).ToString() + ":10577/transmitter"));
-                _logger.Info(serverIps.Find(x => x.ToString().StartsWith("192.168.1.")|| x.ToString().StartsWith("192.168.0.")).ToString());
-            }
-            catch (Exception e)
-            {
-                _logger.Error("Something get wrong with configuring host: " + e.Message);
-            }
+
             _dataLayer = new DataLayer.DataLayer(_logger);
             _nukeHandler = new NukeHandler(_newsHandler, _transmitter, _dataLayer, _logger);
             _mainHandler = new MainHandler(_newsHandler, _dataLayer, _logger, _nukeHandler);            
@@ -70,24 +60,9 @@ namespace Totality.GUI
             try
             {
 
-                ServiceDiscoveryBehavior discoveryBehavior = new ServiceDiscoveryBehavior();
-                // send announcements on UDP multicast transport
-                discoveryBehavior.AnnouncementEndpoints.Add(
-                  new UdpAnnouncementEndpoint("soap.udp://192.168.1.255:3702") );
-
-                _host.Description.Behaviors.Add(discoveryBehavior);
-
-                // ** DISCOVERY ** //
-                // add the discovery endpoint that specifies where to publish the services
-                _host.Description.Endpoints.Add(new UdpDiscoveryEndpoint());
-
-                _host.Open();
-
-                if (_host.State == CommunicationState.Opened)
-                {
-                    listeningStatusDisplay.Fill = Brushes.ForestGreen;
-                    _logger.Info("Server is listening now.");
-                }
+                var ipDial = new IpDialog();
+                ipDial.IpReceived += IpDial_IpReceived;
+                grid.Children.Add(ipDial);
             }
             catch (Exception ex)
             {
@@ -95,6 +70,39 @@ namespace Totality.GUI
             }
 
 
+        }
+
+        private void IpDial_IpReceived(object sender, string ip)
+        {
+            grid.Children.Remove((UIElement)sender);
+
+            try
+            {
+                _host = new ServiceHost(_transmitter, new Uri("net.tcp://" + ip + ":10577/transmitter"));
+            }
+            catch (Exception e)
+            {
+                _logger.Error("Something get wrong with configuring host: " + e.Message);
+            }
+
+            ServiceDiscoveryBehavior discoveryBehavior = new ServiceDiscoveryBehavior();
+            // send announcements on UDP multicast transport
+            discoveryBehavior.AnnouncementEndpoints.Add(
+              //new UdpAnnouncementEndpoint("soap.udp://192.168.1.255:3702"));
+              new UdpAnnouncementEndpoint());
+            _host.Description.Behaviors.Add(discoveryBehavior);
+
+            // ** DISCOVERY ** //
+            // add the discovery endpoint that specifies where to publish the services
+            _host.Description.Endpoints.Add(new UdpDiscoveryEndpoint());
+
+            _host.Open();
+
+            if (_host.State == CommunicationState.Opened)
+            {
+                listeningStatusDisplay.Fill = Brushes.ForestGreen;
+                _logger.Info("Server is listening now.");
+            }
         }
 
         private void buttonLogOpen_Click(object sender, RoutedEventArgs e)

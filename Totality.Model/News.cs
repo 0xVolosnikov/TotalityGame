@@ -14,7 +14,11 @@ namespace Totality.Model
         public bool IsOur;
         [DataMember]
         public string text;
-        
+        [DataMember]
+        public string color;
+        [DataMember]
+        public string picture;
+
         public News(bool isOur)
         {
             IsOur = isOur;

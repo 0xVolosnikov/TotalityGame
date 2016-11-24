@@ -86,11 +86,11 @@ namespace Totality.Handlers.Main
 
             updateMoney();
 
-            // followDipContracts
-
             updateMilitaryPower();
 
             updateResources();
+
+            followDipContracts();
 
             updateUranus();
 
@@ -111,12 +111,106 @@ namespace Totality.Handlers.Main
 
             updateCurrencyRatios();
 
-            updateClients();
-
             DipHandler.SendContractsToAll();
 
             _newsHandler.Countries = _ordersBase.Keys.ToList();
             _newsHandler.SendNews();
+
+            updateClients();
+        }
+
+        private void followDipContracts()
+        {
+            var contracts = _dataLayer.GetContractList();
+            for (int i = 0; i < contracts.Count; i++)
+            {
+                Country country1, country2;
+                var contract = contracts[i];
+
+                if (!contract.IsFinished)
+                    switch (contract.Type)
+                    {
+                        case Model.Diplomatical.DipMsg.Types.Alliance:
+                            country1 = _dataLayer.GetCountry(contract.From);
+                            country2 = _dataLayer.GetCountry(contract.To);
+                            country1.Alliance = contract.Text;
+                            country2.Alliance = contract.Text;
+                            _dataLayer.UpdateCountry(country1);
+                            _dataLayer.UpdateCountry(country2);
+                            contract.IsFinished = true;
+                            _newsHandler.AddBroadNews(new Model.News(false) { text = "Страна " + country1.Name + " добавила страну " + country2.Name + " в альянс " + contract.Text + "."});
+                            break;
+                        case Model.Diplomatical.DipMsg.Types.CurrencyAlliance:
+                            break;
+                        case Model.Diplomatical.DipMsg.Types.MilitaryTraining:
+                            break;
+                        case Model.Diplomatical.DipMsg.Types.Other:
+                            contract.IsFinished = true;
+                            _newsHandler.AddNews(contract.From, new Model.News(true) { text = "Мы и страна " + contract.To  + " ратифицировали договор: " + contract.Text});
+                            _newsHandler.AddNews(contract.To, new Model.News(true) { text = "Мы и страна " + contract.From + " ратифицировали договор: " + contract.Text });
+                            break;
+                        case Model.Diplomatical.DipMsg.Types.Peace:
+                            //
+                            break;
+                        case Model.Diplomatical.DipMsg.Types.Trade:
+                            if (contract.Time == 0)
+                            {
+                                contract.IsFinished = true;
+                                _dataLayer.BreakContract(contract.Id);
+                                break;
+                            }
+                            contract.Time--;
+
+                            country1 = _dataLayer.GetCountry(contract.From);
+                            country2 = _dataLayer.GetCountry(contract.To);
+                            var res = (double)_dataLayer.GetProperty(country1.Name, "Final" + contract.Res) - (double)_dataLayer.GetProperty(country1.Name, "Used" + contract.Res);
+                            var needMoney = FinancialTools.GetExchangeCost(contract.Price, country2.NationalCurrencyDemand, country1.NationalCurrencyDemand, _dataLayer.GetCurrencyOnStock(country2.Name), _dataLayer.GetCurrencyOnStock(country1.Name));
+
+                            if (needMoney > country2.Money)
+                            {
+                                _newsHandler.AddNews(country1.Name, new Model.News(true) { text = "Страна " + country2.Name + " не смогла заплатить по торговому контракту: " + contract.Description});
+                                _newsHandler.AddNews(country2.Name, new Model.News(true) { text = "Мы не смогли заплатить стране " + country2.Name + " по торговому контракту: " + contract.Description });
+                                break;
+                            }
+
+                            if (res >= contract.Count)
+                            {
+                                _dataLayer.SetProperty(country1.Name, "Used" + contract.Res, (double)_dataLayer.GetProperty(country1.Name, "Used" + contract.Res) + contract.Count);
+                                _dataLayer.SetProperty(country2.Name, "Final" + contract.Res, (double)_dataLayer.GetProperty(country2.Name, "Final" + contract.Res) + contract.Count);
+
+                                _dataLayer.SetProperty(country1.Name, "Money", (long)_dataLayer.GetProperty(country1.Name, "Money") + contract.Price);
+                                _dataLayer.SetProperty(country2.Name, "Money", (long)_dataLayer.GetProperty(country2.Name, "Money") - needMoney);
+
+                                _dataLayer.SetCurrencyOnStock(country1.Name, _dataLayer.GetCurrencyOnStock(country1.Name) - contract.Price);
+                                _dataLayer.SetCurrencyOnStock(country2.Name, _dataLayer.GetCurrencyOnStock(country2.Name) + needMoney);
+
+                                _newsHandler.AddNews(country1.Name, new Model.News(true) { text = "Страна " + country2.Name + " оплатила очередную партию по торговому контракту: " + contract.Description + ", " + String.Format("{0:0,0}",contract.Price) });
+                                _newsHandler.AddNews(country2.Name, new Model.News(true) { text = "Мы получили очередную партию товара из страны " + country1.Name + " по торговому контракту: " + contract.Description + ", в количестве " + contract.Count });
+                            }
+                            else
+                            {
+                                _newsHandler.AddNews(country2.Name, new Model.News(true) { text = "Страна " + country1.Name + " не предоставить товар по торговому контракту: " + contract.Description });
+                                _newsHandler.AddNews(country1.Name, new Model.News(true) { text = "Мы не смогли предоставить товар стране " + country2.Name + " по торговому контракту: " + contract.Description });
+                            }
+
+                            break;
+                        case Model.Diplomatical.DipMsg.Types.Transfer:
+                            country1 = _dataLayer.GetCountry(contract.From);
+                            country2 = _dataLayer.GetCountry(contract.To);
+                            if (country1.Money >= contract.Count)
+                            {
+                                country1.Money -= contract.Count;
+                                country2.CurrencyAccounts[country1.Name] += contract.Count;
+                                _dataLayer.UpdateCountry(country1);
+                                _dataLayer.UpdateCountry(country2);
+                                _newsHandler.AddNews(country1.Name, new Model.News(true) { text = "В страну " + country2.Name + " совершен перевод: " + String.Format("{0:0,0}", contract.Count)});
+                                _newsHandler.AddNews(country2.Name, new Model.News(true) { text = "Страна " + country1.Name + " совершила нам перевод в своей валюте: " + String.Format("{0:0,0}", contract.Count) });
+                            }
+                            contract.IsFinished = true;
+                            _dataLayer.BreakContract(contract.Id);
+                            break;
+                    }
+            }
         }
 
         private void updateMoney()
@@ -193,6 +287,15 @@ namespace Totality.Handlers.Main
 
                             if (powers[armies[p].Key] > powers[armies[j].Key])
                             {
+                                if ((powers[armies[p].Key] - powers[armies[j].Key])/(double)powers[armies[j].Key] > 0.5)
+                                    _newsHandler.AddBroadNews(new Model.News(true) { text = "При подавляющем превосходстве армия " + armies[p].Key  + " нанесла сокрушительное поражение армии " + armies[j].Key + "." });
+                                else if ((powers[armies[p].Key] - powers[armies[j].Key]) / (double)powers[armies[j].Key] > 0.2)
+                                    _newsHandler.AddBroadNews(new Model.News(true) { text = "Пользуясь превосходством, армия " + armies[p].Key + " нанесла поражение армии " + armies[j].Key + "." });
+                                else if ((powers[armies[p].Key] - powers[armies[j].Key]) / (double)powers[armies[j].Key] > 0.04)
+                                    _newsHandler.AddBroadNews(new Model.News(true) { text = "Пользуясь незначительным превосходством, армия " + armies[p].Key + " ослабила армию " + armies[j].Key  + "."});
+                                else if ((powers[armies[p].Key] - powers[armies[j].Key]) / (double)powers[armies[j].Key] >= 0)
+                                    _newsHandler.AddBroadNews(new Model.News(true) { text = "В результате боев, армии  " + armies[p].Key + " и " + armies[j].Key + "остались на своих позициях."});
+
                                 countries[armies[j].Value[k]].ResOil -= ((powers[armies[p].Key] - powers[armies[j].Key]) / (armies[j].Value.Count))*0.75;
                                 if (countries[armies[j].Value[k]].ResOil < 0) countries[armies[j].Value[k]].ResOil = 0;
 

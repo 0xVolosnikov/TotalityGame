@@ -26,7 +26,7 @@
                     <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="Новости в стране:" Height="34" Width="486" FontFamily="Aparajita" FontSize="28" TextAlignment="Center" Padding="0,2,0,0" FontWeight="Bold"/>
                 </WrapPanel>
                 <WrapPanel x:Name="Panel2" Height="501" VerticalAlignment="Top" Width="468" Orientation="Vertical" MinWidth="468">
-                    <TextBlock x:Name="textBlock_Copy" TextWrapping="Wrap" Text="Новости в мире:" Height="34" Width="486" FontFamily="Aparajita" FontSize="28" TextAlignment="Center" Padding="0,2,0,0" FontWeight="Bold"/>
+                    <TextBlock x:Name="textBlock_Copy" TextWrapping="Wrap" Text="Новости в мире:" Height="34" Width="468" FontFamily="Aparajita" FontSize="28" TextAlignment="Center" Padding="0,2,0,0" FontWeight="Bold"/>
                 </WrapPanel>
                 <Label x:Name="label1" Content="Label" Height="501" VerticalAlignment="Top" Width="100"/>
             </DockPanel>

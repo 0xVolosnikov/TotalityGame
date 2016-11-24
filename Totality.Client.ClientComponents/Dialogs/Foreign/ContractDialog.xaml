@@ -1,4 +1,4 @@
-﻿<local:AbstractDialog x:Class="Totality.Client.ClientComponents.Dialogs.Foreign.IncomeDialog"
+﻿<local:AbstractDialog x:Class="Totality.Client.ClientComponents.Dialogs.Foreign.ContractDialog"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -12,7 +12,7 @@
         <Canvas Height="45" Canvas.Top="23" Width="607" Background="#FF111717">
             <Image x:Name="image" Height="74" Canvas.Left="263" Canvas.Top="-18" Width="74" RenderTransformOrigin="0.483,0.466" Stretch="None" Source="/Totality.Client.ClientComponents;component/Images/Foreign/ForeignBird.png"/>
         </Canvas>
-        <Button x:Name="cancelButton" Content="Закрыть" Canvas.Left="208" Canvas.Top="306" Width="194" Height="36" FontFamily="Arial Black" FontSize="20" Click="cancelButton_Click">
+        <Button x:Name="cancelButton" Content="Отмена" Canvas.Left="88" Canvas.Top="292" Width="194" Height="48" FontFamily="Arial Black" FontSize="20" Click="cancelButton_Click">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                     <GradientStop Color="#FFF3F3F3" Offset="0"/>
@@ -20,8 +20,18 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <ScrollViewer Height="199" Canvas.Left="14" Canvas.Top="98" Width="572">
-            <WrapPanel x:Name="_wrap" ItemWidth="555" Orientation="Vertical" ItemHeight="35" Width="555" Background="White"/>
+        <Button x:Name="acceptButton" Content="Разорвать" Canvas.Left="322" Canvas.Top="292" Width="194" Height="48" Foreground="#FF02000C" FontSize="20" FontWeight="Bold" FontFamily="Arial Black" Click="acceptButton_Click">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                    <GradientStop Color="#FFF3F3F3" Offset="0"/>
+                    <GradientStop Color="#FFCDCDCD" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <ScrollViewer Height="185" Canvas.Left="22" Canvas.Top="89" Width="562">
+            <WrapPanel Width="545" Background="White" ItemWidth="545">
+                <TextBlock x:Name="textBlock" TextWrapping="Wrap" TextAlignment="Center" FontFamily="Arial Black" FontSize="16"/>
+            </WrapPanel>
         </ScrollViewer>
     </Canvas>
 </local:AbstractDialog>

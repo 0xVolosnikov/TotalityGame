@@ -18,6 +18,7 @@ using Totality.Model;
 using Totality.Model.Diplomatical;
 using Totality.Client.ClientComponents.Dialogs.Foreign;
 using Totality.CommonClasses;
+using Totality.Client.ClientComponents.ServiceReference1;
 
 namespace Totality.Client.ClientComponents.Panels
 {
@@ -26,37 +27,53 @@ namespace Totality.Client.ClientComponents.Panels
     /// </summary>
     public partial class ForeignPanel : AbstractPanel, InPanel
     {
-        Dialog currentDialog;
+        public TransmitterServiceClient _client;
+        AbstractDialog currentDialog;
+        List<DipMsg> _messages = new List<DipMsg>();
 
         public ForeignPanel()
         {
             InitializeComponent();
-            SendButton.click += () => createDialog<Dialogs.Foreign.SendDialog>(new Dialogs.Foreign.SendDialog(SendDiplomaticalMessage));
-            IncomeButton.click += () => createDialog<IncomeDialog>(new IncomeDialog());
+            SendButton.click += () => createDialog(new Dialogs.Foreign.SendDialog(SendDiplomaticalMessage, false));
+            IncomeButton.click += () => createDialog(new IncomeDialog(_messages, SendDiplomaticalMessage));
 
         }
 
-        private void createDialog<T>(Dialog dialog) where T : UIElement
+        private void createDialog(AbstractDialog dialog)
         {
             if (currentDialog == null)
             {
                 currentDialog = dialog;
-                canvas1.Children.Add((T)currentDialog);
-                Canvas.SetLeft((T)currentDialog, 295);
-                Canvas.SetTop((T)currentDialog, 68);
+                canvas1.Children.Add(currentDialog);
+                Canvas.SetLeft(currentDialog, (Width - dialog.Width) / 2);
+                Canvas.SetTop(currentDialog, (Height - dialog.Height) / 2);
             }
         }
 
         public void receiveOrder(object sender, Order order)
         {
             canvas1.Children.Remove((UIElement)sender);
-            currentDialog = null;     
+            currentDialog = null;
+
+            if (order != null)
+            {
+                order.Ministery = (short)Mins.Foreign;
+                Table.addOrder(new OrderRecord("Расторжение договора со страной " + order.TargetCountryName, "0", order));
+            }
         }
 
-        public void SendDiplomaticalMessage(object sender, DipMsg msg)
+        public void SendDiplomaticalMessage(object sender, DipMsg msg, Guid id, object button = null)
         {
-            canvas1.Children.Remove((UIElement)sender);
-            currentDialog = null;
+            if (id == Guid.Empty)
+            {
+                canvas1.Children.Remove((UIElement)sender);
+                currentDialog = null;
+            }
+            if (msg != null)
+                _client.DipMsg(msg);
+
+            if (id != Guid.Empty && _messages.Any(x=>x.Id == id))
+                _messages.Remove(_messages.First(x => x.Id == id));
         }
 
         public void Update()
@@ -86,6 +103,36 @@ namespace Totality.Client.ClientComponents.Panels
                 IncomeButton.imgUp = new BitmapImage(uriSource);
                 IncomeButton.Update();
                 IncomeButton.IsEnabled = true;
+            }
+        }
+
+        public void ReceiveMessage(DipMsg msg)
+        {
+            _messages.Add(msg);
+        }
+
+        public void ReceiveContracts(DipContract[] contracts)
+        {
+            _wrap.Children.Clear();
+            var c = new FontFamilyConverter();
+
+            for (int i = 0; i < contracts.Count(); i++)
+            {
+                var num = i;
+
+                var button = new System.Windows.Controls.Button()
+                {
+                    Background = null,
+                    Content = contracts[num].Description,
+                    FontSize = 14,
+                    FontFamily = (FontFamily)c.ConvertFrom("Segoe WP Black"),
+                    Cursor = Cursors.Hand,
+                    ClickMode = ClickMode.Press
+                };
+
+                button.Click += (object sender, RoutedEventArgs e) => { createDialog(new ContractDialog(receiveOrder, contracts[num])); };
+
+                _wrap.Children.Add(button);
             }
         }
     }

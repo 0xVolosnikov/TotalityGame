@@ -1,18 +1,19 @@
-﻿<local:AbstractDialog x:Class="Totality.Client.ClientComponents.Dialogs.Foreign.SendDialog"
+﻿<local:AbstractDialog
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Totality.Client.ClientComponents.Dialogs"
-             mc:Ignorable="d" d:DesignWidth="607.389" Width="617" Height="361.767" BorderBrush="White" BorderThickness="5">
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="Totality.Client.ClientComponents.Dialogs.Foreign.SendDialog"
+             mc:Ignorable="d" Width="1031" Height="409.767" BorderBrush="White" BorderThickness="5">
     <local:AbstractDialog.Effect>
         <DropShadowEffect RenderingBias="Quality" BlurRadius="7"/>
     </local:AbstractDialog.Effect>
     <Canvas x:Name="canvas" Background="#FFC82E31">
-        <Canvas Height="45" Canvas.Top="23" Width="607" Background="#FF111717">
-            <Image x:Name="image" Height="74" Canvas.Left="263" Canvas.Top="-18" Width="74" RenderTransformOrigin="0.483,0.466" Stretch="None" Source="/Totality.Client.ClientComponents;component/Images/Foreign/ForeignBird.png"/>
+        <Canvas Height="45" Canvas.Top="15" Width="1021" Background="#FF111717">
+            <Image x:Name="image" Height="74" Canvas.Left="470" Canvas.Top="-16" Width="74" RenderTransformOrigin="0.483,0.466" Stretch="None" Source="/Totality.Client.ClientComponents;component/Images/Foreign/ForeignBird.png"/>
         </Canvas>
-        <ComboBox x:Name="CountriesBox" Canvas.Left="146" Canvas.Top="102" Width="437" Height="52" FontFamily="Arial Black" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+        <ComboBox x:Name="CountriesBox" Canvas.Left="142" Canvas.Top="76" Width="314" Height="52" FontFamily="Arial Black" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
             <ComboBox.Background>
                 <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                     <GradientStop Color="#FFCBC7C7" Offset="0"/>
@@ -20,7 +21,7 @@
                 </LinearGradientBrush>
             </ComboBox.Background>
         </ComboBox>
-        <Button x:Name="cancelButton" Content="Отмена" Canvas.Left="88" Canvas.Top="272" Width="194" Height="48" FontFamily="Arial Black" FontSize="20" Click="cancelButton_Click">
+        <Button x:Name="cancelButton" Content="Отмена" Canvas.Left="292" Canvas.Top="342" Width="194" Height="48" FontFamily="Arial Black" FontSize="20" Click="cancelButton_Click">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                     <GradientStop Color="#FFF3F3F3" Offset="0"/>
@@ -28,7 +29,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button x:Name="acceptButton" Content="Подтвердить" Canvas.Left="322" Canvas.Top="272" Width="194" Height="48" Foreground="#FF02000C" FontSize="20" FontWeight="Bold" FontFamily="Arial Black" Click="acceptButton_Click">
+        <Button x:Name="acceptButton" Content="Подтвердить" Canvas.Left="526" Canvas.Top="342" Width="194" Height="48" Foreground="#FF02000C" FontSize="20" FontWeight="Bold" FontFamily="Arial Black" Click="acceptButton_Click">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                     <GradientStop Color="#FFF3F3F3" Offset="0"/>
@@ -36,8 +37,8 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Label x:Name="label_Copy" Content="Страна" Canvas.Top="102" Width="145" Height="54" Foreground="White" FontSize="24" FontFamily="Arial Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" Canvas.Left="-4"/>
-        <ComboBox x:Name="TypesBox" Canvas.Left="146" Canvas.Top="184" Width="437" Height="52" FontFamily="Arial Black" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+        <Label x:Name="label_Copy" Content="Страна" Canvas.Top="74" Width="110" Height="54" Foreground="White" FontSize="24" FontFamily="Arial Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" Canvas.Left="31"/>
+        <ComboBox x:Name="TypesBox" Canvas.Left="642" Canvas.Top="76" Width="314" Height="52" FontFamily="Arial Black" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" SelectionChanged="TypesBox_SelectionChanged">
             <ComboBox.Background>
                 <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                     <GradientStop Color="#FFCBC7C7" Offset="0"/>
@@ -45,6 +46,36 @@
                 </LinearGradientBrush>
             </ComboBox.Background>
         </ComboBox>
-        <Label x:Name="label_Copy1" Content="Тема" Canvas.Top="184" Width="145" Height="54" Foreground="White" FontSize="24" FontFamily="Arial Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" Canvas.Left="-4"/>
+        <Label x:Name="label_Copy1" Content="Тема" Canvas.Top="76" Width="103" Height="54" Foreground="White" FontSize="24" FontFamily="Arial Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" Canvas.Left="542"/>
+        <Separator Height="13" Canvas.Left="10" Margin="0" Canvas.Top="132" Width="997"/>
+        <Canvas x:Name="otherCanvas" Height="138" Canvas.Left="14" Canvas.Top="145" Width="997">
+            <TextBox x:Name="otherTextBox" Height="72" Canvas.Left="10" TextWrapping="Wrap" Canvas.Top="56" Width="977" FontFamily="Times New Roman" FontSize="14" VerticalScrollBarVisibility="Auto"/>
+            <Label x:Name="label_Copy2" Content="Текст" Canvas.Top="-3" Width="110" Height="54" Foreground="White" FontSize="24" FontFamily="Arial Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" Canvas.Left="439"/>
+        </Canvas>
+        <Canvas x:Name="transferCanvas" Height="138" Canvas.Left="14" Canvas.Top="145" Width="997">
+            <Label x:Name="label_Copy3" Content="Сумма" Canvas.Top="-3" Width="110" Height="54" Foreground="White" FontSize="24" FontFamily="Arial Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" Canvas.Left="439"/>
+            <xctk:IntegerUpDown x:Name="TransferUpDown" Canvas.Left="204" Canvas.Top="56" Height="61" Width="590" FontSize="38" FontFamily="Arial Black" FontWeight="Bold" ClipValueToMinMax="True" DefaultValue="0" Minimum="0" Maximum="100" Value="0" Text="" HorizontalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.IsSharedSizeScope="True" TextAlignment="Center" FormatString="C" ParsingNumberStyle="Currency" CultureInfo="en-US"/>
+        </Canvas>
+        <Canvas x:Name="TradeCanvas" Height="138" Canvas.Left="14" Canvas.Top="145" Width="997">
+            <Label x:Name="label_Copy4" Content="Стоимость" Width="307" Height="54" Foreground="White" FontSize="24" FontFamily="Arial Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" Canvas.Left="680"/>
+            <xctk:IntegerUpDown x:Name="TradePriceIntUpDown" Canvas.Left="680" Canvas.Top="48" Height="60" Width="307" FontSize="38" FontFamily="Arial Black" FontWeight="Bold" ClipValueToMinMax="True" DefaultValue="0" Minimum="0" Value="0" Text="" HorizontalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.IsSharedSizeScope="True" TextAlignment="Center" FormatString="C" ParsingNumberStyle="Currency" CultureInfo="en-US"/>
+            <Label x:Name="label_Copy5" Content="Длительность" Width="225" Height="54" Foreground="White" FontSize="24" FontFamily="Arial Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" Canvas.Left="426"/>
+            <xctk:IntegerUpDown x:Name="TradeTimeUpdown" Canvas.Left="426" Canvas.Top="48" Height="60" Width="225" FontSize="38" FontFamily="Arial Black" FontWeight="Bold" ClipValueToMinMax="True" DefaultValue="0" Minimum="0" Maximum="100" Value="0" Text="" HorizontalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.IsSharedSizeScope="True" TextAlignment="Center" ParsingNumberStyle="Integer" CultureInfo="en-US"/>
+            <Label x:Name="label_Copy6" Content="Кол-во" Width="151" Height="54" Foreground="White" FontSize="24" FontFamily="Arial Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" Canvas.Left="242"/>
+            <xctk:IntegerUpDown x:Name="TradeCountUpdown" Canvas.Left="242" Canvas.Top="48" Height="60" Width="151" FontSize="38" FontFamily="Arial Black" FontWeight="Bold" ClipValueToMinMax="True" DefaultValue="0" Minimum="0" Value="0" Text="" HorizontalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.IsSharedSizeScope="True" TextAlignment="Center" CultureInfo="en-US" ParsingNumberStyle="Integer"/>
+            <ComboBox x:Name="TradeResBox" Canvas.Left="10" Canvas.Top="48" Width="207" Height="60" FontSize="16" FontFamily="Arial Black" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" SelectionChanged="TradeResBox_SelectionChanged">
+                <ComboBox.Background>
+                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                        <GradientStop Color="#FFF3F3F3" Offset="0"/>
+                        <GradientStop Color="#FFE0DBDB" Offset="1"/>
+                    </LinearGradientBrush>
+                </ComboBox.Background>
+            </ComboBox>
+            <Label x:Name="label_Copy7" Content="Ресурс" Width="207" Height="54" Foreground="White" FontSize="24" FontFamily="Arial Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" Canvas.Left="10"/>
+        </Canvas>
+        <Canvas x:Name="AllianceCanvas" Height="138" Canvas.Left="14" Canvas.Top="145" Width="997">
+            <TextBox x:Name="AllianceTextBox" Height="72" Canvas.Left="10" TextWrapping="Wrap" Canvas.Top="56" Width="977" FontFamily="Times New Roman" FontSize="14" VerticalScrollBarVisibility="Auto"/>
+            <Label x:Name="label_Copy12" Content="Название альянса" Canvas.Top="-3" Width="308" Height="54" Foreground="White" FontSize="24" FontFamily="Arial Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" Canvas.Left="342"/>
+        </Canvas>
     </Canvas>
 </local:AbstractDialog>

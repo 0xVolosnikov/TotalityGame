@@ -34,8 +34,6 @@ namespace Totality.Client.ClientComponents.Dialogs.SecretPanels
         {
             _receiveOrder = receiveOrder;
             InitializeComponent();
-            SendButton.click += () => createDialog<Dialogs.Foreign.SendDialog>(new Dialogs.Foreign.SendDialog(SendDiplomaticalMessage));
-            IncomeButton.click += () => createDialog<IncomeDialog>(new IncomeDialog());
 
         }
 
@@ -65,32 +63,7 @@ namespace Totality.Client.ClientComponents.Dialogs.SecretPanels
 
         public void Update()
         {
-            if (CountryData.MinsBlocks[(short)Mins.Foreign] > 0 && !isBlocked)
-            {
-                isBlocked = true;
-                var uriSource = new Uri(@"/Totality.Client.ClientComponents;component/Images/Foreign/ForeignSendButtonDeactivated.png", UriKind.Relative);
-                SendButton.imgUp = new BitmapImage(uriSource);
-                SendButton.Update();
-                SendButton.IsEnabled = false;
 
-                uriSource = new Uri(@"/Totality.Client.ClientComponents;component/Images/Foreign/ForeignInButtonDeactivated.png", UriKind.Relative);
-                IncomeButton.imgUp = new BitmapImage(uriSource);
-                IncomeButton.Update();
-                IncomeButton.IsEnabled = false;
-            }
-            else if (isBlocked && CountryData.MinsBlocks[(short)Mins.Foreign] == 0)
-            {
-                isBlocked = false;
-                var uriSource = new Uri(@"/Totality.Client.ClientComponents;component/Images/Foreign/ForeignSendButton.png", UriKind.Relative);
-                SendButton.imgUp = new BitmapImage(uriSource);
-                SendButton.Update();
-                SendButton.IsEnabled = true;
-
-                uriSource = new Uri(@"/Totality.Client.ClientComponents;component/Images/Foreign/ForeignInButton.png", UriKind.Relative);
-                IncomeButton.imgUp = new BitmapImage(uriSource);
-                IncomeButton.Update();
-                IncomeButton.IsEnabled = true;
-            }
         }
 
         private void button_Click(object sender, RoutedEventArgs e)

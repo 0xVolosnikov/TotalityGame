@@ -17,6 +17,7 @@ using System.Windows.Shapes;
 using Totality.Model;
 using Totality.CommonClasses;
 using Totality.Client.ClientComponents.Panels;
+using Totality.Client.ClientComponents.ServiceReference1;
 
 namespace Totality.Client.ClientComponents.Panels
 {
@@ -27,6 +28,7 @@ namespace Totality.Client.ClientComponents.Panels
     {
         private Dialog _currentDialog;
         private CurrencyDialog _currencyDialog;
+        public TransmitterServiceClient _client;
 
         public FinancePanel()
         {

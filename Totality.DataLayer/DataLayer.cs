@@ -19,6 +19,7 @@ namespace Totality.DataLayer
         }
 
         private List<DipContract> _diplomaticalDatabase = new List<DipContract>();
+        private List<DipContract> _diplomaticalArchive = new List<DipContract>();
         private Dictionary<string, Country> _countries = new Dictionary<string, Country>();
         private Dictionary<string, FieldInfo> countryFields = new Dictionary<string, FieldInfo>();
         private Dictionary<string, long> _financialStock = new Dictionary<string, long>();
@@ -126,7 +127,9 @@ namespace Totality.DataLayer
 
         public void BreakContract(Guid id)
         {
-            _diplomaticalDatabase.Find(x => x.Id == id).Broken = true;
+            var c = _diplomaticalDatabase.Find(x => x.Id == id);
+            _diplomaticalArchive.Add(c);
+            _diplomaticalDatabase.Remove(c);
         }
 
         public bool Save(string savePath)
