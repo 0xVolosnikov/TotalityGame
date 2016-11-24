@@ -48,6 +48,7 @@ namespace Totality.Handlers.Main
             minsBlocks[order.TargetMinistery] += Constants.ReorganizingTime;
             _dataLayer.SetProperty(order.CountryName, "MinsBlocks", minsBlocks);
 
+            _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Министерство " + order.TargetMinistery + "реорганизовано." });
             return true;
         }
 
@@ -67,18 +68,21 @@ namespace Totality.Handlers.Main
             var lvl = (int)_dataLayer.GetProperty(order.CountryName, "PremierLvl") + 1;
             _dataLayer.SetProperty(order.CountryName, "PremierLvl", lvl);
 
+            _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Усилена власть." });
             return true;
         }
 
         private bool alert(Order order)
         {
             _dataLayer.SetProperty(order.CountryName, "IsAlerted", true);
+            _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Объявлено чрезвычайное положение!" });
             return true;
         }
 
         private bool unAlert(Order order)
         {
             _dataLayer.SetProperty(order.CountryName, "IsAlerted", false);
+            _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Чрезвычайное положение отменено!" });
             return true;
         }
     }

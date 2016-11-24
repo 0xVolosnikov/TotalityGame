@@ -77,6 +77,7 @@ namespace Totality.Handlers.Main
                 _dataLayer.SetProperty(order.CountryName, "SpyNetworks", spyNetworks);
             }
 
+            _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Улучшена разведсеть в стране " + order.TargetCountryName + "." });
             return true;
         }
 
@@ -158,6 +159,7 @@ namespace Totality.Handlers.Main
             spyesInTarget[order.TargetMinistery].Add(order.CountryName);
             _dataLayer.SetProperty(order.TargetCountryName, "ForeignSpyes", spyesInTarget);
 
+            _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Внедрены агенты в страну " + order.TargetCountryName + ", " + order.TargetMinistery + "."});
             return true;
         }
 
@@ -181,9 +183,10 @@ namespace Totality.Handlers.Main
             {
                 Count = order.Count,
                 Ministery = order.TargetMinistery,
-                OrderNum = order.Value
+                OrderNum = order.Value,
+                Value = order.Value2
             });
-
+            _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Отдан приказ агентам в стране " + order.TargetCountryName + ", " + order.TargetMinistery + "."});
             return true;
         }
 
@@ -218,6 +221,7 @@ namespace Totality.Handlers.Main
             minsBlocks[order.TargetMinistery] += Constants.PurgeTime;
             _dataLayer.SetProperty(order.CountryName, "MinsBlocks", minsBlocks);
 
+            _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Произведены чистки: " + order.TargetMinistery + "."});
             return true;
         }
 
@@ -237,6 +241,8 @@ namespace Totality.Handlers.Main
             var lvl = (int)_dataLayer.GetProperty(order.CountryName, "CounterSpyLvl") + 1;
             _dataLayer.SetProperty(order.CountryName, "CounterSpyLvl", lvl);
 
+
+            _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Повышен уровень контрразведки. "});
             return true;
         }
 
@@ -256,6 +262,7 @@ namespace Totality.Handlers.Main
             var lvl = (int)_dataLayer.GetProperty(order.CountryName, "ShadowingLvl") + 1;
             _dataLayer.SetProperty(order.CountryName, "ShadowingLvl", lvl);
 
+            _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Повышен уровень слежки. " });
             return true;
         }
 
@@ -275,6 +282,7 @@ namespace Totality.Handlers.Main
             var lvl = (int)_dataLayer.GetProperty(order.CountryName, "IntelligenceLvl") + 1;
             _dataLayer.SetProperty(order.CountryName, "IntelligenceLvl", lvl);
 
+            _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Повышен уровень разведки. " });
             return true;
         }
 
@@ -296,6 +304,7 @@ namespace Totality.Handlers.Main
             minsBlocks[order.TargetMinistery] += Constants.SabotageTime;
             _dataLayer.SetProperty(order.TargetCountryName, "MinsBlocks", minsBlocks);
 
+            _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Произведен саботаж в стране " + order.TargetCountryName +", " + order.TargetMinistery + "."});
             return true;
         }
     }

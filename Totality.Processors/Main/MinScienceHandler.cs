@@ -69,15 +69,19 @@ namespace Totality.Handlers.Main
             {
                 case "Extract":
                     sectorLvlUpExp = (int)(sectorLvlUpExp * Constants.ExtractScLvlUpExpRatio);
+                    _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Улучшены технологии добывающей промышленности." });
                     break;
                 case "Heavy":
                     sectorLvlUpExp = (int)(sectorLvlUpExp * Constants.HeavyScLvlUpExpRatio);
+                    _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Улучшены технологии тяжелой промышленности." });
                     break;
                 case "Light":
                     sectorLvlUpExp = (int)(sectorLvlUpExp * Constants.LightScLvlUpExpRatio);
+                    _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Улучшены технологии легкой промышленности." });
                     break;
                 case "Military":
                     sectorLvlUpExp = (int)(sectorLvlUpExp * Constants.MilitaryScLvlUpExpRatio);
+                    _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Улучшены военные технологии." });
                     break;
             }
             _dataLayer.SetProperty(order.CountryName, sector + "ScLvlUpExp", sectorLvlUpExp);

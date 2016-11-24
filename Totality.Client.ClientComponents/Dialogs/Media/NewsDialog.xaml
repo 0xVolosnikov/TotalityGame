@@ -18,39 +18,22 @@
                         </LinearGradientBrush>
                     </Button.Background>
                 </Button>
-                <Button x:Name="cancelButton_Copy" Content="Новости" FontFamily="Arial Black" FontSize="20" Click="cancelButton_Click" Foreground="Black" RenderTransformOrigin="0.5,0.521" Margin="0,0,-1,387" Cursor="Hand">
-                    <Button.Background>
-                        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                            <GradientStop Color="LightGray" Offset="0.016"/>
-                            <GradientStop Color="#FFDEDEDE" Offset="1"/>
-                        </LinearGradientBrush>
-                    </Button.Background>
-                </Button>
-                <Button x:Name="cancelButton_Copy2" Content="Отчет" FontFamily="Arial Black" FontSize="20" Click="cancelButton_Click" Foreground="Black" RenderTransformOrigin="0.5,0.521" Margin="0,53,0,329" Cursor="Hand">
-                    <Button.Background>
-                        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                            <GradientStop Color="LightGray" Offset="0.016"/>
-                            <GradientStop Color="#FFDEDEDE" Offset="1"/>
-                        </LinearGradientBrush>
-                    </Button.Background>
-                </Button>
             </Grid>
         </Border>
         <ScrollViewer Height="381" Canvas.Top="54" Width="978" HorizontalAlignment="Center" VerticalAlignment="Top">
             <DockPanel LastChildFill="False" Width="953" HorizontalAlignment="Center" VerticalAlignment="Top" Height="501">
-                <WrapPanel x:Name="Panel1" Height="501" VerticalAlignment="Top" Width="486" Orientation="Vertical">
-                    <Label x:Name="label2" Content="Label" Width="486" Height="90"/>
-                    <Label x:Name="label3" Content="Label" Height="77"/>
-                    <Label x:Name="label4" Content="Label" Height="80"/>
-                    <Label x:Name="label5" Content="Label" Height="110"/>
+                <WrapPanel x:Name="Panel1" Height="501" VerticalAlignment="Top" Width="486" Orientation="Vertical" MaxWidth="486">
+                    <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="Новости в стране:" Height="34" Width="486" FontFamily="Aparajita" FontSize="28" TextAlignment="Center" Padding="0,2,0,0" FontWeight="Bold"/>
                 </WrapPanel>
-                <WrapPanel x:Name="Panel2" Height="501" VerticalAlignment="Top" Width="468" Orientation="Vertical"/>
+                <WrapPanel x:Name="Panel2" Height="501" VerticalAlignment="Top" Width="468" Orientation="Vertical" MinWidth="468">
+                    <TextBlock x:Name="textBlock_Copy" TextWrapping="Wrap" Text="Новости в мире:" Height="34" Width="486" FontFamily="Aparajita" FontSize="28" TextAlignment="Center" Padding="0,2,0,0" FontWeight="Bold"/>
+                </WrapPanel>
                 <Label x:Name="label1" Content="Label" Height="501" VerticalAlignment="Top" Width="100"/>
             </DockPanel>
         </ScrollViewer>
         <Canvas Height="47" Width="983" Background="#FFFAFAFA"/>
         <Label x:Name="label" Content="Новости" Height="53" Width="274" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontFamily="Times New Roman" FontSize="48" Canvas.Left="349" Padding="0,3,0,0" Canvas.Top="-10"/>
         <Label x:Name="label_Copy" Content="ход №:" Height="53" Width="113" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontFamily="Times New Roman" FontSize="36" Canvas.Left="772" Padding="0,3,0,0" Canvas.Top="-6"/>
-        <Label x:Name="label_Copy1" Content="0" Height="53" Width="91" VerticalContentAlignment="Center" FontFamily="Times New Roman" FontSize="36" Canvas.Left="887" Padding="0,3,0,0" Canvas.Top="-4"/>
+        <Label x:Name="stepLabel" Content="0" Height="53" Width="91" VerticalContentAlignment="Center" FontFamily="Times New Roman" FontSize="36" Canvas.Left="887" Padding="0,3,0,0" Canvas.Top="-4"/>
     </Canvas>
 </local:AbstractDialog>

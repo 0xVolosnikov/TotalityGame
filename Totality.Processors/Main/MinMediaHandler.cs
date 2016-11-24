@@ -30,6 +30,7 @@ namespace Totality.Handlers.Main
             massMedia = (Dictionary<string, short>)_dataLayer.GetProperty(order.CountryName, "MassMedia");
             massMedia[order.TargetCountryName] = order.Value;
             _dataLayer.SetProperty(order.CountryName, "MassMedia", massMedia);
+            _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Изменено направление пропаганды в стране " + order.TargetCountryName });
             return true;
         }
     }

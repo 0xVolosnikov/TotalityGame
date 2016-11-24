@@ -11,13 +11,13 @@ namespace Totality.Model
     public class News
     {
         [DataMember]
-        public string newsCode;
+        public bool IsOur;
         [DataMember]
-        public List<string> args = new List<string>();
+        public string text;
         
-        public News(string code)
+        public News(bool isOur)
         {
-            newsCode = code;
+            IsOur = isOur;
         }
     }
 }

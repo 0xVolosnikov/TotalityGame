@@ -28,6 +28,7 @@ namespace Totality.Client.ClientComponents.Dialogs.Security
         public delegate void ReceiveOrder(object sender, Order order, string text, long price);
         ReceiveOrder _receiveOrder;
         Country _ourCountry;
+        List<string> _countries;
         TransmitterServiceClient _client;
         List<System.Windows.Controls.Button> buttons = new List<System.Windows.Controls.Button>();
 
@@ -77,51 +78,62 @@ namespace Totality.Client.ClientComponents.Dialogs.Security
                         {
                             _ourCountry = CountryData;
                             SecretPanels.SecretAbstractPanel.CountryData = _client.GetCountryData((string)CountriesBox.SelectedValue);
-                            AbstractDialog.CountryData = SecretPanels.SecretAbstractPanel.CountryData;
                             SecretPanels.SecretAbstractPanel panel = null;
 
                             switch (min)
                             {
                                 case 0:
+                                    CountryData = SecretPanels.SecretAbstractPanel.CountryData;
                                     panel = new SecretPanels.SecretIndustryPanel(getOrder);
                                     ((SecretPanels.SecretIndustryPanel)panel).Update();
                                     break;
                                 case 1:
+                                    _countries = Countries.ToList();
+                                    Countries.Add(CountryData.Name);
+                                    Countries.Remove((string)CountriesBox.SelectedValue);
+                                    CountryData = SecretPanels.SecretAbstractPanel.CountryData;
                                     panel = new SecretPanels.SecretFinancePanel(getOrder);
                                     ((SecretPanels.SecretFinancePanel)panel).Update();
                                     break;
                                 case 2:
+                                    CountryData = SecretPanels.SecretAbstractPanel.CountryData;
                                     panel = new SecretPanels.SecretMilitaryPanel(getOrder);
                                     ((SecretPanels.SecretMilitaryPanel)panel).Update();
                                     break;
                                 case 3:
+                                    CountryData = SecretPanels.SecretAbstractPanel.CountryData;
                                     panel = new SecretPanels.SecretForeignPanel(getOrder);
                                     ((SecretPanels.SecretForeignPanel)panel).Update();
                                     break;
                                 case 4:
+                                    CountryData = SecretPanels.SecretAbstractPanel.CountryData;
                                     panel = new SecretPanels.SecretMediaPanel(getOrder);
                                     ((SecretPanels.SecretMediaPanel)panel).Update();
                                     break;
                                 case 5:
+                                    CountryData = SecretPanels.SecretAbstractPanel.CountryData;
                                     panel = new SecretPanels.SecretInnerPanel(getOrder);
                                     ((SecretPanels.SecretInnerPanel)panel).Update();
                                     break;
                                 case 6:
+                                    CountryData = SecretPanels.SecretAbstractPanel.CountryData;
                                     panel = new SecretPanels.SecretSecurityPanel(getOrder);
                                     ((SecretPanels.SecretSecurityPanel)panel).Update();
                                     break;
                                 case 7:
+                                    CountryData = SecretPanels.SecretAbstractPanel.CountryData;
                                     panel = new SecretPanels.SecretSciencePanel(getOrder);
                                     ((SecretPanels.SecretSciencePanel)panel).Update();
                                     break;
                                 case 8:
+                                    CountryData = SecretPanels.SecretAbstractPanel.CountryData;
                                     panel = new SecretPanels.SecretPremierPanel(getOrder);
                                     ((SecretPanels.SecretPremierPanel)panel).Update();
                                     break;
                             }
                             canvas.Children.Add(panel);
                             Canvas.SetLeft(panel, (Width - panel.Width)/2);
-                            Canvas.SetTop(panel, (Height - panel.Height)/2 - 50 );
+                            Canvas.SetTop(panel, (Height - panel.Height)/2 - 35 );
                         };
                     }
                     else
@@ -165,7 +177,12 @@ namespace Totality.Client.ClientComponents.Dialogs.Security
         private void getOrder(object sender, Order order)
         {
             if (_ourCountry != null)
+            {
                 AbstractDialog.CountryData = _ourCountry;
+                if (_countries != null)
+                    AbstractDialog.Countries = _countries;
+            }
+
 
             canvas.Children.Remove((UIElement)sender);
             if (order != null)
@@ -180,12 +197,13 @@ namespace Totality.Client.ClientComponents.Dialogs.Security
                     var newOrder = new Order(CountryData.Name);
                     newOrder.TargetCountryName = order.CountryName;
                     newOrder.Ministery = (short)Mins.Security;
-                    newOrder.OrderNum = (short)Orders.OrderToAgent;
+                    newOrder.OrderNum = order.OrderNum;
                     newOrder.TargetCountryName2 = order.TargetCountryName;
                     newOrder.TargetMinistery = order.Ministery;
                     newOrder.Count = order.Count;
-                    newOrder.Value = order.OrderNum;
-                    _receiveOrder(this, newOrder, "Приказ агенту: " + (string)CountriesBox.SelectedValue + ", " + Ministers[order.TargetMinistery], 0);
+                    newOrder.Value = order.Value;
+                    newOrder.Value2 = order.Value2;
+                    _receiveOrder(this, newOrder, "Приказ агенту: " + (string)CountriesBox.SelectedValue + ", " + Ministers[order.Ministery], 0);
                 }
             }
 

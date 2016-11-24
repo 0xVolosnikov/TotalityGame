@@ -54,7 +54,7 @@ namespace Totality.Client.GUI
                 _servCallbackHandler.CountryUpdated += _servCallbackHandler_CountryUpdated;
                 _servCallbackHandler.NukesInitialized += _servCallbackHandler_NukesInitialized;
                 _servCallbackHandler.NukesUpdated += _servCallbackHandler_NukesUpdated;
-                //_servCallbackHandler.
+                _servCallbackHandler.NewsReceived += _servCallbackHandler_NewsReceived;
 
                 InitializeComponent();
                 setAnims();
@@ -125,6 +125,11 @@ namespace Totality.Client.GUI
             {
                 System.Console.WriteLine(e.Message);
             }
+        }
+
+        private void _servCallbackHandler_NewsReceived(News[] news)
+        {
+            _mediaPanel.ReceiveNews(news);
         }
 
         private void _header_StatButtonClicked()

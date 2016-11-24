@@ -19,6 +19,7 @@
       <xs:element minOccurs="0" name="TargetId" type="ser:guid" />
       <xs:element minOccurs="0" name="TargetMinistery" type="xs:short" />
       <xs:element minOccurs="0" name="Value" type="xs:short" />
+      <xs:element minOccurs="0" name="Value2" type="xs:short" />
       <xs:element minOccurs="0" name="isSecret" type="xs:boolean" />
     </xs:sequence>
   </xs:complexType>
@@ -130,8 +131,8 @@
   <xs:element name="ArrayOfNews" nillable="true" type="tns:ArrayOfNews" />
   <xs:complexType name="News">
     <xs:sequence>
-      <xs:element xmlns:q8="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="args" nillable="true" type="q8:ArrayOfstring" />
-      <xs:element minOccurs="0" name="newsCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsOur" type="xs:boolean" />
+      <xs:element minOccurs="0" name="text" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="News" nillable="true" type="tns:News" />

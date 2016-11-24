@@ -26,14 +26,20 @@ namespace Totality.Client.ClientComponents.Panels
     public partial class MediaPanel : AbstractPanel, InPanel
     {
         Dialog currentDialog;
+        List<News> _news = new List<News>();
 
         public MediaPanel()
         {
             InitializeComponent();
             PropagandaButton.click += () => createDialog<PropagandaDialog>(new PropagandaDialog(receiveOrder));
-            NewsButton.click += () => createBigDialog<NewsDialog>(new NewsDialog(receiveOrder));
+            NewsButton.click += () => createBigDialog<NewsDialog>(new NewsDialog(receiveOrder, _news));
         }
 
+        public void ReceiveNews (News[] news)
+        {
+            _news.Clear();
+            _news.AddRange(news);
+        }
 
         private void createDialog<T>(Dialog dialog) where T : UIElement
         {

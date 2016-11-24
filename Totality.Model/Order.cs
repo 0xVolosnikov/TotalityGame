@@ -21,6 +21,8 @@ namespace Totality.Model
         [DataMember]
         public short Value { get; set; }
         [DataMember]
+        public short Value2 { get; set; }
+        [DataMember]
         public short OrderNum { get; set; }
         [DataMember]
         public short Ministery { get; set; }

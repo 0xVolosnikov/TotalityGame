@@ -20,6 +20,9 @@ namespace Totality.Client.GUI
         public delegate void UpdateNukes(NukeRocket[] rockets);
         public event UpdateNukes NukesUpdated;
 
+        public delegate void NewsReceivedDelegate(News[] news);
+        public event NewsReceivedDelegate NewsReceived;
+
         public CallbackHandler()
         {
         }
@@ -41,7 +44,7 @@ namespace Totality.Client.GUI
 
         public void SendNews(News[] newsList)
         {
-            //throw new NotImplementedException();
+            NewsReceived.Invoke(newsList);
         }
 
         public void UpdateClient(Country country)

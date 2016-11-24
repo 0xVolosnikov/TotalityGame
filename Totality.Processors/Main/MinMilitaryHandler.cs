@@ -43,12 +43,16 @@ namespace Totality.Handlers.Main
         private bool Mobilize(Order order)
         {
             _dataLayer.SetProperty(order.CountryName, "IsMobilized", true);
+
+            _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Объявлена всеобщая мобилизация." });
             return true;
         }
 
         private bool Demobilize(Order order)
         {
             _dataLayer.SetProperty(order.CountryName, "IsMobilized", false);
+
+            _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Всеобщая мобилизация прекращена." });
             return true;
         }
 
@@ -68,6 +72,8 @@ namespace Totality.Handlers.Main
             var uraniumProduction = (double)_dataLayer.GetProperty(order.CountryName, "ProdUranus");
             uraniumProduction += Constants.ProductionUpgrade;
             _dataLayer.SetProperty(order.CountryName, "ProdUranus", uraniumProduction);
+
+            _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Повышено производство оружейного урана." });
             return true;
         }
 
@@ -91,6 +97,8 @@ namespace Totality.Handlers.Main
             var nukes = (int)_dataLayer.GetProperty(order.CountryName, "NukesCount");
             nukes += (int)order.Count;
             _dataLayer.SetProperty(order.CountryName, "NukesCount", nukes);
+
+            _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Произведены ядерные ракеты, в количестве " + order.Count + "." });
             return true;
         }
 
@@ -111,6 +119,8 @@ namespace Totality.Handlers.Main
             var missiles = (int)_dataLayer.GetProperty(order.CountryName, "MissilesCount");
             missiles += (int)order.Count;
             _dataLayer.SetProperty(order.CountryName, "MissilesCount", missiles);
+
+            _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Произведены системы ПРО, в количестве " + order.Count+ "." });
             return true;
         }
 
@@ -126,6 +136,7 @@ namespace Totality.Handlers.Main
 
             _nukeHandler.AddRocket(new NukeRocket(order.CountryName, order.TargetCountryName, (int)order.Count));
 
+            _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Запущены ядерные ракеты по стране " + order.TargetCountryName + "." });
             return true;
         }
 
@@ -139,6 +150,8 @@ namespace Totality.Handlers.Main
             targetWarList.Add(order.CountryName);
             _dataLayer.SetProperty(order.TargetCountryName, "WarList", targetWarList);
 
+            _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Объявлена война стране " + order.TargetCountryName  + "!"});
+            _newsHandler.AddNews(order.TargetCountryName, new Model.News(true) { text = "Стране " + order.CountryName + " объявила нам войну!" });
             return true;
         }
 

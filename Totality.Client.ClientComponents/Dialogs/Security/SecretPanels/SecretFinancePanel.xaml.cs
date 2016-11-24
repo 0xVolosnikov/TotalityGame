@@ -25,7 +25,7 @@ namespace Totality.Client.ClientComponents.Dialogs.SecretPanels
     /// </summary>
     public partial class SecretFinancePanel : SecretAbstractPanel, InPanel
     {
-        private Dialog _currentDialog;
+        private AbstractDialog _currentDialog;
         private CurrencyDialog _currencyDialog;
         public delegate void ReceiveOrder(object sender, Order order);
         ReceiveOrder _receiveOrder;
@@ -33,24 +33,23 @@ namespace Totality.Client.ClientComponents.Dialogs.SecretPanels
         public SecretFinancePanel(ReceiveOrder receiveOrder)
         {
             InitializeComponent();
-            _currencyDialog = new CurrencyDialog(SReceiveOrder);
-            _currencyDialog.Visibility = Visibility.Hidden;
-            canvas1.Children.Add(_currencyDialog);
+
+
             _receiveOrder = receiveOrder;
 
             CurrencyButton.click += () => createCurrencyDialog<CurrencyDialog>();
-            InterventionButton.click += () => createDialog<InterventionDialog>(new InterventionDialog(SReceiveOrder));
-            TaxesButton.click += () => createDialog<TaxesDialog>(new TaxesDialog(SReceiveOrder));
+            InterventionButton.click += () => createDialog(new InterventionDialog(SReceiveOrder));
+            TaxesButton.click += () => createDialog(new TaxesDialog(SReceiveOrder));
         }
 
-        private void createDialog<T>(Dialog dialog) where T : UIElement
-        {
+        private void createDialog(AbstractDialog dialog)
+        { 
             if (_currentDialog == null)
             {
                 _currentDialog = dialog;
-                canvas1.Children.Add((T)_currentDialog);
-                Canvas.SetLeft((T)_currentDialog, 295);
-                Canvas.SetTop((T)_currentDialog, 68);
+                canvas1.Children.Add(_currentDialog);
+                Canvas.SetLeft(_currentDialog, (Width - dialog.Width)/2);
+                Canvas.SetTop(_currentDialog, (Height - dialog.Height)/2 );
             }
         }
 
@@ -58,31 +57,27 @@ namespace Totality.Client.ClientComponents.Dialogs.SecretPanels
         {
             if (_currentDialog == null)
             {
-                _currencyDialog.Visibility = Visibility.Visible;
+                _currencyDialog = new CurrencyDialog(SReceiveOrder);
+                canvas1.Children.Add(_currencyDialog);
+                Canvas.SetLeft(_currencyDialog, (Width - _currencyDialog.Width) / 2);
+                Canvas.SetTop(_currencyDialog, (Height - _currencyDialog.Height) / 2);
+                _currencyDialog.Update();
             }
         }
 
         public void SReceiveOrder(object sender, Order order, string text, long price)
         {
+                order.Value = order.OrderNum;
+                order.OrderNum = (short)2;
+
             _receiveOrder(this, order);
-            if (order != null)
-            {
-                if (order.OrderNum != (short)CurrencyDialog.Orders.PurchaseCurrency && order.OrderNum != (short)CurrencyDialog.Orders.SellCurrency)
-                    canvas1.Children.Remove((UIElement)sender);
-                else
-                    _currencyDialog.Visibility = Visibility.Hidden;
-                _currentDialog = null;
-            }
-            else
-            {
+
                 canvas1.Children.Remove((UIElement)sender);
                 _currentDialog = null;
-            }
         }
 
         public void Update()
         {
-            _currencyDialog.Update();
 
             if (CountryData.MinsBlocks[(short)Mins.Finance] > 0)
             {

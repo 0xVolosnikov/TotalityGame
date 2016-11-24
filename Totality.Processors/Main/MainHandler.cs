@@ -115,6 +115,7 @@ namespace Totality.Handlers.Main
 
             DipHandler.SendContractsToAll();
 
+            _newsHandler.Countries = _ordersBase.Keys.ToList();
             _newsHandler.SendNews();
         }
 

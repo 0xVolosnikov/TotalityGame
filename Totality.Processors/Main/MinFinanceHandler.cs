@@ -37,6 +37,7 @@ namespace Totality.Handlers.Main
                 return false;
 
             _dataLayer.SetProperty(order.CountryName, "TaxesLvl", order.Value);
+            _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Изменен уровень налогов: " + order.Value + "%" });
             return true;
         }
 
@@ -70,6 +71,8 @@ namespace Totality.Handlers.Main
                 ourAccounts[order.TargetCountryName] += order.Count;
             _dataLayer.SetProperty(order.CountryName, "CurrencyAccounts", ourAccounts);
 
+            _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Закуплена валюта страны " + order.TargetCountryName  + " в размере " + String.Format("{0:0,0}",order.Count) + "."});
+
             return true;
         }
 
@@ -101,6 +104,7 @@ namespace Totality.Handlers.Main
             theirQuontityOnStock += order.Count;
             _dataLayer.SetCurrencyOnStock(order.TargetCountryName, theirQuontityOnStock);
 
+            _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Продана валюта страны " + order.TargetCountryName + " в размере " + String.Format("{0:0,0}", order.Count) + "." });
             return true;
         }
 
@@ -117,6 +121,8 @@ namespace Totality.Handlers.Main
             var ourCurrencyOnStock = _dataLayer.GetCurrencyOnStock(order.CountryName);
             ourCurrencyOnStock += order.Count;
             _dataLayer.SetCurrencyOnStock(order.CountryName, ourCurrencyOnStock);
+
+            _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Произведено вливание денег на рынок валюты." });
             return true;
         }
     }

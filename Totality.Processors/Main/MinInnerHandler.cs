@@ -39,21 +39,27 @@ namespace Totality.Handlers.Main
             if (_randomizer.NextDouble() * 100 <= mood)
             {
                 _dataLayer.SetProperty(order.CountryName, "IsRiot", false);
+                _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Бунт успешно подавлен!" });
                 return true;
             }
             else
+            {
+                _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Попытка подавления бунта провалилась." });
                 return false;
+            }
         }
 
         private bool Repressions(Order order)
         {
             _dataLayer.SetProperty(order.CountryName, "IsRepressed", true);
+            _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Начаты репрессии." });
             return true;
         }
 
         private bool EndRepressions(Order order)
         {
             _dataLayer.SetProperty(order.CountryName, "IsRepressed", false);
+            _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Прекращены репрессии." });
             return true;
         }
 
@@ -73,6 +79,7 @@ namespace Totality.Handlers.Main
             var lvl = (int)_dataLayer.GetProperty(order.CountryName, "InnerLvl") + 1;
             _dataLayer.SetProperty(order.CountryName, "InnerLvl", lvl);
 
+            _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Повышена квалификация МВД." });
             return true;
         }
     }

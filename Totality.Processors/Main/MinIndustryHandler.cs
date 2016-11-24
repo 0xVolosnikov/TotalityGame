@@ -51,6 +51,8 @@ namespace Totality.Handlers.Main
                 res2 = (double)_dataLayer.GetProperty(order.CountryName, "FinalOil");
                 if (res1 < industryPower * Constants.IndustryUpgrade* Constants.IndustrySteelCoeff || res2 < industryPower * Constants.IndustryUpgrade* Constants.IndustryOilCoeff)
                     return false;
+
+                _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Повышена мощь Тяжелой Промышленности!" });
             }
             else
             {
@@ -58,6 +60,8 @@ namespace Totality.Handlers.Main
                 res2 = (double)_dataLayer.GetProperty(order.CountryName, "FinalAgricultural");
                 if (res1 < industryPower * Constants.IndustryUpgrade* Constants.IndustryWoodCoeff || res2 < industryPower* Constants.IndustryUpgrade * Constants.IndustryAgroCoeff)
                     return false;
+
+                _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Повышена мощь Легкой Промышленности!" });
             }
 
 
@@ -88,6 +92,23 @@ namespace Totality.Handlers.Main
             var resProduction = (double)_dataLayer.GetProperty(order.CountryName, "Res" + res);
             resProduction += Constants.ProductionUpgrade;
             _dataLayer.SetProperty(order.CountryName, "Res" + res, resProduction);
+
+            switch(res)
+            {
+                case "Oil":
+                    _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Повышена добыча нефти!" });
+                    break;
+                case "Steel":
+                    _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Повышена выплавка стали!" });
+                    break;
+                case "Wood":
+                    _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Повышено производство древесины!" });
+                    break;
+                case "Agricultural":
+                    _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Повышено сельскохозяйственное производство!" });
+                    break;
+            }
+
             return true;
         }
     }
