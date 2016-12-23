@@ -123,7 +123,7 @@ namespace Totality.Client.ClientComponents.Dialogs.Finance
         {
             if (MoneyBox.SelectedIndex != -1)
             {
-                var dial = new CurrencyCountDialog(getOrderFromChildren, CountryData.CurrencyRatios[accountNames[MoneyBox.SelectedIndex]], CurrencyCountDialog.Orders.PurchaseCurrency, 0);
+                var dial = new CurrencyCountDialog(getOrderFromChildren, CountryData.CurrencyRatios[accountNames[MoneyBox.SelectedIndex]], CurrencyCountDialog.Orders.PurchaseCurrency, 0, accountNames[MoneyBox.SelectedIndex]);
                 canvas.Children.Add(dial);
                 Canvas.SetLeft(dial, 295);
                 Canvas.SetTop(dial, 68);
@@ -134,7 +134,7 @@ namespace Totality.Client.ClientComponents.Dialogs.Finance
         {
             if (MoneyBox.SelectedIndex != -1)
             {
-                var dial = new CurrencyCountDialog(getOrderFromChildren, CountryData.CurrencyRatios[accountNames[MoneyBox.SelectedIndex]], CurrencyCountDialog.Orders.SellCurrency, (int)accounts[accountNames[MoneyBox.SelectedIndex]]);
+                var dial = new CurrencyCountDialog(getOrderFromChildren, CountryData.CurrencyRatios[accountNames[MoneyBox.SelectedIndex]], CurrencyCountDialog.Orders.SellCurrency, (int)accounts[accountNames[MoneyBox.SelectedIndex]], accountNames[MoneyBox.SelectedIndex]);
                 canvas.Children.Add(dial);
                 Canvas.SetLeft(dial, 295);
                 Canvas.SetTop(dial, 68);

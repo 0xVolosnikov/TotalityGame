@@ -37,7 +37,7 @@ namespace Totality.Client.ClientComponents.Dialogs.Inner
             Order order = new Order(CountryData.Name);
             order.OrderNum = (short)Orders.LvlUp;
             order.Ministery = (short)Mins.Inner;
-            _receiveOrder(this, order, "Повысить квалификацию МВД", 0);
+            _receiveOrder(this, order, "Повысить квалификацию МВД", CountryData.InnerLvlUpCost);
 
         }
 

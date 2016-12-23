@@ -30,6 +30,6 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <xctk:IntegerUpDown x:Name="integerUpDown" Canvas.Left="216" Canvas.Top="145" Height="44" Width="174" FontSize="36" FontFamily="Arial Black" FontWeight="Bold" ClipValueToMinMax="True" DefaultValue="1" Minimum="0" Maximum="100" Value="1" Text="" HorizontalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center"/>
+        <xctk:IntegerUpDown x:Name="integerUpDown" Canvas.Left="216" Canvas.Top="145" Height="44" Width="174" FontSize="36" FontFamily="Arial Black" FontWeight="Bold" ClipValueToMinMax="True" DefaultValue="0" Minimum="0" Maximum="100" Value="0" Text="" HorizontalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center"/>
     </Canvas>
 </local:AbstractDialog>

@@ -167,5 +167,10 @@ namespace Totality.DataLayer
                 return false;
             }
         }
+
+        public Dictionary<string, long> GetStock()
+        {
+            return _financialStock;
+        }
     }
 }

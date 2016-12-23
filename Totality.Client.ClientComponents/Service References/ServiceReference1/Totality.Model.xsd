@@ -30,6 +30,7 @@
       <xs:element minOccurs="0" name="CounterSpyLvl" type="xs:int" />
       <xs:element minOccurs="0" name="CounterSpyLvlUpCost" type="xs:long" />
       <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="CurrencyAccounts" nillable="true" type="q1:ArrayOfKeyValueOfstringlong" />
+      <xs:element minOccurs="0" name="CurrencyAlliance" nillable="true" type="xs:string" />
       <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="CurrencyRatios" nillable="true" type="q2:ArrayOfKeyValueOfstringdouble" />
       <xs:element minOccurs="0" name="Ecology" type="xs:double" />
       <xs:element minOccurs="0" name="ExtractExperience" type="xs:int" />
@@ -52,6 +53,7 @@
       <xs:element minOccurs="0" name="IntelligenceLvl" type="xs:int" />
       <xs:element minOccurs="0" name="IntelligenceLvlUpCost" type="xs:long" />
       <xs:element minOccurs="0" name="IsAlerted" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsBoss" type="xs:boolean" />
       <xs:element minOccurs="0" name="IsMobilized" type="xs:boolean" />
       <xs:element minOccurs="0" name="IsRepressed" type="xs:boolean" />
       <xs:element minOccurs="0" name="IsRiot" type="xs:boolean" />
@@ -59,10 +61,6 @@
       <xs:element minOccurs="0" name="LightScLvlUpCost" type="xs:long" />
       <xs:element minOccurs="0" name="LightScLvlUpExp" type="xs:int" />
       <xs:element minOccurs="0" name="LightScienceLvl" type="xs:int" />
-      <xs:element minOccurs="0" name="LvlHeavyIndustry" type="xs:int" />
-      <xs:element minOccurs="0" name="LvlLightIndustry" type="xs:int" />
-      <xs:element minOccurs="0" name="LvlMilitary" type="xs:int" />
-      <xs:element minOccurs="0" name="LvlResIndustry" type="xs:int" />
       <xs:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="MassMedia" nillable="true" type="q3:ArrayOfKeyValueOfstringshort" />
       <xs:element minOccurs="0" name="MilitaryExperience" type="xs:int" />
       <xs:element minOccurs="0" name="MilitaryPower" type="xs:double" />
@@ -115,6 +113,7 @@
   <xs:element name="ArrayOfNukeRocket" nillable="true" type="tns:ArrayOfNukeRocket" />
   <xs:complexType name="NukeRocket">
     <xs:sequence>
+      <xs:element minOccurs="0" name="AttackerLvl" type="xs:int" />
       <xs:element minOccurs="0" name="Count" type="xs:int" />
       <xs:element minOccurs="0" name="From" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Id" type="ser:guid" />

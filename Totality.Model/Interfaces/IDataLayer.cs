@@ -26,6 +26,6 @@ namespace Totality.Model.Interfaces
         List<DipContract> GetContractList();
         void AddContract(DipContract contract);
         void BreakContract(Guid id);
-
+        Dictionary<string, long> GetStock();
     }
 }

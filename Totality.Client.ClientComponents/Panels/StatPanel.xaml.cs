@@ -62,14 +62,17 @@ namespace Totality.Client.ClientComponents.Panels
         public void Update()
         {
             leftList.Clear();
-            leftList.Add(new Record("Уровень силы власти", CountryData.PremierLvl.ToString()));
             leftList.Add(new Record("Уровень слежки", CountryData.ShadowingLvl.ToString()));
             leftList.Add(new Record("Уровень контрразведки", CountryData.CounterSpyLvl.ToString()));
-            leftList.Add(new Record("Уровень разведки", CountryData.IntelligenceLvl.ToString()));
             leftList.Add(new Record("Уровень МВД", CountryData.InnerLvl.ToString()));
 
             rightList.Clear();
-            rightList.Add(new Record("Стоимость повышения легкой промышленности", CountryData.LightScLvlUpCost.ToString()));
+            rightList.Add(new Record("Прибыль от промышленности", String.Format("{0:0,0}", (long)(CountryData.FinalLightIndustry * Constants.LightPowerProfit * (CountryData.TaxesLvl / 100.0)))));
+            rightList.Add(new Record("Стоимость повышения промышленности", String.Format("{0:0,0}", CountryData.ProductionUpgradeCost)));
+            rightList.Add(new Record("Стоимость повышения технологий добывающей промышленности", String.Format("{0:0,0}", CountryData.ExtractScLvlUpCost)));
+            rightList.Add(new Record("Стоимость повышения технологий тяжелой промышленности", String.Format("{0:0,0}", CountryData.HeavyScLvlUpCost)));
+            rightList.Add(new Record("Стоимость повышения технологий легкой промышленности", String.Format("{0:0,0}", CountryData.LightScLvlUpCost)));
+            rightList.Add(new Record("Стоимость повышения технологий военной промышленности", String.Format("{0:0,0}", CountryData.MilitaryScLvlUpCost)));
         }
 
         private void button_Click(object sender, RoutedEventArgs e)

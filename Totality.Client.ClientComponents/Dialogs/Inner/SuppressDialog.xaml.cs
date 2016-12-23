@@ -37,7 +37,7 @@ namespace Totality.Client.ClientComponents.Dialogs.Inner
             Order order = new Order(CountryData.Name);
             order.OrderNum = (short)Orders.SuppressRiot;
             order.Ministery = (short)Mins.Inner;
-            _receiveOrder(this, order, "Подавить бунт", 0);
+            _receiveOrder(this, order, "Подавить бунт", 500000);
         }
 
         private void cancelButton_Click(object sender, RoutedEventArgs e)

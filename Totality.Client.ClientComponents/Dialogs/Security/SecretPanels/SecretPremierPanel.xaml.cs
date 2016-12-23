@@ -35,7 +35,6 @@ namespace Totality.Client.ClientComponents.Dialogs.SecretPanels
             InitializeComponent();
             ReorganizeButton.click += () => createDialog<ReorganizeDialog>(new ReorganizeDialog(SReceiveOrder));
             AlertButton.click += () => createDialog<AlertDialog>(new AlertDialog(SReceiveOrder));
-            LvlupButton.click += () => createDialog<LvlupDialog>(new LvlupDialog(SReceiveOrder));
         }
 
         private void createDialog<T>(Dialog dialog) where T : UIElement
@@ -63,7 +62,6 @@ namespace Totality.Client.ClientComponents.Dialogs.SecretPanels
                 isBlocked = true;
                 deActivateButton(ReorganizeButton, "/Totality.Client.ClientComponents;component/Images/Premier/PremierReorganizeButtonDeactivated.png");
                 deActivateButton(AlertButton, "/Totality.Client.ClientComponents;component/Images/Premier/PremierAlertButtonDeactivated.png");
-                deActivateButton(LvlupButton, "/Totality.Client.ClientComponents;component/Images/Premier/PremierLvlupButtonDeactivated.png");
 
             }
             else if (isBlocked && CountryData.MinsBlocks[(short)Mins.Premier] == 0)
@@ -71,7 +69,6 @@ namespace Totality.Client.ClientComponents.Dialogs.SecretPanels
                 isBlocked = false;
                 activateButton(ReorganizeButton, "/Totality.Client.ClientComponents;component/Images/Premier/PremierReorganizeButton.png");
                 activateButton(AlertButton, "/Totality.Client.ClientComponents;component/Images/Premier/PremierAlertButton.png");
-                activateButton(LvlupButton, "/Totality.Client.ClientComponents;component/Images/Premier/PremierLvlupButton.png");
             }
 
             if (CountryData.IsAlerted)

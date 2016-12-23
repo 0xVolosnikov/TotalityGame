@@ -33,6 +33,15 @@ namespace Totality.Handlers.Main
         private bool SuppressRiot(Order order)
         {
              Random _randomizer = new Random((DateTime.Today - new DateTime(1995, 1, 1)).Milliseconds);
+            var c = _dataLayer.GetCountry(order.CountryName);
+            if (c.Money < 500000)
+            {
+                _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Не хватает денег на попытку подавления бунта." });
+                return false;
+            }
+            c.Money -= 500000;
+            _dataLayer.UpdateCountry(c);
+
 
             var mood = (double)_dataLayer.GetProperty(order.CountryName, "Mood");
 

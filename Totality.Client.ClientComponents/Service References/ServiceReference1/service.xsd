@@ -3,6 +3,7 @@
   <xs:import namespace="http://schemas.datacontract.org/2004/07/Totality.Model" />
   <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
   <xs:import namespace="http://schemas.datacontract.org/2004/07/Totality.Model.Diplomatical" />
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <xs:element name="Register">
     <xs:complexType>
       <xs:sequence>
@@ -21,6 +22,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Totality.Model" minOccurs="0" name="orders" nillable="true" type="q1:ArrayOfOrder" />
+        <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -74,6 +76,30 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetCurrencyStock">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCurrencyStockResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetCurrencyStockResult" nillable="true" type="q5:ArrayOfKeyValueOfstringlong" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCurrencyDemands">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCurrencyDemandsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetCurrencyDemandsResult" nillable="true" type="q6:ArrayOfKeyValueOfstringlong" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="InitializeNukeDialog">
     <xs:complexType>
       <xs:sequence />
@@ -82,35 +108,35 @@
   <xs:element name="UpdateNukeDialog">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Totality.Model" minOccurs="0" name="rockets" nillable="true" type="q5:ArrayOfNukeRocket" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Totality.Model" minOccurs="0" name="rockets" nillable="true" type="q7:ArrayOfNukeRocket" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SendNews">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Totality.Model" minOccurs="0" name="newsList" nillable="true" type="q6:ArrayOfNews" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Totality.Model" minOccurs="0" name="newsList" nillable="true" type="q8:ArrayOfNews" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateClient">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Totality.Model" minOccurs="0" name="country" nillable="true" type="q7:Country" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Totality.Model" minOccurs="0" name="country" nillable="true" type="q9:Country" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SendDip">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Totality.Model.Diplomatical" minOccurs="0" name="msg" nillable="true" type="q8:DipMsg" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Totality.Model.Diplomatical" minOccurs="0" name="msg" nillable="true" type="q10:DipMsg" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SendContracts">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Totality.Model.Diplomatical" minOccurs="0" name="contracts" nillable="true" type="q9:ArrayOfDipContract" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Totality.Model.Diplomatical" minOccurs="0" name="contracts" nillable="true" type="q11:ArrayOfDipContract" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -32,7 +32,7 @@ namespace Totality.Client.ClientComponents
 
         public void UpdateMoney (long money)
         {
-            this.LMoney.Content = money.ToString();
+            this.LMoney.Content = String.Format("{0:0,0}", money);
         }
 
         public void UpdateNukes(int count)

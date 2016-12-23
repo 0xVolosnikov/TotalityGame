@@ -45,6 +45,7 @@ namespace Totality.Handlers.Main
             _dataLayer.SetProperty(order.CountryName, "IsMobilized", true);
 
             _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Объявлена всеобщая мобилизация." });
+            _newsHandler.AddBroadNews(new Model.News(false) { text = "Страна " + order.CountryName + " начала активную мобилизацию!" });
             return true;
         }
 
@@ -70,7 +71,7 @@ namespace Totality.Handlers.Main
             _dataLayer.SetProperty(order.CountryName, "ProductionUpgradeCost", upgradeCost);
 
             var uraniumProduction = (double)_dataLayer.GetProperty(order.CountryName, "ProdUranus");
-            uraniumProduction += Constants.ProductionUpgrade;
+            uraniumProduction += Constants.ProductionUpgrade/5;
             _dataLayer.SetProperty(order.CountryName, "ProdUranus", uraniumProduction);
 
             _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Повышено производство оружейного урана." });
@@ -127,14 +128,15 @@ namespace Totality.Handlers.Main
         private bool NukeStrike(Order order)
         {
             var nukes = (int)_dataLayer.GetProperty(order.CountryName, "NukesCount");
+           
 
-            if (nukes < order.Count)
+            if (nukes < order.Count || order.Count == 0)
                 return false;
 
             nukes -= (int)order.Count;
             _dataLayer.SetProperty(order.CountryName, "NukesCount", nukes);
 
-            _nukeHandler.AddRocket(new NukeRocket(order.CountryName, order.TargetCountryName, (int)order.Count));
+            _nukeHandler.AddRocket(new NukeRocket(order.CountryName, order.TargetCountryName, (int)order.Count) { AttackerLvl = (int)_dataLayer.GetProperty(order.CountryName, "MilitaryScienceLvl") });
 
             _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Запущены ядерные ракеты по стране " + order.TargetCountryName + "." });
             return true;
@@ -149,9 +151,10 @@ namespace Totality.Handlers.Main
             var targetWarList = (List<string>)_dataLayer.GetProperty(order.TargetCountryName, "WarList");
             targetWarList.Add(order.CountryName);
             _dataLayer.SetProperty(order.TargetCountryName, "WarList", targetWarList);
-
+            _log.Trace("Начата война между " + order.CountryName + " и " + order.TargetCountryName);
             _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Объявлена война стране " + order.TargetCountryName  + "!"});
-            _newsHandler.AddNews(order.TargetCountryName, new Model.News(true) { text = "Стране " + order.CountryName + " объявила нам войну!" });
+            _newsHandler.AddNews(order.TargetCountryName, new Model.News(true) { text = "Страна " + order.CountryName + " объявила нам войну!" });
+            _newsHandler.AddBroadNews(new Model.News(false) { text = "Страна " + order.CountryName + " объявила войну стране " + order.TargetCountryName + "!" });
             return true;
         }
 

@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using Totality.Client.ClientComponents.ServiceReference1;
 using Totality.CommonClasses;
 using Totality.Model;
+using static Totality.Model.Country;
 
 namespace Totality.Client.ClientComponents.Dialogs.Security
 {
@@ -190,7 +191,16 @@ namespace Totality.Client.ClientComponents.Dialogs.Security
                 if (order.OrderNum == (short)Orders.AddAgents)
                 {
                     order.TargetCountryName = (string)CountriesBox.SelectedValue;
-                    _receiveOrder(this, order, "Внедрение агентов в страну " + (string)CountriesBox.SelectedValue + ", " + Ministers[order.TargetMinistery], 0);
+                    var agentCost = Constants.InitialAgentCost;
+
+                    int count = 0;
+                    foreach (KeyValuePair<string, SpyNetwork> net in CountryData.SpyNetworks)
+                    {
+                        count += net.Value.Recruit.FindAll(x => x == true).Count;
+                    }
+
+                    agentCost = (long)(agentCost * Math.Pow(Constants.AgentCostRatio, count));
+                    _receiveOrder(this, order, "Внедрение агентов в страну " + (string)CountriesBox.SelectedValue + ", " + Ministers[order.TargetMinistery], agentCost);
                 }
                 else
                 {

@@ -13,7 +13,7 @@
         <Canvas Height="39" Canvas.Top="23" Width="607" Background="Black">
             <Image x:Name="image" Height="57" Canvas.Left="267" Canvas.Top="-10" Width="67" RenderTransformOrigin="0.483,0.466" Source="/Totality.Client.ClientComponents;component/Images/Media/MediaNewspaper.png"/>
         </Canvas>
-        <ComboBox x:Name="CountriesBox" Canvas.Left="145" Canvas.Top="89" Width="441" Height="52" FontFamily="Arial Black" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+        <ComboBox x:Name="CountriesBox" Canvas.Left="145" Canvas.Top="89" Width="441" Height="52" FontFamily="Arial Black" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" SelectionChanged="CountriesBox_SelectionChanged">
             <ComboBox.Background>
                 <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                     <GradientStop Color="#FFCBC7C7" Offset="0"/>

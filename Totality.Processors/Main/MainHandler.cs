@@ -66,7 +66,14 @@ namespace Totality.Handlers.Main
 
         public void FinishStep()
         {
-            ProcessOrders();
+            try
+            {
+                ProcessOrders();
+            }
+            catch (Exception e)
+            {
+                _log.Error(e.Message);
+            }
 
             foreach (KeyValuePair<string, Queue<Order>> country in _ordersBase)
             {
@@ -90,7 +97,14 @@ namespace Totality.Handlers.Main
 
             updateResources();
 
-            followDipContracts();
+            try
+            {
+                followDipContracts();
+            }
+            catch (Exception e)
+            {
+                _log.Error(e.Message);
+            }
 
             updateUranus();
 
@@ -109,14 +123,30 @@ namespace Totality.Handlers.Main
 
             updateMood();
 
-            updateCurrencyRatios();
+            try
+            {
+                updateCurrencyRatios();
+            }
+            catch(Exception e)
+            {
+                _log.Error(e.Message);
+            }
 
             DipHandler.SendContractsToAll();
 
             _newsHandler.Countries = _ordersBase.Keys.ToList();
             _newsHandler.SendNews();
 
-            updateClients();
+            try
+            {
+                updateClients();
+            }
+            catch(Exception e)
+            {
+                _log.Error(e.Message);
+            }
+
+            _dataLayer.Save("lastSave.json");
         }
 
         private void followDipContracts()
@@ -133,7 +163,15 @@ namespace Totality.Handlers.Main
                         case Model.Diplomatical.DipMsg.Types.Alliance:
                             country1 = _dataLayer.GetCountry(contract.From);
                             country2 = _dataLayer.GetCountry(contract.To);
+                            if (country1.Alliance != country1.Name || country2.Alliance != country2.Name)
+                            {
+                                _newsHandler.AddNews(contract.From, new Model.News(true) { text = "Не удалось заключить союз со страной" + contract.To });
+                                _newsHandler.AddNews(contract.To, new Model.News(true) { text = "Не удалось заключить союз со страной" + contract.From });
+                                contract.IsFinished = true;
+                                break;
+                            }
                             country1.Alliance = contract.Text;
+                            country1.IsBoss = true;
                             country2.Alliance = contract.Text;
                             _dataLayer.UpdateCountry(country1);
                             _dataLayer.UpdateCountry(country2);
@@ -141,8 +179,33 @@ namespace Totality.Handlers.Main
                             _newsHandler.AddBroadNews(new Model.News(false) { text = "Страна " + country1.Name + " добавила страну " + country2.Name + " в альянс " + contract.Text + "."});
                             break;
                         case Model.Diplomatical.DipMsg.Types.CurrencyAlliance:
+                            country1 = _dataLayer.GetCountry(contract.From);
+                            country2 = _dataLayer.GetCountry(contract.To);
+
+                            if (country1.CurrencyAlliance != country1.Name || country2.CurrencyAlliance != country2.Name)
+                            {
+                                _newsHandler.AddNews(contract.From, new Model.News(true) { text = "Не удалось заключить союз со страной" + contract.To });
+                                _newsHandler.AddNews(contract.To, new Model.News(true) { text = "Не удалось заключить союз со страной" + contract.From });
+                                contract.IsFinished = true;
+                                _dataLayer.BreakContract(contract.Id);
+                                break;
+                            }
+
+                            country2.CurrencyAlliance = country1.CurrencyAlliance;
+                            _dataLayer.UpdateCountry(country2);
+                            contract.IsFinished = true;
+
                             break;
                         case Model.Diplomatical.DipMsg.Types.MilitaryTraining:
+                            country1 = _dataLayer.GetCountry(contract.From);
+                            country2 = _dataLayer.GetCountry(contract.To);
+                            country1.MilitaryPower *= 1.02;
+                            country2.MilitaryPower *= 1.02;
+                            _dataLayer.UpdateCountry(country1);
+                            _dataLayer.UpdateCountry(country2);
+                            _newsHandler.AddBroadNews(new Model.News(false) { text = "Страна " + country1.Name + " провела военные учения со страной " + country2.Name + "." });
+                            contract.IsFinished = true;
+                            _dataLayer.BreakContract(contract.Id);
                             break;
                         case Model.Diplomatical.DipMsg.Types.Other:
                             contract.IsFinished = true;
@@ -150,8 +213,48 @@ namespace Totality.Handlers.Main
                             _newsHandler.AddNews(contract.To, new Model.News(true) { text = "Мы и страна " + contract.From + " ратифицировали договор: " + contract.Text });
                             break;
                         case Model.Diplomatical.DipMsg.Types.Peace:
-                            //
+                            var countries = _dataLayer.GetCountries();
+                            country1 = _dataLayer.GetCountry(contract.From);
+                            country2 = _dataLayer.GetCountry(contract.To);
+                            _log.Trace("Заключен мир между " + country1.Name + " и " + country2.Name);
+
+                            if (!country1.IsBoss && country1.Alliance != country1.Name || !country2.IsBoss && country2.Alliance != country2.Name)
+                            {
+                                _newsHandler.AddNews(contract.From, new Model.News(true) { text = "Мы не имеем права заключать мир со страной " + contract.To + ", полномочия есть только у глав альянсов."});
+                                _newsHandler.AddNews(contract.To, new Model.News(true) { text = "Мы не имеем права заключать мир со страной " + contract.From + ", полномочия есть только у глав альянсов." });
+                                contract.IsFinished = true;
+                                _dataLayer.BreakContract(contract.Id);
+                                break;
+                            }
+
+                            var alliance1 = countries.Values.Where(x => x.Alliance == country1.Alliance).ToList();
+                            var alliance2 = countries.Values.Where(x => x.Alliance == country2.Alliance).ToList();
+
+                            for (int al1 = 0; al1 < alliance1.Count; al1++)
+                            {
+                                for (int c = 0; c < alliance1[al1].WarList.Count; c++)
+                                {
+                                    if (alliance2.Any(x => x.Name == alliance1[al1].WarList[c]))
+                                        alliance1[al1].WarList.Remove(alliance1[al1].WarList[c]);
+                                }
+                            }
+
+                            for (int al2 = 0; al2 < alliance2.Count; al2++)
+                            {
+                                for (int c = 0; c < alliance2[al2].WarList.Count; c++)
+                                {
+                                    if (alliance1.Any(x => x.Name == alliance2[al2].WarList[c]))
+                                        alliance2[al2].WarList.Remove(alliance2[al2].WarList[c]);
+                                }
+                            }
+
+                            battles.RemoveAll(x => x.Alliances.Any(t => t.Key == country1.Alliance) && x.Alliances.Any(p => p.Key == country2.Alliance));
+
+                            _newsHandler.AddBroadNews(new Model.News(false) { text = "Альянсы " + country1.Alliance + " и " + country2.Alliance + " заключили мир." });
+                            contract.IsFinished = true;
+                            _dataLayer.BreakContract(contract.Id);
                             break;
+
                         case Model.Diplomatical.DipMsg.Types.Trade:
                             if (contract.Time == 0)
                             {
@@ -213,6 +316,24 @@ namespace Totality.Handlers.Main
             }
         }
 
+        public Dictionary<string, long> GetCurrencyDemands()
+        {
+            Dictionary<string, long> demands = new Dictionary<string, long>();
+            var countries = _dataLayer.GetCountries();
+
+            foreach (Country c in countries.Values)
+            {
+                demands.Add(c.Name, c.NationalCurrencyDemand);
+            }
+
+            return demands;
+        }
+
+        public Dictionary<string, long> GetCurrencyStock()
+        {
+            return _dataLayer.GetStock();
+        }
+
         private void updateMoney()
         {
             var countries = _dataLayer.GetCountries();
@@ -258,6 +379,9 @@ namespace Totality.Handlers.Main
 
             for (int i = 0; i < battles.Count; i++)
             {
+                battles[i].Alliances.First().Value.RemoveAll(x => _dataLayer.GetCountry(x).Alliance != battles[i].Alliances.First().Key);
+                battles[i].Alliances.Last().Value.RemoveAll(x => _dataLayer.GetCountry(x).Alliance != battles[i].Alliances.Last().Key);
+
                 if (battles[i].step == 0)
                 {
                     battles[i].step++;
@@ -291,10 +415,9 @@ namespace Totality.Handlers.Main
                                     _newsHandler.AddBroadNews(new Model.News(true) { text = "При подавляющем превосходстве армия " + armies[p].Key  + " нанесла сокрушительное поражение армии " + armies[j].Key + "." });
                                 else if ((powers[armies[p].Key] - powers[armies[j].Key]) / (double)powers[armies[j].Key] > 0.2)
                                     _newsHandler.AddBroadNews(new Model.News(true) { text = "Пользуясь превосходством, армия " + armies[p].Key + " нанесла поражение армии " + armies[j].Key + "." });
-                                else if ((powers[armies[p].Key] - powers[armies[j].Key]) / (double)powers[armies[j].Key] > 0.04)
+                                else if ((powers[armies[p].Key] - powers[armies[j].Key]) / (double)powers[armies[j].Key] > 0)
                                     _newsHandler.AddBroadNews(new Model.News(true) { text = "Пользуясь незначительным превосходством, армия " + armies[p].Key + " ослабила армию " + armies[j].Key  + "."});
-                                else if ((powers[armies[p].Key] - powers[armies[j].Key]) / (double)powers[armies[j].Key] >= 0)
-                                    _newsHandler.AddBroadNews(new Model.News(true) { text = "В результате боев, армии  " + armies[p].Key + " и " + armies[j].Key + "остались на своих позициях."});
+
 
                                 countries[armies[j].Value[k]].ResOil -= ((powers[armies[p].Key] - powers[armies[j].Key]) / (armies[j].Value.Count))*0.75;
                                 if (countries[armies[j].Value[k]].ResOil < 0) countries[armies[j].Value[k]].ResOil = 0;
@@ -314,6 +437,7 @@ namespace Totality.Handlers.Main
                                 countries[armies[j].Value[k]].PowerLightIndustry -= ((powers[armies[p].Key] - powers[armies[j].Key]) / (armies[j].Value.Count)) * 0.75;
                                 if (countries[armies[j].Value[k]].PowerLightIndustry < 0) countries[armies[j].Value[k]].PowerLightIndustry = 0;
                             }
+                            else _newsHandler.AddBroadNews(new Model.News(true) { text = "В результате боев, армии  " + armies[p].Key + " и " + armies[j].Key + "остались на своих позициях." });
                         }
                     }
                 }
@@ -350,22 +474,40 @@ namespace Totality.Handlers.Main
         {
             foreach (KeyValuePair<string, Queue<Order>> country in _ordersBase)
             {
+                int exp0 = (int)_dataLayer.GetProperty(country.Key, "ExtractExperience");
+                int exp = 0;
+
+                if ((bool)_dataLayer.GetProperty(country.Key, "IsRepressed"))
+                {
+                    _newsHandler.AddNews(country.Key, new Model.News(true) { text = "Репрессии наносят урон промышленности " });
+                }
+                if ((bool)_dataLayer.GetProperty(country.Key, "IsRiot"))
+                {
+                    _newsHandler.AddNews(country.Key, new Model.News(true) { text = "Бунт наносит урон промышленности! " });
+                }
+
                 foreach (string res in new List<string>{ "Steel", "Oil", "Wood", "Agricultural"} )
                 {
                     var extract = (double)_dataLayer.GetProperty(country.Key, "Res" + res);
                     if ((bool)_dataLayer.GetProperty(country.Key, "IsRepressed"))
+                    {
                         extract *= 0.98;
+                    }
+                    if ((bool)_dataLayer.GetProperty(country.Key, "IsRiot"))
+                    {
+                        extract *= 0.92;
+                    }
                     _dataLayer.SetProperty(country.Key, "Res" + res, extract);
 
                     extract *=  Math.Pow(Constants.ScienceBuff, (int)_dataLayer.GetProperty(country.Key, "ExtractScienceLvl" ));
                     // сюда добавить другие баффы
-                    _dataLayer.SetProperty(country.Key, "Final" + res, extract);
-
+                    _dataLayer.SetProperty(country.Key, "Final" + res, extract);                   
                     double usedRes = 0;
                     switch (res)
                     {
                         case "Steel":
                             usedRes = ((double)_dataLayer.GetProperty(country.Key, "PowerHeavyIndustry")) * Constants.IndustrySteelCoeff;
+                            
                             break;
                         case "Oil":
                             usedRes = ((double)_dataLayer.GetProperty(country.Key, "PowerHeavyIndustry")) * Constants.IndustryOilCoeff;
@@ -377,8 +519,14 @@ namespace Totality.Handlers.Main
                             usedRes = ((double)_dataLayer.GetProperty(country.Key, "PowerLightIndustry")) * Constants.IndustryAgroCoeff;
                             break;
                     }
+                    exp += (int)usedRes;
                     _dataLayer.SetProperty(country.Key, "Used" + res, usedRes);
                 }
+
+                Random r = new Random();
+                exp /= 4;
+                exp = (int)(r.NextDouble() * exp) + exp0;
+                _dataLayer.SetProperty(country.Key, "ExtractExperience", exp);
             }
         }
 
@@ -402,7 +550,14 @@ namespace Totality.Handlers.Main
 
                 if ((bool)_dataLayer.GetProperty(country.Key, "IsRepressed"))
                     LIpower *= 0.98;
+                if ((bool)_dataLayer.GetProperty(country.Key, "IsRiot"))
+                    LIpower *= 0.92;
                 _dataLayer.SetProperty(country.Key, "PowerLightIndustry", LIpower);
+
+                Random r = new Random();
+                var lE = (int)_dataLayer.GetProperty(country.Key, "LightExperience");
+                lE += (int)(LIpower * r.NextDouble());
+                _dataLayer.SetProperty(country.Key, "LightExperience", lE);
 
                 LIpower *= Math.Pow(Constants.ScienceBuff, (int)_dataLayer.GetProperty(country.Key, "LightScienceLvl"));
                     // сюда добавить другие баффы
@@ -413,7 +568,13 @@ namespace Totality.Handlers.Main
 
                 if ((bool)_dataLayer.GetProperty(country.Key, "IsRepressed"))
                     HIpower *= 0.98;
+                if ((bool)_dataLayer.GetProperty(country.Key, "IsRiot"))
+                    HIpower *= 0.92;
                 _dataLayer.SetProperty(country.Key, "PowerHeavyIndustry", HIpower);
+
+                var hE = (int)_dataLayer.GetProperty(country.Key, "HeavyExperience");
+                hE += (int)(HIpower * r.NextDouble());
+                _dataLayer.SetProperty(country.Key, "HeavyExperience", hE);
 
                 HIpower *= Math.Pow(Constants.ScienceBuff, (int)_dataLayer.GetProperty(country.Key, "HeavyScienceLvl"));
                 // сюда добавить другие баффы
@@ -426,7 +587,32 @@ namespace Totality.Handlers.Main
             foreach (KeyValuePair<string, Queue<Order>> country in _ordersBase)
             {
                 Country cur = (Country)_dataLayer.GetCountry(country.Key);
-                cur.Mood -= cur.TaxesLvl / 10.0;
+                foreach (KeyValuePair<string, short> prop in cur.MassMedia)
+                {
+                    Country cur2 = (Country)_dataLayer.GetCountry(prop.Key);
+                    if (prop.Value == 1)
+                    {
+                        cur2.Mood -= 7;
+                        cur.Money -= Constants.PropagandaCost;
+                        _newsHandler.AddNews(cur.Name, new Model.News(false) { text = "Наши СМИ повышают волнения в стране " + cur2.Name  });
+                        _newsHandler.AddNews(cur2.Name, new Model.News(false) { text = "Подлые газетчики из страны " + cur.Name + " повышают волнения в нашей стране!"});
+                    }
+                    else if (prop.Value == 2)
+                    {
+                        cur2.Mood += 7;
+                        cur2.Money -= Constants.PropagandaCost;
+                        _newsHandler.AddNews(cur.Name, new Model.News(false) { text = "Наши СМИ повышают настроение населения в стране " + cur2.Name });
+                        _newsHandler.AddNews(cur2.Name, new Model.News(false) { text = "Братские СМИ из страны " + cur.Name + " улучшают настроение населения в нашей стране." });
+                    }
+                    _dataLayer.UpdateCountry(cur2);
+                }
+                _dataLayer.UpdateCountry(cur);
+            }
+
+                foreach (KeyValuePair<string, Queue<Order>> country in _ordersBase)
+            {
+                Country cur = (Country)_dataLayer.GetCountry(country.Key);
+                cur.Mood -= cur.TaxesLvl / 5.0;
                 cur.Mood *= Math.Pow(1.05, cur.InnerLvl - 1);
                 if ( (cur.PowerHeavyIndustry - cur.PowerLightIndustry)/ cur.PowerLightIndustry > 0.3)
                 {
@@ -434,7 +620,20 @@ namespace Totality.Handlers.Main
                 }
 
                 if (cur.Mood > 100) cur.Mood = 100;
+
+                if (cur.Mood < 50 && !cur.IsRiot)
+                {
+                    var chance = 50 - cur.Mood;
+                    Random r = new Random();
+                    var result = r.Next(1, 100);
+                    if (result <= chance)
+                    {
+                        cur.IsRiot = true;
+                        _newsHandler.AddBroadNews(new Model.News(false) { text = "В стране " + cur.Name + " начался бунт!" });
+                    }
+                }
                 _dataLayer.UpdateCountry(cur);
+
             }
 
         }
@@ -500,6 +699,7 @@ namespace Totality.Handlers.Main
 
                     var money = (long)_dataLayer.GetProperty(country.Key, "Money");
                     money -= (long)(HIpower*(Constants.MobilizeBuff - 1)*(long)_dataLayer.GetProperty(country.Key, "IndustryUpgradeCost"));
+                    _newsHandler.AddNews(country.Key, new Model.News(true) { text = "Мобилизация приносит убытки: " + String.Format("{0:0,0}", (long)(HIpower * (Constants.MobilizeBuff - 1) * (long)_dataLayer.GetProperty(country.Key, "IndustryUpgradeCost"))) });
                     _dataLayer.SetProperty(country.Key, "Money", money);
                 }
                 else
@@ -511,6 +711,11 @@ namespace Totality.Handlers.Main
                     militaryPower += increase;
                     if (militaryPower < 0) militaryPower = 0;
                 }
+
+                Random r = new Random();
+                var mE = (int)_dataLayer.GetProperty(country.Key, "MilitaryExperience");
+                mE += (int)(militaryPower * r.NextDouble());
+                _dataLayer.SetProperty(country.Key, "MilitaryExperience", mE);
 
                 _dataLayer.SetProperty(country.Key, "MilitaryPower", militaryPower);
 

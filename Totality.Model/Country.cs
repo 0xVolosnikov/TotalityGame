@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Totality.CommonClasses;
 
@@ -26,6 +27,10 @@ namespace Totality.Model
         [DataMember]
         public string Alliance;
         [DataMember]
+        public string CurrencyAlliance;
+        [DataMember]
+        public bool IsBoss;
+        [DataMember]
         public string Name { get; set; }
         [DataMember]
         public long Money;
@@ -38,21 +43,21 @@ namespace Totality.Model
         public int[] MinsBlocks = new int[Constants.CountOfMinisters];
 
         [DataMember]
-        public double ResAgricultural;
+        public double ResAgricultural = 250;
         [DataMember]
-        public double ResWood;
+        public double ResWood = 250;
         [DataMember]
-        public double ResSteel;
+        public double ResSteel = 250;
         [DataMember]
-        public double ResOil;
+        public double ResOil = 250;
         [DataMember]
         public double ProdUranus;
         [DataMember]
         public double ResUranus;
         [DataMember]
-        public double PowerLightIndustry;
+        public double PowerLightIndustry = 100;
         [DataMember]
-        public double PowerHeavyIndustry;
+        public double PowerHeavyIndustry = 100;
 
         [DataMember]
         public double FinalAgricultural;
@@ -120,14 +125,6 @@ namespace Totality.Model
         [DataMember]
         public Dictionary<string, double> CurrencyRatios = new Dictionary<string, double>();
 
-        [DataMember]
-        public int LvlResIndustry;
-        [DataMember]
-        public int LvlLightIndustry;
-        [DataMember]
-        public int LvlHeavyIndustry;
-        [DataMember]
-        public int LvlMilitary;
         [DataMember]
         public int PremierLvl = 1;
         [DataMember]
@@ -212,6 +209,24 @@ namespace Totality.Model
             for (int i = 0; i < Constants.CountOfMinisters; i++)
             {
                 ForeignSpyes.Add(new List<string>());
+            }
+
+            Random r = new Random();
+            var result = r.Next(0, 3);
+            switch (result)
+            {
+                case 0:
+                    ResOil += 75;
+                    break;
+                case 1:
+                    ResSteel += 75;
+                    break;
+                case 2:
+                    ResWood += 75;
+                    break;
+                case 3:
+                    ResAgricultural += 75;
+                    break;
             }
         }
     }

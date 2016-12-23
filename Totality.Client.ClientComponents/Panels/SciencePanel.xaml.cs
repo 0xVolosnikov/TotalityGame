@@ -64,12 +64,19 @@ namespace Totality.Client.ClientComponents.Panels
             MilitaryLabel.Content = CountryData.MilitaryScienceLvl;
 
             ExtractLine.Height = (19 + 273 * (CountryData.ExtractExperience / (double)CountryData.ExtractScLvlUpExp));
+            if (ExtractLine.Height > 19 + 273) ExtractLine.Height = 19 + 273;
             Canvas.SetTop(ExtractLine, 295 -  ExtractLine.Height);
+
             HeavyLine.Height = 19 + 273 * (CountryData.HeavyExperience / (double)CountryData.HeavyScLvlUpExp);
+            if (HeavyLine.Height > 19 + 273) HeavyLine.Height = 19 + 273;
             Canvas.SetTop(HeavyLine, 295 - HeavyLine.Height);
+
             LightLine.Height = 19 + 273 * (CountryData.LightExperience / (double)CountryData.LightScLvlUpExp);
+            if (LightLine.Height > 19 + 273) LightLine.Height = 19 + 273;
             Canvas.SetTop(LightLine, 295 - LightLine.Height);
+
             MilitaryLine.Height = 19 + 273 * (CountryData.MilitaryExperience / (double)CountryData.MilitaryScLvlUpExp);
+            if (MilitaryLine.Height > 19 + 273) MilitaryLine.Height = 19 + 273;
             Canvas.SetTop(MilitaryLine, 295 - MilitaryLine.Height);
 
             if (CountryData.MinsBlocks[(short)Mins.Science] > 0 && !isBlocked)

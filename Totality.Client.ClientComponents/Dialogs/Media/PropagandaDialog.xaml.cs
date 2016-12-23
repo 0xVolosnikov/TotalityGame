@@ -31,10 +31,13 @@ namespace Totality.Client.ClientComponents.Dialogs.Media
             _receiveOrder = receiveOrder;
             InitializeComponent();
 
-            List<string> regimes = new List<string>{"Негативное","Нейтральное","Позитивное" };
+            List<string> regimes = new List<string>{"Нейтральное", "Негативное", "Позитивное" };
 
             CountriesBox.ItemsSource = Countries;
+            RegimeBox.ItemsSource = regimes;
+
             CountriesBox.SelectedIndex = 0;
+
         }
 
         private void acceptButton_Click(object sender, RoutedEventArgs e)
@@ -49,6 +52,13 @@ namespace Totality.Client.ClientComponents.Dialogs.Media
         private void cancelButton_Click(object sender, RoutedEventArgs e)
         {
             _receiveOrder(this, null, null, 0);
+        }
+
+        private void CountriesBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (CountryData.MassMedia.ContainsKey(CountriesBox.SelectedValue.ToString()))
+                RegimeBox.SelectedIndex = CountryData.MassMedia[CountriesBox.SelectedValue.ToString()];
+            else RegimeBox.SelectedIndex = 0;
         }
     }
 }

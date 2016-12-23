@@ -45,6 +45,7 @@ namespace Totality.Client.ClientComponents.Panels
         {
             if (canvas1.Children.Contains(currentDialog))
             canvas1.Children.Remove(currentDialog);
+            currentDialog = null;
 
             createBigDialog(new NewsDialog(receiveOrder, _news));
         }

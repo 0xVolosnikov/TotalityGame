@@ -23,8 +23,7 @@
                 </Canvas.Background>
             </Canvas>
         </Canvas>
-        <local:Button x:Name="AlertButton" Canvas.Left="484" Canvas.Top="100" Width="236" Height="272" imgUp="/Totality.Client.ClientComponents;component/Images/Premier/PremierAlertButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Premier/PremierAlertButtonDown.png" Cursor="Hand"/>
-        <local:Button x:Name="ReorganizeButton" Canvas.Left="200" Canvas.Top="100" Width="236" Height="272" imgUp="/Totality.Client.ClientComponents;component/Images/Premier/PremierReorganizeButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Premier/PremierReorganizeButtonDown.png" Cursor="Hand"/>
-        <local:Button x:Name="LvlupButton" Canvas.Left="758" Canvas.Top="100" Width="236" Height="272" imgUp="/Totality.Client.ClientComponents;component/Images/Premier/PremierLvlupButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Premier/PremierLvlupButtonDown.png" Cursor="Hand"/>
+        <local:Button x:Name="AlertButton" Canvas.Left="621" Canvas.Top="102" Width="236" Height="272" imgUp="/Totality.Client.ClientComponents;component/Images/Premier/PremierAlertButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Premier/PremierAlertButtonDown.png" Cursor="Hand"/>
+        <local:Button x:Name="ReorganizeButton" Canvas.Left="337" Canvas.Top="102" Width="236" Height="272" imgUp="/Totality.Client.ClientComponents;component/Images/Premier/PremierReorganizeButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Premier/PremierReorganizeButtonDown.png" Cursor="Hand"/>
     </Canvas>
 </we:AbstractPanel>

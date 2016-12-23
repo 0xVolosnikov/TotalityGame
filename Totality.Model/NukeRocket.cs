@@ -20,6 +20,8 @@ namespace Totality.Model
         [DataMember]
         public int Count { get; set; }
         [DataMember]
+        public int AttackerLvl { get; set; }
+        [DataMember]
         public Guid Id { get; set; }
 
         public NukeRocket( string from, string to, int count)

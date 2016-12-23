@@ -11,6 +11,8 @@ using System.ServiceModel;
 using System.ServiceModel.Discovery;
 using System.Collections.Generic;
 using System.Net;
+using System.Windows.Controls;
+using Totality.Model;
 
 namespace Totality.GUI
 {
@@ -27,6 +29,7 @@ namespace Totality.GUI
         private NewsHandler _newsHandler;
         private NukeHandler _nukeHandler;
         private ServiceHost _host;
+        private List<Label> _labels = new List<Label>();
 
         public MainWindow()
         {
@@ -47,6 +50,39 @@ namespace Totality.GUI
             _transmitter.MainHandler = _mainHandler;
             _transmitter.NukeHandler = _nukeHandler;
             _transmitter.DipHandler = _dipHandler;
+            _transmitter.ClientRegistered += _transmitter_ClientRegistered;
+            _transmitter.ClientDisconnected += _transmitter_ClientDisconnected;
+            _transmitter.ClientSendedData += _transmitter_ClientSendedData;
+        }
+
+        private void _transmitter_ClientSendedData(string name)
+        {
+            _labels.Find(x => (string)x.Content == name).Foreground = Brushes.Blue;
+            if (_labels.TrueForAll(x => x.Foreground == Brushes.Blue || x.Foreground == Brushes.Red))
+                ordersDisplay.Fill = Brushes.PowderBlue;
+        }
+
+        private void _transmitter_ClientDisconnected(string name)
+        {
+            Dispatcher.BeginInvoke(new Action(() => { _labels.Find(x => (string)x.Content == name).Foreground = Brushes.Red; }));
+        }
+
+        private void _transmitter_ClientRegistered(string name)
+        {
+            if (_labels.Exists(x => (string)x.Content == name))
+            {
+                _labels.Find(x => (string)x.Content == name).Foreground = Brushes.Black;
+            }
+            else
+            {
+                _labels.Add(new Label()
+                {
+                    Width = 351,
+                    HorizontalAlignment = HorizontalAlignment.Left,
+                    Content = name
+                });
+                _wrap.Children.Add(_labels[_labels.Count - 1]);
+            }
         }
 
         private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -85,11 +121,16 @@ namespace Totality.GUI
                 _logger.Error("Something get wrong with configuring host: " + e.Message);
             }
 
+            ip = ip.Remove(ip.LastIndexOf(".")+1);
+            ip += "255";
+
             ServiceDiscoveryBehavior discoveryBehavior = new ServiceDiscoveryBehavior();
             // send announcements on UDP multicast transport
             discoveryBehavior.AnnouncementEndpoints.Add(
               //new UdpAnnouncementEndpoint("soap.udp://192.168.1.255:3702"));
-              new UdpAnnouncementEndpoint());
+              //new UdpAnnouncementEndpoint("soap.udp://" + ip + ":3702"));
+              new UdpAnnouncementEndpoint("soap.udp://" + ip + ":3702"));
+
             _host.Description.Behaviors.Add(discoveryBehavior);
 
             // ** DISCOVERY ** //
@@ -125,6 +166,13 @@ namespace Totality.GUI
         private void _endStepButtonClick(object sender, RoutedEventArgs e)
         {
             _mainHandler.FinishStep();
+
+            for (int i = 0; i < _labels.Count; i++)
+            {
+                if (_labels[i].Foreground == Brushes.Blue)
+                    _labels[i].Foreground = Brushes.Black;
+            }
+            ordersDisplay.Fill = Brushes.Black;
         }
 
         private void button_Click(object sender, RoutedEventArgs e)
@@ -159,6 +207,32 @@ namespace Totality.GUI
             _dataLayer.SetCurrencyOnStock("Test2", 2500000000);
 
             // _nukeHandler.StartAttack();
+        }
+
+        private void button_Copy1_Click(object sender, RoutedEventArgs e)
+        {
+            var points = new List<string>();
+            var countries = _dataLayer.GetCountries();
+           
+            foreach (Country country in countries.Values)
+            {
+                long p = 0;
+                p += country.Money/10;
+                p += (long)(country.MilitaryPower * 10000);
+                p += (long)(country.PowerHeavyIndustry * 10000);
+                p += (long)(country.PowerLightIndustry * 10000);
+                p += (long)(country.NukesCount * 50000);
+                if (country.IsRiot)
+                    p -= 1000000;
+
+                points.Add(country.Name + " " + String.Format("{0:0,0}", p));
+            }
+
+            
+
+            var pointsDial = new PointDialog(points);
+            grid.Children.Add(pointsDial);
+            pointsDial.Close += (object o) => grid.Children.Remove((UIElement)o);
         }
     }
 }

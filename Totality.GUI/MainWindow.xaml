@@ -13,8 +13,7 @@
         </LinearGradientBrush>
     </Window.Background>
     <Grid x:Name="grid">
-        <ListBox x:Name="listBox" HorizontalAlignment="Left" Height="242" Margin="10,10,0,0" VerticalAlignment="Top" Width="358"/>
-        <Rectangle Fill="#FF262674" HorizontalAlignment="Left" Height="50" Margin="373,202,0,0" Stroke="Black" VerticalAlignment="Top" Width="61"/>
+        <Rectangle x:Name="ordersDisplay" Fill="#FF262674" HorizontalAlignment="Left" Height="50" Margin="373,202,0,0" Stroke="Black" VerticalAlignment="Top" Width="61"/>
         <Rectangle x:Name="listeningStatusDisplay" Fill="#FFC50000" HorizontalAlignment="Left" Height="50" Margin="446,202,0,0" Stroke="Black" VerticalAlignment="Top" Width="61"/>
         <Button x:Name="startListening" Content="Запуск сервера" HorizontalAlignment="Left" Margin="373,10,0,0" VerticalAlignment="Top" Width="134" Height="30" Click="startListening_Click"/>
         <Button x:Name="_endStepButton" Content="Завершить ход" HorizontalAlignment="Left" Margin="373,150,0,0" VerticalAlignment="Top" Width="134" Height="30" Click="_endStepButtonClick">
@@ -26,7 +25,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button x:Name="button_Copy1" Content="Открыть консоль" HorizontalAlignment="Left" Margin="373,80,0,0" VerticalAlignment="Top" Width="134" Height="30">
+        <Button x:Name="button_Copy1" Content="Подсчитать очки" HorizontalAlignment="Left" Margin="373,80,0,0" VerticalAlignment="Top" Width="134" Height="30" Click="button_Copy1_Click">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                     <GradientStop Color="#FFDCE1E2" Offset="0"/>
@@ -53,7 +52,10 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="396,202,0,0" VerticalAlignment="Top" Width="75" Click="button_Click"/>
+        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="534,121,-109,0" VerticalAlignment="Top" Width="98" Click="button_Click" Height="24"/>
+        <ScrollViewer HorizontalAlignment="Left" Height="242" Margin="10,10,0,0" VerticalAlignment="Top" Width="358">
+            <WrapPanel x:Name="_wrap" Width="341" ItemWidth="341" Background="White"/>
+        </ScrollViewer>
 
     </Grid>
 </Window>

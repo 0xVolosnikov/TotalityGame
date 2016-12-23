@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Totality.CommonClasses;
 using Totality.Model;
 
 namespace Totality.Client.ClientComponents.Dialogs.Finance
@@ -26,19 +27,21 @@ namespace Totality.Client.ClientComponents.Dialogs.Finance
         ReceiveOrder receiveOrder;
         Orders _type;
         double _ratio = 1;
+        string _country;
 
-        public CurrencyCountDialog(ReceiveOrder receiveOrder, double ratio, Orders type, int max)
+        public CurrencyCountDialog(ReceiveOrder receiveOrder, double ratio, Orders type, int max, string country)
         {
             this.receiveOrder = receiveOrder;
             _type = type;
             _ratio = ratio;
+            _country = country;
 
             InitializeComponent();
 
             integerUpDown.ValueChanged += IntegerUpDown_ValueChanged;
 
             if (type == Orders.PurchaseCurrency)
-                integerUpDown.Maximum = (int)(CountryData.Money / ratio);
+                integerUpDown.Maximum = (int)CountryData.Money;
             else
             {
                 integerUpDown.Maximum = max;
@@ -47,7 +50,7 @@ namespace Totality.Client.ClientComponents.Dialogs.Finance
 
         private void IntegerUpDown_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            CostLabel.Content = String.Format("{0:0,#}", (integerUpDown.Value * _ratio));
+            CostLabel.Content = String.Format("{0:0,#}", FinancialTools.GetExchangeCost((long)integerUpDown.Value,Demands[CountryData.Name], Demands[_country], Stock[CountryData.Name], Stock[_country] ));
         }
 
         private void acceptButton_Click(object sender, RoutedEventArgs e)

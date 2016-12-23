@@ -41,7 +41,7 @@ namespace Totality.Client.ClientComponents.Dialogs.Security
             order.TargetMinistery = (short)MinistersBox.SelectedIndex;
             order.OrderNum = (short)Orders.Purge;
             order.Ministery = (short)Mins.Security;
-            _receiveOrder(this, order, "Чистка в министерстве: " + MinistersBox.SelectedItem, 0);
+            _receiveOrder(this, order, "Чистка в министерстве: " + MinistersBox.SelectedItem, Constants.PurgeCost);
         }
 
         private void cancelButton_Click(object sender, RoutedEventArgs e)

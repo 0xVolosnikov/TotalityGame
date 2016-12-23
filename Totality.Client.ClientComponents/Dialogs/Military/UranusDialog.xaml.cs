@@ -37,7 +37,7 @@ namespace Totality.Client.ClientComponents.Dialogs.Military
             Order order = new Order(CountryData.Name);
             order.OrderNum = (short)Orders.IncreaseUranium;
             order.Ministery = (short)Mins.Military;
-            _receiveOrder(this, order, "Повышение добычи урана", 0);
+            _receiveOrder(this, order, "Повышение добычи урана", CountryData.ProductionUpgradeCost);
         }
 
         private void cancelButton_Click(object sender, RoutedEventArgs e)

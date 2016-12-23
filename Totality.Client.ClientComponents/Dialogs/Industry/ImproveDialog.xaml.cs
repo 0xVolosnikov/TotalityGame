@@ -42,7 +42,10 @@ namespace Totality.Client.ClientComponents.Dialogs.Industry
             Order order = new Order(CountryData.Name);
             order.OrderNum = (short)_type;
             order.Ministery = (short)Mins.Industry;
-            _receiveOrder(this, order, _textOrder, 0);
+            if (order.OrderNum == (short)Orders.ImproveHeavy || order.OrderNum == (short)Orders.ImproveLight)
+                _receiveOrder(this, order, _textOrder, CountryData.IndustryUpgradeCost);
+            else
+            _receiveOrder(this, order, _textOrder, CountryData.ProductionUpgradeCost);
         }
 
         private void cancelButton_Click(object sender, RoutedEventArgs e)

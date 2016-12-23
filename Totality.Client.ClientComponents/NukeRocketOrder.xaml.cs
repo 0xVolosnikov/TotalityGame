@@ -37,9 +37,19 @@ namespace Totality.Client.ClientComponents
 
             CountryData = countryData;
             Id = rocket.Id;
+            var openingTime = rocket.AttackerLvl - countryData.MilitaryScienceLvl;
             CountLabel.Content = rocket.Count;
             AgressorLabel.Text = rocket.From;
-            TargetLabel.Text = rocket.To;
+
+            if (rocket.LifeTime <= 7500 - openingTime * 1000)
+            {
+                TargetLabel.Text = rocket.To;
+            }
+            else
+            {
+                TargetLabel.Text = "????";
+            }
+
 
             ProgressLine.Width = 315 * (rocket.LifeTime / (double)Constants.NukeRocketLifetime);
             
@@ -48,8 +58,20 @@ namespace Totality.Client.ClientComponents
         public void Update(NukeRocket rocket)
         {
             CountLabel.Content = rocket.Count;
+
             AgressorLabel.Text = rocket.From;
-            TargetLabel.Text = rocket.To;
+
+            var openingTime = rocket.AttackerLvl - CountryData.MilitaryScienceLvl;
+
+            if (rocket.LifeTime <= 7500 - openingTime * 1000)
+            {
+                TargetLabel.Text = rocket.To;
+            }
+            else
+            {
+                TargetLabel.Text = "????";
+            }
+
             if (rocket.LifeTime == 0)
             {
                 if (rocket.To.Equals(CountryData.Name))

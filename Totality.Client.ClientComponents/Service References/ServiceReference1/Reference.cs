@@ -22,10 +22,10 @@ namespace Totality.Client.ClientComponents.ServiceReference1 {
         System.Threading.Tasks.Task<bool> RegisterAsync(string myName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITransmitterService/AddOrders", ReplyAction="http://tempuri.org/ITransmitterService/AddOrdersResponse")]
-        bool AddOrders(Totality.Model.Order[] orders);
+        bool AddOrders(Totality.Model.Order[] orders, string name);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITransmitterService/AddOrders", ReplyAction="http://tempuri.org/ITransmitterService/AddOrdersResponse")]
-        System.Threading.Tasks.Task<bool> AddOrdersAsync(Totality.Model.Order[] orders);
+        System.Threading.Tasks.Task<bool> AddOrdersAsync(Totality.Model.Order[] orders, string name);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITransmitterService/ShootDownNuke", ReplyAction="http://tempuri.org/ITransmitterService/ShootDownNukeResponse")]
         bool ShootDownNuke(string defender, System.Guid rocketId);
@@ -44,6 +44,18 @@ namespace Totality.Client.ClientComponents.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITransmitterService/GetCountryData", ReplyAction="http://tempuri.org/ITransmitterService/GetCountryDataResponse")]
         System.Threading.Tasks.Task<Totality.Model.Country> GetCountryDataAsync(string name);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITransmitterService/GetCurrencyStock", ReplyAction="http://tempuri.org/ITransmitterService/GetCurrencyStockResponse")]
+        System.Collections.Generic.Dictionary<string, long> GetCurrencyStock();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITransmitterService/GetCurrencyStock", ReplyAction="http://tempuri.org/ITransmitterService/GetCurrencyStockResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, long>> GetCurrencyStockAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITransmitterService/GetCurrencyDemands", ReplyAction="http://tempuri.org/ITransmitterService/GetCurrencyDemandsResponse")]
+        System.Collections.Generic.Dictionary<string, long> GetCurrencyDemands();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITransmitterService/GetCurrencyDemands", ReplyAction="http://tempuri.org/ITransmitterService/GetCurrencyDemandsResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, long>> GetCurrencyDemandsAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -104,12 +116,12 @@ namespace Totality.Client.ClientComponents.ServiceReference1 {
             return base.Channel.RegisterAsync(myName);
         }
         
-        public bool AddOrders(Totality.Model.Order[] orders) {
-            return base.Channel.AddOrders(orders);
+        public bool AddOrders(Totality.Model.Order[] orders, string name) {
+            return base.Channel.AddOrders(orders, name);
         }
         
-        public System.Threading.Tasks.Task<bool> AddOrdersAsync(Totality.Model.Order[] orders) {
-            return base.Channel.AddOrdersAsync(orders);
+        public System.Threading.Tasks.Task<bool> AddOrdersAsync(Totality.Model.Order[] orders, string name) {
+            return base.Channel.AddOrdersAsync(orders, name);
         }
         
         public bool ShootDownNuke(string defender, System.Guid rocketId) {
@@ -134,6 +146,22 @@ namespace Totality.Client.ClientComponents.ServiceReference1 {
         
         public System.Threading.Tasks.Task<Totality.Model.Country> GetCountryDataAsync(string name) {
             return base.Channel.GetCountryDataAsync(name);
+        }
+        
+        public System.Collections.Generic.Dictionary<string, long> GetCurrencyStock() {
+            return base.Channel.GetCurrencyStock();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, long>> GetCurrencyStockAsync() {
+            return base.Channel.GetCurrencyStockAsync();
+        }
+        
+        public System.Collections.Generic.Dictionary<string, long> GetCurrencyDemands() {
+            return base.Channel.GetCurrencyDemands();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, long>> GetCurrencyDemandsAsync() {
+            return base.Channel.GetCurrencyDemandsAsync();
         }
     }
 }

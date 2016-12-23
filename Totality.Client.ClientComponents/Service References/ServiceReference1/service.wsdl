@@ -47,6 +47,18 @@
   <wsdl:message name="ITransmitterService_GetCountryData_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetCountryDataResponse" />
   </wsdl:message>
+  <wsdl:message name="ITransmitterService_GetCurrencyStock_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCurrencyStock" />
+  </wsdl:message>
+  <wsdl:message name="ITransmitterService_GetCurrencyStock_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCurrencyStockResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITransmitterService_GetCurrencyDemands_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCurrencyDemands" />
+  </wsdl:message>
+  <wsdl:message name="ITransmitterService_GetCurrencyDemands_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCurrencyDemandsResponse" />
+  </wsdl:message>
   <wsdl:message name="ITransmitterService_InitializeNukeDialog_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:InitializeNukeDialog" />
   </wsdl:message>
@@ -85,6 +97,14 @@
     <wsdl:operation name="GetCountryData">
       <wsdl:input wsaw:Action="http://tempuri.org/ITransmitterService/GetCountryData" message="tns:ITransmitterService_GetCountryData_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ITransmitterService/GetCountryDataResponse" message="tns:ITransmitterService_GetCountryData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrencyStock">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITransmitterService/GetCurrencyStock" message="tns:ITransmitterService_GetCurrencyStock_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITransmitterService/GetCurrencyStockResponse" message="tns:ITransmitterService_GetCurrencyStock_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrencyDemands">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITransmitterService/GetCurrencyDemands" message="tns:ITransmitterService_GetCurrencyDemands_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITransmitterService/GetCurrencyDemandsResponse" message="tns:ITransmitterService_GetCurrencyDemands_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="InitializeNukeDialog">
       <wsdl:output wsaw:Action="http://tempuri.org/ITransmitterService/InitializeNukeDialog" message="tns:ITransmitterService_InitializeNukeDialog_OutputCallbackMessage" />
@@ -153,6 +173,24 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetCurrencyStock">
+      <soap12:operation soapAction="http://tempuri.org/ITransmitterService/GetCurrencyStock" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrencyDemands">
+      <soap12:operation soapAction="http://tempuri.org/ITransmitterService/GetCurrencyDemands" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="InitializeNukeDialog">
       <soap12:operation soapAction="http://tempuri.org/ITransmitterService/InitializeNukeDialog" style="document" />
       <wsdl:output>
@@ -192,9 +230,9 @@
   </wsdl:binding>
   <wsdl:service name="Transmitter">
     <wsdl:port name="NetTcpBinding_ITransmitterService" binding="tns:NetTcpBinding_ITransmitterService">
-      <soap12:address location="net.tcp://192.168.0.101:10577/transmitter" />
+      <soap12:address location="net.tcp://192.168.43.136:10577/transmitter" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://192.168.0.101:10577/transmitter</wsa10:Address>
+        <wsa10:Address>net.tcp://192.168.43.136:10577/transmitter</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
           <Dns>localhost</Dns>
         </Identity>

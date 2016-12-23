@@ -29,6 +29,8 @@ namespace Totality.Client.ClientComponents.Dialogs.Military
         {
             this.receiveOrder = receiveOrder;
             InitializeComponent();
+
+            integerUpDown.Maximum = CountryData.NukesCount;
         }
 
         private void acceptButton_Click(object sender, RoutedEventArgs e)

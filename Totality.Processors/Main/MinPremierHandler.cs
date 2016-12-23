@@ -34,6 +34,16 @@ namespace Totality.Handlers.Main
 
         private bool reorganize(Order order)
         {
+
+            var c = _dataLayer.GetCountry(order.CountryName);
+            if (c.Money < 600000)
+            {
+                _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Не хватает денег на реорганизацию министерства." });
+                return false;
+            }
+            c.Money -= 600000;
+            _dataLayer.UpdateCountry(c);
+
             var foreignSpyes = (List<List<string>>)_dataLayer.GetProperty(order.CountryName, "ForeignSpyes");
             foreach (string country in foreignSpyes[order.TargetMinistery])
             {
@@ -58,7 +68,10 @@ namespace Totality.Handlers.Main
             var PremierLvlUpCost = (long)_dataLayer.GetProperty(order.CountryName, "PremierLvlUpCost");
 
             if (money < PremierLvlUpCost)
+            {
+                _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Не хватает денег на усиление власти." });
                 return false;
+            }
 
             money -= PremierLvlUpCost;
             _dataLayer.SetProperty(order.CountryName, "Money", money);

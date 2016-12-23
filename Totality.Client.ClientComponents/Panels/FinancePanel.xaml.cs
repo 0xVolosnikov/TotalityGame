@@ -57,6 +57,8 @@ namespace Totality.Client.ClientComponents.Panels
         {
             if (_currentDialog == null)
             {
+               // AbstractDialog.Stock = _client.GetCurrencyStock();
+               // AbstractDialog.Demands = _client.GetCurrencyDemands();
                 _currencyDialog.Visibility = Visibility.Visible;
             }
         }

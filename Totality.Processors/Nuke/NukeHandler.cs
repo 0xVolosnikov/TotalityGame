@@ -70,9 +70,9 @@ namespace Totality.Handlers.Nuke
             if (rckt != null)
             {
                 var missilesCount = (int)_dataLayer.GetProperty(defender, "MissilesCount");
-                var lvlMilitary = (int)_dataLayer.GetProperty(defender, "LvlMilitary");
+                var militaryScienceLvl = (int)_dataLayer.GetProperty(defender, "MilitaryScienceLvl");
                 int loosed;
-                int result = WinnerChoosingSystems.NukeMassiveTsop(missilesCount, out loosed, rckt.Count, _dataLayer.GetCountry(rckt.From).LvlMilitary, lvlMilitary);
+                int result = WinnerChoosingSystems.NukeMassiveTsop(missilesCount, out loosed, rckt.Count, _dataLayer.GetCountry(rckt.From).MilitaryScienceLvl, militaryScienceLvl);
                 missilesCount -= loosed;
                 _dataLayer.SetProperty(defender, "MissilesCount", missilesCount);
                 rckt.Count -= result;
@@ -134,7 +134,7 @@ namespace Totality.Handlers.Nuke
 
         private double getNukesDamage(int count, bool isAlerted)
         {
-            var min = Math.Pow(0.95, count);
+            var min = Math.Pow(0.90, count);
             var max = Math.Pow(0.85, count);
             var dif = max - min;
             if (isAlerted) dif /= 3;

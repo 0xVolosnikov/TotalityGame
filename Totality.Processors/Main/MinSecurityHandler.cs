@@ -56,11 +56,14 @@ namespace Totality.Handlers.Main
 
             networkLvlUpCost = (long)(networkLvlUpCost*Math.Pow(Constants.NetworkLvlUpCostRatio, count));
 
-            var intLvl = (int)_dataLayer.GetProperty(order.CountryName, "IntelligenceLvl");
+            var intLvl = (int)_dataLayer.GetProperty(order.CountryName, "CounterSpyLvl");
             var counterSpyLvl = (int)_dataLayer.GetProperty(order.TargetCountryName, "CounterSpyLvl");
 
             if (money < networkLvlUpCost || !WinnerChoosingSystems.Tsop(intLvl, counterSpyLvl))
+            {
+                _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Не удалось улучшить разведсеть в стране " + order.TargetCountryName + "." });
                 return false;
+            }
 
             money -= networkLvlUpCost;
             _dataLayer.SetProperty(order.CountryName, "Money", money);
@@ -96,21 +99,28 @@ namespace Totality.Handlers.Main
             agentCost = (long)(agentCost * Math.Pow(Constants.AgentCostRatio, count));
 
             if (money < agentCost)
+            {
+                _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Не хватило денег на внедрения агентов в страну " + order.TargetCountryName + "." });
                 return false;
+            }
 
             if (!spyNetworks.ContainsKey(order.TargetCountryName) || spyNetworks[order.TargetCountryName].NetLvl < Constants.MinAgentLvl)
             {
+                _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Разведсеть в стране " + order.TargetCountryName + " слшиком слаба для внедрения." });
                 return false;
             }
 
             money -= agentCost;
             _dataLayer.SetProperty(order.CountryName, "Money", money);
 
-            var intLvl = (int)_dataLayer.GetProperty(order.CountryName, "IntelligenceLvl");
+            var intLvl = (int)_dataLayer.GetProperty(order.CountryName, "CounterSpyLvl");
             var shadowingLvl = (int)_dataLayer.GetProperty(order.TargetCountryName, "ShadowingLvl");
 
             if (!WinnerChoosingSystems.Tsop(intLvl, shadowingLvl))
+            {
+                _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Не удалось внедрить агентов в страну " + order.TargetCountryName + "." });
                 return false;
+            }
 
             spyNetworks[order.TargetCountryName].Recruit[order.TargetMinistery] = true;
 
@@ -197,8 +207,11 @@ namespace Totality.Handlers.Main
             var money = (long)_dataLayer.GetProperty(order.CountryName, "Money");
             var purgeCost = Constants.PurgeCost;
 
-            if (money < purgeCost )
+            if (money < purgeCost)
+            {
+                _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Не хватило денег на чистку в министерстве: " + order.TargetMinistery + "." });
                 return false;
+            }
 
             money -= purgeCost;
             _dataLayer.SetProperty(order.CountryName, "Money", money);
@@ -206,7 +219,7 @@ namespace Totality.Handlers.Main
             var foreignSpyes = (List<List<string>>)_dataLayer.GetProperty(order.CountryName, "ForeignSpyes");
             for (int i = 0; i < foreignSpyes[order.TargetMinistery].Count; i++)
             {
-                var intLvl = (int)_dataLayer.GetProperty(foreignSpyes[order.TargetMinistery][i], "IntelligenceLvl");
+                var intLvl = (int)_dataLayer.GetProperty(foreignSpyes[order.TargetMinistery][i], "CounterSpyLvl");
                 if (WinnerChoosingSystems.Tsop(shadowingLvl, intLvl))
                 {
                     var foreignSpyNetwork = (Dictionary<string, SpyNetwork>)_dataLayer.GetProperty(foreignSpyes[order.TargetMinistery][i], "SpyNetworks");
@@ -231,7 +244,10 @@ namespace Totality.Handlers.Main
             var counterSpyLvlUpCost = (long)_dataLayer.GetProperty(order.CountryName, "CounterSpyLvlUpCost");
 
             if (money < counterSpyLvlUpCost)
+            {
+                _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Не хватило денег на повышение уровня контрразведки. " });
                 return false;
+            }
 
             money -= counterSpyLvlUpCost;
             _dataLayer.SetProperty(order.CountryName, "Money", money);

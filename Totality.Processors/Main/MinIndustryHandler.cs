@@ -71,6 +71,11 @@ namespace Totality.Handlers.Main
             _dataLayer.SetProperty(order.CountryName, "IndustryUpgradeCost", upgradeCost);
 
             industryPower *= Constants.IndustryUpgrade;
+
+            var demand = (long)_dataLayer.GetProperty(order.CountryName, "NationalCurrencyDemand");
+            demand = (long)(demand * 1.01);
+            _dataLayer.SetProperty(order.CountryName, "NationalCurrencyDemand", demand);
+                
             _dataLayer.SetProperty(order.CountryName, "Power" + industry + "Industry", industryPower);
 
             return true;

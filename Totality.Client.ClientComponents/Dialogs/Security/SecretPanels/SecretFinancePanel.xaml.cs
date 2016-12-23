@@ -27,6 +27,7 @@ namespace Totality.Client.ClientComponents.Dialogs.SecretPanels
     {
         private AbstractDialog _currentDialog;
         private CurrencyDialog _currencyDialog;
+
         public delegate void ReceiveOrder(object sender, Order order);
         ReceiveOrder _receiveOrder;
 

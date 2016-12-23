@@ -48,10 +48,15 @@ namespace Totality.Client.ClientComponents.Dialogs.Military
 
         public void receiveOrderFromChildren(object sender, Order order)
         {
-            order.CountryName = CountryData.Name;
-            order.TargetCountryName = (string)CountriesBox.SelectedItem;
-            order.Ministery = (short)Mins.Military;
-            _receiveOrder(this, order, "Ядерный удар", 0);
+            if (order != null)
+            {
+                order.CountryName = CountryData.Name;
+                order.TargetCountryName = (string)CountriesBox.SelectedItem;
+                order.Ministery = (short)Mins.Military;
+                _receiveOrder(this, order, "Ядерный удар", 0);
+            }
+            else
+                _receiveOrder(this, null, null, 0);
         }
     }
 }

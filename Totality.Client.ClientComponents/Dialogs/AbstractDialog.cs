@@ -16,5 +16,7 @@ namespace Totality.Client.ClientComponents.Dialogs
         public static int CurrentStep;
 
         public Country LocalCountryData;
+        public static Dictionary<string, long> Stock;
+        public static Dictionary<string, long> Demands;
     }
 }

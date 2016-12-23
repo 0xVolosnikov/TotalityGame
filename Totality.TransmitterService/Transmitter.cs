@@ -17,6 +17,15 @@ namespace Totality.TransmitterService
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
     public class Transmitter : AbstractLoggable, ITransmitterService
     {
+        public delegate void ClientRegister(string name);
+        public event ClientRegister ClientRegistered;
+
+        public delegate void ClientFault(string name);
+        public event ClientFault ClientDisconnected;
+
+        public delegate void ClientData(string name);
+        public event ClientData ClientSendedData;
+
         public SynchronizedCollection<Client> Clients = new SynchronizedCollection<Client>();
         public DiplomaticalHandler DipHandler { get; set; }
         public NukeHandler NukeHandler { get; set; }
@@ -32,6 +41,8 @@ namespace Totality.TransmitterService
 
         public bool Register(string myName)
         {
+            ClientRegistered?.Invoke(myName);
+
             if (!Clients.Any(c => c.Name == myName))
             {
                 Client newClient = new Client(OperationContext.Current.GetCallbackChannel<ICallbackService>(), myName);
@@ -51,12 +62,14 @@ namespace Totality.TransmitterService
         private void FaultHandler(Client sender)
         {
             _log.Info("Client " + sender.Name + " disconnected!");
+            ClientDisconnected?.Invoke(sender.Name);
             Clients.Remove(sender);
         }
 
-        public bool AddOrders(List<Order> orders)
+        public bool AddOrders(List<Order> orders, string name)
         {
             MainHandler.AddOrders(orders);
+            ClientSendedData?.Invoke(name);
             return true;
         }
 
@@ -127,6 +140,20 @@ namespace Totality.TransmitterService
         public Country GetCountryData(string name)
         {
             return MainHandler.GetCountry(name);
+        }
+
+        public Dictionary<string, long> GetCurrencyStock()
+        {
+            try { 
+            return MainHandler.GetCurrencyStock();
+
+            catch (Exception e)
+
+        }
+
+        public Dictionary<string, long> GetCurrencyDemands()
+        {
+            return MainHandler.GetCurrencyDemands();
         }
     }
 }

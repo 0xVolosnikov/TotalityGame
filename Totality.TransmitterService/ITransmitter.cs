@@ -17,7 +17,7 @@ namespace Totality.TransmitterService
         bool Register(string myName);
 
         [OperationContract]
-        bool AddOrders(List<Order> orders);
+        bool AddOrders(List<Order> orders, string name);
 
         [OperationContract]
         bool ShootDownNuke(string defender, Guid rocketId);
@@ -27,6 +27,12 @@ namespace Totality.TransmitterService
 
         [OperationContract]
         Country GetCountryData(string name);
+
+        [OperationContract]
+        Dictionary<string, long> GetCurrencyStock();
+
+        [OperationContract]
+        Dictionary<string, long> GetCurrencyDemands();
     }
 
     public interface ICallbackService

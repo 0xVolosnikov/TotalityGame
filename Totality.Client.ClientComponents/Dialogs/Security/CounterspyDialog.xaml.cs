@@ -37,7 +37,7 @@ namespace Totality.Client.ClientComponents.Dialogs.Security
             Order order = new Order(CountryData.Name);
             order.OrderNum = (short)Orders.CounterSpyLvlUp;
             order.Ministery = (short)Mins.Security;
-            _receiveOrder(this, order, "Усиление контрразведки" , 0);
+            _receiveOrder(this, order, "Усиление контрразведки" , CountryData.CounterSpyLvlUpCost);
         }
 
         private void cancelButton_Click(object sender, RoutedEventArgs e)

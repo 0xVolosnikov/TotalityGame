@@ -37,7 +37,7 @@ namespace Totality.Client.ClientComponents.Dialogs.Premier
             Order order = new Order(CountryData.Name);
             order.OrderNum = (short)Orders.LvlUp;
             order.Ministery = (short)Mins.Premier;
-            _receiveOrder(this, order, "Усиление власти", 0);
+            _receiveOrder(this, order, "Усиление власти", CountryData.PremierLvlUpCost);
         }
 
         private void cancelButton_Click(object sender, RoutedEventArgs e)

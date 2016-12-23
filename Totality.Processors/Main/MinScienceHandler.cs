@@ -85,6 +85,7 @@ namespace Totality.Handlers.Main
                     break;
             }
             _dataLayer.SetProperty(order.CountryName, sector + "ScLvlUpExp", sectorLvlUpExp);
+            _dataLayer.SetProperty(order.CountryName, sector + "Experience", 0);
 
             var lvl = (int)_dataLayer.GetProperty(order.CountryName, sector + "ScienceLvl") + 1;
             _dataLayer.SetProperty(order.CountryName, sector + "ScienceLvl", lvl);

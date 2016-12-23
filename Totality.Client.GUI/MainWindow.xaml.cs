@@ -122,6 +122,7 @@ namespace Totality.Client.GUI
 
                 _securityPanel._client = _client;
                 _foreignPanel._client = _client;
+                _financePanel._client = _client;
 
             }
             catch (Exception e)
@@ -197,13 +198,13 @@ namespace Totality.Client.GUI
 
         private void FindServer(object sender, DoWorkEventArgs e)
         {
-            DiscoveryClient discoveryClient = new DiscoveryClient(new UdpDiscoveryEndpoint());
+            DiscoveryClient discoveryClient = new DiscoveryClient(new UdpDiscoveryEndpoint("soap.udp://192.168.43.255:3702"));
 
             bool needToStop = false;
 
             while (!needToStop)
             {
-                FindResponse servers = discoveryClient.Find(new FindCriteria(typeof(ITransmitterService)){ Duration = TimeSpan.FromSeconds(0.5) });
+                FindResponse servers = discoveryClient.Find(new FindCriteria(typeof(ITransmitterService)){ Duration = TimeSpan.FromSeconds(1) });
                 System.Console.WriteLine(servers.Endpoints.Count);
                 if (servers.Endpoints.Count > 0)
                 {
@@ -322,7 +323,7 @@ namespace Totality.Client.GUI
             {
                 List<Order> orders = _ordersTable.GetOrders();
 
-                _client.AddOrders(orders.ToArray());
+                _client.AddOrders(orders.ToArray(), _country.Name);
                 _waitingPanel.Open();
 
             }

@@ -30,6 +30,10 @@ namespace Totality.Client.ClientComponents.Dialogs.Military
         {
             _receiveOrder = receiveOrder;
             InitializeComponent();
+
+            var b = Math.Max(CountryData.Money / Constants.MissileCost, (CountryData.FinalHeavyIndustry - CountryData.UsedHIpower) / Constants.MissileHeavyPower);
+
+            integerUpDown.Maximum = (int)b;
         }
 
         private void acceptButton_Click(object sender, RoutedEventArgs e)
@@ -38,7 +42,7 @@ namespace Totality.Client.ClientComponents.Dialogs.Military
             order.Count = (long)integerUpDown.Value;
             order.OrderNum = (short)Orders.MakeMissiles;
             order.Ministery = (short)Mins.Military;
-            _receiveOrder(this, order, "Производство ракет ПРО", 0);
+            _receiveOrder(this, order, "Производство ракет ПРО", Constants.MissileCost * order.Count);
         }
 
         private void cancelButton_Click(object sender, RoutedEventArgs e)

@@ -42,7 +42,7 @@ namespace Totality.Client.ClientComponents.Dialogs.Foreign
             types.Add("Торговля");
             types.Add("Мирный договор");
             types.Add("Военный альянс");
-            types.Add("Валютный союз");
+            //types.Add("Валютный союз");
             types.Add("Военные учения");
             types.Add("Денежный перевод");
             types.Add("Другое");
@@ -119,6 +119,12 @@ namespace Totality.Client.ClientComponents.Dialogs.Foreign
                 TradeCanvas.IsEnabled = true;
                 CountriesBox.IsEnabled = true;
                 TypesBox.IsEnabled = true;
+
+                if (CountryData.Alliance != CountryData.Name)
+                {
+                    AllianceTextBox.Text = CountryData.Alliance;
+                    AllianceTextBox.IsEnabled = false;
+                }
 
                 CountriesBox.ItemsSource = Countries;
                 if (Countries.Count > 0)
@@ -217,27 +223,46 @@ namespace Totality.Client.ClientComponents.Dialogs.Foreign
                 case "Торговля":
                     TradeCanvas.Visibility = Visibility.Visible;
                     _type = DipMsg.Types.Trade;
+                    acceptButton.IsEnabled = true;
                     break;
                 case "Мирный договор":
                     _type = DipMsg.Types.Peace;
+                    acceptButton.IsEnabled = true;
                     break;
                 case "Военный альянс":
+                    if (!_isReceive && CountryData.Alliance != CountryData.Name && !CountryData.IsBoss)
+                    {
+                        acceptButton.IsEnabled = false;
+                        break;
+                    }
+
+                    acceptButton.IsEnabled = true;
                     AllianceCanvas.Visibility = Visibility.Visible;
                     _type = DipMsg.Types.Alliance;
                     break;
                 case "Валютный союз":
+                   /* if (!_isReceive && CountryData.CurrencyAlliance != CountryData.Name)
+                    {
+                        acceptButton.IsEnabled = false;
+                        break;
+                    }
                     _type = DipMsg.Types.CurrencyAlliance;
+                    acceptButton.IsEnabled = true;
+                    */
                     break;
                 case "Военные учения":
                     _type = DipMsg.Types.MilitaryTraining;
+                    acceptButton.IsEnabled = true;
                     break;
                 case "Денежный перевод":
                     transferCanvas.Visibility = Visibility.Visible;
                     _type = DipMsg.Types.Transfer;
+                    acceptButton.IsEnabled = true;
                     break;
                 case "Другое":
                     otherCanvas.Visibility = Visibility.Visible;
                     _type = DipMsg.Types.Other;
+                    acceptButton.IsEnabled = true;
                     break;
             }
         }
