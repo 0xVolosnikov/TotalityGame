@@ -10,22 +10,45 @@
         <Canvas.Background>
             <ImageBrush Stretch="None" ImageSource="/Totality.Client.ClientComponents;component/Images/Security/SecurityBackground.png"/>
         </Canvas.Background>
+        <Canvas Height="54" Canvas.Top="179" Width="1200" Background="#26000000"/>
+        <Canvas Height="54" Canvas.Top="274" Width="1200" Background="#26000000" Canvas.Left="3"/>
         <Canvas Height="41" Width="1200">
-            <Canvas Height="41" Width="1200" Background="#FF00053D">
-                <Label x:Name="label" Content="Министерство Государственной Безопасности" Canvas.Left="191" Height="39" Width="830" Foreground="#FFFFF0CE" FontFamily="Impact" FontSize="36" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" Canvas.Top="-2"/>
+            <Canvas Height="41" Width="1200" Background="#FF141413">
+                <Label x:Name="label" Content="Министерство Государственной Безопасности" Canvas.Left="179" Height="40" Width="830" Foreground="#FFD6D8D0" FontFamily="Impact" FontSize="34" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" Canvas.Top="-2"/>
             </Canvas>
-            <Canvas Height="9" Canvas.Top="41" Width="1200" Canvas.Left="3">
+            <Canvas Height="7" Canvas.Top="41" Width="1200" Canvas.Left="3">
                 <Canvas.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="Black" Offset="0"/>
+                        <GradientStop Color="#66000000" Offset="0"/>
                         <GradientStop Color="#00000000" Offset="1"/>
                     </LinearGradientBrush>
                 </Canvas.Background>
             </Canvas>
         </Canvas>
-        <local:Button x:Name="ShadowingButton" Canvas.Left="893" Canvas.Top="82" Width="210" Height="321" imgUp="/Totality.Client.ClientComponents;component/Images/Security/SecurityShadowingButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Security/SecurityShadowingButtonDown.png" Cursor="Hand"/>
-        <local:Button x:Name="CounterspyButton" Canvas.Left="669" Canvas.Top="82" Width="210" Height="321" imgUp="/Totality.Client.ClientComponents;component/Images/Security/SecurityCounterspyButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Security/SecurityCounterspyButtonDown.png" Cursor="Hand"/>
-        <local:Button x:Name="PurgeButton" Canvas.Left="447" Canvas.Top="82" Width="210" Height="321" imgUp="/Totality.Client.ClientComponents;component/Images/Security/SecurityPurgeButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Security/SecurityPurgeButtonDown.png" Cursor="Hand"/>
-        <local:Button x:Name="NetsButton" Canvas.Left="90" Canvas.Top="82" Width="210" Height="321" imgUp="/Totality.Client.ClientComponents;component/Images/Security/SecurityNetsButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Security/SecurityNetsButtonDown.png" Cursor="Hand"/>
+        <local:Button x:Name="ShadowingButton" Canvas.Left="909" Canvas.Top="64" Width="241" Height="321" imgUp="/Totality.Client.ClientComponents;component/Images/Security/SecurityShadowingButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Security/SecurityShadowingButtonDown.png" Cursor="Hand">
+            <local:Button.Effect>
+                <DropShadowEffect BlurRadius="8" ShadowDepth="2"/>
+            </local:Button.Effect>
+        </local:Button>
+        <local:Button x:Name="CounterspyButton" Canvas.Left="628" Canvas.Top="64" Width="241" Height="321" imgUp="/Totality.Client.ClientComponents;component/Images/Security/SecuritySpyButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Security/SecuritySpyButtonDown.png" Cursor="Hand">
+            <local:Button.Effect>
+                <DropShadowEffect BlurRadius="8" ShadowDepth="2"/>
+            </local:Button.Effect>
+        </local:Button>
+        <local:Button x:Name="PurgeButton" Canvas.Left="331" Canvas.Top="64" Width="240" Height="321" imgUp="/Totality.Client.ClientComponents;component/Images/Security/SecurityPurgeButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Security/SecurityPurgeButtonDown.png" Cursor="Hand">
+            <local:Button.Effect>
+                <DropShadowEffect BlurRadius="8" ShadowDepth="2"/>
+            </local:Button.Effect>
+        </local:Button>
+        <local:Button x:Name="NetsButton" Canvas.Left="51" Canvas.Top="64" Width="240" Height="321" imgUp="/Totality.Client.ClientComponents;component/Images/Security/SecurityAgentsButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Security/SecurityAgentsButtonDown.png" Cursor="Hand">
+            <local:Button.Effect>
+                <DropShadowEffect BlurRadius="8" ShadowDepth="2"/>
+            </local:Button.Effect>
+        </local:Button>
+        <Canvas Height="28" Canvas.Top="417" Width="1200" SnapsToDevicePixels="True">
+            <Canvas.Background>
+                <ImageBrush ImageSource="/Totality.Client.ClientComponents;component/Images/Security/SecurityFooter.png"/>
+            </Canvas.Background>
+        </Canvas>
     </Canvas>
 </we:AbstractPanel>

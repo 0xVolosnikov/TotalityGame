@@ -38,6 +38,8 @@ namespace Totality.Client.ClientComponents.Dialogs.Security
             _receiveOrder = receiveOrder;
             _client = client;
             InitializeComponent();
+
+            levelButton.click += LevelButton_click;
             foreach (string min in Ministers)
             {
                 buttons.Add( new System.Windows.Controls.Button());
@@ -48,7 +50,7 @@ namespace Totality.Client.ClientComponents.Dialogs.Security
                 buttons.Last().Content = min;
                 buttons.Last().Background = null;
                 buttons.Last().Cursor = Cursors.Hand;
-                _wrap.Children.Add(buttons.Last());
+               // _wrap.Children.Add(buttons.Last());
             }
 
             CountriesBox.ItemsSource = Countries;
@@ -56,6 +58,13 @@ namespace Totality.Client.ClientComponents.Dialogs.Security
                 CountriesBox.SelectedIndex = 0;
         }
 
+        private void LevelButton_click()
+        {
+            var order = new Order(CountryData.Name, (string)CountriesBox.SelectedValue);
+            order.Ministery = (short)Mins.Security;
+            order.OrderNum = (short)Orders.ImproveNetwork;
+            _receiveOrder(this, order, "Повышение уровня разведсети: " + (string)CountriesBox.SelectedValue, 0);
+        }
 
         private void cancelButton_Click(object sender, RoutedEventArgs e)
         {
@@ -67,7 +76,7 @@ namespace Totality.Client.ClientComponents.Dialogs.Security
             if (CountryData.SpyNetworks.ContainsKey((string)CountriesBox.SelectedValue) && CountryData.SpyNetworks[(string)CountriesBox.SelectedValue].NetLvl >= 3)
             {
                 levelButton.Content = CountryData.SpyNetworks[(string)CountriesBox.SelectedValue].NetLvl;
-                _wrap.IsEnabled = true;
+                //_wrap.IsEnabled = true;
 
                 for (int i = 0; i < buttons.Count; i++)
                 {
@@ -165,14 +174,6 @@ namespace Totality.Client.ClientComponents.Dialogs.Security
             }
 
             this.UpdateLayout();
-        }
-
-        private void levelButton_Click(object sender, RoutedEventArgs e)
-        {
-            var order = new Order(CountryData.Name, (string)CountriesBox.SelectedValue);
-            order.Ministery = (short)Mins.Security;
-            order.OrderNum = (short)Orders.ImproveNetwork;
-            _receiveOrder(this, order, "Повышение уровня разведсети: " + (string)CountriesBox.SelectedValue, 0);           
         }
 
         private void getOrder(object sender, Order order)

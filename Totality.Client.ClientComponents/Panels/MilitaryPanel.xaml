@@ -18,7 +18,7 @@
                 <Canvas.Effect>
                     <DropShadowEffect Direction="270"/>
                 </Canvas.Effect>
-                <Label x:Name="label" Content="Министерство Обороны" Canvas.Left="427" Height="39" Width="346" Foreground="White" FontFamily="Haettenschweiler" FontSize="36" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" Canvas.Top="-2"/>
+                <Label x:Name="label" Content="Министерство Обороны" Canvas.Left="347" Height="40" Width="624" Foreground="White" FontFamily="Arial Black" FontSize="36" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" Canvas.Top="-2"/>
             </Canvas>
             <Canvas Height="2" Canvas.Top="41" Width="1200" Background="#77FFFFFF">
                 <Canvas.Effect>

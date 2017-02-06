@@ -68,13 +68,13 @@
             <Canvas.Background>
                 <ImageBrush ImageSource="Images/Industry/heavyIndustryPowerBack.png" Stretch="None"/>
             </Canvas.Background>
-            <Label x:Name="HeavyLabel" Content="500" Canvas.Left="43" Canvas.Top="10" Height="34" Width="123" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Padding="0" FontSize="28" FontFamily="Haettenschweiler" Foreground="#FF4F4F4F"/>
+            <Label x:Name="HeavyLabel" Content="500" Canvas.Left="43" Canvas.Top="10" Height="34" Width="123" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Padding="0" FontSize="28" FontFamily="Arial Black" Foreground="#FF4F4F4F"/>
         </Canvas>
         <Canvas Height="52" Canvas.Left="808" Canvas.Top="79" Width="210">
             <Canvas.Background>
                 <ImageBrush ImageSource="Images/Industry/lightIndustryPowerBack.png" Stretch="None"/>
             </Canvas.Background>
-            <Label x:Name="LightLabel" Content="500" Canvas.Left="43" Canvas.Top="10" Height="34" Width="123" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Padding="0" FontSize="28" FontFamily="Haettenschweiler" Foreground="#FF32514B" SnapsToDevicePixels="True"/>
+            <Label x:Name="LightLabel" Content="500" Canvas.Left="43" Canvas.Top="10" Height="34" Width="123" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Padding="0" FontSize="28" FontFamily="Arial Black" Foreground="#FF32514B" SnapsToDevicePixels="True"/>
         </Canvas>
         <Canvas Height="281" Canvas.Left="1056" Canvas.Top="128" Width="100">
             <Canvas.Background>

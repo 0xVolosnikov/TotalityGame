@@ -1,18 +1,19 @@
-﻿<local:AbstractDialog x:Class="Totality.Client.ClientComponents.Dialogs.Security.NetsDialog"
+﻿<local:AbstractDialog
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Totality.Client.ClientComponents.Dialogs"
+             xmlns:ClientComponents="clr-namespace:Totality.Client.ClientComponents" x:Class="Totality.Client.ClientComponents.Dialogs.Security.NetsDialog"
              mc:Ignorable="d" Width="846.18" Height="382.118" BorderBrush="White" BorderThickness="5">
     <local:AbstractDialog.Effect>
         <DropShadowEffect RenderingBias="Quality" BlurRadius="7"/>
     </local:AbstractDialog.Effect>
     <Canvas x:Name="canvas" Background="#FF0D1C21">
-        <Canvas Height="39" Canvas.Top="9" Width="836" Background="#FF3C8296">
-            <Image x:Name="image" Height="82" Canvas.Left="372" Width="100" Canvas.Top="-25" Stretch="None" Source="/Totality.Client.ClientComponents;component/Images/Security/SecurityEye.png"/>
+        <Canvas Height="39" Canvas.Top="9" Width="836" Background="#FFFADC75">
+            <Image x:Name="image" Height="63" Canvas.Left="386" Width="77" Canvas.Top="-12" Source="/Totality.Client.ClientComponents;component/Images/Security/SecurityEye.png"/>
         </Canvas>
-        <Button x:Name="cancelButton" Content="Закрыть" Canvas.Left="341" Canvas.Top="328" Width="164" Height="34" FontFamily="Arial Black" FontSize="20" Click="cancelButton_Click">
+        <Button x:Name="cancelButton" Content="Закрыть" Canvas.Left="695" Canvas.Top="275" Width="102" Height="58" FontFamily="Arial Black" FontSize="20" Click="cancelButton_Click">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                     <GradientStop Color="#FFF3F3F3" Offset="0"/>
@@ -20,7 +21,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <ComboBox x:Name="CountriesBox" Canvas.Left="156" Canvas.Top="58" Width="328" Height="52" FontFamily="Arial Black" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" SelectionChanged="CountriesBox_SelectionChanged">
+        <ComboBox x:Name="CountriesBox" Canvas.Left="147" Canvas.Top="61" Width="458" Height="37" FontFamily="Arial Black" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" SelectionChanged="CountriesBox_SelectionChanged">
             <ComboBox.Background>
                 <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                     <GradientStop Color="#FFCBC7C7" Offset="0"/>
@@ -28,20 +29,21 @@
                 </LinearGradientBrush>
             </ComboBox.Background>
         </ComboBox>
-        <Label x:Name="label_Copy" Content="Страна" Canvas.Top="58" Width="114" Height="54" Foreground="White" FontSize="24" FontFamily="Arial Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" Canvas.Left="32"/>
-        <TextBlock x:Name="textBlock" Canvas.Left="558" TextWrapping="Wrap" Text="Уровень сети" Canvas.Top="58" Height="54" Width="122" Foreground="White" FontFamily="Arial Black" FontSize="24" TextAlignment="Center"/>
-        <Button x:Name="levelButton" Content="0" Canvas.Left="684" Canvas.Top="58" Width="56" Height="52" FontFamily="Arial Black" FontSize="36" Click="levelButton_Click">
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                    <GradientStop Color="#FFCFFFBC" Offset="0"/>
-                    <GradientStop Color="#FFD1FFC0" Offset="0.5"/>
-                    <GradientStop Color="#FFD1FFC0" Offset="1"/>
-                </LinearGradientBrush>
-            </Button.Background>
-        </Button>
-        <Separator Height="13" Canvas.Left="40" Margin="0" Canvas.Top="111" Width="756"/>
-        <ScrollViewer Height="178" Canvas.Left="40" Canvas.Top="129" Width="756">
-            <WrapPanel x:Name="_wrap" Width="756" Background="#FFDBDBDB" Orientation="Vertical"/>
-        </ScrollViewer>
+        <Label x:Name="label_Copy" Content="Страна" Canvas.Top="56" Width="114" Height="43" Foreground="White" FontSize="24" FontFamily="Arial Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" Canvas.Left="28"/>
+        <TextBlock x:Name="textBlock" Canvas.Left="629" TextWrapping="Wrap" Text="Сеть:" Canvas.Top="65" Height="29" Width="78" Foreground="White" FontFamily="Arial Black" FontSize="24" TextAlignment="Center"/>
+        <Separator Height="13" Canvas.Left="40" Margin="0" Canvas.Top="103" Width="756"/>
+        <TextBlock x:Name="textBlock_Copy" Canvas.Left="708" TextWrapping="Wrap" Text="0" Canvas.Top="52" Height="50" Width="38" Foreground="#FFFF1E1E" FontFamily="Arial Black" FontSize="48" TextAlignment="Center"/>
+        <ClientComponents:Button x:Name="levelButton" Canvas.Left="751" Canvas.Top="58" Height="44" Width="38" imgUp="/Totality.Client.ClientComponents;component/Images/Security/AgentsLvlUp.png" imgDown="/Totality.Client.ClientComponents;component/Images/Security/AgentsLvlUpDown.png" Cursor="Hand"/>
+        <ClientComponents:Button Canvas.Left="40" Canvas.Top="121" Height="109" Width="102" imgUp="/Totality.Client.ClientComponents;component/Images/Security/SecurityIndButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Security/SecurityIndButtonDown.png" Cursor="Hand"/>
+        <ClientComponents:Button Canvas.Left="169" Canvas.Top="121" Height="109" Width="102"/>
+        <ClientComponents:Button Canvas.Left="302" Canvas.Top="121" Height="109" Width="102"/>
+        <ClientComponents:Button Canvas.Left="431" Canvas.Top="121" Height="109" Width="102" Cursor="Hand" imgUp="/Totality.Client.ClientComponents;component/Images/Security/SecurityForeignButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Security/SecurityForeignButtonDown.png"/>
+        <ClientComponents:Button Canvas.Left="564" Canvas.Top="121" Height="109" Width="102"/>
+        <ClientComponents:Button Canvas.Left="694" Canvas.Top="121" Height="109" Width="102"/>
+        <ClientComponents:Button Canvas.Left="40" Canvas.Top="246" Height="109" Width="102"/>
+        <ClientComponents:Button Canvas.Left="169" Canvas.Top="246" Height="109" Width="102"/>
+        <ClientComponents:Button Canvas.Left="303" Canvas.Top="246" Height="109" Width="102"/>
+        <ClientComponents:Button Canvas.Left="431" Canvas.Top="246" Height="109" Width="102"/>
+        <ClientComponents:Button Canvas.Left="564" Canvas.Top="246" Height="109" Width="102"/>
     </Canvas>
 </local:AbstractDialog>

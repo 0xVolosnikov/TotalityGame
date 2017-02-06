@@ -671,6 +671,10 @@
       <Project>{2d0a4c97-8f53-4b07-b51c-d1cb3bbdc020}</Project>
       <Name>Totality.CommonClasses</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Totality.LoggingSystem\Totality.LoggingSystem.csproj">
+      <Project>{D90072A3-49D1-40CF-AE1A-98CD75136A3B}</Project>
+      <Name>Totality.LoggingSystem</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Totality.Model\Totality.Model.csproj">
       <Project>{277f5307-857b-46bb-8f51-63df2549bbe8}</Project>
       <Name>Totality.Model</Name>
@@ -755,7 +759,6 @@
     <Resource Include="Images\Science\ScienceHeavyLine.png" />
     <Resource Include="Images\Science\ScienceLightLine.png" />
     <Resource Include="Images\Science\ScienceMilitaryLine.png" />
-    <Resource Include="Images\Security\SecurityBackground.png" />
     <Resource Include="Images\Security\SecurityShadowingButton.png" />
     <Resource Include="Images\Security\SecurityShadowingButtonDown.png" />
     <Resource Include="Images\Security\SecurityCounterspyButton.png" />
@@ -831,6 +834,18 @@
     <Resource Include="Panels\Images\Industry\lightIndustryButtonDeactivated.png" />
     <Resource Include="Images\StatBack.jpg" />
     <Resource Include="Images\Finance\CurrencyBack.png" />
+    <Resource Include="Images\Security\SecurityFooter.png" />
+    <Resource Include="Images\Security\SecurityBackground.png" />
+    <Resource Include="Images\Security\SecurityAgentsButton.png" />
+    <Resource Include="Images\Security\SecuritySpyButton.png" />
+    <Resource Include="Images\Security\SecurityAgentsButtonDown.png" />
+    <Resource Include="Images\Security\SecuritySpyButtonDown.png" />
+    <Resource Include="Images\Security\AgentsLvlUp.png" />
+    <Resource Include="Images\Security\AgentsLvlUpDown.png" />
+    <Resource Include="Images\Security\SecurityIndButton.png" />
+    <Resource Include="Images\Security\SecurityIndButtonDown.png" />
+    <Resource Include="Images\Security\SecurityForeignButtonDown.png" />
+    <Resource Include="Images\Security\SecurityForeignButton.png" />
     <Content Include="video2.mp4">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Totality.Client.GUI"
         xmlns:Totality.Client.ClientComponents="clr-namespace:Totality.Client.ClientComponents;assembly=Totality.Client.ClientComponents" xmlns:Panels="clr-namespace:Totality.Client.ClientComponents.Panels;assembly=Totality.Client.ClientComponents" x:Class="Totality.Client.GUI.MainWindow"
         mc:Ignorable="d"
-        Title="Totality" Height="702" Width="1206.5" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" UseLayoutRounding="True" Icon="lettert_letr_12656.ico">
+        Title="Totality" Height="702" Width="1206.5" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" UseLayoutRounding="True" Icon="lettert_letr_12656.ico" Background="Black" BorderBrush="#FF404040">
     <Grid x:Name="_grid">
         <Grid.Background>
             <ImageBrush ImageSource="Images/bgtexture.jpg" TileMode="Tile" ViewportUnits="Absolute" Viewport="0 0 500 300" Stretch="None"/>

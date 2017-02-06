@@ -18,6 +18,7 @@ using Totality.Model;
 using Totality.CommonClasses;
 using Totality.Client.ClientComponents.Panels;
 using Totality.Client.ClientComponents.ServiceReference1;
+using Totality.LoggingSystem;
 
 namespace Totality.Client.ClientComponents.Panels
 {
@@ -55,11 +56,18 @@ namespace Totality.Client.ClientComponents.Panels
 
         private void createCurrencyDialog<T>() where T : UIElement
         {
-            if (_currentDialog == null)
+            try
             {
-               // AbstractDialog.Stock = _client.GetCurrencyStock();
-               // AbstractDialog.Demands = _client.GetCurrencyDemands();
-                _currencyDialog.Visibility = Visibility.Visible;
+                if (_currentDialog == null)
+                {
+                    AbstractDialog.Stock = _client.GetCurrencyStock();
+                    AbstractDialog.Demands = _client.GetCurrencyDemands();
+                    _currencyDialog.Visibility = Visibility.Visible;
+                }
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.Message);
             }
         }
 
@@ -84,7 +92,16 @@ namespace Totality.Client.ClientComponents.Panels
 
         public void Update()
         {
-            _currencyDialog.Update();
+            try
+            {
+                _currencyDialog.Update();
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.Message);
+            }
+
+
 
             if (CountryData.MinsBlocks[(short)Mins.Finance] > 0)
             {

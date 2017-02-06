@@ -9,8 +9,8 @@
         <DropShadowEffect RenderingBias="Quality" BlurRadius="7"/>
     </local:AbstractDialog.Effect>
     <Canvas x:Name="canvas" Background="#FF0D1C21">
-        <Canvas Height="39" Canvas.Top="23" Width="607" Background="#FF3C8296">
-            <Image x:Name="image" Height="82" Canvas.Left="252" Width="100" Canvas.Top="-25" Stretch="None" Source="/Totality.Client.ClientComponents;component/Images/Security/SecurityEye.png"/>
+        <Canvas Height="39" Canvas.Top="23" Width="607" Background="#FFFADC75">
+            <Image x:Name="image" Height="58" Canvas.Left="262" Width="72" Canvas.Top="-10" Source="/Totality.Client.ClientComponents;component/Images/Security/SecurityEye.png"/>
         </Canvas>
         <Button x:Name="cancelButton" Content="Отмена" Canvas.Left="92" Canvas.Top="232" Width="194" Height="48" FontFamily="Arial Black" FontSize="20" Click="cancelButton_Click">
             <Button.Background>
@@ -28,6 +28,6 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <TextBlock x:Name="textBlock" Canvas.Left="92" TextWrapping="Wrap" Text="Усилить контрразведку?" Canvas.Top="135" Foreground="White" FontFamily="Arial Black" FontSize="24" TextAlignment="Center" Height="38" Width="418"/>
+        <TextBlock x:Name="textBlock" Canvas.Left="92" TextWrapping="Wrap" Text="Усилить агентов?" Canvas.Top="135" Foreground="White" FontFamily="Arial Black" FontSize="24" TextAlignment="Center" Height="38" Width="418"/>
     </Canvas>
 </local:AbstractDialog>

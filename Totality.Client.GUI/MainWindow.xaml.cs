@@ -23,6 +23,7 @@ using Totality.Client.ClientComponents.Dialogs;
 using Totality.Client.ClientComponents.ServiceReference1;
 using Totality.Model;
 
+
 namespace Totality.Client.GUI
 {
     /// <summary>
@@ -30,6 +31,7 @@ namespace Totality.Client.GUI
     /// </summary>
     public partial class MainWindow : Window
     {
+        //private Logger _log = new Logger();
         private List<MinisteryButton> buttons = new List<MinisteryButton>();
         private DoubleAnimation slideToLeft;
         private DoubleAnimation slideToCenter;
@@ -48,7 +50,7 @@ namespace Totality.Client.GUI
 
         public MainWindow()
         {
-            try
+           // try
             {
                 _servCallbackHandler = new CallbackHandler();
                 _servCallbackHandler.CountryUpdated += _servCallbackHandler_CountryUpdated;
@@ -125,10 +127,11 @@ namespace Totality.Client.GUI
                 _financePanel._client = _client;
 
             }
-            catch (Exception e)
-            {
-                System.Console.WriteLine(e.Message);
-            }
+           // catch (Exception error)
+          //  {
+          //      _log.Error(error.Message);
+          //      MessageBox.Show(error.Message);
+         //   }
         }
 
         private void _servCallbackHandler_MessageReceived(Model.Diplomatical.DipMsg msg)
@@ -138,7 +141,15 @@ namespace Totality.Client.GUI
 
         private void _servCallbackHandler_ContractsReceived(Model.Diplomatical.DipContract[] contracts)
         {
-            _foreignPanel.ReceiveContracts(contracts);
+            try
+            {
+                _foreignPanel.ReceiveContracts(contracts);
+            }
+            catch (Exception error)
+            {
+               // _log.Error(error.Message);
+                MessageBox.Show(error.Message);
+            }
         }
 
         private void _servCallbackHandler_NewsReceived(News[] news)
@@ -153,21 +164,37 @@ namespace Totality.Client.GUI
 
         private void _servCallbackHandler_NukesUpdated(NukeRocket[] rockets)
         {
-            if (_nukeDialog != null)
+            try
             {
-                _nukeDialog.UpdateRockets(rockets);
+                if (_nukeDialog != null)
+                {
+                    _nukeDialog.UpdateRockets(rockets);
+                }
+                else
+                {
+                    _nukeDialog = new NukeAttackDialog();
+                    _nukeDialog.TryToShootDown += _nukeDialog_TryToShootDown;
+                    _nukeDialog.UpdateRockets(rockets);
+                }
             }
-            else
+            catch (Exception error)
             {
-                _nukeDialog = new NukeAttackDialog();
-                _nukeDialog.TryToShootDown += _nukeDialog_TryToShootDown;
-                _nukeDialog.UpdateRockets(rockets);
+                //_log.Error(error.Message);
+                MessageBox.Show(error.Message);
             }
         }
 
         private void _nukeDialog_TryToShootDown(Guid Id)
         {
-            _client.ShootDownNuke(_countryModel.Name, Id);
+            try
+            {
+                _client.ShootDownNuke(_countryModel.Name, Id);
+            }
+            catch (Exception error)
+            {
+                //_log.Error(error.Message);
+                MessageBox.Show(error.Message);
+            }
         }
 
         private void _servCallbackHandler_NukesInitialized()
@@ -198,78 +225,114 @@ namespace Totality.Client.GUI
 
         private void FindServer(object sender, DoWorkEventArgs e)
         {
-            DiscoveryClient discoveryClient = new DiscoveryClient(new UdpDiscoveryEndpoint("soap.udp://192.168.43.255:3702"));
-
-            bool needToStop = false;
-
-            while (!needToStop)
+            try
             {
-                FindResponse servers = discoveryClient.Find(new FindCriteria(typeof(ITransmitterService)){ Duration = TimeSpan.FromSeconds(1) });
-                System.Console.WriteLine(servers.Endpoints.Count);
-                if (servers.Endpoints.Count > 0)
+                DiscoveryClient discoveryClient = new DiscoveryClient(new UdpDiscoveryEndpoint("soap.udp://192.168.0.255:3702"));
+
+                bool needToStop = false;
+
+                while (!needToStop && this.IsInitialized)
                 {
-                    needToStop = true;
-                    _client.Endpoint.Address = servers.Endpoints[0].Address;
-                    
+                    FindResponse servers = discoveryClient.Find(new FindCriteria(typeof(ITransmitterService)) { Duration = TimeSpan.FromSeconds(1) });
+                    //_log.Info(servers.Endpoints.Count.ToString());
+                    if (servers.Endpoints.Count > 0)
+                    {
+                        needToStop = true;
+                        _client.Endpoint.Address = servers.Endpoints[0].Address;
+
+                    }
                 }
+                discoveryClient.Close();
             }
-            discoveryClient.Close();
+            catch (Exception error)
+            {
+                //_log.Error(error.Message);
+                MessageBox.Show(error.Message);
+            }
         }
 
         private void ServerFound(object sender, RunWorkerCompletedEventArgs e)
         {
-            _client.Open();
-            this.Dispatcher.Invoke( () => _client.InnerDuplexChannel.Faulted += ClientChannelFaulted);
-            _client.Register(_name);
-            this.Dispatcher.Invoke( () => _connectionPanel.Close());
+            try
+            {
+                _client.Open();
+                this.Dispatcher.Invoke(() => _client.InnerDuplexChannel.Faulted += ClientChannelFaulted);
+                _client.Register(_name);
+                this.Dispatcher.Invoke(() => _connectionPanel.Close());
+            }
+            catch (Exception error)
+            {
+                //_log.Error(error.Message);
+                MessageBox.Show(error.Message);
+            }
         }
 
 
         private void ClientChannelFaulted(object sender, EventArgs e)
         {
-            Dispatcher.BeginInvoke(new Action( () => {
-                _client.Abort();
-                _client = new TransmitterServiceClient(new System.ServiceModel.InstanceContext(_servCallbackHandler));
-                _connectionPanel.Open();
-                connectionSetter.RunWorkerAsync();
-            }));
+            try
+            {
+                Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    _client.Abort();
+                    _client = new TransmitterServiceClient(new System.ServiceModel.InstanceContext(_servCallbackHandler));
+                    _securityPanel._client = _client;
+                    _foreignPanel._client = _client;
+                    _financePanel._client = _client;
+                    _connectionPanel.Open();
+                    connectionSetter.RunWorkerAsync();
+                }));
+            }
+            catch (Exception error)
+            {
+                //_log.Error(error.Message);
+                MessageBox.Show(error.Message);
+            }
 
-        }
+}
 
         private void _servCallbackHandler_CountryUpdated(Country country)
         {
-            _ordersTable.Clear();
-            _waitingPanel.Close();
-            if (_nukeDialog != null)
+            try
             {
-                _grid.Children.Remove(_nukeDialog);
-                _nukeDialog = null;
+                _ordersTable.Clear();
+                _waitingPanel.Close();
+                if (_nukeDialog != null)
+                {
+                    _grid.Children.Remove(_nukeDialog);
+                    _nukeDialog = null;
+                }
+                _country = country;
+                AbstractPanel.CountryData = country;
+                AbstractDialog.CountryData = country;
+                AbstractDialog.Countries = country.CurrencyRatios.Keys.ToList();
+                AbstractDialog.CurrentStep++;
+                _header.UpdateMoney(country.Money);
+                _header.UpdateNukes(country.NukesCount);
+                _header.UpdateMissiles(country.MissilesCount);
+                _header.UpdateMood((short)country.Mood);
+
+                _industryPanel.Update();
+                _financePanel.Update();
+                _militaryPanel.Update();
+                _mediaPanel.Update();
+                _foreignPanel.Update();
+                _innerPanel.Update();
+                _securityPanel.Update();
+                _sciencePanel.Update();
+                _premierPanel.Update();
+
+                _statPanel.Update();
+
+                but6.DoClick();
+                changePanel(_mediaPanel);
+                _mediaPanel.OpenNews();
             }
-            _country = country;
-            AbstractPanel.CountryData = country;
-            AbstractDialog.CountryData = country;
-            AbstractDialog.Countries = country.CurrencyRatios.Keys.ToList();
-            AbstractDialog.CurrentStep++;
-            _header.UpdateMoney(country.Money);
-            _header.UpdateNukes(country.NukesCount);
-            _header.UpdateMissiles(country.MissilesCount);
-            _header.UpdateMood((short)country.Mood);
-
-            _industryPanel.Update();
-            _financePanel.Update();
-            _militaryPanel.Update();
-            _mediaPanel.Update();
-            _foreignPanel.Update();
-            _innerPanel.Update();
-            _securityPanel.Update();
-            _sciencePanel.Update();
-            _premierPanel.Update();
-
-            _statPanel.Update();
-
-            but6.DoClick();
-            changePanel(_mediaPanel);
-            _mediaPanel.OpenNews();
+            catch (Exception e)
+            {
+                //_log.Error(e.Message);
+                MessageBox.Show(e.Message);
+            }
 
 
         }
@@ -319,15 +382,25 @@ namespace Totality.Client.GUI
 
         private void sendOrders(bool allowed, SendDialog sender )
         {
-            if (allowed)
+            try
             {
-                List<Order> orders = _ordersTable.GetOrders();
+                if (allowed)
+                {
+                    List<Order> orders = _ordersTable.GetOrders();
 
-                _client.AddOrders(orders.ToArray(), _country.Name);
-                _waitingPanel.Open();
+                    _client.AddOrders(orders.ToArray(), _country.Name);
+                    _waitingPanel.Open();
 
+                }
+                canvas1.Children.Remove(sender);
             }
-            canvas1.Children.Remove(sender);
+            catch (Exception e)
+            {
+                //_log.Error(e.Message);
+                MessageBox.Show(e.Message);
+            }
         }
+
+        
     }
 }

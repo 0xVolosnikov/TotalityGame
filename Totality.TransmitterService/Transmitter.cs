@@ -11,6 +11,7 @@ using Totality.Model.Diplomatical;
 using Totality.Handlers.Diplomatical;
 using Totality.Handlers.Nuke;
 using Totality.Handlers.Main;
+using System.Windows;
 
 namespace Totality.TransmitterService
 {
@@ -139,21 +140,48 @@ namespace Totality.TransmitterService
 
         public Country GetCountryData(string name)
         {
-            return MainHandler.GetCountry(name);
+            try
+            {
+                return MainHandler.GetCountry(name);
+            }
+            catch (Exception e)
+            {
+                _log.Error(e.Message);
+                MessageBox.Show(e.Message);
+                return null;
+            }
+
         }
 
         public Dictionary<string, long> GetCurrencyStock()
         {
-            try { 
-            return MainHandler.GetCurrencyStock();
+            try
+            {
+                return MainHandler.GetCurrencyStock();
+            }
 
             catch (Exception e)
+            {
+                _log.Error(e.Message);
+                MessageBox.Show(e.Message);
+                return null;
+            }
 
         }
 
         public Dictionary<string, long> GetCurrencyDemands()
         {
-            return MainHandler.GetCurrencyDemands();
-        }
+            try
+            {
+                return MainHandler.GetCurrencyDemands();
+            }
+
+            catch (Exception e)
+            {
+                _log.Error(e.Message);
+                MessageBox.Show(e.Message);
+                return null;
+            }
+}
     }
 }
