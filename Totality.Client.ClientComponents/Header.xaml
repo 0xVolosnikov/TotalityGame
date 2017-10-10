@@ -7,25 +7,26 @@
              mc:Ignorable="d" 
              d:DesignHeight="69.29" d:DesignWidth="1194.193" Height="51">
     <Grid>
-        <Canvas Background="#FF1A203D" Margin="0,0,0,4">
+        <Canvas x:Name="_canvas" Background="#FF1A203D" Margin="0,0,0,4">
             <Canvas Height="38" Canvas.Left="10" Canvas.Top="5" Width="258">
-                <Label x:Name="labelDollar" Content="$" Height="38" Width="23" FontSize="20" FontFamily="Euphemia" FontWeight="Bold" Foreground="DarkOrange"/>
-                <Label x:Name="LMoney" Content="2.000.000.000" Canvas.Left="114" Height="38" Width="144" Foreground="White" FontFamily="Euphemia" FontSize="20" FontWeight="Bold"/>
-                <Label x:Name="labelBudget" Content="Бюджет:" Canvas.Left="23" Height="38" Width="94" FontFamily="Euphemia" FontWeight="Bold" FontSize="20" Foreground="White"/>
+                <Label x:Name="labelDollar" Content="$" Height="38" Width="22" FontSize="20" FontFamily="Euphemia" FontWeight="Bold" Foreground="DarkOrange" Canvas.Left="16" Padding="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+                <Label x:Name="LMoney" Content="200.000.000" Canvas.Left="117" Height="22" Width="144" Foreground="White" FontFamily="Euphemia" FontSize="20" FontWeight="Bold" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Canvas.Top="4"/>
+                <Label x:Name="labelBudget" Content="Бюджет:" Canvas.Left="31" Height="38" Width="94" FontFamily="Euphemia" FontWeight="Bold" FontSize="20" Foreground="White" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                <Label x:Name="profitLabel" Content="+ 3.000.000" Canvas.Left="117" Height="15" Width="141" Foreground="#FF78FF74" FontFamily="Euphemia" FontWeight="Bold" Padding="0" Canvas.Top="23" IsEnabled="False" Background="#00000000" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
             </Canvas>
             <Canvas Height="38" Canvas.Left="759" Canvas.Top="5" Width="155">
-                <Image x:Name="shield" Height="38" Width="37" Source="Images/Interface/proShield.png" Stretch="None"/>
-                <Label x:Name="labelPRO" Content="ПРО:" Canvas.Left="33" Height="38" Width="57" FontFamily="Euphemia" FontWeight="Bold" FontSize="20" Foreground="White"/>
-                <Label x:Name="LPRO" Content="1.000" Canvas.Left="90" Height="38" Width="66" Foreground="White" FontFamily="Euphemia" FontSize="20" FontWeight="Bold"/>
+                <Image x:Name="shield" Height="38" Width="37" Source="Images/Interface/proShield.png" Stretch="None" Canvas.Left="2" Canvas.Top="-1"/>
+                <Label x:Name="labelPRO" Content="ПРО:" Canvas.Left="33" Height="38" Width="57" FontFamily="Euphemia" FontWeight="Bold" FontSize="20" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0"/>
+                <Label x:Name="LPRO" Content="1.000" Canvas.Left="90" Height="38" Width="66" Foreground="White" FontFamily="Euphemia" FontSize="20" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0"/>
             </Canvas>
             <Canvas Height="38" Canvas.Left="304" Canvas.Top="5" Width="138">
-                <Image x:Name="sword" Height="38" Width="37" Source="Images/Interface/sword.png" Stretch="None"/>
-                <Label x:Name="labelNuke" Content="ЯР:" Canvas.Left="33" Height="38" Width="42" FontFamily="Euphemia" FontWeight="Bold" FontSize="20" Foreground="White"/>
-                <Label x:Name="LNukes" Content="1.000" Canvas.Left="75" Height="38" Width="66" Foreground="White" FontFamily="Euphemia" FontSize="20" FontWeight="Bold"/>
+                <Image x:Name="sword" Height="38" Width="37" Source="Images/Interface/sword.png" Stretch="None" Canvas.Left="3" Canvas.Top="-2"/>
+                <Label x:Name="labelNuke" Content="ЯР:" Canvas.Left="33" Height="38" Width="42" FontFamily="Euphemia" FontWeight="Bold" FontSize="20" Foreground="White" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                <Label x:Name="LNukes" Content="1.000" Canvas.Left="75" Height="38" Width="66" Foreground="White" FontFamily="Euphemia" FontSize="20" FontWeight="Bold" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
             </Canvas>
             <Canvas Height="38" Canvas.Left="987" Canvas.Top="5" Width="101">
-                <Image x:Name="smile" Height="38" Width="37" Source="Images/Interface/smile.png" Stretch="None"/>
-                <Label x:Name="LMood" Content="100%" Canvas.Left="37" Height="38" Width="66" Foreground="White" FontFamily="Euphemia" FontSize="20" FontWeight="Bold"/>
+                <Image x:Name="smile" Height="38" Width="37" Source="Images/Interface/smile.png" Stretch="None" Canvas.Left="8" Canvas.Top="-2"/>
+                <Label x:Name="LMood" Content="100%" Canvas.Left="37" Height="38" Width="66" Foreground="White" FontFamily="Euphemia" FontSize="20" FontWeight="Bold" Padding="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
             </Canvas>
             <local:StatButton x:Name="statButton" Canvas.Left="478" Canvas.Top="6" Width="244" Cursor="Hand"/>
         </Canvas>

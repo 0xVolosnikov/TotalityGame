@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Totality.CommonClasses;
 
 namespace Totality.Client.ClientComponents
 {
@@ -29,10 +30,24 @@ namespace Totality.Client.ClientComponents
             statButton.click += () => StatButtonClicked?.Invoke();
         }
 
+        public void RiotOn()
+        {
+            _canvas.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFC00000"));
+        }
+
+        public void RiotOff()
+        {
+            _canvas.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF1A203D"));
+        }
 
         public void UpdateMoney (long money)
         {
             this.LMoney.Content = String.Format("{0:0,0}", money);
+        }
+
+        public void UpdateProfit(long FinalLightIndustry, double TaxesLvl)
+        {
+            profitLabel.Content = "+" + ((long) (FinalLightIndustry*Constants.LightPowerProfit*(TaxesLvl/100.0))).ToString("N0");
         }
 
         public void UpdateNukes(int count)

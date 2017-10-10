@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Totality.Handlers.News;
 using Totality.Model.Diplomatical;
 using Totality.Model.Interfaces;
@@ -47,5 +48,6 @@ namespace Totality.Handlers.Diplomatical
         {
             _transmitter.SendContractsToAll(_dataLayer.GetContractList());
         }
+
     }
 }

@@ -14,16 +14,17 @@ namespace Totality.Model
             [DataMember]
             public int NetLvl;
             [DataMember]
-            public List<bool> Recruit;
+            public bool[] Recruit;
 
             public SpyNetwork()
             {
                 NetLvl = 0;
-                bool[] rc = new bool[Constants.CountOfMinisters];
-                Recruit = new List<bool>(rc);
+                Recruit = new bool[Constants.CountOfMinisters];
             }
         }
 
+        [DataMember]
+        public int Step;
         [DataMember]
         public string Alliance;
         [DataMember]

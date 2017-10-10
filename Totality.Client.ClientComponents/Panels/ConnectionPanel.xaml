@@ -13,21 +13,26 @@
             <Image x:Name="_synchronizationImage" HorizontalAlignment="Left" Height="236" VerticalAlignment="Top" Width="236" Source="Images/synchronization.png" Canvas.Left="378" Canvas.Top="196"/>
             <Image x:Name="image" Height="200" Canvas.Left="206" Canvas.Top="-9" Width="581" Source="Images/TotalityText.png"/>
             <Image x:Name="image1" Height="63" Canvas.Left="58" Canvas.Top="494" Width="893" Source="Images/TotalityText2.png"/>
-            <Border x:Name="_nameCanvas" Height="614" Width="1006" Background="#FF170000" BorderBrush="White" BorderThickness="2">
+            <Border x:Name="_nameCanvas" Height="614" Width="1006" BorderBrush="White" BorderThickness="2">
+                <Border.Background>
+                    <ImageBrush ImageSource="/Totality.Client.ClientComponents;component/Images/map.jpg"/>
+                </Border.Background>
                 <Grid>
-                    <Label x:Name="label" Content="Введите название вашей страны:" FontSize="48" FontFamily="Arial" FontWeight="Bold" Foreground="White" Margin="108,168,84,381"/>
-                    <TextBox x:Name="nameInput" TextWrapping="Wrap" Background="#FFF5FCFF" FontSize="36" HorizontalContentAlignment="Center" Margin="108,264,84,293"/>
-                    <Button x:Name="approveName" Content="Подтвердить" FontSize="24" FontFamily="Arial" FontWeight="Bold" Margin="627,416,84,128" Click="approveName_Click">
+                    <Label x:Name="label" Content="Введите название вашей страны:" FontSize="48" FontFamily="Arial" FontWeight="Bold" Foreground="White" Margin="96,210,94.4,338.4"/>
+                    <TextBox x:Name="nameInput" TextWrapping="Wrap" FontSize="36" HorizontalContentAlignment="Center" Margin="96,301,95.4,255.4" Background="#FFF5FCFF"/>
+                    <Button x:Name="approveName" Content="Подтвердить" FontSize="24" FontFamily="Source Sans Pro Black" FontWeight="Bold" Margin="616,400,94.4,143.4" Click="approveName_Click">
                         <Button.Background>
                             <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                                 <GradientStop Color="#FFF3F3F3" Offset="0"/>
                                 <GradientStop Color="#FFEBEBEB" Offset="0.5"/>
                                 <GradientStop Color="#FFDDDDDD" Offset="0.904"/>
-                                <GradientStop Color="#FFCDCDCD" Offset="1"/>
+                                <GradientStop Color="#FFD6D6D6" Offset="0.987"/>
                             </LinearGradientBrush>
                         </Button.Background>
                     </Button>
-                    <Image x:Name="image2" Source="/Totality.Client.ClientComponents;component/Images/Interface/star.png" Margin="470,42,436,472"/>
+                    <Image x:Name="image2" Source="/Totality.Client.ClientComponents;component/Images/Interface/star.png" Margin="665,57,290.4,506.4"/>
+                    <Label x:Name="label1" Margin="331,35,342.4,487.4" FontFamily="Capture it" Foreground="White" Content="Totality" FontWeight="Bold" FontSize="72"/>
+                    <Image x:Name="image2_Copy" Source="/Totality.Client.ClientComponents;component/Images/Interface/star.png" Margin="278,57,676.4,506.4"/>
                 </Grid>
             </Border>
         </Canvas>

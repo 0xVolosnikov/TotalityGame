@@ -12,7 +12,7 @@
         </Canvas.Background>
         <Canvas Height="43" Width="1200">
             <Canvas Height="47" Canvas.Top="2" Width="1200" Background="#F2000000">
-                <Label x:Name="label" Content="Министерство промышленности" Canvas.Left="248" Height="39" Width="705" Foreground="White" FontFamily="Impact" FontSize="36" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" Canvas.Top="1"/>
+                <Label x:Name="label" Content="Министерство промышленности" Height="39" Width="1200" Foreground="White" FontFamily="Impact" FontSize="36" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" Canvas.Top="1"/>
             </Canvas>
             <Canvas Height="2" Canvas.Top="49" Width="1200" Background="#77FFFFFF"/>
             <Canvas Height="2" Width="1200" Background="#77FFFFFF"/>

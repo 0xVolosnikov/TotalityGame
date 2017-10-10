@@ -41,7 +41,10 @@ namespace Totality.Client.ClientComponents.Dialogs.Finance
             integerUpDown.ValueChanged += IntegerUpDown_ValueChanged;
 
             if (type == Orders.PurchaseCurrency)
-                integerUpDown.Maximum = (int)CountryData.Money;
+                integerUpDown.Maximum = (int)FinancialTools.GetMaximumPurchaseHighAcc(CountryData.Money,
+                Demands[CountryData.Name], Demands[_country],
+                Stock[CountryData.Name], Stock[_country],
+                SumIndPowers[CountryData.Name], SumIndPowers[_country]);
             else
             {
                 integerUpDown.Maximum = max;
@@ -50,7 +53,16 @@ namespace Totality.Client.ClientComponents.Dialogs.Finance
 
         private void IntegerUpDown_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            CostLabel.Content = String.Format("{0:0,#}", FinancialTools.GetExchangeCost((long)integerUpDown.Value,Demands[CountryData.Name], Demands[_country], Stock[CountryData.Name], Stock[_country] ));
+            if (_type == Orders.PurchaseCurrency)
+            CostLabel.Content = String.Format("{0:0,#}", FinancialTools.GetExchangeCostHighAcc((long)integerUpDown.Value,
+                Demands[CountryData.Name], Demands[_country],
+                Stock[CountryData.Name], Stock[_country],
+                SumIndPowers[CountryData.Name], SumIndPowers[_country]));
+            else
+                CostLabel.Content = String.Format("{0:0,#}", FinancialTools.GetMaximumPurchaseHighAcc((long)integerUpDown.Value,
+                    Demands[_country], Demands[CountryData.Name],
+                    Stock[_country], Stock[CountryData.Name],
+                    SumIndPowers[_country], SumIndPowers[CountryData.Name]));
         }
 
         private void acceptButton_Click(object sender, RoutedEventArgs e)

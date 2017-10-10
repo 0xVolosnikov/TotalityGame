@@ -26,10 +26,19 @@ namespace Totality.Client.ClientComponents
         public Guid Id { get; }
         public Country CountryData { get; set; }
 
+        private bool _isActive;
+        public bool IsDefending = false;
+
         public NukeRocketOrder()
         {
             InitializeComponent();
         }
+
+        public bool IsActive()
+        {
+            return _isActive;
+        }
+
 
         public NukeRocketOrder(NukeRocket rocket, Country countryData)
         {
@@ -40,6 +49,7 @@ namespace Totality.Client.ClientComponents
             var openingTime = rocket.AttackerLvl - countryData.MilitaryScienceLvl;
             CountLabel.Content = rocket.Count;
             AgressorLabel.Text = rocket.From;
+            _isActive = true;
 
             if (rocket.LifeTime <= 7500 - openingTime * 1000)
             {
@@ -81,10 +91,12 @@ namespace Totality.Client.ClientComponents
                 }
                 else
                     Background = Brushes.YellowGreen;
+                _isActive = false;
             }
             if (rocket.Count == 0)
             {
                 Background = Brushes.Green;
+                _isActive = false;
             }
             ProgressLine.Width = 315*( rocket.LifeTime / (double)Constants.NukeRocketLifetime);
         }

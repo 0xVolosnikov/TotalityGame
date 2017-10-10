@@ -62,6 +62,8 @@ namespace Totality.Client.ClientComponents.Panels
                 {
                     AbstractDialog.Stock = _client.GetCurrencyStock();
                     AbstractDialog.Demands = _client.GetCurrencyDemands();
+                    AbstractDialog.SumIndPowers = _client.GetSumIndPowers();
+                    Canvas.SetLeft(_currencyDialog, (Width - _currencyDialog.Width) / 2);
                     _currencyDialog.Visibility = Visibility.Visible;
                 }
             }

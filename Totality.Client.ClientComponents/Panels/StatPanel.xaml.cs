@@ -63,7 +63,7 @@ namespace Totality.Client.ClientComponents.Panels
         {
             leftList.Clear();
             leftList.Add(new Record("Уровень слежки", CountryData.ShadowingLvl.ToString()));
-            leftList.Add(new Record("Уровень контрразведки", CountryData.CounterSpyLvl.ToString()));
+            leftList.Add(new Record("Уровень разведки", CountryData.CounterSpyLvl.ToString()));
             leftList.Add(new Record("Уровень МВД", CountryData.InnerLvl.ToString()));
 
             rightList.Clear();

@@ -26,25 +26,27 @@ namespace Totality.Client.ClientComponents.Dialogs.SecretPanels
     /// </summary>
     public partial class SecretForeignPanel : SecretAbstractPanel, InPanel
     {
-        Dialog currentDialog;
+        AbstractDialog currentDialog;
         public delegate void ReceiveOrder(object sender, Order order);
         ReceiveOrder _receiveOrder;
+        private Dictionary<string, DipContract[]> _secretBase;
 
-        public SecretForeignPanel(ReceiveOrder receiveOrder)
+        public SecretForeignPanel(ReceiveOrder receiveOrder,  DipContract[] secretBase)
         {
             _receiveOrder = receiveOrder;
             InitializeComponent();
 
+            ReceiveContracts(secretBase);
         }
 
-        private void createDialog<T>(Dialog dialog) where T : UIElement
+        private void createDialog(AbstractDialog dialog)
         {
             if (currentDialog == null)
             {
                 currentDialog = dialog;
-                canvas1.Children.Add((T)currentDialog);
-                Canvas.SetLeft((T)currentDialog, 295);
-                Canvas.SetTop((T)currentDialog, 68);
+                canvas1.Children.Add(currentDialog);
+                Canvas.SetLeft(currentDialog, (Width - dialog.Width) / 2);
+                Canvas.SetTop(currentDialog, (Height - dialog.Height) / 2);
             }
         }
 
@@ -69,6 +71,31 @@ namespace Totality.Client.ClientComponents.Dialogs.SecretPanels
         private void button_Click(object sender, RoutedEventArgs e)
         {
             _receiveOrder(this, null);
+        }
+
+        public void ReceiveContracts(DipContract[] contracts)
+        {
+            _wrap.Children.Clear();
+            var c = new FontFamilyConverter();
+
+            for (int i = 0; i < contracts.Count(); i++)
+            {
+                var num = i;
+
+                var button = new System.Windows.Controls.Button()
+                {
+                    Background = null,
+                    Content = contracts[num].Description,
+                    FontSize = 14,
+                    FontFamily = (FontFamily)c.ConvertFrom("Segoe WP Black"),
+                    Cursor = Cursors.Hand,
+                    ClickMode = ClickMode.Press
+                };
+
+                button.Click += (object sender, RoutedEventArgs e) => { createDialog(new ContractDialog(SReceiveOrder, contracts[num])); };
+
+                _wrap.Children.Add(button);
+            }
         }
     }
 }

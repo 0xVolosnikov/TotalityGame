@@ -6,12 +6,12 @@ namespace Totality.CommonClasses
     {
         public static double ProductionUpgrade = 10;
         public static double UpgradeCostRate = 1.1;
-        public static double IndustryUpgrade = 1.1;
-        public static double IndustryUpgradeCostRate = 1.1;
-        public static double IndustrySteelCoeff = 2;
-        public static double IndustryOilCoeff = 2;
-        public static double IndustryWoodCoeff = 2;
-        public static double IndustryAgroCoeff = 2;
+        public static double IndustryUpgrade = 10;
+        public static double IndustryUpgradeCostRate = 500;
+        public static double IndustrySteelCoeff = 1;
+        public static double IndustryOilCoeff = 1;
+        public static double IndustryWoodCoeff = 1;
+        public static double IndustryAgroCoeff = 1;
         public static double PremierLvlUpCostRatio = 1.1;
         public static double InnerLvlUpCostRatio = 1.1;
         public static double NetworkLvlUpCostRatio = 1.1;
@@ -49,8 +49,8 @@ namespace Totality.CommonClasses
         public static int SabotageTime = 1;
         public static int PurgeTime = 1;
 
-        public static long InitialCurrencyOnStock = 3000000000;
-        public static long InitialNationalCurrencyDemand = 3000000000;
+        public static long InitialCurrencyOnStock = 100000000;
+        public static long InitialNationalCurrencyDemand = 100000000;
         public static long InitialMoney = 1000000;
         public static int InitialUranusProd = 0;
         public static long InitialPremierLvlUpCost = 100000;

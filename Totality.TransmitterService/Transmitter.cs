@@ -28,6 +28,7 @@ namespace Totality.TransmitterService
         public event ClientData ClientSendedData;
 
         public SynchronizedCollection<Client> Clients = new SynchronizedCollection<Client>();
+        public SynchronizedCollection<string> CountryNames = new SynchronizedCollection<string>();
         public DiplomaticalHandler DipHandler { get; set; }
         public NukeHandler NukeHandler { get; set; }
         public MainHandler MainHandler { get; set; }
@@ -44,11 +45,17 @@ namespace Totality.TransmitterService
         {
             ClientRegistered?.Invoke(myName);
 
-            if (!Clients.Any(c => c.Name == myName))
+            bool isNew;
+
+            if (Clients.All(c => c.Name != myName))
             {
                 Client newClient = new Client(OperationContext.Current.GetCallbackChannel<ICallbackService>(), myName);
                 newClient.Fault += FaultHandler;
                 Clients.Add(newClient);
+                if (CountryNames.All(c => !c.Equals(myName)))
+                {
+                    CountryNames.Add(myName);
+                }
                 MainHandler.AddCountry(myName);
                 _log.Info("Client " + myName + " registered!");
                 return true;
@@ -87,6 +94,17 @@ namespace Totality.TransmitterService
             return true;
         }
 
+        public bool AskUpdate(string myName)
+        {
+            MainHandler.CountryReconnected(myName);
+            return true;
+        }
+
+        public List<DipContract> AskContracts(string myName, string targetName)
+        {
+            return MainHandler.AskContracts( myName,  targetName);
+        }
+
         public void InitializeNukeDialogs()
         {
             _log.Trace("Starting nuke attack...");
@@ -123,10 +141,23 @@ namespace Totality.TransmitterService
             }
         }
 
+        public void UpdateClient(Country country)
+        {
+            _log.Trace("Updating country");
+            Clients.First((x) => x.Name.Equals(country.Name)).Transmitter.UpdateClient(country);
+        }
+
         public void SendDip(DipMsg msg)
         {
             _log.Trace("Client " + msg.From + " sended a diplomatical message to " + msg.To);
-            Clients.First(x => x.Name == msg.To).Transmitter.SendDip(msg);
+            try
+            {
+                Clients.First(x => x.Name == msg.To).Transmitter.SendDip(msg);
+            }
+            catch (Exception e)
+            {
+                _log.Error("SMTHING WITH DIPLOMACY: " + e.Message);
+            }
         }
 
         public void SendContractsToAll(List<DipContract> contracts)
@@ -183,5 +214,20 @@ namespace Totality.TransmitterService
                 return null;
             }
 }
+
+        public Dictionary<string, double> GetSumIndPowers()
+        {
+            try
+            {
+                return MainHandler.GetSumIndPowers();
+            }
+
+            catch (Exception e)
+            {
+                _log.Error(e.Message);
+                MessageBox.Show(e.Message);
+                return null;
+            }
+        }
     }
 }

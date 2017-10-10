@@ -35,11 +35,16 @@ namespace Totality.Client.ClientComponents
         {
             InitializeComponent();
             RocketBox.ItemsSource = _rockets;
+            RocketBox.SelectionMode = SelectionMode.Single;
+            if (CountryData.MissilesCount <= 0) ShootDownButton.IsEnabled = false;
+
 
             Spinning = new DoubleAnimation(360, TimeSpan.FromSeconds(1.5));
             Spinning.RepeatBehavior = RepeatBehavior.Forever;
             RadioSign.RenderTransform = new RotateTransform(0, RadioSign.Width / 2, RadioSign.Height / 2);
             RadioSign.RenderTransform.BeginAnimation(RotateTransform.AngleProperty, Spinning);
+
+
         }
 
         public void UpdateRockets(NukeRocket[] rockets)
@@ -58,7 +63,22 @@ namespace Totality.Client.ClientComponents
                 }
                 else
                     _rockets.Add(new NukeRocketOrder(rockets[i], CountryData));
-            }        
+            }
+
+            if (_rockets.Any((x) => x.IsActive() && !x.IsDefending))
+            {
+                //if (CountryData.MissilesCount > 0)
+                    ShootDownButton.IsEnabled = true;
+                var item = _rockets.First((x) => x.IsActive() && !x.IsDefending);
+
+                if (item != null)
+                {
+                    RocketBox.SelectedItem = item;
+                    RocketBox.UpdateLayout();
+                }
+
+            }
+            else ShootDownButton.IsEnabled = false;
         }
 
         private void shootDownButtonClick(object sender, RoutedEventArgs e)
@@ -68,7 +88,26 @@ namespace Totality.Client.ClientComponents
 
         private void ShootDownButton_Click(object sender, RoutedEventArgs e)
         {
-           TryToShootDown?.Invoke(_rockets[RocketBox.SelectedIndex].Id);
+            if (RocketBox.SelectedIndex == -1)
+            {
+                if (_rockets.Any((x) => x.IsActive() && !x.IsDefending))
+                {
+                    var item = _rockets.First((x) => x.IsActive() && !x.IsDefending);
+
+                    if (item != null)
+                    {
+                        RocketBox.SelectedItem = item;
+                    }
+
+                }
+            }
+
+            if (!_rockets[RocketBox.SelectedIndex].IsDefending)
+            {
+                TryToShootDown?.Invoke(_rockets[RocketBox.SelectedIndex].Id);
+                _rockets[RocketBox.SelectedIndex].IsDefending = true;
+                _rockets[RocketBox.SelectedIndex].IsEnabled = false;
+            }
         }
     }
 }

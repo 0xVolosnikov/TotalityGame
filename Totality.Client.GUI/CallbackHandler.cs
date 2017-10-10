@@ -29,6 +29,9 @@ namespace Totality.Client.GUI
         public delegate void ContractsReceivedMessage(DipMsg msg);
         public event ContractsReceivedMessage MessageReceived;
 
+        public delegate void ContractsReceivedSecretMessage(string countryName, DipContract[] contracts);
+        public event ContractsReceivedSecretMessage ContractsSecretReceived;
+
         public CallbackHandler()
         {
         }

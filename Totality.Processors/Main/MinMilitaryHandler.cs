@@ -12,6 +12,7 @@ namespace Totality.Handlers.Main
     {
         private enum Orders { GeneralMobilization, Demobilization, IncreaseUranium, MakeNukes, MakeMissiles, NukeStrike, StartWar }
         private NukeHandler _nukeHandler;
+        private MinForeignHandler _foreignHandler;
 
         public MinMilitaryHandler(NewsHandler newsHandler, IDataLayer dataLayer, NukeHandler nukeHandler, ILogger logger) : base(newsHandler, dataLayer, logger)
         {
@@ -144,6 +145,16 @@ namespace Totality.Handlers.Main
 
         private bool StartWar(Order order)
         {
+
+            if (_dataLayer.GetCountry(order.CountryName).Alliance ==
+                _dataLayer.GetCountry(order.TargetCountryName).Alliance)
+            {
+                if (_dataLayer.GetCountry(order.CountryName).IsBoss)
+                    _dataLayer.SetProperty(order.TargetCountryName, "Alliance", order.TargetCountryName);
+                else
+                    _dataLayer.SetProperty(order.CountryName, "Alliance", order.CountryName);
+            }
+
             var warList = (List<string>)_dataLayer.GetProperty(order.CountryName, "WarList");
             warList.Add(order.TargetCountryName);
             _dataLayer.SetProperty(order.CountryName, "WarList", warList);

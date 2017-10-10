@@ -19,6 +19,8 @@ namespace Totality.Model.Interfaces
 
         void UpdateClients(Dictionary<string, Country> countries);
 
+        void UpdateClient(Country country);
+
         void SendDip(DipMsg msg);
 
         void SendContractsToAll(List<DipContract> contracts);

@@ -223,6 +223,7 @@
     <Resource Include="Images\ListButton.png" />
     <Resource Include="Images\ListButtonDown.png" />
     <Resource Include="lettert_letr_12656.ico" />
+    <Resource Include="Images\hell-fire-today.png" />
     <Content Include="video2.mp4">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

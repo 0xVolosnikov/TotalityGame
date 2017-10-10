@@ -22,9 +22,11 @@ namespace Totality.Handlers.Nuke
         private Random rand = new Random();
 
         public delegate void AttackEnd();
+
         public event AttackEnd AttackEnded;
 
-        public NukeHandler(NewsHandler newsHandler, ITransmitter transmitter, IDataLayer dataLayer, ILogger logger) : base(newsHandler, dataLayer, logger)
+        public NukeHandler(NewsHandler newsHandler, ITransmitter transmitter, IDataLayer dataLayer, ILogger logger)
+            : base(newsHandler, dataLayer, logger)
         {
             _transmitter = transmitter;
 
@@ -61,22 +63,33 @@ namespace Totality.Handlers.Nuke
             {
                 AttackEnded?.Invoke();
             }
-            
+
         }
 
         public void TryToShootdown(string defender, Guid rocketId)
         {
-            NukeRocket rckt = _rockets.First(x => x.Id == rocketId);
-            if (rckt != null)
-            {
-                var missilesCount = (int)_dataLayer.GetProperty(defender, "MissilesCount");
-                var militaryScienceLvl = (int)_dataLayer.GetProperty(defender, "MilitaryScienceLvl");
-                int loosed;
-                int result = WinnerChoosingSystems.NukeMassiveTsop(missilesCount, out loosed, rckt.Count, _dataLayer.GetCountry(rckt.From).MilitaryScienceLvl, militaryScienceLvl);
-                missilesCount -= loosed;
-                _dataLayer.SetProperty(defender, "MissilesCount", missilesCount);
-                rckt.Count -= result;
-                //_rockets2.First(x => x.Id == rocketId).Count -= result;
+            if (_rockets.Any((x) => x.Id == rocketId))
+            { 
+                try
+                {
+                    NukeRocket rckt = _rockets.First(x => x.Id == rocketId);
+                    if (rckt != null)
+                    {
+                        var missilesCount = (int) _dataLayer.GetProperty(defender, "MissilesCount");
+                        var militaryScienceLvl = (int) _dataLayer.GetProperty(defender, "MilitaryScienceLvl");
+                        int loosed;
+                        int result = WinnerChoosingSystems.NukeMassiveTsop(missilesCount, out loosed, rckt.Count,
+                            _dataLayer.GetCountry(rckt.From).MilitaryScienceLvl, militaryScienceLvl);
+                        missilesCount -= loosed;
+                        _dataLayer.SetProperty(defender, "MissilesCount", missilesCount);
+                        rckt.Count -= result;
+                        //_rockets2.First(x => x.Id == rocketId).Count -= result;
+                    }
+                }
+                catch (Exception e)
+                {
+                    _log.Error("SMTNG WITH NUKES: " + e.Message);
+                }
             }
         }
 
@@ -134,12 +147,12 @@ namespace Totality.Handlers.Nuke
 
         private double getNukesDamage(int count, bool isAlerted)
         {
-            var min = Math.Pow(0.90, count);
-            var max = Math.Pow(0.85, count);
+            var min = Math.Pow(0.80, count);
+            var max = Math.Pow(0.60, count);
             var dif = max - min;
             if (isAlerted) dif /= 3;
 
-            return min + (dif/rand.Next(1,1000));
+            return min + (dif/(double)rand.Next(1,10));
         }
 
     }

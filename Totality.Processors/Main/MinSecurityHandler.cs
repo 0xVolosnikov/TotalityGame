@@ -20,13 +20,14 @@ namespace Totality.Handlers.Main
 
         public bool ProcessOrder(Order order)
         {
+            if (order.Ministery.Equals((short) Mins.Secret))
+                return OrderToAgent(order);
+            else
             switch (order.OrderNum)
             {
                 case (int)Orders.ImproveNetwork: return ImproveNetwork(order);
 
                 case (int)Orders.AddAgents: return AddAgents(order);
-
-                case (int)Orders.OrderToAgent: return OrderToAgent(order);
 
                 case (int)Orders.Purge: return Purge(order);
 
@@ -93,7 +94,8 @@ namespace Totality.Handlers.Main
             int count = 0;
             foreach (KeyValuePair<string, SpyNetwork> net in spyNetworks)
             {
-                count += net.Value.Recruit.FindAll(x => x == true).Count;
+                var a = Array.FindAll(net.Value.Recruit, x => x == true);
+                count += a.Length;
             }
 
             agentCost = (long)(agentCost * Math.Pow(Constants.AgentCostRatio, count));
@@ -132,7 +134,7 @@ namespace Totality.Handlers.Main
                     if (net.Key == order.CountryName)
                     { 
                         var foreignSpyes = (List<List<string>>)_dataLayer.GetProperty(order.CountryName, "ForeignSpyes");
-                        for (int i = 0; i < net.Value.Recruit.Count; i++)
+                        for (int i = 0; i < net.Value.Recruit.Length; i++)
                             if (net.Value.Recruit[i])
                             {
                                 foreignSpyes[i].Remove(order.TargetCountryName);
@@ -151,7 +153,7 @@ namespace Totality.Handlers.Main
                         spyNetworks[net.Key].NetLvl = net.Value.NetLvl;
 
                     var foreignSpyesInTarget = (List<List<string>>)_dataLayer.GetProperty(net.Key, "ForeignSpyes");
-                    for (int i = 0; i < net.Value.Recruit.Count; i++)
+                    for (int i = 0; i < net.Value.Recruit.Length; i++)
                         if (net.Value.Recruit[i] && !spyNetworks[net.Key].Recruit[i])
                         {
                             spyNetworks[net.Key].Recruit[i] = true;
@@ -193,8 +195,9 @@ namespace Totality.Handlers.Main
             {
                 Count = order.Count,
                 Ministery = order.TargetMinistery,
-                OrderNum = order.Value,
-                Value = order.Value2
+                OrderNum = order.OrderNum,
+                Value = order.Value,
+                TargetMinistery = order.Value2
             });
             _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Отдан приказ агентам в стране " + order.TargetCountryName + ", " + order.TargetMinistery + "."});
             return true;
@@ -245,7 +248,7 @@ namespace Totality.Handlers.Main
 
             if (money < counterSpyLvlUpCost)
             {
-                _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Не хватило денег на повышение уровня контрразведки. " });
+                _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Не хватило денег на повышение уровня разведки. " });
                 return false;
             }
 
@@ -258,7 +261,7 @@ namespace Totality.Handlers.Main
             _dataLayer.SetProperty(order.CountryName, "CounterSpyLvl", lvl);
 
 
-            _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Повышен уровень контрразведки. "});
+            _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Повышен уровень разведки. "});
             return true;
         }
 

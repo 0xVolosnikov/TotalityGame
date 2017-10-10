@@ -25,6 +25,7 @@ namespace Totality.Client.ClientComponents.Dialogs.Media
         private enum Orders { ChangePropDirection }
         public delegate void ReceiveOrder(object sender, Order order, string text, long price);
         ReceiveOrder _receiveOrder;
+        List<string> allCountries = new List<string>();
 
         public PropagandaDialog(ReceiveOrder receiveOrder)
         {
@@ -33,7 +34,10 @@ namespace Totality.Client.ClientComponents.Dialogs.Media
 
             List<string> regimes = new List<string>{"Нейтральное", "Негативное", "Позитивное" };
 
-            CountriesBox.ItemsSource = Countries;
+            allCountries.Add(CountryData.Name);
+            allCountries.AddRange(Countries);
+
+            CountriesBox.ItemsSource = allCountries;
             RegimeBox.ItemsSource = regimes;
 
             CountriesBox.SelectedIndex = 0;

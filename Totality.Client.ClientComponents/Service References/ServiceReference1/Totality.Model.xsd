@@ -87,6 +87,7 @@
       <xs:element minOccurs="0" name="ShadowingLvl" type="xs:int" />
       <xs:element minOccurs="0" name="ShadowingLvlUpCost" type="xs:long" />
       <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="SpyNetworks" nillable="true" type="q5:ArrayOfKeyValueOfstringCountry.SpyNetworkZ8yiO27Z" />
+      <xs:element minOccurs="0" name="Step" type="xs:int" />
       <xs:element minOccurs="0" name="TaxesLvl" type="xs:short" />
       <xs:element minOccurs="0" name="UsedAgricultural" type="xs:double" />
       <xs:element minOccurs="0" name="UsedHIpower" type="xs:double" />

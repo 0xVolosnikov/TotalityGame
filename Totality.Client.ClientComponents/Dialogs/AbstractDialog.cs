@@ -18,5 +18,6 @@ namespace Totality.Client.ClientComponents.Dialogs
         public Country LocalCountryData;
         public static Dictionary<string, long> Stock;
         public static Dictionary<string, long> Demands;
+        public static Dictionary<string, double> SumIndPowers;
     }
 }

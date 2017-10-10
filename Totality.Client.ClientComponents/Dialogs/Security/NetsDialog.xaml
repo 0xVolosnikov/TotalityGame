@@ -32,18 +32,20 @@
         <Label x:Name="label_Copy" Content="Страна" Canvas.Top="56" Width="114" Height="43" Foreground="White" FontSize="24" FontFamily="Arial Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" Canvas.Left="28"/>
         <TextBlock x:Name="textBlock" Canvas.Left="629" TextWrapping="Wrap" Text="Сеть:" Canvas.Top="65" Height="29" Width="78" Foreground="White" FontFamily="Arial Black" FontSize="24" TextAlignment="Center"/>
         <Separator Height="13" Canvas.Left="40" Margin="0" Canvas.Top="103" Width="756"/>
-        <TextBlock x:Name="textBlock_Copy" Canvas.Left="708" TextWrapping="Wrap" Text="0" Canvas.Top="52" Height="50" Width="38" Foreground="#FFFF1E1E" FontFamily="Arial Black" FontSize="48" TextAlignment="Center"/>
+        <TextBlock x:Name="levelLabel" Canvas.Left="708" TextWrapping="Wrap" Text="0" Canvas.Top="52" Height="50" Width="38" Foreground="#FFFF1E1E" FontFamily="Arial Black" FontSize="48" TextAlignment="Center"/>
         <ClientComponents:Button x:Name="levelButton" Canvas.Left="751" Canvas.Top="58" Height="44" Width="38" imgUp="/Totality.Client.ClientComponents;component/Images/Security/AgentsLvlUp.png" imgDown="/Totality.Client.ClientComponents;component/Images/Security/AgentsLvlUpDown.png" Cursor="Hand"/>
-        <ClientComponents:Button Canvas.Left="40" Canvas.Top="121" Height="109" Width="102" imgUp="/Totality.Client.ClientComponents;component/Images/Security/SecurityIndButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Security/SecurityIndButtonDown.png" Cursor="Hand"/>
-        <ClientComponents:Button Canvas.Left="169" Canvas.Top="121" Height="109" Width="102"/>
-        <ClientComponents:Button Canvas.Left="302" Canvas.Top="121" Height="109" Width="102"/>
-        <ClientComponents:Button Canvas.Left="431" Canvas.Top="121" Height="109" Width="102" Cursor="Hand" imgUp="/Totality.Client.ClientComponents;component/Images/Security/SecurityForeignButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Security/SecurityForeignButtonDown.png"/>
-        <ClientComponents:Button Canvas.Left="564" Canvas.Top="121" Height="109" Width="102"/>
-        <ClientComponents:Button Canvas.Left="694" Canvas.Top="121" Height="109" Width="102"/>
-        <ClientComponents:Button Canvas.Left="40" Canvas.Top="246" Height="109" Width="102"/>
-        <ClientComponents:Button Canvas.Left="169" Canvas.Top="246" Height="109" Width="102"/>
-        <ClientComponents:Button Canvas.Left="303" Canvas.Top="246" Height="109" Width="102"/>
-        <ClientComponents:Button Canvas.Left="431" Canvas.Top="246" Height="109" Width="102"/>
-        <ClientComponents:Button Canvas.Left="564" Canvas.Top="246" Height="109" Width="102"/>
+        <ClientComponents:Button x:Name="b1" Canvas.Left="40" Canvas.Top="121" Height="109" Width="102" imgUp="/Totality.Client.ClientComponents;component/Images/Security/SecurityIndButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Security/SecurityIndButtonDown.png" Cursor="Hand">
+            <ClientComponents:Button.Effect>
+                <DropShadowEffect BlurRadius="8" ShadowDepth="2"/>
+            </ClientComponents:Button.Effect>
+        </ClientComponents:Button>
+        <ClientComponents:Button x:Name="b2" Canvas.Left="169" Canvas.Top="121" Height="109" Width="102" imgUp="/Totality.Client.ClientComponents;component/Images/Security/SecurityFinButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Security/SecurityFinButtonDown.png" Cursor="Hand"/>
+        <ClientComponents:Button x:Name="b3" Canvas.Left="302" Canvas.Top="121" Height="109" Width="102" imgUp="/Totality.Client.ClientComponents;component/Images/Security/SecurityMilButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Security/SecurityMilButtonDown.png" Cursor="Hand"/>
+        <ClientComponents:Button x:Name="b4" Canvas.Left="431" Canvas.Top="121" Height="109" Width="102" Cursor="Hand" imgUp="/Totality.Client.ClientComponents;component/Images/Security/SecurityForeignButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Security/SecurityForeignButtonDown.png"/>
+        <ClientComponents:Button x:Name="b5" Canvas.Left="564" Canvas.Top="121" Height="109" Width="102" imgUp="/Totality.Client.ClientComponents;component/Images/Security/SecurityMediaButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Security/SecurityMediaButtonDown.png" Cursor="Hand"/>
+        <ClientComponents:Button x:Name="b6" Canvas.Left="694" Canvas.Top="121" Height="109" Width="102" imgUp="/Totality.Client.ClientComponents;component/Images/Security/SecurityInnerButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Security/SecurityInnerButtonDown.png" Cursor="Hand"/>
+        <ClientComponents:Button x:Name="b7" Canvas.Left="40" Canvas.Top="246" Height="109" Width="102" imgUp="/Totality.Client.ClientComponents;component/Images/Security/SecuritySecurityButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Security/SecuritySecurityButtonDown.png" Cursor="Hand"/>
+        <ClientComponents:Button x:Name="b8" Canvas.Left="169" Canvas.Top="246" Height="109" Width="102" imgUp="/Totality.Client.ClientComponents;component/Images/Security/SecurityScienceButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Security/SecurityScienceButtonDown.png" Cursor="Hand"/>
+        <ClientComponents:Button x:Name="b9" Canvas.Left="303" Canvas.Top="246" Height="109" Width="102" imgUp="/Totality.Client.ClientComponents;component/Images/Security/SecurityPremierButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Security/SecurityPremierButtonDown.png" Cursor="Hand"/>
     </Canvas>
 </local:AbstractDialog>

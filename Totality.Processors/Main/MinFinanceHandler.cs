@@ -46,11 +46,17 @@ namespace Totality.Handlers.Main
             var ourDemand = (long)_dataLayer.GetProperty(order.CountryName, "NationalCurrencyDemand");
             var theirDemand = (long)_dataLayer.GetProperty(order.TargetCountryName, "NationalCurrencyDemand");
 
-            var ourQuontityOnStock = _dataLayer.GetCurrencyOnStock(order.CountryName);
-            var theirQuontityOnStock = _dataLayer.GetCurrencyOnStock(order.TargetCountryName);
+            var ourQuontityOnStock = (long)_dataLayer.GetCurrencyOnStock(order.CountryName);
+            var theirQuontityOnStock = (long)_dataLayer.GetCurrencyOnStock(order.TargetCountryName);
+
+            var ourIndPower = (double)_dataLayer.GetProperty(order.CountryName, "FinalHeavyIndustry") + (double)_dataLayer.GetProperty(order.CountryName, "FinalLightIndustry");
+            var theirIndPower = (double)_dataLayer.GetProperty(order.TargetCountryName, "FinalHeavyIndustry") + (double)_dataLayer.GetProperty(order.TargetCountryName, "FinalLightIndustry");
 
             var money = (long)_dataLayer.GetProperty(order.CountryName, "Money");
-            var exchangeCost = FinancialTools.GetExchangeCost(order.Count, ourDemand, theirDemand, ourQuontityOnStock, theirQuontityOnStock);
+            var exchangeCost = FinancialTools.GetExchangeCostHighAcc(order.Count,
+                ourDemand, theirDemand,
+                ourQuontityOnStock, theirQuontityOnStock,
+                ourIndPower, theirIndPower);
 
             if (money < exchangeCost)
                 return false;
@@ -81,11 +87,16 @@ namespace Totality.Handlers.Main
             var ourDemand = (long)_dataLayer.GetProperty(order.CountryName, "NationalCurrencyDemand");
             var theirDemand = (long)_dataLayer.GetProperty(order.TargetCountryName, "NationalCurrencyDemand");
 
-            var ourQuontityOnStock = _dataLayer.GetCurrencyOnStock(order.CountryName);
-            var theirQuontityOnStock = _dataLayer.GetCurrencyOnStock(order.TargetCountryName);
+            var ourQuontityOnStock = (long)_dataLayer.GetCurrencyOnStock(order.CountryName);
+            var theirQuontityOnStock = (long)_dataLayer.GetCurrencyOnStock(order.TargetCountryName);
 
+            var ourIndPower = (double)_dataLayer.GetProperty(order.CountryName, "FinalHeavyIndustry") + (double)_dataLayer.GetProperty(order.CountryName, "FinalLightIndustry");
+            var theirIndPower = (double)_dataLayer.GetProperty(order.TargetCountryName, "FinalHeavyIndustry") + (double)_dataLayer.GetProperty(order.TargetCountryName, "FinalLightIndustry");
 
-            var exchangeCost = FinancialTools.GetExchangeCost(order.Count, theirDemand, ourDemand, theirQuontityOnStock, ourQuontityOnStock );
+            var exchangeCost = (long)FinancialTools.GetMaximumPurchaseHighAcc(order.Count,
+                theirDemand, ourDemand,
+                theirQuontityOnStock, ourQuontityOnStock,
+                theirIndPower, ourIndPower);
             var ourAccounts = (Dictionary<string, long>)_dataLayer.GetProperty(order.CountryName, "CurrencyAccounts");
 
             if (!ourAccounts.ContainsKey(order.TargetCountryName) ||  ourAccounts[order.TargetCountryName] < order.Count)

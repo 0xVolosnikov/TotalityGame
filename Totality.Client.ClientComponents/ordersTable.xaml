@@ -4,22 +4,31 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Totality.Client.ClientComponents"
-             mc:Ignorable="d" Width="708.901" Height="437.97" FontFamily="TrixieCyr Plain" FontWeight="Bold">
+             mc:Ignorable="d" Width="708.901" Height="auto" FontFamily="TrixieCyr Plain" FontWeight="Bold">
     <UserControl.ContextMenu>
         <ContextMenu/>
     </UserControl.ContextMenu>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" MinHeight="361"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="35"/>
         </Grid.RowDefinitions>
-        <DataGrid x:Name="dataGrid" BorderThickness="0" BorderBrush="#FF020624" FontFamily="/Totality.Client.ClientComponents;component/#TrixieCyr Plain" FontWeight="Bold" FontSize="24" CanUserResizeColumns="False" CanUserSortColumns="False" CanUserReorderColumns="False" HorizontalGridLinesBrush="#FF7A7A7A" VerticalGridLinesBrush="#FF7A7A7A" CanUserResizeRows="False" IsReadOnly="True" HeadersVisibility="None" VerticalScrollBarVisibility="Disabled" Background="White" SelectionMode="Single" HorizontalScrollBarVisibility="Disabled" SelectionChanged="dataGrid_SelectionChanged" ScrollViewer.CanContentScroll="False">
+        <DataGrid x:Name="dataGrid" Grid.Row="0" BorderThickness="0" BorderBrush="#FF020624" FontFamily="/Totality.Client.ClientComponents;component/#TrixieCyr Plain" FontWeight="Bold" FontSize="24" CanUserResizeColumns="False" CanUserSortColumns="False" CanUserReorderColumns="False" HorizontalGridLinesBrush="#FF7A7A7A" VerticalGridLinesBrush="#FF7A7A7A" CanUserResizeRows="False" IsReadOnly="True" HeadersVisibility="None" VerticalScrollBarVisibility="Disabled" Background="White" SelectionMode="Single" HorizontalScrollBarVisibility="Disabled" SelectionChanged="dataGrid_SelectionChanged" ScrollViewer.CanContentScroll="False" Margin="0,0,0,0">
             <DataGrid.Resources>
                 <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#FF020624"/>
             </DataGrid.Resources>
         </DataGrid>
 
-        <Image x:Name="image" Source="Images/Interface/footerOfTable.png" Stretch="None" Grid.Row="1" Height="35" VerticalAlignment="Bottom"/>
+        <Image x:Name="image" Source="Images/Interface/footerOfTable.png" Stretch="None" Grid.Row="2" Height="35" VerticalAlignment="Bottom" Margin="0,0,0,0 "/>
+        <Grid Height="30" Margin="0,0,0,0" VerticalAlignment="Top" Grid.Row="1" Grid.RowSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label x:Name="label" Content="Суммарные расходы бюджета:" Background="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontFamily="/Totality.Client.ClientComponents;component/#TrixieCyr Plain" FontSize="24" BorderThickness="0,1,1,1" BorderBrush="Black" Margin="0,0,0,0" Padding="0"/>
+            <Label x:Name="sum" Content="1.000.000 / 2.000.000" Margin="0,0,0,0" Background="White" BorderBrush="Black" BorderThickness="0,1" VerticalContentAlignment="Center" FontSize="24" FontFamily="/Totality.Client.ClientComponents;component/#TrixieCyr Plain" Foreground="#FF00A83E" Grid.Column="1" HorizontalContentAlignment="Center" Padding="0"/>
+        </Grid>
 
     </Grid>
 </UserControl>

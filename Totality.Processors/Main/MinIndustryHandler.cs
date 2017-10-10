@@ -49,8 +49,12 @@ namespace Totality.Handlers.Main
             {
                 res1 = (double)_dataLayer.GetProperty(order.CountryName, "FinalSteel");
                 res2 = (double)_dataLayer.GetProperty(order.CountryName, "FinalOil");
-                if (res1 < industryPower * Constants.IndustryUpgrade* Constants.IndustrySteelCoeff || res2 < industryPower * Constants.IndustryUpgrade* Constants.IndustryOilCoeff)
+                if (res1 < industryPower + Constants.IndustryUpgrade*Constants.IndustrySteelCoeff ||
+                    res2 < industryPower + Constants.IndustryUpgrade*Constants.IndustryOilCoeff)
+                {
+                    _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Не получилось повысить мощь Тяжелой Промышленности!" });
                     return false;
+                }
 
                 _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Повышена мощь Тяжелой Промышленности!" });
             }
@@ -58,8 +62,12 @@ namespace Totality.Handlers.Main
             {
                 res1 = (double)_dataLayer.GetProperty(order.CountryName, "FinalWood");
                 res2 = (double)_dataLayer.GetProperty(order.CountryName, "FinalAgricultural");
-                if (res1 < industryPower * Constants.IndustryUpgrade* Constants.IndustryWoodCoeff || res2 < industryPower* Constants.IndustryUpgrade * Constants.IndustryAgroCoeff)
+                if (res1 < industryPower + Constants.IndustryUpgrade*Constants.IndustryWoodCoeff ||
+                    res2 < industryPower + Constants.IndustryUpgrade*Constants.IndustryAgroCoeff)
+                {
+                    _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Не получилось повысить мощь Легкой Промышленности!" });
                     return false;
+                }
 
                 _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Повышена мощь Легкой Промышленности!" });
             }
@@ -67,16 +75,20 @@ namespace Totality.Handlers.Main
 
             money -= upgradeCost;
             _dataLayer.SetProperty(order.CountryName, "Money", money);
-            upgradeCost = (long)(Constants.IndustryUpgradeCostRate * upgradeCost);
-            _dataLayer.SetProperty(order.CountryName, "IndustryUpgradeCost", upgradeCost);
 
-            industryPower *= Constants.IndustryUpgrade;
+            industryPower += Constants.IndustryUpgrade;
 
-            var demand = (long)_dataLayer.GetProperty(order.CountryName, "NationalCurrencyDemand");
-            demand = (long)(demand * 1.01);
-            _dataLayer.SetProperty(order.CountryName, "NationalCurrencyDemand", demand);
+            //var demand = (long)_dataLayer.GetProperty(order.CountryName, "NationalCurrencyDemand");
+            //demand = (long)(demand * 1.01);
+            //_dataLayer.SetProperty(order.CountryName, "NationalCurrencyDemand", demand);
                 
             _dataLayer.SetProperty(order.CountryName, "Power" + industry + "Industry", industryPower);
+
+
+            var LIpower = (double)_dataLayer.GetProperty(order.CountryName, "PowerLightIndustry");
+            var HIpower = (double)_dataLayer.GetProperty(order.CountryName, "PowerHeavyIndustry");
+            var newUpgradeCost = (long)(Constants.IndustryUpgradeCostRate * (LIpower + HIpower));
+            _dataLayer.SetProperty(order.CountryName, "IndustryUpgradeCost", newUpgradeCost);
 
             return true;
         }

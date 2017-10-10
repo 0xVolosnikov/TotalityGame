@@ -13,6 +13,7 @@ namespace Totality.CommonClasses
         Inner,
         Security,
         Science,
-        Premier
+        Premier,
+        Secret
     }
 }

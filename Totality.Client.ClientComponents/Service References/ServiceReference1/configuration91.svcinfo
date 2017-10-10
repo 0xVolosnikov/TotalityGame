@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="agT5zrEDmACZRgHQjEbyjewefQo=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="12DsypzZgk3dqQCLZ6KOdQC7xvU=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="netTcpBinding" name="NetTcpBinding_ITransmitterService">
       <properties>
@@ -106,7 +106,7 @@
           <serializedValue>(Коллекция)</serializedValue>
         </property>
         <property path="/security/transport/sslProtocols" isComplexType="false" isExplicitlyDefined="false" clrType="System.Security.Authentication.SslProtocols, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>Default, Tls11, Tls12</serializedValue>
+          <serializedValue>Tls, Tls11, Tls12</serializedValue>
         </property>
         <property path="/security/message" isComplexType="true" isExplicitlyDefined="false" clrType="System.ServiceModel.Configuration.MessageSecurityOverTcpElement, System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>System.ServiceModel.Configuration.MessageSecurityOverTcpElement</serializedValue>
@@ -121,10 +121,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="NetTcpBinding_ITransmitterService" contract="ServiceReference1.ITransmitterService" bindingType="netTcpBinding" address="net.tcp://192.168.43.136:10577/transmitter" bindingConfiguration="NetTcpBinding_ITransmitterService">
+    <endpoint name="NetTcpBinding_ITransmitterService" contract="ServiceReference1.ITransmitterService" bindingType="netTcpBinding" address="net.tcp://172.20.217.55:10577/transmitter" bindingConfiguration="NetTcpBinding_ITransmitterService">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>net.tcp://192.168.43.136:10577/transmitter</serializedValue>
+          <serializedValue>net.tcp://172.20.217.55:10577/transmitter</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

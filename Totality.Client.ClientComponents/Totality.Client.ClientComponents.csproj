@@ -287,6 +287,7 @@
     <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\Totality.Model.Country.datasource" />
+    <None Include="Properties\DataSources\Totality.Model.Diplomatical.DipContract.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -846,6 +847,21 @@
     <Resource Include="Images\Security\SecurityIndButtonDown.png" />
     <Resource Include="Images\Security\SecurityForeignButtonDown.png" />
     <Resource Include="Images\Security\SecurityForeignButton.png" />
+    <Resource Include="Images\Security\SecurityFinButton.png" />
+    <Resource Include="Images\Security\SecurityFinButtonDown.png" />
+    <Resource Include="Images\Security\SecurityMilButton.png" />
+    <Resource Include="Images\Security\SecurityMilButtonDown.png" />
+    <Resource Include="Images\Security\SecurityMediaButton.png" />
+    <Resource Include="Images\Security\SecurityMediaButtonDown.png" />
+    <Resource Include="Images\Security\SecurityInnerButton.png" />
+    <Resource Include="Images\Security\SecurityInnerButtonDown.png" />
+    <Resource Include="Images\Security\SecuritySecurityButton.png" />
+    <Resource Include="Images\Security\SecuritySecurityButtonDown.png" />
+    <Resource Include="Images\Security\SecurityScienceButton.png" />
+    <Resource Include="Images\Security\SecurityScienceButtonDown.png" />
+    <Resource Include="Images\Security\SecurityPremierButton.png" />
+    <Resource Include="Images\Security\SecurityPremierButtonDown.png" />
+    <Resource Include="Images\map.jpg" />
     <Content Include="video2.mp4">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

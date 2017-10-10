@@ -22,6 +22,7 @@ using Totality.CommonClasses;
 using Totality.Client.ClientComponents.Dialogs;
 using Totality.Client.ClientComponents.ServiceReference1;
 using Totality.Model;
+using Totality.Model.Diplomatical;
 
 
 namespace Totality.Client.GUI
@@ -117,6 +118,7 @@ namespace Totality.Client.GUI
 
                _waitingPanel = new WaitingPanel();
                 _grid.Children.Add(_waitingPanel);
+                _waitingPanel.Close();
 
                 _grid.Children.Add(_connectionPanel);
                 _connectionPanel.NameReceived += _connectionPanel_NameReceived;
@@ -133,6 +135,7 @@ namespace Totality.Client.GUI
           //      MessageBox.Show(error.Message);
          //   }
         }
+
 
         private void _servCallbackHandler_MessageReceived(Model.Diplomatical.DipMsg msg)
         {
@@ -227,7 +230,7 @@ namespace Totality.Client.GUI
         {
             try
             {
-                DiscoveryClient discoveryClient = new DiscoveryClient(new UdpDiscoveryEndpoint("soap.udp://192.168.0.255:3702"));
+                DiscoveryClient discoveryClient = new DiscoveryClient(new UdpDiscoveryEndpoint("soap.udp://192.168.0.255:3702")); //"soap.udp://192.168.0.255:3702"
 
                 bool needToStop = false;
 
@@ -257,8 +260,13 @@ namespace Totality.Client.GUI
             {
                 _client.Open();
                 this.Dispatcher.Invoke(() => _client.InnerDuplexChannel.Faulted += ClientChannelFaulted);
-                _client.Register(_name);
-                this.Dispatcher.Invoke(() => _connectionPanel.Close());
+                if (_client.Register(_name))
+                {
+                    this.Dispatcher.Invoke(() => _connectionPanel.Close());
+                    _waitingPanel.Open();
+                    _client.AskUpdateAsync(_name);
+                }
+                else _client.Close();
             }
             catch (Exception error)
             {
@@ -306,11 +314,14 @@ namespace Totality.Client.GUI
                 AbstractPanel.CountryData = country;
                 AbstractDialog.CountryData = country;
                 AbstractDialog.Countries = country.CurrencyRatios.Keys.ToList();
-                AbstractDialog.CurrentStep++;
+                AbstractDialog.CurrentStep = country.Step;
                 _header.UpdateMoney(country.Money);
                 _header.UpdateNukes(country.NukesCount);
                 _header.UpdateMissiles(country.MissilesCount);
                 _header.UpdateMood((short)country.Mood);
+                _header.UpdateProfit((long)country.FinalLightIndustry, country.TaxesLvl);
+
+                _ordersTable.changeMoney(country.Money);
 
                 _industryPanel.Update();
                 _financePanel.Update();
@@ -327,6 +338,17 @@ namespace Totality.Client.GUI
                 but6.DoClick();
                 changePanel(_mediaPanel);
                 _mediaPanel.OpenNews();
+
+                if (country.IsRiot)
+                {
+                    _header.RiotOn();
+                    fire.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    _header.RiotOff();
+                    fire.Visibility = Visibility.Hidden;
+                }
             }
             catch (Exception e)
             {

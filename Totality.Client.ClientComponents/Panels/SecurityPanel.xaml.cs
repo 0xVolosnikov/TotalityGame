@@ -18,6 +18,7 @@ using Totality.Model;
 using Totality.Client.ClientComponents.Dialogs.Security;
 using Totality.CommonClasses;
 using Totality.Client.ClientComponents.ServiceReference1;
+using Totality.Model.Diplomatical;
 
 namespace Totality.Client.ClientComponents.Panels
 {
@@ -71,6 +72,7 @@ namespace Totality.Client.ClientComponents.Panels
 
         public void Update()
         {
+
             if (CountryData.MinsBlocks[(short)Mins.Security] > 0 && !isBlocked)
             {
                 isBlocked = true;

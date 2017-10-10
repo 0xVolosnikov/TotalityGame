@@ -25,6 +25,7 @@ namespace Totality.Client.ClientComponents
     {
         private ObservableCollection<OrderRecord> orderRecords = new ObservableCollection<OrderRecord>();
         public int startingLines { get; set; }
+        private long _money = 1000000;
 
         public OrdersTable()
         {
@@ -48,6 +49,21 @@ namespace Totality.Client.ClientComponents
             this.dataGrid.ItemsSource = orderRecords;
             dataGrid.Columns[0].Width = this.Width * 0.8;
            dataGrid.Columns[1].Width = this.Width * 0.2 + 1;
+        }
+
+        public void changeMoney(long money)
+        {
+            _money = money;
+            long cost = 0;
+            foreach (var ord in orderRecords)
+            {
+                if (!ord.Text.Equals(""))
+                    cost += long.Parse(ord.Cost);
+            }
+
+            sum.Content = String.Format("{0:N0}", cost).Replace(' ', '.') + " / " + String.Format("{0:N0}", money).Replace(' ', '.');
+            if (cost > _money) sum.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFA80000"));
+            else sum.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF00A83E"));
         }
 
         public void addOrder(OrderRecord newRecord)
@@ -115,8 +131,11 @@ namespace Totality.Client.ClientComponents
                             orderRecords.Move(i - 1, k);
                     }
                     break;
+
                 }
             }
+
+            changeMoney(_money);
         }
 
         private void dataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)

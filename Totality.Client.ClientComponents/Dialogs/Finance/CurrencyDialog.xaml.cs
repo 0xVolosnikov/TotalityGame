@@ -56,6 +56,8 @@ namespace Totality.Client.ClientComponents.Dialogs.Finance
                 Legend.SetDescription(pen, ratios.Keys.First());
                 CurrencyPlotter.Legend.Visibility = Visibility.Hidden;
                 CurrencyPlotter.Children.Add(pen);
+                CurrencyPlotter.FitToView();
+                
             }
 
         }

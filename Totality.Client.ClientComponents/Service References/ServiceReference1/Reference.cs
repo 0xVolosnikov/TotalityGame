@@ -39,6 +39,18 @@ namespace Totality.Client.ClientComponents.ServiceReference1 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITransmitterService/DipMsg", ReplyAction="http://tempuri.org/ITransmitterService/DipMsgResponse")]
         System.Threading.Tasks.Task<bool> DipMsgAsync(Totality.Model.Diplomatical.DipMsg msg);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITransmitterService/AskUpdate", ReplyAction="http://tempuri.org/ITransmitterService/AskUpdateResponse")]
+        bool AskUpdate(string myName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITransmitterService/AskUpdate", ReplyAction="http://tempuri.org/ITransmitterService/AskUpdateResponse")]
+        System.Threading.Tasks.Task<bool> AskUpdateAsync(string myName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITransmitterService/AskContracts", ReplyAction="http://tempuri.org/ITransmitterService/AskContractsResponse")]
+        Totality.Model.Diplomatical.DipContract[] AskContracts(string myName, string targetName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITransmitterService/AskContracts", ReplyAction="http://tempuri.org/ITransmitterService/AskContractsResponse")]
+        System.Threading.Tasks.Task<Totality.Model.Diplomatical.DipContract[]> AskContractsAsync(string myName, string targetName);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITransmitterService/GetCountryData", ReplyAction="http://tempuri.org/ITransmitterService/GetCountryDataResponse")]
         Totality.Model.Country GetCountryData(string name);
         
@@ -56,6 +68,12 @@ namespace Totality.Client.ClientComponents.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITransmitterService/GetCurrencyDemands", ReplyAction="http://tempuri.org/ITransmitterService/GetCurrencyDemandsResponse")]
         System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, long>> GetCurrencyDemandsAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITransmitterService/GetSumIndPowers", ReplyAction="http://tempuri.org/ITransmitterService/GetSumIndPowersResponse")]
+        System.Collections.Generic.Dictionary<string, double> GetSumIndPowers();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITransmitterService/GetSumIndPowers", ReplyAction="http://tempuri.org/ITransmitterService/GetSumIndPowersResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, double>> GetSumIndPowersAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -140,6 +158,22 @@ namespace Totality.Client.ClientComponents.ServiceReference1 {
             return base.Channel.DipMsgAsync(msg);
         }
         
+        public bool AskUpdate(string myName) {
+            return base.Channel.AskUpdate(myName);
+        }
+        
+        public System.Threading.Tasks.Task<bool> AskUpdateAsync(string myName) {
+            return base.Channel.AskUpdateAsync(myName);
+        }
+        
+        public Totality.Model.Diplomatical.DipContract[] AskContracts(string myName, string targetName) {
+            return base.Channel.AskContracts(myName, targetName);
+        }
+        
+        public System.Threading.Tasks.Task<Totality.Model.Diplomatical.DipContract[]> AskContractsAsync(string myName, string targetName) {
+            return base.Channel.AskContractsAsync(myName, targetName);
+        }
+        
         public Totality.Model.Country GetCountryData(string name) {
             return base.Channel.GetCountryData(name);
         }
@@ -162,6 +196,14 @@ namespace Totality.Client.ClientComponents.ServiceReference1 {
         
         public System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, long>> GetCurrencyDemandsAsync() {
             return base.Channel.GetCurrencyDemandsAsync();
+        }
+        
+        public System.Collections.Generic.Dictionary<string, double> GetSumIndPowers() {
+            return base.Channel.GetSumIndPowers();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, double>> GetSumIndPowersAsync() {
+            return base.Channel.GetSumIndPowersAsync();
         }
     }
 }

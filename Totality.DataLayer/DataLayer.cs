@@ -128,6 +128,7 @@ namespace Totality.DataLayer
         public void BreakContract(Guid id)
         {
             var c = _diplomaticalDatabase.Find(x => x.Id == id);
+            
             _diplomaticalArchive.Add(c);
             _diplomaticalDatabase.Remove(c);
         }

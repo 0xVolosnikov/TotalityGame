@@ -18,7 +18,7 @@
                 <Canvas.Effect>
                     <DropShadowEffect Direction="270"/>
                 </Canvas.Effect>
-                <Label x:Name="label" Content="Министерство Обороны" Canvas.Left="347" Height="40" Width="624" Foreground="White" FontFamily="Arial Black" FontSize="36" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" Canvas.Top="-2"/>
+                <Label x:Name="label" Content="Министерство Обороны" Height="40" Width="1200" Foreground="White" FontFamily="Arial Black" FontSize="36" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" Canvas.Top="-2"/>
             </Canvas>
             <Canvas Height="2" Canvas.Top="41" Width="1200" Background="#77FFFFFF">
                 <Canvas.Effect>
@@ -33,7 +33,7 @@
             </local:Button.Effect>
         </local:Button>
         <local:Button x:Name="NukeStrikeButton" Canvas.Left="958" Canvas.Top="311" Width="192" imgUp="Images/Military/MilButNuke0.png" imgDown="Images/Military/MilButNuke1.png" Height="84" Cursor="Hand"/>
-        <local:Button x:Name="UranusButton" Canvas.Left="734" Canvas.Top="69" Width="192" imgUp="/Totality.Client.ClientComponents;component/Images/Military/UranusButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Military/UranusButtonDown.png" Height="224" toolTipCost="" UseLayoutRounding="True" SnapsToDevicePixels="True" Cursor="Hand">
+        <local:Button x:Name="UranusButton" Canvas.Left="734" Canvas.Top="69" Width="192" imgUp="/Totality.Client.ClientComponents;component/Images/Military/UranusButton.png" imgDown="/Totality.Client.ClientComponents;component/Images/Military/UranusButtonDown.png" Height="224" toolTipCost="1000" UseLayoutRounding="True" SnapsToDevicePixels="True" Cursor="Hand">
             <local:Button.Effect>
                 <DropShadowEffect Opacity="0.7" Direction="270"/>
             </local:Button.Effect>

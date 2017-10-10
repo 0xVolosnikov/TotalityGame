@@ -50,6 +50,8 @@ namespace Totality.Client.ClientComponents.Dialogs.SecretPanels
 
         public void SReceiveOrder(object sender, Order order, string text, long price)
         {
+            order.Value2 = order.TargetMinistery;
+
             _receiveOrder(this, order);
             canvas1.Children.Remove((UIElement)sender);
             currentDialog = null;

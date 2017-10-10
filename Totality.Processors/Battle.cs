@@ -14,8 +14,12 @@ namespace Totality.OrderHandlers
 
         public Battle(string firstAlliance, string secondAlliance)
         {
-            Alliances.Add(firstAlliance, new List<string>());
-            Alliances.Add(secondAlliance, new List<string>());
+            try
+            {
+                Alliances.Add(firstAlliance, new List<string>());
+                Alliances.Add(secondAlliance, new List<string>());
+            }
+            catch (Exception e) { }
         }
     }
 }

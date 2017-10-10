@@ -41,6 +41,18 @@
   <wsdl:message name="ITransmitterService_DipMsg_OutputMessage">
     <wsdl:part name="parameters" element="tns:DipMsgResponse" />
   </wsdl:message>
+  <wsdl:message name="ITransmitterService_AskUpdate_InputMessage">
+    <wsdl:part name="parameters" element="tns:AskUpdate" />
+  </wsdl:message>
+  <wsdl:message name="ITransmitterService_AskUpdate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AskUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITransmitterService_AskContracts_InputMessage">
+    <wsdl:part name="parameters" element="tns:AskContracts" />
+  </wsdl:message>
+  <wsdl:message name="ITransmitterService_AskContracts_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AskContractsResponse" />
+  </wsdl:message>
   <wsdl:message name="ITransmitterService_GetCountryData_InputMessage">
     <wsdl:part name="parameters" element="tns:GetCountryData" />
   </wsdl:message>
@@ -58,6 +70,12 @@
   </wsdl:message>
   <wsdl:message name="ITransmitterService_GetCurrencyDemands_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetCurrencyDemandsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITransmitterService_GetSumIndPowers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSumIndPowers" />
+  </wsdl:message>
+  <wsdl:message name="ITransmitterService_GetSumIndPowers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSumIndPowersResponse" />
   </wsdl:message>
   <wsdl:message name="ITransmitterService_InitializeNukeDialog_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:InitializeNukeDialog" />
@@ -94,6 +112,14 @@
       <wsdl:input wsaw:Action="http://tempuri.org/ITransmitterService/DipMsg" message="tns:ITransmitterService_DipMsg_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ITransmitterService/DipMsgResponse" message="tns:ITransmitterService_DipMsg_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="AskUpdate">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITransmitterService/AskUpdate" message="tns:ITransmitterService_AskUpdate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITransmitterService/AskUpdateResponse" message="tns:ITransmitterService_AskUpdate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AskContracts">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITransmitterService/AskContracts" message="tns:ITransmitterService_AskContracts_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITransmitterService/AskContractsResponse" message="tns:ITransmitterService_AskContracts_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetCountryData">
       <wsdl:input wsaw:Action="http://tempuri.org/ITransmitterService/GetCountryData" message="tns:ITransmitterService_GetCountryData_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ITransmitterService/GetCountryDataResponse" message="tns:ITransmitterService_GetCountryData_OutputMessage" />
@@ -105,6 +131,10 @@
     <wsdl:operation name="GetCurrencyDemands">
       <wsdl:input wsaw:Action="http://tempuri.org/ITransmitterService/GetCurrencyDemands" message="tns:ITransmitterService_GetCurrencyDemands_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ITransmitterService/GetCurrencyDemandsResponse" message="tns:ITransmitterService_GetCurrencyDemands_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSumIndPowers">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITransmitterService/GetSumIndPowers" message="tns:ITransmitterService_GetSumIndPowers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITransmitterService/GetSumIndPowersResponse" message="tns:ITransmitterService_GetSumIndPowers_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="InitializeNukeDialog">
       <wsdl:output wsaw:Action="http://tempuri.org/ITransmitterService/InitializeNukeDialog" message="tns:ITransmitterService_InitializeNukeDialog_OutputCallbackMessage" />
@@ -164,6 +194,24 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="AskUpdate">
+      <soap12:operation soapAction="http://tempuri.org/ITransmitterService/AskUpdate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AskContracts">
+      <soap12:operation soapAction="http://tempuri.org/ITransmitterService/AskContracts" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetCountryData">
       <soap12:operation soapAction="http://tempuri.org/ITransmitterService/GetCountryData" style="document" />
       <wsdl:input>
@@ -184,6 +232,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetCurrencyDemands">
       <soap12:operation soapAction="http://tempuri.org/ITransmitterService/GetCurrencyDemands" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSumIndPowers">
+      <soap12:operation soapAction="http://tempuri.org/ITransmitterService/GetSumIndPowers" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -230,9 +287,9 @@
   </wsdl:binding>
   <wsdl:service name="Transmitter">
     <wsdl:port name="NetTcpBinding_ITransmitterService" binding="tns:NetTcpBinding_ITransmitterService">
-      <soap12:address location="net.tcp://192.168.43.136:10577/transmitter" />
+      <soap12:address location="net.tcp://172.20.217.55:10577/transmitter" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://192.168.43.136:10577/transmitter</wsa10:Address>
+        <wsa10:Address>net.tcp://172.20.217.55:10577/transmitter</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
           <Dns>localhost</Dns>
         </Identity>

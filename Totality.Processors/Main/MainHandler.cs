@@ -6,6 +6,7 @@ using Totality.Handlers.Diplomatical;
 using Totality.Handlers.News;
 using Totality.Handlers.Nuke;
 using Totality.Model;
+using Totality.Model.Diplomatical;
 using Totality.Model.Interfaces;
 using Totality.OrderHandlers;
 
@@ -20,6 +21,7 @@ namespace Totality.Handlers.Main
         private NukeHandler _nukeHandler;
         public DiplomaticalHandler DipHandler { get; set; }
         private List<Battle> battles = new List<Battle>();
+        private int _stepOfGame = 0;
 
 
         public MainHandler(NewsHandler newsHandler, IDataLayer dataLayer, ILogger logger, NukeHandler nukeHandler) : base(newsHandler, dataLayer, logger)
@@ -66,6 +68,7 @@ namespace Totality.Handlers.Main
 
         public void FinishStep()
         {
+            _stepOfGame++;
             try
             {
                 ProcessOrders();
@@ -78,6 +81,7 @@ namespace Totality.Handlers.Main
             foreach (KeyValuePair<string, Queue<Order>> country in _ordersBase)
             {
                 Country cur = (Country)_dataLayer.GetCountry(country.Key);
+                cur.Step = _stepOfGame;
                 cur.Mood = 100;
                 if (cur.IsRepressed) cur.Mood += 10;
                 _dataLayer.UpdateCountry(cur);
@@ -89,8 +93,6 @@ namespace Totality.Handlers.Main
 
         private void _nukeHandler_AttackEnded()
         {
-            fightBattles();
-
             updateMoney();
 
             updateMilitaryPower();
@@ -109,6 +111,8 @@ namespace Totality.Handlers.Main
             updateUranus();
 
             updateIndustries();
+
+            fightBattles();
 
             foreach (KeyValuePair<string, Queue<Order>> cou in _ordersBase)
             {
@@ -267,7 +271,7 @@ namespace Totality.Handlers.Main
                             country1 = _dataLayer.GetCountry(contract.From);
                             country2 = _dataLayer.GetCountry(contract.To);
                             var res = (double)_dataLayer.GetProperty(country1.Name, "Final" + contract.Res) - (double)_dataLayer.GetProperty(country1.Name, "Used" + contract.Res);
-                            var needMoney = FinancialTools.GetExchangeCost(contract.Price, country2.NationalCurrencyDemand, country1.NationalCurrencyDemand, _dataLayer.GetCurrencyOnStock(country2.Name), _dataLayer.GetCurrencyOnStock(country1.Name));
+                            var needMoney = FinancialTools.GetExchangeCost(contract.Price, country2.NationalCurrencyDemand, country1.NationalCurrencyDemand, _dataLayer.GetCurrencyOnStock(country2.Name), _dataLayer.GetCurrencyOnStock(country1.Name), country2.FinalHeavyIndustry + country2.FinalLightIndustry, country1.FinalHeavyIndustry + country1.FinalLightIndustry);
 
                             if (needMoney > country2.Money)
                             {
@@ -316,7 +320,7 @@ namespace Totality.Handlers.Main
             }
         }
 
-        public Dictionary<string, long> GetCurrencyDemands()
+        public Dictionary<string, long> GetCurrencyDemands() // OPTIMISE
         {
             Dictionary<string, long> demands = new Dictionary<string, long>();
             var countries = _dataLayer.GetCountries();
@@ -327,6 +331,19 @@ namespace Totality.Handlers.Main
             }
 
             return demands;
+        }
+
+        public Dictionary<string, double> GetSumIndPowers()
+        {
+            Dictionary<string, double> SumIndPowers = new Dictionary<string, double>();
+            var countries = _dataLayer.GetCountries();
+
+            foreach (Country c in countries.Values)
+            {
+                SumIndPowers.Add(c.Name, c.FinalHeavyIndustry + c.FinalLightIndustry);
+            }
+
+            return SumIndPowers;
         }
 
         public Dictionary<string, long> GetCurrencyStock()
@@ -343,6 +360,8 @@ namespace Totality.Handlers.Main
                 _dataLayer.UpdateCountry(countries[country.Key]);
             }
         }
+
+
 
         private void fightBattles()
         {
@@ -398,50 +417,109 @@ namespace Totality.Handlers.Main
                     }
                 }
 
-                var armies = battles[i].Alliances.ToList();
-                for (int j = 0; j < 2; j++)
+                try
                 {
-                    for (int k = 0; k < armies[j].Value.Count; k++)
+                    var armies = battles[i].Alliances.ToList();
+                    for (int j = 0; j < 2; j++)
                     {
-                        for (int p = 0; p < 2; p++)
+                        for (int k = 0; k < armies[j].Value.Count; k++)
                         {
-                            if (p == j) continue;
-                            countries[armies[j].Value[k]].MilitaryPower -= (powers[armies[p].Key] / armies[j].Value.Count)* 0.75;
-                            if (countries[armies[j].Value[k]].MilitaryPower < 0) countries[armies[j].Value[k]].MilitaryPower = 0;
-
-                            if (powers[armies[p].Key] > powers[armies[j].Key])
+                            for (int p = 0; p < 2; p++)
                             {
-                                if ((powers[armies[p].Key] - powers[armies[j].Key])/(double)powers[armies[j].Key] > 0.5)
-                                    _newsHandler.AddBroadNews(new Model.News(true) { text = "При подавляющем превосходстве армия " + armies[p].Key  + " нанесла сокрушительное поражение армии " + armies[j].Key + "." });
-                                else if ((powers[armies[p].Key] - powers[armies[j].Key]) / (double)powers[armies[j].Key] > 0.2)
-                                    _newsHandler.AddBroadNews(new Model.News(true) { text = "Пользуясь превосходством, армия " + armies[p].Key + " нанесла поражение армии " + armies[j].Key + "." });
-                                else if ((powers[armies[p].Key] - powers[armies[j].Key]) / (double)powers[armies[j].Key] > 0)
-                                    _newsHandler.AddBroadNews(new Model.News(true) { text = "Пользуясь незначительным превосходством, армия " + armies[p].Key + " ослабила армию " + armies[j].Key  + "."});
+                                try
+                                {
+                                    if (p == j) continue;
+                                    countries[armies[j].Value[k]].MilitaryPower -= (powers[armies[p].Key]/
+                                                                                    armies[j].Value.Count)*0.75;
+                                        // ERROR
+                                    if (countries[armies[j].Value[k]].MilitaryPower < 0)
+                                        countries[armies[j].Value[k]].MilitaryPower = 0;
+
+                                    if (powers[armies[p].Key] > powers[armies[j].Key])
+                                    {
+                                        if ((powers[armies[p].Key] - powers[armies[j].Key])/
+                                            (double) powers[armies[j].Key] >
+                                            0.5)
+                                            _newsHandler.AddBroadNews(new Model.News(true)
+                                            {
+                                                text =
+                                                    "При подавляющем превосходстве армия " + armies[p].Key +
+                                                    " нанесла сокрушительное поражение армии " + armies[j].Key + "."
+                                            });
+                                        else if ((powers[armies[p].Key] - powers[armies[j].Key])/
+                                                 (double) powers[armies[j].Key] >
+                                                 0.2)
+                                            _newsHandler.AddBroadNews(new Model.News(true)
+                                            {
+                                                text =
+                                                    "Пользуясь превосходством, армия " + armies[p].Key +
+                                                    " нанесла поражение армии " + armies[j].Key + "."
+                                            });
+                                        else if ((powers[armies[p].Key] - powers[armies[j].Key])/
+                                                 (double) powers[armies[j].Key] >
+                                                 0)
+                                            _newsHandler.AddBroadNews(new Model.News(true)
+                                            {
+                                                text =
+                                                    "Пользуясь незначительным превосходством, армия " + armies[p].Key +
+                                                    " ослабила армию " + armies[j].Key + "."
+                                            });
 
 
-                                countries[armies[j].Value[k]].ResOil -= ((powers[armies[p].Key] - powers[armies[j].Key]) / (armies[j].Value.Count))*0.75;
-                                if (countries[armies[j].Value[k]].ResOil < 0) countries[armies[j].Value[k]].ResOil = 0;
+                                        countries[armies[j].Value[k]].ResOil -= ((powers[armies[p].Key] -
+                                                                                  powers[armies[j].Key])/
+                                                                                 (armies[j].Value.Count))*0.25;
+                                        if (countries[armies[j].Value[k]].ResOil < 0)
+                                            countries[armies[j].Value[k]].ResOil = 0;
 
-                                    countries[armies[j].Value[k]].ResSteel -= ((powers[armies[p].Key] - powers[armies[j].Key]) / (armies[j].Value.Count)) * 0.75;
-                                if (countries[armies[j].Value[k]].ResSteel < 0) countries[armies[j].Value[k]].ResSteel = 0;
+                                        countries[armies[j].Value[k]].ResSteel -= ((powers[armies[p].Key] -
+                                                                                    powers[armies[j].Key])/
+                                                                                   (armies[j].Value.Count))*0.25;
+                                        if (countries[armies[j].Value[k]].ResSteel < 0)
+                                            countries[armies[j].Value[k]].ResSteel = 0;
 
-                                countries[armies[j].Value[k]].ResWood -= ((powers[armies[p].Key] - powers[armies[j].Key]) / (armies[j].Value.Count)) * 0.75;
-                                if (countries[armies[j].Value[k]].ResWood < 0) countries[armies[j].Value[k]].ResWood = 0;
+                                        countries[armies[j].Value[k]].ResWood -= ((powers[armies[p].Key] -
+                                                                                   powers[armies[j].Key])/
+                                                                                  (armies[j].Value.Count))*0.25;
+                                        if (countries[armies[j].Value[k]].ResWood < 0)
+                                            countries[armies[j].Value[k]].ResWood = 0;
 
-                                countries[armies[j].Value[k]].ResAgricultural -= ((powers[armies[p].Key] - powers[armies[j].Key]) / (armies[j].Value.Count)) * 0.75;
-                                if (countries[armies[j].Value[k]].ResAgricultural < 0) countries[armies[j].Value[k]].ResAgricultural = 0;
+                                        countries[armies[j].Value[k]].ResAgricultural -= ((powers[armies[p].Key] -
+                                                                                           powers[armies[j].Key])/
+                                                                                          (armies[j].Value.Count))*0.25;
+                                        if (countries[armies[j].Value[k]].ResAgricultural < 0)
+                                            countries[armies[j].Value[k]].ResAgricultural = 0;
 
-                                countries[armies[j].Value[k]].PowerHeavyIndustry -= ((powers[armies[p].Key] - powers[armies[j].Key]) / (armies[j].Value.Count)) * 0.75;
-                                if (countries[armies[j].Value[k]].PowerHeavyIndustry < 0) countries[armies[j].Value[k]].PowerHeavyIndustry = 0;
+                                        countries[armies[j].Value[k]].PowerHeavyIndustry -= ((powers[armies[p].Key] -
+                                                                                              powers[armies[j].Key])/
+                                                                                             (armies[j].Value.Count))*
+                                                                                            0.10;
+                                        if (countries[armies[j].Value[k]].PowerHeavyIndustry < 0)
+                                            countries[armies[j].Value[k]].PowerHeavyIndustry = 0;
 
-                                countries[armies[j].Value[k]].PowerLightIndustry -= ((powers[armies[p].Key] - powers[armies[j].Key]) / (armies[j].Value.Count)) * 0.75;
-                                if (countries[armies[j].Value[k]].PowerLightIndustry < 0) countries[armies[j].Value[k]].PowerLightIndustry = 0;
+                                        countries[armies[j].Value[k]].PowerLightIndustry -= ((powers[armies[p].Key] -
+                                                                                              powers[armies[j].Key])/
+                                                                                             (armies[j].Value.Count))*
+                                                                                            0.10;
+                                        if (countries[armies[j].Value[k]].PowerLightIndustry < 0)
+                                            countries[armies[j].Value[k]].PowerLightIndustry = 0;
+                                    }
+                                    else
+                                        _newsHandler.AddBroadNews(new Model.News(true)
+                                        {
+                                            text =
+                                                "Атака армии " + armies[p].Key + " позиций " + armies[j].Key +
+                                                "оказалась неудачной и не изменила баланса сил."
+                                        });
+                                }
+                                catch (Exception e)
+                                {
+                                    _log.Error("SMTHNG WITH ARMIES: " + e.Message);
+                                }
                             }
-                            else _newsHandler.AddBroadNews(new Model.News(true) { text = "В результате боев, армии  " + armies[p].Key + " и " + armies[j].Key + "остались на своих позициях." });
                         }
                     }
-                }
-               
+                } catch (Exception e) { _log.Error("SMTHING WITH ARMIES 2: " + e.Message);}
             }
 
             var cs = countries.Values.ToList();
@@ -464,6 +542,9 @@ namespace Totality.Handlers.Main
 
                 for (int i = 0; i < _currentOrdersLine.Count; i++)
                 {
+                    if (_currentOrdersLine[i].Ministery.Equals((short)Mins.Secret) )
+                        _ministeryHandlers[(short)Mins.Security].ProcessOrder(_currentOrdersLine[i]);
+                    else
                     _ministeryHandlers[_currentOrdersLine[i].Ministery].ProcessOrder(_currentOrdersLine[i]);
                 }
                 _currentOrdersLine.Clear();
@@ -559,10 +640,6 @@ namespace Totality.Handlers.Main
                 lE += (int)(LIpower * r.NextDouble());
                 _dataLayer.SetProperty(country.Key, "LightExperience", lE);
 
-                LIpower *= Math.Pow(Constants.ScienceBuff, (int)_dataLayer.GetProperty(country.Key, "LightScienceLvl"));
-                    // сюда добавить другие баффы
-                    _dataLayer.SetProperty(country.Key, "FinalLightIndustry", LIpower);
-
                 _dataLayer.SetProperty(country.Key, "UsedHIpower", 0);
                 var HIpower = (double)_dataLayer.GetProperty(country.Key, "PowerHeavyIndustry");
 
@@ -575,6 +652,13 @@ namespace Totality.Handlers.Main
                 var hE = (int)_dataLayer.GetProperty(country.Key, "HeavyExperience");
                 hE += (int)(HIpower * r.NextDouble());
                 _dataLayer.SetProperty(country.Key, "HeavyExperience", hE);
+
+                var upgradeCost = (long)(Constants.IndustryUpgradeCostRate * (LIpower + HIpower));
+                _dataLayer.SetProperty(country.Key, "IndustryUpgradeCost", upgradeCost);
+
+                LIpower *= Math.Pow(Constants.ScienceBuff, (int)_dataLayer.GetProperty(country.Key, "LightScienceLvl"));
+                // сюда добавить другие баффы
+                _dataLayer.SetProperty(country.Key, "FinalLightIndustry", LIpower);
 
                 HIpower *= Math.Pow(Constants.ScienceBuff, (int)_dataLayer.GetProperty(country.Key, "HeavyScienceLvl"));
                 // сюда добавить другие баффы
@@ -612,7 +696,7 @@ namespace Totality.Handlers.Main
                 foreach (KeyValuePair<string, Queue<Order>> country in _ordersBase)
             {
                 Country cur = (Country)_dataLayer.GetCountry(country.Key);
-                cur.Mood -= cur.TaxesLvl / 5.0;
+                cur.Mood -= (cur.TaxesLvl-20) / 2.0;
                 cur.Mood *= Math.Pow(1.05, cur.InnerLvl - 1);
                 if ( (cur.PowerHeavyIndustry - cur.PowerLightIndustry)/ cur.PowerLightIndustry > 0.3)
                 {
@@ -652,7 +736,9 @@ namespace Totality.Handlers.Main
                             countries[country.Key].NationalCurrencyDemand,
                             countries[anotherCountry.Key].NationalCurrencyDemand,
                             _dataLayer.GetCurrencyOnStock(country.Key),
-                            _dataLayer.GetCurrencyOnStock(anotherCountry.Key));
+                            _dataLayer.GetCurrencyOnStock(anotherCountry.Key),
+                            countries[country.Key].FinalHeavyIndustry + countries[country.Key].FinalLightIndustry,
+                            countries[anotherCountry.Key].FinalHeavyIndustry + countries[anotherCountry.Key].FinalLightIndustry);
                     else
                     {
                         countries[country.Key].CurrencyRatios.Add
@@ -661,7 +747,9 @@ namespace Totality.Handlers.Main
                                 countries[country.Key].NationalCurrencyDemand,
                                 countries[anotherCountry.Key].NationalCurrencyDemand,
                                 _dataLayer.GetCurrencyOnStock(country.Key),
-                                _dataLayer.GetCurrencyOnStock(anotherCountry.Key)
+                                _dataLayer.GetCurrencyOnStock(anotherCountry.Key),
+                                countries[country.Key].FinalHeavyIndustry + countries[country.Key].FinalLightIndustry,
+                                countries[anotherCountry.Key].FinalHeavyIndustry + countries[anotherCountry.Key].FinalLightIndustry
                                 )
                             );
                     }
@@ -698,8 +786,8 @@ namespace Totality.Handlers.Main
                     if (militaryPower < 0) militaryPower = 0;
 
                     var money = (long)_dataLayer.GetProperty(country.Key, "Money");
-                    money -= (long)(HIpower*(Constants.MobilizeBuff - 1)*(long)_dataLayer.GetProperty(country.Key, "IndustryUpgradeCost"));
-                    _newsHandler.AddNews(country.Key, new Model.News(true) { text = "Мобилизация приносит убытки: " + String.Format("{0:0,0}", (long)(HIpower * (Constants.MobilizeBuff - 1) * (long)_dataLayer.GetProperty(country.Key, "IndustryUpgradeCost"))) });
+                    money -= (long)(increase*5000);
+                    _newsHandler.AddNews(country.Key, new Model.News(true) { text = "Мобилизация приносит убытки: " + String.Format("{0:0,0}", (long)((long)(increase * 50000))) });
                     _dataLayer.SetProperty(country.Key, "Money", money);
                 }
                 else
@@ -731,10 +819,21 @@ namespace Totality.Handlers.Main
             }
         }
 
+        public void CountryReconnected(string name)
+        {
+            if (_stepOfGame != 0)
+            Transmitter.UpdateClient(_dataLayer.GetCountry(name));
+        }
+
         public void RemoveCountry(string name)
         {
             _ordersBase.Remove(name);
         }
 
+        public List<DipContract> AskContracts(string myName, string targetName)
+        {
+            var contracts = _dataLayer.GetContractList();
+            return contracts.Where((x) => x.From == targetName || x.To == targetName).ToList();
+        }
     }
 }

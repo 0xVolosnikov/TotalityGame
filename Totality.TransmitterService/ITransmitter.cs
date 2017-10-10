@@ -26,6 +26,12 @@ namespace Totality.TransmitterService
         bool DipMsg(DipMsg msg);
 
         [OperationContract]
+        bool AskUpdate(string myName);
+
+        [OperationContract]
+        List<DipContract> AskContracts(string myName, string targetName);
+
+        [OperationContract]
         Country GetCountryData(string name);
 
         [OperationContract]
@@ -33,6 +39,9 @@ namespace Totality.TransmitterService
 
         [OperationContract]
         Dictionary<string, long> GetCurrencyDemands();
+
+        [OperationContract]
+        Dictionary<string, double> GetSumIndPowers();
     }
 
     public interface ICallbackService
@@ -54,5 +63,6 @@ namespace Totality.TransmitterService
 
         [OperationContract(IsOneWay = true)]
         void SendContracts(List<DipContract> contracts);
+
     }
 }

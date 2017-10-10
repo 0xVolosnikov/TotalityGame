@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using Totality.Client.ClientComponents.ServiceReference1;
 using Totality.CommonClasses;
 using Totality.Model;
+using Totality.Model.Diplomatical;
 using static Totality.Model.Country;
 
 namespace Totality.Client.ClientComponents.Dialogs.Security
@@ -31,27 +32,27 @@ namespace Totality.Client.ClientComponents.Dialogs.Security
         Country _ourCountry;
         List<string> _countries;
         TransmitterServiceClient _client;
-        List<System.Windows.Controls.Button> buttons = new List<System.Windows.Controls.Button>();
+        List<Totality.Client.ClientComponents.Button> buttons = new List<Button>();
+        private Dictionary<string, DipContract[]> _secretBase;
 
-        public NetsDialog(ReceiveOrder receiveOrder, TransmitterServiceClient client )
+        public NetsDialog(ReceiveOrder receiveOrder, TransmitterServiceClient client)
         {
             _receiveOrder = receiveOrder;
             _client = client;
+
             InitializeComponent();
 
             levelButton.click += LevelButton_click;
-            foreach (string min in Ministers)
-            {
-                buttons.Add( new System.Windows.Controls.Button());
-                buttons.Last().Width = 741;
-                buttons.Last().FontSize = 22;
-                var c = new FontFamilyConverter();
-                buttons.Last().FontFamily = (FontFamily)c.ConvertFrom("Arial black");
-                buttons.Last().Content = min;
-                buttons.Last().Background = null;
-                buttons.Last().Cursor = Cursors.Hand;
-               // _wrap.Children.Add(buttons.Last());
-            }
+
+            buttons.Add(b1);
+            buttons.Add(b2);
+            buttons.Add(b3);
+            buttons.Add(b4);
+            buttons.Add(b5);
+            buttons.Add(b6);
+            buttons.Add(b7);
+            buttons.Add(b8);
+            buttons.Add(b9);
 
             CountriesBox.ItemsSource = Countries;
             if (Countries.Count > 0)
@@ -75,16 +76,19 @@ namespace Totality.Client.ClientComponents.Dialogs.Security
         {
             if (CountryData.SpyNetworks.ContainsKey((string)CountriesBox.SelectedValue) && CountryData.SpyNetworks[(string)CountriesBox.SelectedValue].NetLvl >= 3)
             {
-                levelButton.Content = CountryData.SpyNetworks[(string)CountriesBox.SelectedValue].NetLvl;
+                levelLabel.Text = CountryData.SpyNetworks[(string)CountriesBox.SelectedValue].NetLvl.ToString();
                 //_wrap.IsEnabled = true;
 
                 for (int i = 0; i < buttons.Count; i++)
                 {
                     if (CountryData.SpyNetworks[(string)CountriesBox.SelectedValue].Recruit[i])
                     {
-                        buttons[i].Foreground = Brushes.Green;
+                        var buf = buttons[i].imgUp;
+                        buttons[i].imgUp = buttons[i].imgDown;
+                        buttons[i].imgDown = buf;
+
                         var min = i;
-                        buttons[i].Click += (object s, RoutedEventArgs e2) =>
+                        buttons[i].click += () =>
                         {
                             _ourCountry = CountryData;
                             SecretPanels.SecretAbstractPanel.CountryData = _client.GetCountryData((string)CountriesBox.SelectedValue);
@@ -112,7 +116,7 @@ namespace Totality.Client.ClientComponents.Dialogs.Security
                                     break;
                                 case 3:
                                     CountryData = SecretPanels.SecretAbstractPanel.CountryData;
-                                    panel = new SecretPanels.SecretForeignPanel(getOrder);
+                                    panel = new SecretPanels.SecretForeignPanel(getOrder, _client.AskContracts(_ourCountry.Name, CountryData.Name));
                                     ((SecretPanels.SecretForeignPanel)panel).Update();
                                     break;
                                 case 4:
@@ -149,10 +153,9 @@ namespace Totality.Client.ClientComponents.Dialogs.Security
                     else
                     {
                         var min = i;
-                        buttons[i].Foreground = Brushes.Black;
-                        buttons[i].Click += (object s, RoutedEventArgs e2) =>
+                        buttons[i].click += () =>
                         {
-                            var recDil = new RecruitDialog(getOrder, min);
+                            var recDil = new RecruitDialog(getInnerOrder, min);
                             canvas.Children.Add(recDil);
                             Canvas.SetLeft(recDil, (Width - recDil.Width) / 2);
                             Canvas.SetTop(recDil, (Height - recDil.Height) / 2);
@@ -163,18 +166,40 @@ namespace Totality.Client.ClientComponents.Dialogs.Security
             else
             {
                 if (CountryData.SpyNetworks.ContainsKey((string)CountriesBox.SelectedValue))
-                    levelButton.Content = CountryData.SpyNetworks[(string)CountriesBox.SelectedValue].NetLvl;
+                    levelLabel.Text = CountryData.SpyNetworks[(string)CountriesBox.SelectedValue].NetLvl.ToString();
                 else
-                    levelButton.Content = 0;
-
-                for (int i = 0; i < buttons.Count; i++)
-                {
-                    buttons[i].Foreground = Brushes.Gray;
-                }
+                    levelLabel.Text = "0";
             }
 
             this.UpdateLayout();
         }
+
+
+        private void getInnerOrder(object sender, Order order)
+        {
+            if (order != null)
+            {
+                order.TargetCountryName = (string) CountriesBox.SelectedValue;
+                var agentCost = Constants.InitialAgentCost;
+
+                int count = 0;
+                foreach (KeyValuePair<string, SpyNetwork> net in CountryData.SpyNetworks)
+                {
+                    var a = Array.FindAll(net.Value.Recruit, x => x == true);
+                    count += a.Length;
+                }
+
+                agentCost = (long) (agentCost*Math.Pow(Constants.AgentCostRatio, count));
+                _receiveOrder(this, order,
+                    "Внедрение агентов в страну " + (string) CountriesBox.SelectedValue + ", " +
+                    Ministers[order.TargetMinistery], agentCost);
+            }
+            else
+            {
+                _receiveOrder(this, null, null, 0);
+            }
+        }
+
 
         private void getOrder(object sender, Order order)
         {
@@ -189,25 +214,10 @@ namespace Totality.Client.ClientComponents.Dialogs.Security
             canvas.Children.Remove((UIElement)sender);
             if (order != null)
             {
-                if (order.OrderNum == (short)Orders.AddAgents)
-                {
-                    order.TargetCountryName = (string)CountriesBox.SelectedValue;
-                    var agentCost = Constants.InitialAgentCost;
-
-                    int count = 0;
-                    foreach (KeyValuePair<string, SpyNetwork> net in CountryData.SpyNetworks)
-                    {
-                        count += net.Value.Recruit.FindAll(x => x == true).Count;
-                    }
-
-                    agentCost = (long)(agentCost * Math.Pow(Constants.AgentCostRatio, count));
-                    _receiveOrder(this, order, "Внедрение агентов в страну " + (string)CountriesBox.SelectedValue + ", " + Ministers[order.TargetMinistery], agentCost);
-                }
-                else
                 {
                     var newOrder = new Order(CountryData.Name);
                     newOrder.TargetCountryName = order.CountryName;
-                    newOrder.Ministery = (short)Mins.Security;
+                    newOrder.Ministery = (short)Mins.Secret;
                     newOrder.OrderNum = order.OrderNum;
                     newOrder.TargetCountryName2 = order.TargetCountryName;
                     newOrder.TargetMinistery = order.Ministery;
