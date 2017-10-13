@@ -16,7 +16,7 @@ namespace Totality.Handlers.Main
         {
         }
 
-        public bool ProcessOrder(Order order)
+        public OrderResult ProcessOrder(Order order)
         {
             switch (order.OrderNum)
             {
@@ -32,14 +32,14 @@ namespace Totality.Handlers.Main
             }
         }
 
-        private bool reorganize(Order order)
+        private OrderResult reorganize(Order order)
         {
 
             var c = _dataLayer.GetCountry(order.CountryName);
             if (c.Money < 600000)
             {
                 _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Не хватает денег на реорганизацию министерства." });
-                return false;
+                return new OrderResult(order.CountryName, "Реорганизация министерства " + order.TargetMinistery, false, 6000000);
             }
             c.Money -= 600000;
             _dataLayer.UpdateCountry(c);
@@ -59,10 +59,10 @@ namespace Totality.Handlers.Main
             _dataLayer.SetProperty(order.CountryName, "MinsBlocks", minsBlocks);
 
             _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Министерство " + order.TargetMinistery + "реорганизовано." });
-            return true;
+            return new OrderResult(order.CountryName, "Реорганизация министерства " + order.TargetMinistery, true, 6000000);
         }
 
-        private bool lvlUp(Order order)
+        private OrderResult lvlUp(Order order)
         {
             var money = (long)_dataLayer.GetProperty(order.CountryName, "Money");
             var PremierLvlUpCost = (long)_dataLayer.GetProperty(order.CountryName, "PremierLvlUpCost");
@@ -70,7 +70,7 @@ namespace Totality.Handlers.Main
             if (money < PremierLvlUpCost)
             {
                 _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Не хватает денег на усиление власти." });
-                return false;
+                return new OrderResult(order.CountryName, "Усиление власти" + order.TargetMinistery, false, PremierLvlUpCost);
             }
 
             money -= PremierLvlUpCost;
@@ -82,21 +82,21 @@ namespace Totality.Handlers.Main
             _dataLayer.SetProperty(order.CountryName, "PremierLvl", lvl);
 
             _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Усилена власть." });
-            return true;
+            return new OrderResult(order.CountryName, "Усиление власти" + order.TargetMinistery, true, PremierLvlUpCost);
         }
 
-        private bool alert(Order order)
+        private OrderResult alert(Order order)
         {
             _dataLayer.SetProperty(order.CountryName, "IsAlerted", true);
             _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Объявлено чрезвычайное положение!" });
-            return true;
+            return new OrderResult(order.CountryName, "Объявление чрезвычайного положения", true);
         }
 
-        private bool unAlert(Order order)
+        private OrderResult unAlert(Order order)
         {
             _dataLayer.SetProperty(order.CountryName, "IsAlerted", false);
             _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Чрезвычайное положение отменено!" });
-            return true;
+            return new OrderResult(order.CountryName, "Отмена чрезвычайного положения", true);
         }
     }
 }

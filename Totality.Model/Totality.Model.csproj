@@ -79,6 +79,7 @@
     <Compile Include="News.cs" />
     <Compile Include="NukeRocket.cs" />
     <Compile Include="Order.cs" />
+    <Compile Include="OrderResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Property.cs" />
   </ItemGroup>

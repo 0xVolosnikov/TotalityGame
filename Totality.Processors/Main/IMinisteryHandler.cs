@@ -4,6 +4,6 @@ namespace Totality.Handlers.Main
 {
     interface IMinisteryHandler
     {
-        bool ProcessOrder(Order order);
+        OrderResult ProcessOrder(Order order);
     }
 }

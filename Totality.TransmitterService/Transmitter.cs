@@ -169,6 +169,17 @@ namespace Totality.TransmitterService
             }
         }
 
+        public void SendResults(Dictionary<string, List<OrderResult>> orderResults)
+        {
+            foreach (var client in Clients)
+            {
+                if (orderResults.Keys.Contains(client.Name))
+                {
+                    client.Transmitter.SendResults(orderResults[client.Name]);
+                }
+            }
+        }
+
         public Country GetCountryData(string name)
         {
             try

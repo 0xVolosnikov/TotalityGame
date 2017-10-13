@@ -88,6 +88,9 @@ namespace Totality.Client.ClientComponents.ServiceReference1 {
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ITransmitterService/SendNews")]
         void SendNews(Totality.Model.News[] newsList);
         
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ITransmitterService/SendResults")]
+        void SendResults(Totality.Model.OrderResult[] results);
+        
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ITransmitterService/UpdateClient")]
         void UpdateClient(Totality.Model.Country country);
         

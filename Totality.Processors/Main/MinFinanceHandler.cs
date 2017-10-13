@@ -15,7 +15,7 @@ namespace Totality.Handlers.Main
         {
         }
 
-        public bool ProcessOrder(Order order)
+        public OrderResult ProcessOrder(Order order)
         {
             switch (order.OrderNum)
             {
@@ -31,17 +31,17 @@ namespace Totality.Handlers.Main
             }
         }
 
-        private bool ChangeTaxes(Order order)
+        private OrderResult ChangeTaxes(Order order)
         {
             if (order.Value > 100 || order.Value < 0)
-                return false;
+                return new OrderResult(order.CountryName, "Изменение уровня налогов", false, 0);
 
             _dataLayer.SetProperty(order.CountryName, "TaxesLvl", order.Value);
             _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Изменен уровень налогов: " + order.Value + "%" });
-            return true;
+            return new OrderResult(order.CountryName, "Изменение уровня налогов: " + order.Value + "%", true, 0); ;
         }
 
-        private bool PurchaseCurrency(Order order)
+        private OrderResult PurchaseCurrency(Order order)
         {
             var ourDemand = (long)_dataLayer.GetProperty(order.CountryName, "NationalCurrencyDemand");
             var theirDemand = (long)_dataLayer.GetProperty(order.TargetCountryName, "NationalCurrencyDemand");
@@ -59,7 +59,7 @@ namespace Totality.Handlers.Main
                 ourIndPower, theirIndPower);
 
             if (money < exchangeCost)
-                return false;
+                return new OrderResult(order.CountryName, "Покупка валюты " + order.TargetCountryName, false, exchangeCost);
 
             money -= exchangeCost;
             _dataLayer.SetProperty(order.CountryName, "Money", money);
@@ -79,10 +79,10 @@ namespace Totality.Handlers.Main
 
             _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Закуплена валюта страны " + order.TargetCountryName  + " в размере " + String.Format("{0:0,0}",order.Count) + "."});
 
-            return true;
+            return new OrderResult(order.CountryName, "Покупка валюты " + order.TargetCountryName, true, exchangeCost);
         }
 
-        private bool SellCurrency(Order order)
+        private OrderResult SellCurrency(Order order)
         {
             var ourDemand = (long)_dataLayer.GetProperty(order.CountryName, "NationalCurrencyDemand");
             var theirDemand = (long)_dataLayer.GetProperty(order.TargetCountryName, "NationalCurrencyDemand");
@@ -100,7 +100,7 @@ namespace Totality.Handlers.Main
             var ourAccounts = (Dictionary<string, long>)_dataLayer.GetProperty(order.CountryName, "CurrencyAccounts");
 
             if (!ourAccounts.ContainsKey(order.TargetCountryName) ||  ourAccounts[order.TargetCountryName] < order.Count)
-                return false;
+                return new OrderResult(order.CountryName, "Продажа валюты " + order.TargetCountryName, false, exchangeCost);
 
             ourAccounts[order.TargetCountryName] -= order.Count;
             _dataLayer.SetProperty(order.CountryName, "CurrencyAccounts", ourAccounts);
@@ -116,15 +116,15 @@ namespace Totality.Handlers.Main
             _dataLayer.SetCurrencyOnStock(order.TargetCountryName, theirQuontityOnStock);
 
             _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Продана валюта страны " + order.TargetCountryName + " в размере " + String.Format("{0:0,0}", order.Count) + "." });
-            return true;
+            return new OrderResult(order.CountryName, "Продажа валюты " + order.TargetCountryName, true, exchangeCost);
         }
 
-        private bool CurrencyInfusion(Order order)
+        private OrderResult CurrencyInfusion(Order order)
         {
             var money = (long)_dataLayer.GetProperty(order.CountryName, "Money");
 
             if (money < order.Count)
-                return false;
+                return new OrderResult(order.CountryName, "Вливание ", false, order.Count);
 
             money -= order.Count;
             _dataLayer.SetProperty(order.CountryName, "Money", money);
@@ -134,7 +134,7 @@ namespace Totality.Handlers.Main
             _dataLayer.SetCurrencyOnStock(order.CountryName, ourCurrencyOnStock);
 
             _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Произведено вливание денег на рынок валюты." });
-            return true;
+            return new OrderResult(order.CountryName, "Вливание ", true, order.Count);
         }
     }
 }

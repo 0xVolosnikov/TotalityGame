@@ -24,5 +24,7 @@ namespace Totality.Model.Interfaces
         void SendDip(DipMsg msg);
 
         void SendContractsToAll(List<DipContract> contracts);
+
+        void SendResults(Dictionary<string, List<OrderResult>> orderResults);
     }
 }

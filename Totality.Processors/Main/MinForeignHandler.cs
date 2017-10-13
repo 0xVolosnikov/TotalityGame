@@ -14,7 +14,7 @@ namespace Totality.Handlers.Main
 
         }
 
-        public bool ProcessOrder(Order order)
+        public OrderResult ProcessOrder(Order order)
         {
             switch (order.OrderNum)
             {
@@ -24,7 +24,7 @@ namespace Totality.Handlers.Main
             }
         }
 
-        private bool BreakContract(Order order)
+        private OrderResult BreakContract(Order order)
         {
             try
             {
@@ -61,12 +61,12 @@ namespace Totality.Handlers.Main
                 }
 
                 _dataLayer.BreakContract(order.TargetId);
-                return true;
+                return new OrderResult(order.CountryName, "Разрыв договора ", true);
             }
             catch (Exception e)
             {
                 _log.Error(e.Message);
-                return false;
+                return new OrderResult(order.CountryName, "Разрыв договора ", false);
             }
         }
     }

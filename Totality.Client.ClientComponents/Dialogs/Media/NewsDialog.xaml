@@ -5,35 +5,120 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Totality.Client.ClientComponents.Dialogs"
              xmlns:we="clr-namespace:Totality.Client.ClientComponents.Dialogs.Media"
-             mc:Ignorable="d" d:DesignWidth="607.389" Width="1200" Height="445" BorderBrush="White" BorderThickness="5">
-    <Canvas x:Name="canvas" Background="#FFF7F7F7">
-        <Border BorderBrush="Black" BorderThickness="1" Height="5" Canvas.Top="48" Width="983" Background="Black"/>
-        <Border BorderBrush="Black" BorderThickness="1,0,0,0" Height="435" Canvas.Left="983" Width="207">
-            <Grid>
-                <Button x:Name="cancelButton_Copy1" Content="Закрыть" FontFamily="Arial Black" FontSize="20" Click="cancelButton_Click" Foreground="Black" RenderTransformOrigin="0.5,0.521" Margin="0,363,-1,0" Cursor="Hand">
-                    <Button.Background>
-                        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                            <GradientStop Color="#FFBBBBBB" Offset="0.016"/>
-                            <GradientStop Color="#FF9E9E9E" Offset="1"/>
-                        </LinearGradientBrush>
-                    </Button.Background>
-                </Button>
-            </Grid>
-        </Border>
-        <ScrollViewer Height="381" Canvas.Top="54" Width="978" HorizontalAlignment="Center" VerticalAlignment="Top">
-            <DockPanel LastChildFill="False" Width="953" HorizontalAlignment="Center" VerticalAlignment="Top" Height="501">
-                <WrapPanel x:Name="Panel1" Height="501" VerticalAlignment="Top" Width="486" Orientation="Vertical" MaxWidth="486">
-                    <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="Новости в стране:" Height="34" Width="486" FontFamily="Aparajita" FontSize="28" TextAlignment="Center" Padding="0,2,0,0" FontWeight="Bold"/>
-                </WrapPanel>
-                <WrapPanel x:Name="Panel2" Height="501" VerticalAlignment="Top" Width="468" Orientation="Vertical" MinWidth="468">
-                    <TextBlock x:Name="textBlock_Copy" TextWrapping="Wrap" Text="Новости в мире:" Height="34" Width="468" FontFamily="Aparajita" FontSize="28" TextAlignment="Center" Padding="0,2,0,0" FontWeight="Bold"/>
-                </WrapPanel>
-                <Label x:Name="label1" Content="Label" Height="501" VerticalAlignment="Top" Width="100"/>
-            </DockPanel>
-        </ScrollViewer>
-        <Canvas Height="47" Width="983" Background="#FFFAFAFA"/>
-        <Label x:Name="label" Content="Новости" Height="53" Width="274" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontFamily="Times New Roman" FontSize="48" Canvas.Left="349" Padding="0,3,0,0" Canvas.Top="-10"/>
-        <Label x:Name="label_Copy" Content="ход №:" Height="53" Width="113" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontFamily="Times New Roman" FontSize="36" Canvas.Left="772" Padding="0,3,0,0" Canvas.Top="-6"/>
-        <Label x:Name="stepLabel" Content="0" Height="53" Width="91" VerticalContentAlignment="Center" FontFamily="Times New Roman" FontSize="36" Canvas.Left="887" Padding="0,3,0,0" Canvas.Top="-4"/>
+             mc:Ignorable="d" d:DesignWidth="607.389" Width="1200" Height="445" BorderBrush="White" BorderThickness="0
+                      ">
+    <Canvas x:Name="canvas" Background="White">
+        <Grid Height="444" Width="1200" ShowGridLines="false">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="38*"/>
+                <RowDefinition Height="397*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="597*"/>
+                <ColumnDefinition Width="593*"/>
+            </Grid.ColumnDefinitions>
+
+            <Canvas  Grid.RowSpan="2" Grid.Column="1" Margin="0.6,10,0,0" Background="#FFF4F4F4">
+                <Canvas.Effect>
+                    <DropShadowEffect Direction="150" BlurRadius="7" ShadowDepth="3"/>
+                </Canvas.Effect>
+            </Canvas>
+            <Button x:Name="cancelButton_Copy1" Content="Закрыть" FontFamily="Old Standard" FontSize="20" Click="cancelButton_Click" Foreground="Black" RenderTransformOrigin="0.5,0.521" Cursor="Hand" Grid.Column="1" Margin="0,10,1,400" HorizontalAlignment="Right" Width="148" Grid.RowSpan="2">
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-0.349"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Button.RenderTransform>
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                        <GradientStop Color="#FFBBBBBB" Offset="0.016"/>
+                        <GradientStop Color="#FF9E9E9E" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Label x:Name="label" Content="Вестник диктатора" HorizontalContentAlignment="Center" FontFamily="Old Standard" FontSize="24" Padding="0" Grid.Column="1" Margin="5.6,8,314,402" VerticalContentAlignment="Center" FontWeight="Bold" Grid.RowSpan="2"/>
+            <Label x:Name="label_Copy" Content="ход №:" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontFamily="Old Standard" FontSize="24" Padding="0" Grid.Column="1" Margin="273.6,9,234,0" Height="36" VerticalAlignment="Top" BorderThickness="2,0,0,0" FontStyle="Italic" Grid.RowSpan="2"/>
+            <Label x:Name="stepLabel" Content="0" VerticalContentAlignment="Center" FontFamily="Old Standard" FontSize="24" Padding="0" Grid.Column="1" Margin="363.6,9,193,399" Grid.IsSharedSizeScope="True" HorizontalContentAlignment="Center" FontStyle="Italic" Grid.RowSpan="2"/>
+            <ScrollViewer Margin="602,0,10,0" Grid.Row="1" Height="394" VerticalAlignment="Bottom" Grid.ColumnSpan="2">
+                <Grid Height="384" Width="578">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" MinHeight="56"/>
+                        <RowDefinition Height="auto" MinHeight="56"/>
+                    </Grid.RowDefinitions>
+                    <WrapPanel Grid.Row="0" x:Name="Panel1" Height="191" VerticalAlignment="Top" Orientation="Vertical" MinWidth="468" Margin="2,0,0,0">
+                        <TextBlock x:Name="Panel1Name" TextWrapping="Wrap" Text="Новости в нашей стране:" Height="34" Width="576" FontFamily="Old Standard" FontSize="28" TextAlignment="Center" Padding="3,0,0,0" FontWeight="Bold"/>
+                    </WrapPanel>
+                    <WrapPanel Grid.Row="1" x:Name="Panel2" Height="191" VerticalAlignment="Top" Orientation="Vertical" MinWidth="468" Margin="2,0,0,0">
+                        <TextBlock x:Name="textBlock_Copy" TextWrapping="Wrap" Text="Новости в мире:" Height="34" Width="576" FontFamily="Old Standard" FontSize="28" TextAlignment="Center" Padding="0" FontWeight="Bold"/>
+                    </WrapPanel>
+                    <GridSplitter x:Name="gridSplitter1" HorizontalAlignment="Left" Height="2" Width="576" Margin="0,0,0,0" Grid.Row="0" VerticalAlignment="Bottom" Background="Black"/>
+                </Grid>
+
+            </ScrollViewer>
+
+            <TextBlock x:Name="textBlock" TextWrapping="Wrap" FontFamily="Old Standard" FontSize="28" TextAlignment="Center" Padding="0,0,0,0" FontWeight="Bold" Margin="0,2,592,404" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2"><Run Text="Отчет правительства:"/></TextBlock>
+            <ScrollViewer HorizontalAlignment="Left" Height="397" Margin="0,38,0,0" VerticalAlignment="Top" Width="588" Grid.RowSpan="2">
+                <Grid Height="auto" Width="572">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="285*"/>
+                        <ColumnDefinition Width="287*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition MinHeight="290" Height="Auto"/>
+                        <RowDefinition Height="36"/>
+                        <RowDefinition Height="36"/>
+                        <RowDefinition Height="36"/>
+                    </Grid.RowDefinitions>
+                    <DataGrid x:Name="resultsGrid" AutoGenerateColumns="False" Grid.ColumnSpan="2" VerticalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="False" Margin="0,0,0,0" Background="White" CanUserResizeColumns="False" CanUserSortColumns="False" CanUserReorderColumns="False" CanUserResizeRows="False" IsReadOnly="True" FontFamily="Old Standard" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="360" Header="Пункт" Binding="{Binding Path=Text}">
+                                <DataGridTextColumn.HeaderStyle>
+                                    <Style TargetType="DataGridColumnHeader" >
+                                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                        <Setter Property="FontWeight" Value="DemiBold"></Setter>
+                                    </Style>
+                                </DataGridTextColumn.HeaderStyle>
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="TextWrapping" Value="Wrap"></Setter>
+                                        <Setter Property="FontSize" Value="18"></Setter>
+                                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn  Width="*" Header="Стоимость" Binding="{Binding Path=Price}">
+                                <DataGridTextColumn.HeaderStyle>
+                                    <Style TargetType="DataGridColumnHeader" >
+                                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                        <Setter Property="FontWeight" Value="DemiBold"></Setter>
+                                    </Style>
+                                </DataGridTextColumn.HeaderStyle>
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="TextWrapping" Value="Wrap"></Setter>
+                                        <Setter Property="FontSize" Value="18"></Setter>
+                                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Label x:Name="label1" Content="Суммарный доход:" Height="36" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Stretch" Width="285" Grid.Row="1" FontFamily="Old Standard" FontSize="18" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" Grid.Column="0" BorderBrush="Black" BorderThickness="1"/>
+                    <Label x:Name="label2" Content="Суммарный расход:" Height="36" Margin="0,0,0,0" Grid.Row="2" Padding="0" FontSize="18" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Old Standard" Grid.Column="0" BorderBrush="Black" BorderThickness="1" />
+                    <Label x:Name="label3" Content="Итого:" HorizontalAlignment="Left" Margin="0,0,0,0" Grid.Row="3" VerticalAlignment="Top" Grid.RowSpan="2" Width="285" Height="36" FontSize="22" FontFamily="Old Standard" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="Black" BorderThickness="1"/>
+                    <Label x:Name="profitLabel" Content="10 000 000" Grid.Column="1" HorizontalAlignment="Left" Height="36" Margin="0,0,0,0" Grid.Row="1" VerticalAlignment="Top" Width="287" Padding="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontFamily="Old Standard" FontSize="24" BorderThickness="1" BorderBrush="Black" Foreground="#FF178800"/>
+                    <Label x:Name="deficitLabel" Content="5 000 000" Grid.Column="1" HorizontalAlignment="Left" Margin="0,0,0,0" Grid.Row="2" VerticalAlignment="Top" Height="36" Width="287" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" FontSize="24" Foreground="#FF8B0707" FontFamily="Old Standard" BorderThickness="1" BorderBrush="Black"/>
+                    <Label x:Name="sumLabel" Content="+ 5 000 000" Grid.Column="1" HorizontalAlignment="Left" Margin="0,0,0,0" Grid.Row="3" VerticalAlignment="Top" Height="36" Width="287" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" FontSize="24" Foreground="#FF197D00" FontFamily="Old Standard" BorderThickness="1" BorderBrush="Black"/>
+
+                </Grid>
+            </ScrollViewer>
+
+            <GridSplitter x:Name="gridSplitter2" HorizontalAlignment="Left" Height="2" Width="598" Margin="602,0,0,399" Grid.Row="1" VerticalAlignment="Bottom"  Background="Black" Grid.ColumnSpan="2"/>
+        </Grid>
+        <Canvas Height="440" Canvas.Left="584" Width="616" Canvas.Top="-5"/>
+
     </Canvas>
 </local:AbstractDialog>

@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
 using System.ServiceModel;
-using System.Text;
 using Totality.Model;
-using Totality.Model.Interfaces;
 using Totality.Model.Diplomatical;
+using Totality.Model.Interfaces;
 
 namespace Totality.TransmitterService
 {
@@ -56,6 +53,9 @@ namespace Totality.TransmitterService
         void SendNews(List<News> newsList);
 
         [OperationContract(IsOneWay = true)]
+        void SendResults(List<OrderResult> results);
+
+        [OperationContract(IsOneWay = true)]
         void UpdateClient(Country country);
 
         [OperationContract(IsOneWay = true)]
@@ -63,6 +63,7 @@ namespace Totality.TransmitterService
 
         [OperationContract(IsOneWay = true)]
         void SendContracts(List<DipContract> contracts);
+
 
     }
 }

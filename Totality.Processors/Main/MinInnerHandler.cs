@@ -14,7 +14,7 @@ namespace Totality.Handlers.Main
         {
         }
 
-        public bool ProcessOrder(Order order)
+        public OrderResult ProcessOrder(Order order)
         {
             switch (order.OrderNum)
             {
@@ -30,14 +30,14 @@ namespace Totality.Handlers.Main
             }
         }
 
-        private bool SuppressRiot(Order order)
+        private OrderResult SuppressRiot(Order order)
         {
              Random _randomizer = new Random((DateTime.Today - new DateTime(1995, 1, 1)).Milliseconds);
             var c = _dataLayer.GetCountry(order.CountryName);
             if (c.Money < 500000)
             {
-                _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Не хватает денег на попытку подавления бунта." });
-                return false;
+                _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "МВД не хватает денег на попытку подавления бунта!" });
+                return new OrderResult(order.CountryName, "Попытка подавления бунта", false, 500000);
             }
             c.Money -= 500000;
             _dataLayer.UpdateCountry(c);
@@ -49,36 +49,39 @@ namespace Totality.Handlers.Main
             {
                 _dataLayer.SetProperty(order.CountryName, "IsRiot", false);
                 _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Бунт успешно подавлен!" });
-                return true;
+                return new OrderResult(order.CountryName, "Попытка подавления бунта", true, 500000);
             }
             else
             {
                 _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Попытка подавления бунта провалилась." });
-                return false;
+                return new OrderResult(order.CountryName, "Попытка подавления бунта", true, 500000);
             }
         }
 
-        private bool Repressions(Order order)
+        private OrderResult Repressions(Order order)
         {
             _dataLayer.SetProperty(order.CountryName, "IsRepressed", true);
             _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Начаты репрессии." });
-            return true;
+            return new OrderResult(order.CountryName, "Начало репрессий", true, 0);
         }
 
-        private bool EndRepressions(Order order)
+        private OrderResult EndRepressions(Order order)
         {
             _dataLayer.SetProperty(order.CountryName, "IsRepressed", false);
             _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Прекращены репрессии." });
-            return true;
+            return new OrderResult(order.CountryName, "Конец репрессий", true, 0);
         }
 
-        private bool LvlUp(Order order)
+        private OrderResult LvlUp(Order order)
         {
             var money = (long)_dataLayer.GetProperty(order.CountryName, "Money");
             var innerLvlUpCost = (long)_dataLayer.GetProperty(order.CountryName, "InnerLvlUpCost");
 
             if (money < innerLvlUpCost)
-                return false;
+            {
+                _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Не хватает денег на реформу МВД." });
+                return new OrderResult(order.CountryName, "Попытка подавления бунта", false, innerLvlUpCost);
+            }
 
             money -= innerLvlUpCost;
             _dataLayer.SetProperty(order.CountryName, "Money", money);
@@ -89,7 +92,7 @@ namespace Totality.Handlers.Main
             _dataLayer.SetProperty(order.CountryName, "InnerLvl", lvl);
 
             _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Повышена квалификация МВД." });
-            return true;
+            return new OrderResult(order.CountryName, "Попытка подавления бунта", true, innerLvlUpCost);
         }
     }
 }

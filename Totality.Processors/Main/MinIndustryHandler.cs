@@ -14,7 +14,7 @@ namespace Totality.Handlers.Main
         {
         }
 
-        public bool ProcessOrder(Order order)
+        public OrderResult ProcessOrder(Order order)
         {
             switch (order.OrderNum)
             {
@@ -34,13 +34,24 @@ namespace Totality.Handlers.Main
             }
         }
 
-        private bool ImproveIndustry(Order order, string industry)
+        private OrderResult ImproveIndustry(Order order, string industry)
         {
             var money = (long)_dataLayer.GetProperty(order.CountryName, "Money");
             var upgradeCost = (long)_dataLayer.GetProperty(order.CountryName, "IndustryUpgradeCost");
 
             if (money < upgradeCost)
-                return false;
+            {
+                if (industry == "Heavy")
+                {
+                    _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Государство не смогло профинансировать развитие мощи Тяжелой Промышленности!" });
+                    return new OrderResult(order.CountryName, "Улучшение Тяжелой Промышленности", false, upgradeCost);
+                }
+                else
+                {
+                    _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Государство не смогло профинансировать развитие мощи Легкой Промышленности!" });
+                    return new OrderResult(order.CountryName, "Улучшение Легкой Промышленности", false, upgradeCost);
+                }
+            }
 
             var industryPower = (double)_dataLayer.GetProperty(order.CountryName, "Power" + industry + "Industry");
 
@@ -52,8 +63,8 @@ namespace Totality.Handlers.Main
                 if (res1 < industryPower + Constants.IndustryUpgrade*Constants.IndustrySteelCoeff ||
                     res2 < industryPower + Constants.IndustryUpgrade*Constants.IndustryOilCoeff)
                 {
-                    _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Не получилось повысить мощь Тяжелой Промышленности!" });
-                    return false;
+                    _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Не получилось повысить мощь Тяжелой Промышленности из-за дефицита ресурсов!" });
+                    return new OrderResult(order.CountryName, "Улучшение Тяжелой Промышленности", false, upgradeCost);
                 }
 
                 _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Повышена мощь Тяжелой Промышленности!" });
@@ -65,8 +76,8 @@ namespace Totality.Handlers.Main
                 if (res1 < industryPower + Constants.IndustryUpgrade*Constants.IndustryWoodCoeff ||
                     res2 < industryPower + Constants.IndustryUpgrade*Constants.IndustryAgroCoeff)
                 {
-                    _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Не получилось повысить мощь Легкой Промышленности!" });
-                    return false;
+                    _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Не получилось повысить мощь Легкой Промышленности из-за дефицита ресурсов!" });
+                    return new OrderResult(order.CountryName, "Улучшение Легкой Промышленности", false, upgradeCost);
                 }
 
                 _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Повышена мощь Легкой Промышленности!" });
@@ -90,16 +101,55 @@ namespace Totality.Handlers.Main
             var newUpgradeCost = (long)(Constants.IndustryUpgradeCostRate * (LIpower + HIpower));
             _dataLayer.SetProperty(order.CountryName, "IndustryUpgradeCost", newUpgradeCost);
 
-            return true;
+            if (industry == "Heavy")
+            {
+                return new OrderResult(order.CountryName, "Улучшение Тяжелой Промышленности", true, upgradeCost);
+            }
+            else
+            {
+                return new OrderResult(order.CountryName, "Улучшение Легкой Промышленности", true, upgradeCost);
+            }
         }
 
-        private bool IncreaseRes(Order order, string res)
+        private OrderResult IncreaseRes(Order order, string res)
         {
             var money = (long)_dataLayer.GetProperty(order.CountryName, "Money");
             var upgradeCost = (long)_dataLayer.GetProperty(order.CountryName, "ProductionUpgradeCost");
 
             if (money < upgradeCost)
-                return false;
+            {
+                switch (res)
+                {
+                    case "Oil":
+                        _newsHandler.AddNews(order.CountryName,
+                            new Model.News(true)
+                            {
+                                text = "Государство не смогло профинансировать повышение добычи нефти!"
+                            });
+                        return new OrderResult(order.CountryName, "Повышение добычи нефти", false, upgradeCost);
+                    case "Steel":
+                        _newsHandler.AddNews(order.CountryName,
+                            new Model.News(true)
+                            {
+                                text = "Государство не смогло профинансировать повышение выплавки стали!"
+                            });
+                        return new OrderResult(order.CountryName, "Повышение выплавки стали", false, upgradeCost);
+                    case "Wood":
+                        _newsHandler.AddNews(order.CountryName,
+                            new Model.News(true)
+                            {
+                                text = "Государство не смогло профинансировать повышение производства древесины!"
+                            });
+                        return new OrderResult(order.CountryName, "Повышение производства древесины", false, upgradeCost);
+                    case "Agricultural":
+                        _newsHandler.AddNews(order.CountryName,
+                            new Model.News(true)
+                            {
+                                text = "Государство не смогло профинансировать повышение сельскохозяйственного производства!"
+                            });
+                        return new OrderResult(order.CountryName, "Повышение сельскохозяйственного производства", false, upgradeCost);
+                }
+            }
 
             money -= upgradeCost;
             _dataLayer.SetProperty(order.CountryName, "Money", money);
@@ -114,19 +164,23 @@ namespace Totality.Handlers.Main
             {
                 case "Oil":
                     _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Повышена добыча нефти!" });
+                    return new OrderResult(order.CountryName, "Повышение добычи нефти", true, upgradeCost);
                     break;
                 case "Steel":
                     _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Повышена выплавка стали!" });
+                    return new OrderResult(order.CountryName, "Повышение выплавки стали", true, upgradeCost);
                     break;
                 case "Wood":
                     _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Повышено производство древесины!" });
+                    return new OrderResult(order.CountryName, "Повышение производства древесины", true, upgradeCost);
                     break;
                 case "Agricultural":
                     _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Повышено сельскохозяйственное производство!" });
+                    return new OrderResult(order.CountryName, "Повышение сельскохозяйственного производства", true, upgradeCost);
                     break;
             }
+            return new OrderResult(order.CountryName, "____", false, 0);
 
-            return true;
         }
     }
 }

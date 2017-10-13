@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Totality.Model;
 using Totality.Model.Interfaces;
 
 namespace Totality.Handlers.News
@@ -49,6 +50,11 @@ namespace Totality.Handlers.News
             Transmitter.SendNews(_newsBase);
             _newsBase.Clear();
             _broadNewsBase.Clear();
+        }
+
+        public void SendResults(Dictionary<string, List<OrderResult>> results )
+        {
+                Transmitter.SendResults(results);
         }
     }
 }

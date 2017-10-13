@@ -23,6 +23,9 @@ namespace Totality.Client.GUI
         public delegate void NewsReceivedDelegate(News[] news);
         public event NewsReceivedDelegate NewsReceived;
 
+        public delegate void ResultsReceivedDelegate(OrderResult[] results);
+        public event ResultsReceivedDelegate ResultsReceived;
+
         public delegate void ContractsReceivedDelegate(DipContract[] contracts);
         public event ContractsReceivedDelegate ContractsReceived;
 
@@ -54,6 +57,11 @@ namespace Totality.Client.GUI
         public void SendNews(News[] newsList)
         {
             NewsReceived.Invoke(newsList);
+        }
+
+        public void SendResults(OrderResult[] results)
+        {
+            ResultsReceived.Invoke(results);
         }
 
         public void UpdateClient(Country country)

@@ -27,12 +27,13 @@ namespace Totality.Client.ClientComponents.Panels
     {
         AbstractDialog currentDialog;
         List<News> _news = new List<News>();
+        private OrderResult[] _results;
 
         public MediaPanel()
         {
             InitializeComponent();
             PropagandaButton.click += () => createDialog(new PropagandaDialog(receiveOrder));
-            NewsButton.click += () => createBigDialog(new NewsDialog(receiveOrder, _news));
+            NewsButton.click += () => createBigDialog(new NewsDialog(receiveOrder, _news, _results));
         }
 
         public void ReceiveNews (News[] news)
@@ -47,7 +48,7 @@ namespace Totality.Client.ClientComponents.Panels
             canvas1.Children.Remove(currentDialog);
             currentDialog = null;
 
-            createBigDialog(new NewsDialog(receiveOrder, _news));
+            createBigDialog(new NewsDialog(receiveOrder, _news, _results));
         }
 
         private void createDialog(AbstractDialog dialog) 
@@ -109,6 +110,11 @@ namespace Totality.Client.ClientComponents.Panels
                 PropagandaButton.Update();
                 PropagandaButton.IsEnabled = true;
             }
+        }
+
+        public void ReceiveResults(OrderResult[] results)
+        {
+            _results = results;
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Totality.Handlers.Main
         {
         }
 
-        public bool ProcessOrder(Order order)
+        public OrderResult ProcessOrder(Order order)
         {
             switch (order.OrderNum)
             {
@@ -30,18 +30,54 @@ namespace Totality.Handlers.Main
             }
         }
 
-        private bool Improve(Order order, string sector)
+        private OrderResult Improve(Order order, string sector)
         {
             var money = (long)_dataLayer.GetProperty(order.CountryName, "Money");
             var sectorLvlUpCost = (long)_dataLayer.GetProperty(order.CountryName, sector + "ScLvlUpCost");
 
             if (money < sectorLvlUpCost)
-                return false;
+                switch (sector)
+                {
+                    case "Extract":
+                        _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Не хватило денег для улучшения технологий добывающей промышленности!" });
+                        return new OrderResult(order.CountryName, "Улучшение технологий добывающей промышленности", false, sectorLvlUpCost);
+                        break;
+                    case "Heavy":
+                        _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Не хватило денег для улучшения технологий тяжелой промышленности!" });
+                        return new OrderResult(order.CountryName, "Улучшение технологий тяжелой промышленности", false, sectorLvlUpCost);
+                        break;
+                    case "Light":
+                        _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Не хватило денег для улучшения технологий легкой промышленности!" });
+                        return new OrderResult(order.CountryName, "Улучшение технологий легкой промышленности", false, sectorLvlUpCost);
+                        break;
+                    case "Military":
+                        _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Не хватило денег для улучшения технологий военной промышленности!" });
+                        return new OrderResult(order.CountryName, "Улучшение технологий военной промышленности", false, sectorLvlUpCost);
+                        break;
+                }
 
             var exp = (int)_dataLayer.GetProperty(order.CountryName, sector + "Experience");
             var sectorLvlUpExp = (int)_dataLayer.GetProperty(order.CountryName, sector + "ScLvlUpExp");
             if (exp < sectorLvlUpExp)
-                return false;
+                switch (sector)
+                {
+                    case "Extract":
+                        _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Не хватило опыта для улучшения технологий добывающей промышленности!" });
+                        return new OrderResult(order.CountryName, "Улучшение технологий добывающей промышленности", false, sectorLvlUpCost);
+                        break;
+                    case "Heavy":
+                        _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Не хватило опыта для улучшения технологий тяжелой промышленности!" });
+                        return new OrderResult(order.CountryName, "Улучшение технологий тяжелой промышленности", false, sectorLvlUpCost);
+                        break;
+                    case "Light":
+                        _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Не хватило опыта для улучшения технологий легкой промышленности!" });
+                        return new OrderResult(order.CountryName, "Улучшение технологий легкой промышленности", false, sectorLvlUpCost);
+                        break;
+                    case "Military":
+                        _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Не хватило опыта для улучшения технологий военной промышленности!" });
+                        return new OrderResult(order.CountryName, "Улучшение технологий военной промышленности", false, sectorLvlUpCost);
+                        break;
+                }
 
             money -= sectorLvlUpCost;
             _dataLayer.SetProperty(order.CountryName, "Money", money);
@@ -90,7 +126,24 @@ namespace Totality.Handlers.Main
             var lvl = (int)_dataLayer.GetProperty(order.CountryName, sector + "ScienceLvl") + 1;
             _dataLayer.SetProperty(order.CountryName, sector + "ScienceLvl", lvl);
 
-            return true;
+            switch (sector)
+            {
+                case "Extract":
+                    return new OrderResult(order.CountryName, "Улучшение технологий добывающей промышленности", true, sectorLvlUpCost);
+                    break;
+                case "Heavy":
+                    return new OrderResult(order.CountryName, "Улучшение технологий тяжелой промышленности", true, sectorLvlUpCost);
+                    break;
+                case "Light":
+                    return new OrderResult(order.CountryName, "Улучшение технологий легкой промышленности", true, sectorLvlUpCost);
+                    break;
+                case "Military":
+                    return new OrderResult(order.CountryName, "Улучшение технологий военной промышленности", true, sectorLvlUpCost);
+                    break;
+                default:
+                    return new OrderResult(order.CountryName, "_______", false, 0);
+
+            }
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Totality.Handlers.Main
         {
         }
 
-        public bool ProcessOrder(Order order)
+        public OrderResult ProcessOrder(Order order)
         {
             switch (order.OrderNum)
             {
@@ -24,14 +24,14 @@ namespace Totality.Handlers.Main
             }
         }
 
-        private bool ChangePropDirection(Order order)
+        private OrderResult ChangePropDirection(Order order)
         {
             Dictionary<string, short> massMedia;
             massMedia = (Dictionary<string, short>)_dataLayer.GetProperty(order.CountryName, "MassMedia");
             massMedia[order.TargetCountryName] = order.Value;
             _dataLayer.SetProperty(order.CountryName, "MassMedia", massMedia);
             _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Изменено направление пропаганды в стране " + order.TargetCountryName });
-            return true;
+            return new OrderResult(order.CountryName, "Смена направления пропаганды в стране " + order.CountryName, true);
         }
     }
 }

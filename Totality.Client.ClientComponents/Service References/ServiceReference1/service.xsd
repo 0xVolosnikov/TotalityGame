@@ -160,24 +160,31 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="SendResults">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Totality.Model" minOccurs="0" name="results" nillable="true" type="q11:ArrayOfOrderResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="UpdateClient">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Totality.Model" minOccurs="0" name="country" nillable="true" type="q11:Country" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/Totality.Model" minOccurs="0" name="country" nillable="true" type="q12:Country" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SendDip">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/Totality.Model.Diplomatical" minOccurs="0" name="msg" nillable="true" type="q12:DipMsg" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/Totality.Model.Diplomatical" minOccurs="0" name="msg" nillable="true" type="q13:DipMsg" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SendContracts">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/Totality.Model.Diplomatical" minOccurs="0" name="contracts" nillable="true" type="q13:ArrayOfDipContract" />
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/Totality.Model.Diplomatical" minOccurs="0" name="contracts" nillable="true" type="q14:ArrayOfDipContract" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -138,4 +138,18 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="News" nillable="true" type="tns:News" />
+  <xs:complexType name="ArrayOfOrderResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OrderResult" nillable="true" type="tns:OrderResult" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOrderResult" nillable="true" type="tns:ArrayOfOrderResult" />
+  <xs:complexType name="OrderResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="IsDone" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Price" type="xs:long" />
+      <xs:element minOccurs="0" name="Text" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OrderResult" nillable="true" type="tns:OrderResult" />
 </xs:schema>

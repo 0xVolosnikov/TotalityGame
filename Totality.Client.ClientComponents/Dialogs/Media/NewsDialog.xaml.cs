@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Research.DynamicDataDisplay;
+using Totality.CommonClasses;
 using Totality.Model;
 
 namespace Totality.Client.ClientComponents.Dialogs.Media
@@ -26,12 +29,19 @@ namespace Totality.Client.ClientComponents.Dialogs.Media
         List<News> _news;
         List<TextBlock> leftList = new List<TextBlock>();
         List<TextBlock> rightList = new List<TextBlock>();
+        private ObservableCollection<OrderResult> _results = new ObservableCollection<OrderResult>();
 
-        public NewsDialog(ReceiveOrder receiveOrder, List<News> news)
+        public NewsDialog(ReceiveOrder receiveOrder, List<News> news, OrderResult[] results)
         {
             _news = news;
             _receiveOrder = receiveOrder;
             InitializeComponent();
+
+            resultsGrid.ItemsSource = _results;
+            resultsGrid.LoadingRow += ResultsGridOnLoadingRow;
+
+            if (results != null)
+                _results.AddMany(results);
 
             stepLabel.Content = CurrentStep;
 
@@ -61,7 +71,30 @@ namespace Totality.Client.ClientComponents.Dialogs.Media
                 Panel2.Children.Add(rightList.Last());
             }
 
+            long profit = 0;
+            long deficit = 0;
+            foreach (var res in _results)
+            {
+                if (res.IsDone) deficit += res.Price;
+            }
 
+            profit = (long)(CountryData.FinalLightIndustry * Constants.LightPowerProfit * (CountryData.TaxesLvl / 100.0));
+            deficitLabel.Content = deficit.ToString("N0");
+            profitLabel.Content = profit.ToString("N0");
+
+            long sum = profit - deficit;
+            string sumText = sum.ToString("N0");
+            if (sum > 0) sumText = "+ " + sumText;
+
+            sumLabel.Content = sumText;
+        }
+
+        private void ResultsGridOnLoadingRow(object sender, DataGridRowEventArgs e)
+        {
+            OrderResult item = e.Row.Item as OrderResult;
+
+            if (!item.IsDone) e.Row.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFD30000"));
+            else e.Row.Background = Brushes.White;
         }
 
         private void cancelButton_Click(object sender, RoutedEventArgs e)
