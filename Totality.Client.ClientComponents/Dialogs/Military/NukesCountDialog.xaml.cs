@@ -43,7 +43,7 @@ namespace Totality.Client.ClientComponents.Dialogs.Military
             order.Count = (long)integerUpDown.Value;
             order.OrderNum = (short)Orders.MakeNukes;
             order.Ministery = (short)Mins.Military;
-            _receiveOrder(this, order, "Производство ядерных ракет", Constants.NukeCost * order.Count);
+            _receiveOrder(this, order, "Производство ядерных ракет", (long)(Constants.NukeCost * order.Count*CountryData.InflationCoeff));
         }
 
         private void cancelButton_Click(object sender, RoutedEventArgs e)

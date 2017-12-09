@@ -47,6 +47,7 @@ namespace Totality.Handlers.Main
         {
             var money = (long)_dataLayer.GetProperty(order.CountryName, "Money");
             var networkLvlUpCost = Constants.InitialNetworkLvlUpCost;
+            var inflationCoeff = (double)_dataLayer.GetProperty(order.CountryName, "InflationCoeff");
 
             var spyNetworks = (Dictionary<string, SpyNetwork>)_dataLayer.GetProperty(order.CountryName, "SpyNetworks");
             int count = 0;
@@ -60,18 +61,18 @@ namespace Totality.Handlers.Main
             var intLvl = (int)_dataLayer.GetProperty(order.CountryName, "CounterSpyLvl");
             var counterSpyLvl = (int)_dataLayer.GetProperty(order.TargetCountryName, "CounterSpyLvl");
 
-            if (money < networkLvlUpCost)
+            if (money < networkLvlUpCost*inflationCoeff)
             {
                 _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Не хватило денег на улучшение разведсети в стране " + order.TargetCountryName + "." });
-                return new OrderResult(order.CountryName, "Улучшение разведсети в стране " + order.TargetCountryName, false, networkLvlUpCost);
+                return new OrderResult(order.CountryName, "Улучшение разведсети в стране " + order.TargetCountryName, false, (long)(inflationCoeff*networkLvlUpCost));
             }
             if (!WinnerChoosingSystems.Tsop(intLvl, counterSpyLvl))
             {
                 _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Попытка улучшения разведсети в стране " + order.TargetCountryName + " провалилась." });
-                return new OrderResult(order.CountryName, "Улучшение разведсети в стране " + order.TargetCountryName, false, networkLvlUpCost);
+                return new OrderResult(order.CountryName, "Улучшение разведсети в стране " + order.TargetCountryName, false, (long)(inflationCoeff * networkLvlUpCost));
             }
 
-            money -= networkLvlUpCost;
+            money -= (long)(inflationCoeff * networkLvlUpCost);
             _dataLayer.SetProperty(order.CountryName, "Money", money);
 
             if (!spyNetworks.ContainsKey(order.TargetCountryName))
@@ -87,13 +88,14 @@ namespace Totality.Handlers.Main
             }
 
             _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Улучшена разведсеть в стране " + order.TargetCountryName + "." });
-            return new OrderResult(order.CountryName, "Улучшение разведсети в стране " + order.TargetCountryName, true, networkLvlUpCost);
+            return new OrderResult(order.CountryName, "Улучшение разведсети в стране " + order.TargetCountryName, true, (long)(inflationCoeff * networkLvlUpCost));
         }
 
         private OrderResult AddAgents(Order order)
         {
             var money = (long)_dataLayer.GetProperty(order.CountryName, "Money");
             var agentCost = Constants.InitialAgentCost;
+            var inflationCoeff = (double)_dataLayer.GetProperty(order.CountryName, "InflationCoeff");
 
             var spyNetworks = (Dictionary<string, SpyNetwork>)_dataLayer.GetProperty(order.CountryName, "SpyNetworks");
             int count = 0;
@@ -105,19 +107,19 @@ namespace Totality.Handlers.Main
 
             agentCost = (long)(agentCost * Math.Pow(Constants.AgentCostRatio, count));
 
-            if (money < agentCost)
+            if (money < agentCost*inflationCoeff)
             {
                 _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Не хватило денег на внедрение агентов в " + MinsNames.Names[order.TargetMinistery] + " страны " + order.TargetCountryName + "." });
-                return new OrderResult(order.CountryName, "Внедрение агентов в" + MinsNames.Names[order.TargetMinistery] + " страны " + order.TargetCountryName, false, agentCost);
+                return new OrderResult(order.CountryName, "Внедрение агентов в" + MinsNames.Names[order.TargetMinistery] + " страны " + order.TargetCountryName, false, (long)(agentCost * inflationCoeff));
             }
 
             if (!spyNetworks.ContainsKey(order.TargetCountryName) || spyNetworks[order.TargetCountryName].NetLvl < Constants.MinAgentLvl)
             {
                 _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Разведсеть в стране " + order.TargetCountryName + " слишком слаба для внедрения в " + MinsNames.Names[order.TargetMinistery] + "." });
-                return new OrderResult(order.CountryName, "Внедрение агентов в" + MinsNames.Names[order.TargetMinistery] + " страны " + order.TargetCountryName, false, agentCost);
+                return new OrderResult(order.CountryName, "Внедрение агентов в" + MinsNames.Names[order.TargetMinistery] + " страны " + order.TargetCountryName, false, (long)(agentCost * inflationCoeff));
             }
 
-            money -= agentCost;
+            money -= (long)(agentCost * inflationCoeff);
             _dataLayer.SetProperty(order.CountryName, "Money", money);
 
             var intLvl = (int)_dataLayer.GetProperty(order.CountryName, "CounterSpyLvl");
@@ -126,7 +128,7 @@ namespace Totality.Handlers.Main
             if (!WinnerChoosingSystems.Tsop(intLvl, shadowingLvl))
             {
                 _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Попытка внедрения агента в " + MinsNames.Names[order.TargetMinistery] + " страны " + order.TargetCountryName + " провалилась." });
-                return new OrderResult(order.CountryName, "Внедрение агентов в" + MinsNames.Names[order.TargetMinistery] + " страны " + order.TargetCountryName, false, agentCost);
+                return new OrderResult(order.CountryName, "Внедрение агентов в" + MinsNames.Names[order.TargetMinistery] + " страны " + order.TargetCountryName, false, (long)(agentCost * inflationCoeff));
             }
 
             spyNetworks[order.TargetCountryName].Recruit[order.TargetMinistery] = true;
@@ -177,7 +179,7 @@ namespace Totality.Handlers.Main
             _dataLayer.SetProperty(order.TargetCountryName, "ForeignSpyes", spyesInTarget);
 
             _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Внедрены агенты в страну " + order.TargetCountryName + ", в " + MinsNames.Names[order.TargetMinistery] + "."});
-            return new OrderResult(order.CountryName, "Внедрение агентов в" + MinsNames.Names[order.TargetMinistery] +  " страны " + order.TargetCountryName, true, agentCost);
+            return new OrderResult(order.CountryName, "Внедрение агентов в" + MinsNames.Names[order.TargetMinistery] +  " страны " + order.TargetCountryName, true, (long)(agentCost * inflationCoeff));
         }
 
         private OrderResult OrderToAgent(Order order)
@@ -251,14 +253,15 @@ namespace Totality.Handlers.Main
         {
             var money = (long)_dataLayer.GetProperty(order.CountryName, "Money");
             var counterSpyLvlUpCost = (long)_dataLayer.GetProperty(order.CountryName, "CounterSpyLvlUpCost");
+            var inflationCoeff = (double)_dataLayer.GetProperty(order.CountryName, "InflationCoeff");
 
-            if (money < counterSpyLvlUpCost)
+            if (money < counterSpyLvlUpCost*inflationCoeff)
             {
                 _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Не хватило денег на усиление контрразведки. " });
-                return new OrderResult(order.CountryName, "Усиление контрразведки", false, counterSpyLvlUpCost);
+                return new OrderResult(order.CountryName, "Усиление контрразведки", false, (long)(inflationCoeff*counterSpyLvlUpCost));
             }
 
-            money -= counterSpyLvlUpCost;
+            money -= (long)(inflationCoeff * counterSpyLvlUpCost);
             _dataLayer.SetProperty(order.CountryName, "Money", money);
             counterSpyLvlUpCost = (long)(counterSpyLvlUpCost * Constants.CounterSpyLvlUpCostRatio);
             _dataLayer.SetProperty(order.CountryName, "CounterSpyLvlUpCost", counterSpyLvlUpCost);
@@ -268,21 +271,22 @@ namespace Totality.Handlers.Main
 
 
             _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Повышен уровень разведки. "});
-            return new OrderResult(order.CountryName, "Усиление контрразведки" , true, counterSpyLvlUpCost);
+            return new OrderResult(order.CountryName, "Усиление контрразведки" , true, (long)(inflationCoeff * counterSpyLvlUpCost));
         }
 
         private OrderResult ShadowingLvlUp(Order order)
         {
             var money = (long)_dataLayer.GetProperty(order.CountryName, "Money");
             var shadowingLvlUpCost = (long)_dataLayer.GetProperty(order.CountryName, "ShadowingLvlUpCost");
+            var inflationCoeff = (double)_dataLayer.GetProperty(order.CountryName, "InflationCoeff");
 
-            if (money < shadowingLvlUpCost)
+            if (money < shadowingLvlUpCost*inflationCoeff)
             {
                 _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Не хватило денег на усиление слежки." });
-                return new OrderResult(order.CountryName, "Усиление слежки",false, shadowingLvlUpCost);
+                return new OrderResult(order.CountryName, "Усиление слежки",false, (long)(inflationCoeff*shadowingLvlUpCost));
             }
 
-            money -= shadowingLvlUpCost;
+            money -= (long)(inflationCoeff * shadowingLvlUpCost);
             _dataLayer.SetProperty(order.CountryName, "Money", money);
             shadowingLvlUpCost = (long)(shadowingLvlUpCost * Constants.ShadowingLvlUpCostRatio);
             _dataLayer.SetProperty(order.CountryName, "ShadowingLvlUpCost", shadowingLvlUpCost);
@@ -291,21 +295,22 @@ namespace Totality.Handlers.Main
             _dataLayer.SetProperty(order.CountryName, "ShadowingLvl", lvl);
 
             _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Повышен уровень слежки. " });
-            return new OrderResult(order.CountryName, "Усиление слежки", true, shadowingLvlUpCost);
+            return new OrderResult(order.CountryName, "Усиление слежки", true, (long)(inflationCoeff * shadowingLvlUpCost));
         }
 
         private OrderResult IntelligenceUp(Order order)
         {
             var money = (long)_dataLayer.GetProperty(order.CountryName, "Money");
             var intelligenceLvlUpCost = (long)_dataLayer.GetProperty(order.CountryName, "IntelligenceLvlUpCost");
+            var inflationCoeff = (double)_dataLayer.GetProperty(order.CountryName, "InflationCoeff");
 
-            if (money < intelligenceLvlUpCost)
+            if (money < intelligenceLvlUpCost*inflationCoeff)
             {
                 _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Не хватило денег на усиление разведки." });
-                return new OrderResult(order.CountryName, "Усиление разведки", false, intelligenceLvlUpCost);
+                return new OrderResult(order.CountryName, "Усиление разведки", false, (long)(inflationCoeff*intelligenceLvlUpCost));
             }
 
-            money -= intelligenceLvlUpCost;
+            money -= (long)(inflationCoeff * intelligenceLvlUpCost);
             _dataLayer.SetProperty(order.CountryName, "Money", money);
             intelligenceLvlUpCost = (long)(intelligenceLvlUpCost * Constants.IntelligenceLvlUpCostRatio);
             _dataLayer.SetProperty(order.CountryName, "IntelligenceLvlUpCost", intelligenceLvlUpCost);
@@ -314,7 +319,7 @@ namespace Totality.Handlers.Main
             _dataLayer.SetProperty(order.CountryName, "IntelligenceLvl", lvl);
 
             _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Повышен уровень разведки. " });
-            return new OrderResult(order.CountryName, "Усиление разведки", true, intelligenceLvlUpCost);
+            return new OrderResult(order.CountryName, "Усиление разведки", true, (long)(inflationCoeff * intelligenceLvlUpCost));
         }
 
         private bool Sabotage(Order order)

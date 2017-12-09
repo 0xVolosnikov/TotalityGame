@@ -40,6 +40,7 @@
       <xs:element minOccurs="0" name="FinalAgricultural" type="xs:double" />
       <xs:element minOccurs="0" name="FinalHeavyIndustry" type="xs:double" />
       <xs:element minOccurs="0" name="FinalLightIndustry" type="xs:double" />
+      <xs:element minOccurs="0" name="FinalMilitaryPower" type="xs:double" />
       <xs:element minOccurs="0" name="FinalOil" type="xs:double" />
       <xs:element minOccurs="0" name="FinalSteel" type="xs:double" />
       <xs:element minOccurs="0" name="FinalWood" type="xs:double" />
@@ -48,6 +49,7 @@
       <xs:element minOccurs="0" name="HeavyScLvlUpExp" type="xs:int" />
       <xs:element minOccurs="0" name="HeavyScienceLvl" type="xs:int" />
       <xs:element minOccurs="0" name="IndustryUpgradeCost" type="xs:long" />
+      <xs:element minOccurs="0" name="InflationCoeff" type="xs:double" />
       <xs:element minOccurs="0" name="InnerLvl" type="xs:int" />
       <xs:element minOccurs="0" name="InnerLvlUpCost" type="xs:long" />
       <xs:element minOccurs="0" name="IntelligenceLvl" type="xs:int" />

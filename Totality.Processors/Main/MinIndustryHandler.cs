@@ -38,7 +38,8 @@ namespace Totality.Handlers.Main
         {
             var money = (long)_dataLayer.GetProperty(order.CountryName, "Money");
             var upgradeCost = (long)_dataLayer.GetProperty(order.CountryName, "IndustryUpgradeCost");
-
+            var InflationCoeff = (double)_dataLayer.GetProperty(order.CountryName, "InflationCoeff");
+            upgradeCost = (long)(upgradeCost *InflationCoeff);
             if (money < upgradeCost)
             {
                 if (industry == "Heavy")
@@ -115,8 +116,8 @@ namespace Totality.Handlers.Main
         {
             var money = (long)_dataLayer.GetProperty(order.CountryName, "Money");
             var upgradeCost = (long)_dataLayer.GetProperty(order.CountryName, "ProductionUpgradeCost");
-
-            if (money < upgradeCost)
+            var InflationCoeff = (double)_dataLayer.GetProperty(order.CountryName, "InflationCoeff");
+            if (money < upgradeCost* InflationCoeff)
             {
                 switch (res)
                 {
@@ -140,18 +141,18 @@ namespace Totality.Handlers.Main
                             {
                                 text = "Государство не смогло профинансировать повышение производства древесины!"
                             });
-                        return new OrderResult(order.CountryName, "Повышение производства древесины", false, upgradeCost);
+                        return new OrderResult(order.CountryName, "Повышение производства древесины", false, (long)(upgradeCost* InflationCoeff));
                     case "Agricultural":
                         _newsHandler.AddNews(order.CountryName,
                             new Model.News(true)
                             {
                                 text = "Государство не смогло профинансировать повышение сельскохозяйственного производства!"
                             });
-                        return new OrderResult(order.CountryName, "Повышение сельскохозяйственного производства", false, upgradeCost);
+                        return new OrderResult(order.CountryName, "Повышение сельскохозяйственного производства", false, (long)(upgradeCost* InflationCoeff));
                 }
             }
 
-            money -= upgradeCost;
+            money -= (long)(upgradeCost* InflationCoeff);
             _dataLayer.SetProperty(order.CountryName, "Money", money);
             upgradeCost = (long)(Constants.UpgradeCostRate * upgradeCost);
             _dataLayer.SetProperty(order.CountryName, "ProductionUpgradeCost", upgradeCost);
@@ -164,19 +165,19 @@ namespace Totality.Handlers.Main
             {
                 case "Oil":
                     _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Повышена добыча нефти!" });
-                    return new OrderResult(order.CountryName, "Повышение добычи нефти", true, upgradeCost);
+                    return new OrderResult(order.CountryName, "Повышение добычи нефти", true, (long)(upgradeCost* InflationCoeff));
                     break;
                 case "Steel":
                     _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Повышена выплавка стали!" });
-                    return new OrderResult(order.CountryName, "Повышение выплавки стали", true, upgradeCost);
+                    return new OrderResult(order.CountryName, "Повышение выплавки стали", true, (long)(upgradeCost* InflationCoeff));
                     break;
                 case "Wood":
                     _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Повышено производство древесины!" });
-                    return new OrderResult(order.CountryName, "Повышение производства древесины", true, upgradeCost);
+                    return new OrderResult(order.CountryName, "Повышение производства древесины", true, (long)(upgradeCost* InflationCoeff));
                     break;
                 case "Agricultural":
                     _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Повышено сельскохозяйственное производство!" });
-                    return new OrderResult(order.CountryName, "Повышение сельскохозяйственного производства", true, upgradeCost);
+                    return new OrderResult(order.CountryName, "Повышение сельскохозяйственного производства", true, (long)(upgradeCost* InflationCoeff));
                     break;
             }
             return new OrderResult(order.CountryName, "____", false, 0);

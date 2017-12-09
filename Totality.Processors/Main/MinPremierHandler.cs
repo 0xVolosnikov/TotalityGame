@@ -34,14 +34,14 @@ namespace Totality.Handlers.Main
 
         private OrderResult reorganize(Order order)
         {
-
+            var inflationCoeff = (double)_dataLayer.GetProperty(order.CountryName, "InflationCoeff");
             var c = _dataLayer.GetCountry(order.CountryName);
-            if (c.Money < 600000)
+            if (c.Money < 600000* inflationCoeff)
             {
                 _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Не хватает денег на реорганизацию министерства." });
-                return new OrderResult(order.CountryName, "Реорганизация министерства " + order.TargetMinistery, false, 6000000);
+                return new OrderResult(order.CountryName, "Реорганизация министерства " + order.TargetMinistery, false, (long)(600000 * inflationCoeff));
             }
-            c.Money -= 600000;
+            c.Money -= (long)(600000*inflationCoeff);
             _dataLayer.UpdateCountry(c);
 
             var foreignSpyes = (List<List<string>>)_dataLayer.GetProperty(order.CountryName, "ForeignSpyes");
@@ -59,21 +59,22 @@ namespace Totality.Handlers.Main
             _dataLayer.SetProperty(order.CountryName, "MinsBlocks", minsBlocks);
 
             _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Министерство " + order.TargetMinistery + "реорганизовано." });
-            return new OrderResult(order.CountryName, "Реорганизация министерства " + order.TargetMinistery, true, 6000000);
+            return new OrderResult(order.CountryName, "Реорганизация министерства " + order.TargetMinistery, true, (long)(600000 * inflationCoeff));
         }
 
         private OrderResult lvlUp(Order order)
         {
+            var inflationCoeff = (double)_dataLayer.GetProperty(order.CountryName, "InflationCoeff");
             var money = (long)_dataLayer.GetProperty(order.CountryName, "Money");
             var PremierLvlUpCost = (long)_dataLayer.GetProperty(order.CountryName, "PremierLvlUpCost");
 
-            if (money < PremierLvlUpCost)
+            if (money < PremierLvlUpCost* inflationCoeff)
             {
                 _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Не хватает денег на усиление власти." });
-                return new OrderResult(order.CountryName, "Усиление власти" + order.TargetMinistery, false, PremierLvlUpCost);
+                return new OrderResult(order.CountryName, "Усиление власти" + order.TargetMinistery, false, (long)(PremierLvlUpCost* inflationCoeff));
             }
 
-            money -= PremierLvlUpCost;
+            money -= (long) (PremierLvlUpCost*inflationCoeff);
             _dataLayer.SetProperty(order.CountryName, "Money", money);
             PremierLvlUpCost = (long)(PremierLvlUpCost * Constants.PremierLvlUpCostRatio);
             _dataLayer.SetProperty(order.CountryName, "PremierLvlUpCost", PremierLvlUpCost);
@@ -82,7 +83,7 @@ namespace Totality.Handlers.Main
             _dataLayer.SetProperty(order.CountryName, "PremierLvl", lvl);
 
             _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Усилена власть." });
-            return new OrderResult(order.CountryName, "Усиление власти" + order.TargetMinistery, true, PremierLvlUpCost);
+            return new OrderResult(order.CountryName, "Усиление власти" + order.TargetMinistery, true, (long)(PremierLvlUpCost * inflationCoeff));
         }
 
         private OrderResult alert(Order order)

@@ -123,18 +123,18 @@ namespace Totality.Handlers.Main
         {
             var money = (long)_dataLayer.GetProperty(order.CountryName, "Money");
 
-            if (money < order.Count)
-                return new OrderResult(order.CountryName, "Вливание ", false, order.Count);
+            if (money < 500000)
+                return new OrderResult(order.CountryName, "Эмиссия валюты в объеме: " + order.Count.ToString("N0"), false, 500000);
 
-            money -= order.Count;
+            money -= 500000;
             _dataLayer.SetProperty(order.CountryName, "Money", money);
 
             var ourCurrencyOnStock = _dataLayer.GetCurrencyOnStock(order.CountryName);
             ourCurrencyOnStock += order.Count;
             _dataLayer.SetCurrencyOnStock(order.CountryName, ourCurrencyOnStock);
 
-            _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Произведено вливание денег на рынок валюты." });
-            return new OrderResult(order.CountryName, "Вливание ", true, order.Count);
+            _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Произведена эмиссия валюты в объеме "+ order.Count.ToString("N0") +"." });
+            return new OrderResult(order.CountryName, "Эмиссия валюты в объеме: " + order.Count.ToString("N0"), true, 500000);
         }
     }
 }

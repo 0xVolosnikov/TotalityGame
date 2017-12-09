@@ -45,16 +45,16 @@ namespace Totality.Client.ClientComponents.Dialogs.Science
             switch(_type)
             {
                 case Orders.ImproveExtract:
-                    _receiveOrder(this, order, _textOrder, CountryData.ExtractScLvlUpCost);
+                    _receiveOrder(this, order, _textOrder, (long)(CountryData.InflationCoeff * CountryData.ExtractScLvlUpCost));
                     break;
                 case Orders.ImproveHeavy:
-                    _receiveOrder(this, order, _textOrder, CountryData.HeavyScLvlUpCost);
+                    _receiveOrder(this, order, _textOrder, (long)(CountryData.InflationCoeff * CountryData.HeavyScLvlUpCost));
                     break;
                 case Orders.ImproveLight:
-                    _receiveOrder(this, order, _textOrder, CountryData.LightScLvlUpCost);
+                    _receiveOrder(this, order, _textOrder, (long)(CountryData.InflationCoeff * CountryData.LightScLvlUpCost));
                     break;
                 case Orders.ImproveMilitary:
-                    _receiveOrder(this, order, _textOrder, CountryData.MilitaryScLvlUpCost);
+                    _receiveOrder(this, order, _textOrder, (long)(CountryData.InflationCoeff * CountryData.MilitaryScLvlUpCost));
                     break;
             }
 

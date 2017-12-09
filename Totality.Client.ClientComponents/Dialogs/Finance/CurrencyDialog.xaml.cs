@@ -32,7 +32,7 @@ namespace Totality.Client.ClientComponents.Dialogs.Finance
         private Dictionary<string, ObservableDataSource<DataPoint>> ratios = new Dictionary<string, ObservableDataSource<DataPoint>>();
         private Dictionary<string, long> accounts = new Dictionary<string, long>();
         private LineGraph pen;
-        ObservableCollection<string> CountriesRatios = new ObservableCollection<string>();
+        ObservableCollection<Ration> CountriesRatios = new ObservableCollection<Ration>();
         List<string> accountNames = new List<string>();
 
         struct DataPoint
@@ -41,12 +41,19 @@ namespace Totality.Client.ClientComponents.Dialogs.Finance
             public double ratio;
         }
 
+        struct Ration
+        {
+            public string Name { get; set; }
+            public double Ratio { get; set; }
+        }
+
         public CurrencyDialog(ReceiveOrder receiveOrder)
         {
             _receiveOrder = receiveOrder;
             InitializeComponent();
 
-            CurrencyBox.ItemsSource = CountriesRatios;
+            rationsGrid.ItemsSource = CountriesRatios;
+            rationsGrid.SelectionChanged += RationsGrid_SelectionChanged;
 
             if (ratios.Any())
             {
@@ -74,7 +81,7 @@ namespace Totality.Client.ClientComponents.Dialogs.Finance
                 string t = " " + String.Format("{0:0.##}", ration.Value);
                 var e = ration.Key;
                 e += t;
-                CountriesRatios.Add(e);
+                CountriesRatios.Add(new Ration() {Name = ration.Key, Ratio = ration.Value});
 
                 ratios[ration.Key].AppendAsync(Dispatcher, new DataPoint() { step = CurrentStep, ratio = ration.Value });
 
@@ -94,7 +101,12 @@ namespace Totality.Client.ClientComponents.Dialogs.Finance
             if (accountRecords.Count > 0)
                 MoneyBox.SelectedIndex = 0;
             if (CountriesRatios.Count > 0)
-                CurrencyBox.SelectedIndex = 0;
+            {
+                rationsGrid.SelectedIndex = 0;
+                rationsGrid.UpdateLayout();
+                RationsGrid_SelectionChanged(null, null);
+            }
+
         }
 
         private void Canvas_MouseDown(object sender, MouseButtonEventArgs e)
@@ -102,17 +114,30 @@ namespace Totality.Client.ClientComponents.Dialogs.Finance
             Visibility = Visibility.Hidden;
         }
 
-        private void CurrencyBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void RationsGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (CurrencyBox.SelectedIndex != -1)
+            if (rationsGrid.SelectedIndex != -1)
             {
                 if (CurrencyPlotter.Children.Contains(pen))
                     CurrencyPlotter.Children.Remove(pen);
-                ratios[Countries[CurrencyBox.SelectedIndex]].SetXYMapping((DataPoint p) => new Point(p.step, p.ratio));
-                pen = new LineGraph(ratios[Countries[CurrencyBox.SelectedIndex]]);
-                Legend.SetDescription(pen, Countries[CurrencyBox.SelectedIndex]);
+                ratios[Countries[rationsGrid.SelectedIndex]].SetXYMapping((DataPoint p) => new Point(p.step, p.ratio));
+                pen = new LineGraph(ratios[Countries[rationsGrid.SelectedIndex]]);
+                Legend.SetDescription(pen, Countries[rationsGrid.SelectedIndex]);
                 CurrencyPlotter.Legend.Visibility = Visibility.Hidden;
                 CurrencyPlotter.Children.Add(pen);
+                CurrencyPlotter.FitToView();
+            }
+            else if (CountriesRatios.Count > 0)
+            {
+                rationsGrid.SelectedIndex = 0;
+                if (CurrencyPlotter.Children.Contains(pen))
+                    CurrencyPlotter.Children.Remove(pen);
+                ratios[Countries[rationsGrid.SelectedIndex]].SetXYMapping((DataPoint p) => new Point(p.step, p.ratio));
+                pen = new LineGraph(ratios[Countries[rationsGrid.SelectedIndex]]);
+                Legend.SetDescription(pen, Countries[rationsGrid.SelectedIndex]);
+                CurrencyPlotter.Legend.Visibility = Visibility.Hidden;
+                CurrencyPlotter.Children.Add(pen);
+                CurrencyPlotter.FitToView();
             }
         }
 
@@ -127,7 +152,7 @@ namespace Totality.Client.ClientComponents.Dialogs.Finance
             {
                 var dial = new CurrencyCountDialog(getOrderFromChildren, CountryData.CurrencyRatios[accountNames[MoneyBox.SelectedIndex]], CurrencyCountDialog.Orders.PurchaseCurrency, 0, accountNames[MoneyBox.SelectedIndex]);
                 canvas.Children.Add(dial);
-                Canvas.SetLeft(dial, 295);
+                Canvas.SetLeft(dial,(Width - dial.Width)/2);
                 Canvas.SetTop(dial, 68);
             }
         }
@@ -138,7 +163,7 @@ namespace Totality.Client.ClientComponents.Dialogs.Finance
             {
                 var dial = new CurrencyCountDialog(getOrderFromChildren, CountryData.CurrencyRatios[accountNames[MoneyBox.SelectedIndex]], CurrencyCountDialog.Orders.SellCurrency, (int)accounts[accountNames[MoneyBox.SelectedIndex]], accountNames[MoneyBox.SelectedIndex]);
                 canvas.Children.Add(dial);
-                Canvas.SetLeft(dial, 295);
+                Canvas.SetLeft(dial, (Width - dial.Width) / 2);
                 Canvas.SetTop(dial, 68);
             }
 

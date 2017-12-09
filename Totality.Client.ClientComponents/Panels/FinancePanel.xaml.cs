@@ -103,6 +103,7 @@ namespace Totality.Client.ClientComponents.Panels
                 MessageBox.Show(error.Message);
             }
 
+            inflationLabel.Content = CountryData.InflationCoeff.ToString("N2");
 
 
             if (CountryData.MinsBlocks[(short)Mins.Finance] > 0)

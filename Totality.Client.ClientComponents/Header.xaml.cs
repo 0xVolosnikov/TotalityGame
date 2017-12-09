@@ -45,9 +45,13 @@ namespace Totality.Client.ClientComponents
             this.LMoney.Content = String.Format("{0:0,0}", money);
         }
 
-        public void UpdateProfit(long FinalLightIndustry, double TaxesLvl)
+        public void UpdateProfit(long FinalLightIndustry, double TaxesLvl, double InflationCoeff)
         {
-            profitLabel.Content = "+" + ((long) (FinalLightIndustry*Constants.LightPowerProfit*(TaxesLvl/100.0))).ToString("N0");
+            if (InflationCoeff > 1)
+                profitLabel.Content = "+" + ((long)(FinalLightIndustry * Constants.LightPowerProfit * (TaxesLvl / 15.0)) * Math.Sqrt(InflationCoeff)).ToString("N0");
+            else
+                profitLabel.Content = "+" + ((long)(FinalLightIndustry * Constants.LightPowerProfit * (TaxesLvl / 15.0)) * Math.Pow(InflationCoeff, 1.2)).ToString("N0");
+
         }
 
         public void UpdateNukes(int count)

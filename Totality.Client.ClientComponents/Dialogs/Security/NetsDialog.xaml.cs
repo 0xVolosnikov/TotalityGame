@@ -192,7 +192,7 @@ namespace Totality.Client.ClientComponents.Dialogs.Security
                 agentCost = (long) (agentCost*Math.Pow(Constants.AgentCostRatio, count));
                 _receiveOrder(this, order,
                     "Внедрение агентов в страну " + (string) CountriesBox.SelectedValue + ", " +
-                    Ministers[order.TargetMinistery], agentCost);
+                    Ministers[order.TargetMinistery], (long) (CountryData.InflationCoeff*agentCost));
             }
             else
             {

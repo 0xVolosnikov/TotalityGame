@@ -24,8 +24,42 @@
                     <Canvas Height="40" Width="284" Background="#FF333333">
                         <Label x:Name="label1" Content="Котировки" Height="40" Width="284" Foreground="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Padding="0" FontFamily="Times New Roman" FontSize="24"/>
                     </Canvas>
-                    <ListBox x:Name="CurrencyBox" Height="312" Canvas.Top="40" Width="284" Background="#FFDBDBDB" FontFamily="Times New Roman" FontSize="17" SelectionChanged="CurrencyBox_SelectionChanged" Cursor="Hand" FontWeight="Bold">
-                    </ListBox>
+                    <DataGrid x:Name="rationsGrid" Canvas.Top="40" Height="312" Width="284" Background="{x:Null}" AutoGenerateColumns="False" CanUserReorderColumns="False" CanUserSortColumns="False" CanUserResizeColumns="False" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="170" Header="Страна" Binding="{Binding Path=Name}">
+                                <DataGridTextColumn.HeaderStyle>
+                                    <Style TargetType="DataGridColumnHeader" >
+                                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                        <Setter Property="FontWeight" Value="DemiBold"></Setter>
+                                    </Style>
+                                </DataGridTextColumn.HeaderStyle>
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="TextWrapping" Value="Wrap"></Setter>
+                                        <Setter Property="FontSize" Value="18"></Setter>
+                                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn  Width="*" Header="Курс" Binding="{Binding Path=Ratio}">
+                                <DataGridTextColumn.HeaderStyle>
+                                    <Style TargetType="DataGridColumnHeader" >
+                                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                        <Setter Property="FontWeight" Value="DemiBold"></Setter>
+                                    </Style>
+                                </DataGridTextColumn.HeaderStyle>
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="TextWrapping" Value="Wrap"></Setter>
+                                        <Setter Property="FontSize" Value="18"></Setter>
+                                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+
                 </Canvas>
                 <Canvas Height="169" Canvas.Left="304" Canvas.Top="250" Width="577" Background="#FFDBDBDB">
                     <Canvas.Effect>

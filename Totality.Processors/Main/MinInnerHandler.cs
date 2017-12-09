@@ -34,12 +34,12 @@ namespace Totality.Handlers.Main
         {
              Random _randomizer = new Random((DateTime.Today - new DateTime(1995, 1, 1)).Milliseconds);
             var c = _dataLayer.GetCountry(order.CountryName);
-            if (c.Money < 500000)
+            if (c.Money < 500000*c.InflationCoeff)
             {
                 _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "МВД не хватает денег на попытку подавления бунта!" });
-                return new OrderResult(order.CountryName, "Попытка подавления бунта", false, 500000);
+                return new OrderResult(order.CountryName, "Попытка подавления бунта", false, (long)(500000 * c.InflationCoeff));
             }
-            c.Money -= 500000;
+            c.Money -= (long)(500000 * c.InflationCoeff);
             _dataLayer.UpdateCountry(c);
 
 
@@ -49,12 +49,12 @@ namespace Totality.Handlers.Main
             {
                 _dataLayer.SetProperty(order.CountryName, "IsRiot", false);
                 _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Бунт успешно подавлен!" });
-                return new OrderResult(order.CountryName, "Попытка подавления бунта", true, 500000);
+                return new OrderResult(order.CountryName, "Попытка подавления бунта", true, (long)(500000 * c.InflationCoeff));
             }
             else
             {
                 _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Попытка подавления бунта провалилась." });
-                return new OrderResult(order.CountryName, "Попытка подавления бунта", true, 500000);
+                return new OrderResult(order.CountryName, "Попытка подавления бунта", true, (long)(500000 * c.InflationCoeff));
             }
         }
 
@@ -76,14 +76,15 @@ namespace Totality.Handlers.Main
         {
             var money = (long)_dataLayer.GetProperty(order.CountryName, "Money");
             var innerLvlUpCost = (long)_dataLayer.GetProperty(order.CountryName, "InnerLvlUpCost");
+            var inflationCoeff = (double)_dataLayer.GetProperty(order.CountryName, "InflationCoeff");
 
-            if (money < innerLvlUpCost)
+            if (money < innerLvlUpCost*inflationCoeff)
             {
                 _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Не хватает денег на реформу МВД." });
-                return new OrderResult(order.CountryName, "Попытка подавления бунта", false, innerLvlUpCost);
+                return new OrderResult(order.CountryName, "Попытка подавления бунта", false, (long)(innerLvlUpCost* inflationCoeff));
             }
 
-            money -= innerLvlUpCost;
+            money -= (long)(innerLvlUpCost * inflationCoeff);
             _dataLayer.SetProperty(order.CountryName, "Money", money);
             innerLvlUpCost = (long)(innerLvlUpCost * Constants.InnerLvlUpCostRatio);
             _dataLayer.SetProperty(order.CountryName, "InnerLvlUpCost", innerLvlUpCost);
@@ -92,7 +93,7 @@ namespace Totality.Handlers.Main
             _dataLayer.SetProperty(order.CountryName, "InnerLvl", lvl);
 
             _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Повышена квалификация МВД." });
-            return new OrderResult(order.CountryName, "Попытка подавления бунта", true, innerLvlUpCost);
+            return new OrderResult(order.CountryName, "Попытка подавления бунта", true, (long)(innerLvlUpCost * inflationCoeff));
         }
     }
 }

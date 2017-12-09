@@ -62,14 +62,15 @@ namespace Totality.Handlers.Main
         {
             var money = (long)_dataLayer.GetProperty(order.CountryName, "Money");
             var upgradeCost = (long)_dataLayer.GetProperty(order.CountryName, "ProductionUpgradeCost");
+            var inflationCoeff = (double)_dataLayer.GetProperty(order.CountryName, "InflationCoeff");
 
-            if (money < upgradeCost)
+            if (money < upgradeCost*inflationCoeff)
             {
                 _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "МинОбороны не хватило денег на повышение добычи урана!" });
-                return new OrderResult(order.CountryName, "Повышение добычи урана", false, upgradeCost);
+                return new OrderResult(order.CountryName, "Повышение добычи урана", false, (long)(inflationCoeff*upgradeCost));
             }
 
-            money -= upgradeCost;
+            money -= (long)(inflationCoeff * upgradeCost);
             _dataLayer.SetProperty(order.CountryName, "Money", money);
             upgradeCost = (long)(Constants.UpgradeCostRate*upgradeCost);
             _dataLayer.SetProperty(order.CountryName, "ProductionUpgradeCost", upgradeCost);
@@ -79,7 +80,7 @@ namespace Totality.Handlers.Main
             _dataLayer.SetProperty(order.CountryName, "ProdUranus", uraniumProduction);
 
             _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Повышено производство оружейного урана." });
-            return new OrderResult(order.CountryName, "Повышение добычи урана", true, upgradeCost);
+            return new OrderResult(order.CountryName, "Повышение добычи урана", true, (long)(inflationCoeff * upgradeCost));
         }
 
         private OrderResult MakeNukes(Order order)
@@ -88,27 +89,28 @@ namespace Totality.Handlers.Main
             var uranus = (double)_dataLayer.GetProperty(order.CountryName, "ResUranus");
             var heavyPower = (double)_dataLayer.GetProperty(order.CountryName, "FinalHeavyIndustry");
             var usedHeavyPower = (double)_dataLayer.GetProperty(order.CountryName, "UsedHIpower");
+            var inflationCoeff = (double)_dataLayer.GetProperty(order.CountryName, "InflationCoeff");
 
-            if ( money < Constants.NukeCost * order.Count)
+            if ( money < Constants.NukeCost * order.Count*inflationCoeff)
             {
                 _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "МинОбороны не хватило денег на создание ядерных ракет!" });
-                return new OrderResult(order.CountryName, "Производство ядерных ракет в количестве: " + order.Count, false, Constants.NukeCost * order.Count);
+                return new OrderResult(order.CountryName, "Производство ядерных ракет в количестве: " + order.Count, false, (long)(Constants.NukeCost * order.Count * inflationCoeff));
             }
 
             if (uranus < Constants.NukeUranusCost)
             {
                 _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "МинОбороны не хватило урана на создание ядерных ракет!" });
-                return new OrderResult(order.CountryName, "Производство ядерных ракет в количестве: " + order.Count, false, Constants.NukeCost * order.Count);
+                return new OrderResult(order.CountryName, "Производство ядерных ракет в количестве: " + order.Count, false, (long)(Constants.NukeCost * order.Count * inflationCoeff));
             }
 
             if (heavyPower - usedHeavyPower < order.Count*Constants.NukeHeavyPower)
             {
                 _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "МинОбороны не хватило Тяжелой промышленной мощи на создание ядерных ракет!" });
-                return new OrderResult(order.CountryName, "Производство ядерных ракет в количестве: " + order.Count, false, Constants.NukeCost * order.Count);
+                return new OrderResult(order.CountryName, "Производство ядерных ракет в количестве: " + order.Count, false, (long)(Constants.NukeCost * order.Count * inflationCoeff));
             }
 
 
-            money -= Constants.NukeCost * order.Count;
+            money -= (long)(Constants.NukeCost * order.Count * inflationCoeff);
             _dataLayer.SetProperty(order.CountryName, "Money", money);
             uranus -= Constants.NukeUranusCost;
             _dataLayer.SetProperty(order.CountryName, "ResUranus", uranus);
@@ -120,7 +122,7 @@ namespace Totality.Handlers.Main
             _dataLayer.SetProperty(order.CountryName, "NukesCount", nukes);
 
             _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Произведены ядерные ракеты, в количестве " + order.Count + "." });
-            return new OrderResult(order.CountryName, "Производство ядерных ракет в количестве: " + order.Count, true, Constants.NukeCost * order.Count);
+            return new OrderResult(order.CountryName, "Производство ядерных ракет в количестве: " + order.Count, true, (long)(Constants.NukeCost * order.Count * inflationCoeff));
         }
 
         private OrderResult MakeMissiles(Order order)
@@ -128,20 +130,21 @@ namespace Totality.Handlers.Main
             var money = (long)_dataLayer.GetProperty(order.CountryName, "Money");
             var heavyPower = (double)_dataLayer.GetProperty(order.CountryName, "FinalHeavyIndustry");
             var usedHeavyPower = (double)_dataLayer.GetProperty(order.CountryName, "UsedHIpower");
+            var inflationCoeff = (double)_dataLayer.GetProperty(order.CountryName, "InflationCoeff");
 
-            if (money < Constants.MissileCost * order.Count)
+            if (money < Constants.MissileCost * order.Count*inflationCoeff)
             {
                 _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "МинОбороны не хватило денег на ПРО!" });
-                return new OrderResult(order.CountryName, "Производство систем ПРО в количестве: " + order.Count, false, Constants.MissileCost * order.Count);
+                return new OrderResult(order.CountryName, "Производство систем ПРО в количестве: " + order.Count, false, (long)(Constants.MissileCost * order.Count*inflationCoeff));
             }
             if (heavyPower - usedHeavyPower < order.Count * Constants.MissileHeavyPower)
             {
                 _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "МинОбороны не хватило Тяжелой промышленной мощи для создания ПРО!" });
-                return new OrderResult(order.CountryName, "Производство систем ПРО в количестве: " + order.Count, false, Constants.MissileCost * order.Count);
+                return new OrderResult(order.CountryName, "Производство систем ПРО в количестве: " + order.Count, false, (long)(Constants.MissileCost * order.Count * inflationCoeff));
             }
 
 
-            money -= Constants.MissileCost * order.Count;
+            money -= (long)(Constants.MissileCost * order.Count * inflationCoeff);
             _dataLayer.SetProperty(order.CountryName, "Money", money);
             usedHeavyPower += order.Count * Constants.MissileHeavyPower;
             _dataLayer.SetProperty(order.CountryName, "UsedHIpower", usedHeavyPower);
@@ -151,7 +154,7 @@ namespace Totality.Handlers.Main
             _dataLayer.SetProperty(order.CountryName, "MissilesCount", missiles);
 
             _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Произведены системы ПРО, в количестве " + order.Count+ "." });
-            return new OrderResult(order.CountryName, "Производство систем ПРО в количестве: " + order.Count, true, Constants.MissileCost * order.Count);
+            return new OrderResult(order.CountryName, "Производство систем ПРО в количестве: " + order.Count, true, (long)(Constants.MissileCost * order.Count * inflationCoeff));
         }
 
         private OrderResult NukeStrike(Order order)

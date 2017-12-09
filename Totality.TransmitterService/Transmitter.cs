@@ -177,6 +177,8 @@ namespace Totality.TransmitterService
                 {
                     client.Transmitter.SendResults(orderResults[client.Name]);
                 }
+                else
+                    client.Transmitter.SendResults(new List<OrderResult>());
             }
         }
 

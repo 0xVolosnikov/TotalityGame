@@ -78,7 +78,11 @@ namespace Totality.Client.ClientComponents.Dialogs.Media
                 if (res.IsDone) deficit += res.Price;
             }
 
-            profit = (long)(CountryData.FinalLightIndustry * Constants.LightPowerProfit * (CountryData.TaxesLvl / 100.0));
+            if (CountryData.InflationCoeff > 1)
+            profit = (long)(CountryData.FinalLightIndustry * Constants.LightPowerProfit * (CountryData.TaxesLvl / 15.0)*Math.Sqrt(CountryData.InflationCoeff));
+            else
+            profit = (long)(CountryData.FinalLightIndustry * Constants.LightPowerProfit * (CountryData.TaxesLvl / 15.0) * Math.Pow(CountryData.InflationCoeff, 1.2));
+
             deficitLabel.Content = deficit.ToString("N0");
             profitLabel.Content = profit.ToString("N0");
 

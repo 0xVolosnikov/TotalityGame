@@ -222,7 +222,7 @@ namespace Totality.Client.GUI
         {
             try
             {
-                var discoveryClient = new DiscoveryClient(new UdpDiscoveryEndpoint("soap.udp://192.168.0.255:3702"));
+                var discoveryClient = new DiscoveryClient(new UdpDiscoveryEndpoint());
                     //"soap.udp://192.168.0.255:3702"
 
                 var needToStop = false;
@@ -314,7 +314,7 @@ namespace Totality.Client.GUI
                 _header.UpdateNukes(country.NukesCount);
                 _header.UpdateMissiles(country.MissilesCount);
                 _header.UpdateMood((short) country.Mood);
-                _header.UpdateProfit((long) country.FinalLightIndustry, country.TaxesLvl);
+                _header.UpdateProfit((long) country.FinalLightIndustry, country.TaxesLvl, country.InflationCoeff);
 
                 _ordersTable.changeMoney(country.Money);
 

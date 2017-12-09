@@ -44,13 +44,13 @@ namespace Totality.Model
         public int[] MinsBlocks = new int[Constants.CountOfMinisters];
 
         [DataMember]
-        public double ResAgricultural = 250;
+        public double ResAgricultural = 125;
         [DataMember]
-        public double ResWood = 250;
+        public double ResWood = 125;
         [DataMember]
-        public double ResSteel = 250;
+        public double ResSteel = 125;
         [DataMember]
-        public double ResOil = 250;
+        public double ResOil = 125;
         [DataMember]
         public double ProdUranus;
         [DataMember]
@@ -72,6 +72,8 @@ namespace Totality.Model
         public double FinalLightIndustry;
         [DataMember]
         public double FinalHeavyIndustry;
+        [DataMember]
+        public double FinalMilitaryPower;
 
         [DataMember]
         public double UsedSteel;
@@ -96,6 +98,8 @@ namespace Totality.Model
 
         [DataMember]
         public short TaxesLvl;
+        [DataMember]
+        public double InflationCoeff;
 
         [DataMember]
         public int NukesCount;
@@ -201,7 +205,8 @@ namespace Totality.Model
             LightScLvlUpCost = (int)Constants.InitialLightScLvlUpCost;
             MilitaryScLvlUpExp = (int)Constants.InitialMilitaryScLvlUpExp;
             MilitaryScLvlUpCost = (int)Constants.InitialMilitaryScLvlUpCost;
-            TaxesLvl = 75;
+            TaxesLvl = 15;
+            InflationCoeff = 1;
 
             NationalCurrencyDemand = Constants.InitialNationalCurrencyDemand;
 

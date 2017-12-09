@@ -41,7 +41,7 @@ namespace Totality.Client.ClientComponents.Dialogs.Premier
             order.TargetMinistery = (short)MinistersBox.SelectedIndex;
             order.OrderNum = (short)Orders.MinisteryReorganization;
             order.Ministery = (short)Mins.Premier;
-            _receiveOrder(this, order, "Реорганизация министерства: " + MinistersBox.SelectedItem, 600000);
+            _receiveOrder(this, order, "Реорганизация министерства: " + MinistersBox.SelectedItem, (long)(CountryData.InflationCoeff*600000));
         }
 
         private void cancelButton_Click(object sender, RoutedEventArgs e)

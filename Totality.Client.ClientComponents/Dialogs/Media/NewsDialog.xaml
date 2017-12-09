@@ -43,15 +43,15 @@
             <Label x:Name="label_Copy" Content="ход №:" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontFamily="Old Standard" FontSize="24" Padding="0" Grid.Column="1" Margin="273.6,9,234,0" Height="36" VerticalAlignment="Top" BorderThickness="2,0,0,0" FontStyle="Italic" Grid.RowSpan="2"/>
             <Label x:Name="stepLabel" Content="0" VerticalContentAlignment="Center" FontFamily="Old Standard" FontSize="24" Padding="0" Grid.Column="1" Margin="363.6,9,193,399" Grid.IsSharedSizeScope="True" HorizontalContentAlignment="Center" FontStyle="Italic" Grid.RowSpan="2"/>
             <ScrollViewer Margin="602,0,10,0" Grid.Row="1" Height="394" VerticalAlignment="Bottom" Grid.ColumnSpan="2">
-                <Grid Height="384" Width="578">
+                <Grid Height="auto" MinHeight="384" Width="578">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto" MinHeight="56"/>
                         <RowDefinition Height="auto" MinHeight="56"/>
                     </Grid.RowDefinitions>
-                    <WrapPanel Grid.Row="0" x:Name="Panel1" Height="191" VerticalAlignment="Top" Orientation="Vertical" MinWidth="468" Margin="2,0,0,0">
+                    <WrapPanel Grid.Row="0" x:Name="Panel1" Height="auto"  MinHeight="191" VerticalAlignment="Top" Orientation="Vertical" MinWidth="468" Margin="2,0,0,0">
                         <TextBlock x:Name="Panel1Name" TextWrapping="Wrap" Text="Новости в нашей стране:" Height="34" Width="576" FontFamily="Old Standard" FontSize="28" TextAlignment="Center" Padding="3,0,0,0" FontWeight="Bold"/>
                     </WrapPanel>
-                    <WrapPanel Grid.Row="1" x:Name="Panel2" Height="191" VerticalAlignment="Top" Orientation="Vertical" MinWidth="468" Margin="2,0,0,0">
+                    <WrapPanel Grid.Row="1" x:Name="Panel2" Height="auto" MinHeight="191" VerticalAlignment="Top" Orientation="Vertical" MinWidth="468" Margin="2,0,0,0">
                         <TextBlock x:Name="textBlock_Copy" TextWrapping="Wrap" Text="Новости в мире:" Height="34" Width="576" FontFamily="Old Standard" FontSize="28" TextAlignment="Center" Padding="0" FontWeight="Bold"/>
                     </WrapPanel>
                     <GridSplitter x:Name="gridSplitter1" HorizontalAlignment="Left" Height="2" Width="576" Margin="0,0,0,0" Grid.Row="0" VerticalAlignment="Bottom" Background="Black"/>

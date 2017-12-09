@@ -43,9 +43,9 @@ namespace Totality.Client.ClientComponents.Dialogs.Industry
             order.OrderNum = (short)_type;
             order.Ministery = (short)Mins.Industry;
             if (order.OrderNum == (short)Orders.ImproveHeavy || order.OrderNum == (short)Orders.ImproveLight)
-                _receiveOrder(this, order, _textOrder, CountryData.IndustryUpgradeCost);
+                _receiveOrder(this, order, _textOrder, (long)(CountryData.IndustryUpgradeCost * CountryData.InflationCoeff));
             else
-            _receiveOrder(this, order, _textOrder, CountryData.ProductionUpgradeCost);
+            _receiveOrder(this, order, _textOrder, (long)(CountryData.ProductionUpgradeCost * CountryData.InflationCoeff));
         }
 
         private void cancelButton_Click(object sender, RoutedEventArgs e)

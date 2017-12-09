@@ -34,25 +34,26 @@ namespace Totality.Handlers.Main
         {
             var money = (long)_dataLayer.GetProperty(order.CountryName, "Money");
             var sectorLvlUpCost = (long)_dataLayer.GetProperty(order.CountryName, sector + "ScLvlUpCost");
+            var inflationCoeff = (double)_dataLayer.GetProperty(order.CountryName, "InflationCoeff");
 
-            if (money < sectorLvlUpCost)
+            if (money < sectorLvlUpCost*inflationCoeff)
                 switch (sector)
                 {
                     case "Extract":
                         _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Не хватило денег для улучшения технологий добывающей промышленности!" });
-                        return new OrderResult(order.CountryName, "Улучшение технологий добывающей промышленности", false, sectorLvlUpCost);
+                        return new OrderResult(order.CountryName, "Улучшение технологий добывающей промышленности", false, (long)(sectorLvlUpCost*inflationCoeff));
                         break;
                     case "Heavy":
                         _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Не хватило денег для улучшения технологий тяжелой промышленности!" });
-                        return new OrderResult(order.CountryName, "Улучшение технологий тяжелой промышленности", false, sectorLvlUpCost);
+                        return new OrderResult(order.CountryName, "Улучшение технологий тяжелой промышленности", false, (long)(sectorLvlUpCost * inflationCoeff));
                         break;
                     case "Light":
                         _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Не хватило денег для улучшения технологий легкой промышленности!" });
-                        return new OrderResult(order.CountryName, "Улучшение технологий легкой промышленности", false, sectorLvlUpCost);
+                        return new OrderResult(order.CountryName, "Улучшение технологий легкой промышленности", false, (long)(sectorLvlUpCost * inflationCoeff));
                         break;
                     case "Military":
                         _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Не хватило денег для улучшения технологий военной промышленности!" });
-                        return new OrderResult(order.CountryName, "Улучшение технологий военной промышленности", false, sectorLvlUpCost);
+                        return new OrderResult(order.CountryName, "Улучшение технологий военной промышленности", false, (long)(sectorLvlUpCost * inflationCoeff));
                         break;
                 }
 
@@ -63,23 +64,23 @@ namespace Totality.Handlers.Main
                 {
                     case "Extract":
                         _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Не хватило опыта для улучшения технологий добывающей промышленности!" });
-                        return new OrderResult(order.CountryName, "Улучшение технологий добывающей промышленности", false, sectorLvlUpCost);
+                        return new OrderResult(order.CountryName, "Улучшение технологий добывающей промышленности", false, (long)(sectorLvlUpCost * inflationCoeff));
                         break;
                     case "Heavy":
                         _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Не хватило опыта для улучшения технологий тяжелой промышленности!" });
-                        return new OrderResult(order.CountryName, "Улучшение технологий тяжелой промышленности", false, sectorLvlUpCost);
+                        return new OrderResult(order.CountryName, "Улучшение технологий тяжелой промышленности", false, (long)(sectorLvlUpCost * inflationCoeff));
                         break;
                     case "Light":
                         _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Не хватило опыта для улучшения технологий легкой промышленности!" });
-                        return new OrderResult(order.CountryName, "Улучшение технологий легкой промышленности", false, sectorLvlUpCost);
+                        return new OrderResult(order.CountryName, "Улучшение технологий легкой промышленности", false, (long)(sectorLvlUpCost * inflationCoeff));
                         break;
                     case "Military":
                         _newsHandler.AddNews(order.CountryName, new Model.News(true) { text = "Не хватило опыта для улучшения технологий военной промышленности!" });
-                        return new OrderResult(order.CountryName, "Улучшение технологий военной промышленности", false, sectorLvlUpCost);
+                        return new OrderResult(order.CountryName, "Улучшение технологий военной промышленности", false, (long)(sectorLvlUpCost * inflationCoeff));
                         break;
                 }
 
-            money -= sectorLvlUpCost;
+            money -= (long)(sectorLvlUpCost * inflationCoeff);
             _dataLayer.SetProperty(order.CountryName, "Money", money);
 
             switch (sector)
@@ -129,16 +130,16 @@ namespace Totality.Handlers.Main
             switch (sector)
             {
                 case "Extract":
-                    return new OrderResult(order.CountryName, "Улучшение технологий добывающей промышленности", true, sectorLvlUpCost);
+                    return new OrderResult(order.CountryName, "Улучшение технологий добывающей промышленности", true, (long)(sectorLvlUpCost * inflationCoeff));
                     break;
                 case "Heavy":
-                    return new OrderResult(order.CountryName, "Улучшение технологий тяжелой промышленности", true, sectorLvlUpCost);
+                    return new OrderResult(order.CountryName, "Улучшение технологий тяжелой промышленности", true, (long)(sectorLvlUpCost * inflationCoeff));
                     break;
                 case "Light":
-                    return new OrderResult(order.CountryName, "Улучшение технологий легкой промышленности", true, sectorLvlUpCost);
+                    return new OrderResult(order.CountryName, "Улучшение технологий легкой промышленности", true, (long)(sectorLvlUpCost * inflationCoeff));
                     break;
                 case "Military":
-                    return new OrderResult(order.CountryName, "Улучшение технологий военной промышленности", true, sectorLvlUpCost);
+                    return new OrderResult(order.CountryName, "Улучшение технологий военной промышленности", true, (long)(sectorLvlUpCost * inflationCoeff));
                     break;
                 default:
                     return new OrderResult(order.CountryName, "_______", false, 0);

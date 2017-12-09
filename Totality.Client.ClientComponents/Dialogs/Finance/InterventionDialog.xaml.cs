@@ -30,7 +30,7 @@ namespace Totality.Client.ClientComponents.Dialogs.Finance
         {
             _receiveOrder = receiveOrder;
             InitializeComponent();
-            integerUpDown.Maximum = (int)CountryData.Money;
+            integerUpDown.Maximum = 50000000;
         }
 
         private void acceptButton_Click(object sender, RoutedEventArgs e)
@@ -39,7 +39,7 @@ namespace Totality.Client.ClientComponents.Dialogs.Finance
             order.Ministery = (short)Mins.Finance;
             order.OrderNum = (short)Orders.CurrencyInfusion;
             order.Count = (long)integerUpDown.Value;
-            _receiveOrder(this, order, "Вливание на валютный рынок", order.Count);
+            _receiveOrder(this, order, "Эмиссия валюты в объеме: " + order.Count.ToString("N0"), 500000);
         }
 
         private void cancelButton_Click(object sender, RoutedEventArgs e)
